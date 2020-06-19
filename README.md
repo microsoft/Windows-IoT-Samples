@@ -57,6 +57,8 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 ## Samples by category
 
+> **Note:**  This is a new repository as of 6/19/2020.  We are working on preparing the initial samples for this repository which we expect to be available by 7/6/2020.
+
 ### Category Name
 
 <table>
