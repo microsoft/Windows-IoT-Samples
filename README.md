@@ -4,7 +4,7 @@
 
 # Windows 10 Internet of Things (IoT) Samples
 
-This repo contains samples that demonstrate usage patterns for Microsoft's Windows 10 IoT.  THes code samples were created with templates available in Visual Studio and are designd, but not limited to, run on devices usign Windwos IoT Enterprise.
+This repo contains samples that demonstrate usage patterns for Microsoft's Windows 10 IoT.  These code samples were created with templates available in Visual Studio and are designd, but not limited to, run on devices usign Windwos IoT Enterprise.
 
 > **Note:** If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
