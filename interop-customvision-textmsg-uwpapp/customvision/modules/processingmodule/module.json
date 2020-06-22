@@ -1,0 +1,17 @@
+{
+    "$schema-version": "0.0.1",
+    "description": "Azure IoT edge processing module do process messages forwarded by proxy module then send the processed message back to proxy module. Proxy module will forward processed message over to the native Windows application.",
+    "image": {
+        "repository": "partnercontainerregistry.azurecr.io/processingmodule",
+        "tag": {
+            "version": "2.0.0",
+            "platforms": {
+                "amd64": "./Dockerfile.amd64", 
+                "amd64.debug": "./Dockerfile.amd64.debug"
+            }
+        },
+        "buildOptions": [],
+        "contextPath": "./"
+    },
+    "language": "csharp"
+}

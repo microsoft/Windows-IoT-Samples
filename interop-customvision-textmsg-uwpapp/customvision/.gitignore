@@ -1,0 +1,6 @@
+config/
+.env
+DeviceCustomVisionUWPApp/.vs/
+DeviceCustomVisionUWPApp/bin/
+DeviceCustomVisionUWPApp/obj/
+DeviceCustomVisionUWPApp/x64/
