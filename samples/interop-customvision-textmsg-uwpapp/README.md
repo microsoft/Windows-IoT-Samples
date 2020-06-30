@@ -45,7 +45,7 @@ Our showcase uses a configuration in the Azure IoT Portal with a sample *IoT Hub
 Execute the following instructions:
 - If using the PowerShell Az module, load the Az PowerShell module:
 
-   - The following command is required if PowerShell execution policy disallows module loading.
+   - The following command is required if the PowerShell execution policy disallows module loading.
 
        ```
        powershell -ExecutionPolicy Bypass
@@ -111,7 +111,7 @@ Execute the following instructions:
    Get-AzIotHubDCS -ResourceGroupName InteropSampleRG -IotHubName InteropSampleIoTHub -DeviceId InteropSampleEdgeDev -KeyType primary | fl *
    ```
    ```
-   `Get-AzIotHubDCS -ResourceGroupName InteropSampleRG -IotHubName InteropSampleIoTHub -DeviceId InteropSampleLeafDev -KeyType primary | fl *
+   Get-AzIotHubDCS -ResourceGroupName InteropSampleRG -IotHubName InteropSampleIoTHub -DeviceId InteropSampleLeafDev -KeyType primary | fl *
    ```
 
 - *Optional:* Create a registry for the modules part of this sample using [New-AzContainerRegistry](https://docs.microsoft.com/powershell/module/az.containerregistry/New-AzContainerRegistry) (or other suitable registry):
@@ -122,7 +122,7 @@ Execute the following instructions:
 
 ## Development environment setup
 
-In this part, we describe how to build the Windows application and the Linux modules, how to upload the latter to our Azure Registry, and how to add our sample deployment to our sample IoT Edge Device. These steps are executed in a separate Windows development environment, an Azure cloud VM which we set up with the following steps. Note that the development environment can also be set up manually on a separate physical Windows development machine.
+In this part, we describe how to build the Windows application and the Linux modules, how to upload the latter to our Azure Registry, and how to add our sample deployment to our sample IoT Edge Device. These steps are executed in a separate Windows development environment, which is an Azure cloud VM we set up with the following steps. Note that the development environment can also be set up manually on a separate physical Windows development machine.
 On a Windows device with PowerShell installed, follow these steps to create the Windows development cloud VM serving as build environment:
 
 - Complete the following steps from [Tutorial: Set up an environment for machine learning on IoT Edge](https://docs.microsoft.com/azure/iot-edge/tutorial-machine-learning-edge-02-prepare-environment)
@@ -138,7 +138,7 @@ On a Windows device with PowerShell installed, follow these steps to create the 
    > 2. Go to 'Networking' and add an inbound port rule, allowing port 53389.
    > 3. Go to 'Connect' select 'RDP' and change the port number to 53389. Download the generated RDP file.
 
-- For building the Windows application, install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) with the Universal Windows Platform workload.
+- For building the Windows application, install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) with the Universal Windows Platform workload. The community edition is sufficient.
 
 - Clone our interop sample code from GitHub in the VM:
 
@@ -148,11 +148,11 @@ On a Windows device with PowerShell installed, follow these steps to create the 
 
 You are now all set to build the Linux modules and the Windows application in the cloud VM.
 
-Build the sample Linux modules in VS Code and add them to our Azure Registry (we created the registry optionally in [Steps in the Azure IoT Portal](.readme.md#Steps-in-the-Azure-IoT-Portal):
+Build the sample Linux modules in VS Code and add them to your Azure Registry (we created the registry optionally in [Steps in the Azure IoT Portal](.readme.md#Steps-in-the-Azure-IoT-Portal)):
 
 - Open VS Code as an administrator
 
-- Open the below folder in VS Code based on the sample you are running,
+- Open the below folder in VS Code based on the sample you are running:
 
   Text Messaging
   ` Windows-IoT-Samples\interop-customvision-textmsg-uwpapp\textmsg-uwpapp`
@@ -187,9 +187,9 @@ Create an IoT Deployment containing the Linux modules and add it to our sample I
 
 - This means to deploy the deployment manifest i.e. deployment.template.json onto your IoT Edge device.
 
-- Using VS code, follow the steps from the documentation [Deploy Azure IoT Edge modules from Visual Studio Code](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode): Choose your subscription, IoT Hub, right-click on the Edge Device and select 'Create Deployment for Single Device'. Select folder 'config' and 'deployment.amd64.json' to push the deployment.
+- Using VS code, follow the steps from the documentation [Deploy Azure IoT Edge modules from Visual Studio Code](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode): Choose your subscription, IoT Hub, right-click on the Edge Device and select 'Create Deployment for Single Device'. Select the file 'deployment.amd64.json' in the folder 'config' to push the deployment manifest.
 
-Build sample certificates for authentication between the Windows app and Linux module
+Build sample certificates for the authentication between the Windows app and Linux module
 
 - The following tutorial [Create certificates](https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-machine-learning-edge-05-configure-edge-device#create-certificates) provides instructions on how to create a sample PKI with certificate validity for one month. You only need to generate certificates and do not need to upload them to Azure Key Vault.
 
@@ -200,7 +200,7 @@ Build sample certificates for authentication between the Windows app and Linux m
 
 - You can also use your own root CA certificate in case you have a (test) PKI for downstream devices and edge devices.
 
-- Copy the above generated sample PKI certificates i.e. private key 'new-edge-device.key.pem', certificate chain 'new-edge-device-full-chain.cert.pem', root CA cert 'azure-iot-test-only.root.ca.cert.pem' for authenticating the IoT Edge Device to C:\certs folder for future use.
+- Copy the above generated sample PKI certificates i.e. private key 'new-edge-device.key.pem', certificate chain 'new-edge-device-full-chain.cert.pem', root CA cert 'azure-iot-test-only.root.ca.cert.pem' for authenticating the IoT Edge Device to the folder 'C:\certs' for future use.
 
 Build the Windows application as an [application package in Visual Studio](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps):
 
@@ -230,7 +230,7 @@ Build the Windows application as an [application package in Visual Studio](https
 
 ## Steps in the Windows OS on the IoT Device
 
-The Windows IoT device hosting the Linux environment requires the Windows interop application binary, and must provide the Azure IoT Edge runtime in the Linux  with the private key, certificate chain and root CA certificate such that the IoT Edge Device can communicate with the downstream device (aka Windows application).
+The Windows IoT device hosting the Linux environment requires the Windows interop application binary, and must provide the Azure IoT Edge runtime in the Linux environment with the private key, certificate chain and root CA certificate such that the IoT Edge Device can communicate with the downstream device (aka Windows application).
 
 - Copy the output Windows sample application package built in the previous step in the Windows cloud VM to this Windows IoT device
 
@@ -242,13 +242,13 @@ The Windows IoT device hosting the Linux environment requires the Windows intero
    Custom Vision
    `Windows-IoT-Samples\interop-customvision-textmsg-uwpapp\customvision\DeviceCustomVisionUWPApp\AppPackages\DeviceCustomVisionUWPApp_1.0.0.0_Debug_Test\Dependencies`
 
-- Install the signing certificate for the Windows sample application from the package folder. Install the certificate to your local machine into the 'Trusted Root' store. This ensures that Windows will install and execute the application binary.
+- Install the signing certificate for the Windows sample application from the 'package' folder. Install the certificate to your local machine into the 'Trusted Root' store. This ensures that Windows will install and execute the application binary.
 
 - Install the MSIX bundle in the application package folder (a file called as below based on the running sample). The app can now be found on the system, as...
    - Text Messaging: **azure iot edge for windows on Linux interop sample**
    - Custom Vision:  **UWP - Edge interop**
 
-- In the next steps we copy the sample certificates to the Linux environment. Copy the private key, certificate chain, root CA cert for authenticating the IoT Edge Device from the development VM to this Windows IoT device ('new-edge-device.key.pem', 'new-edge-device-full-chain.cert.pem', 'azure-iot-test-only.root.ca.cert.pem') to the '~/certs' folder.
+- In the next steps we copy the sample certificates to the Linux environment. Copy the private key, certificate chain, root CA cert for authenticating the IoT Edge Device from the development VM to this Windows IoT device ('new-edge-device.key.pem', 'new-edge-device-full-chain.cert.pem', 'azure-iot-test-only.root.ca.cert.pem') to the '~/certs' folder in the Linux environment.
 
   - WSL2: Copy the files, for instance, via accessing the Linux filesystem through the patch '\\wsl$' in File Explorer
 
@@ -313,7 +313,7 @@ This subsection describes the configuration and provisioning steps for the Linux
 
    - Save and exit nano: press **CTRL+x**, confirm save and exit with **Y** and press **Enter**.
 
-- Restart the iotedge by running the below command.
+- Restart the iotedge service by running the below command.
 
    ```
    sudo systemctl restart iotedge
@@ -342,7 +342,12 @@ Having restarted the 'iotedge' service and verified that iotedge is configured c
 
    ![Text Messaging Sample UI](./textmsg-uwpapp/illustrations/uwp-app-message-sample.png)
 
-- Use the command sudo iotedge logs processingmodule and sudo iotedge logs proxyModule in the Linux environment to see messages passed from the Windows application to the Linux module.
+- Use the following commands in the Linux environment to see messages passed from the Windows application to the Linux module.
+
+   ```
+   sudo iotedge logs processingmodule
+   sudo iotedge logs proxyModule
+   ```
 
 ### For custom vision sample interop:
 - Run the application 'UWP-Edge interop sample' and use its GUI to send messages to the Linux module.
