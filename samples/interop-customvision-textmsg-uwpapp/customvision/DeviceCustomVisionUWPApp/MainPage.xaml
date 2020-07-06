@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="DeviceCustomVisionUWPApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DeviceCustomVisionUWPApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid BorderBrush="Black" BorderThickness="1" Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Button  Grid.Row="0" Name="PhotoButton" Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendFramesButton_Click" Background="Gray" Foreground="Blue" Width="200" ></Button>
+                <Button x:Name="ConfigureGatewayDeviceButton" Grid.Row="0" Margin="0" Padding="0" Click="ConfigureGatewayDeviceButtonClick" Height="35" Width="35" Content="⚙️"></Button>
+            </StackPanel>
+            <Popup x:Name="ConfigureGatewayDevicePopup" IsLightDismissEnabled="True" IsOpen="True"  LightDismissOverlayMode="On"  Closed="ConfigureGatewayDevicePopupClosed"  Grid.RowSpan="3" Grid.ColumnSpan="2" Height="250" Width="600">
+                <StackPanel Height="250" Width="600" Background="LightSlateGray">
+                    <TextBlock Margin="20" FontSize="25" Text="Input gateway device connection values"></TextBlock>
+                    <TextBox BorderBrush="Black" BorderThickness="1" Margin="0,20,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="LeafDeviceConnectionStringTextBox" FontSize="25" PlaceholderText="Enter leaf device IoT hub connection string." Width="598"  Foreground="Gray"></TextBox>
+                    <StackPanel  Orientation="Horizontal" >
+                        <TextBox BorderBrush="Black" BorderThickness="1" Margin="0,20,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" x:Name="GatewayDNSNameTextBox" PlaceholderText="Enter gateway DNS name." Width="300" MaxLength="20" Foreground="Gray"></TextBox>
+                        <Button x:Name="InitializeGatewayDeviceConnectionButton" Content="OK" Margin="20" Width="60" Click="InitializeGatewayDeviceConnectionButtonClick" ></Button>
+                    </StackPanel>
+                </StackPanel>
+            </Popup>
+            <StackPanel Grid.Row="1" BorderBrush="Black" BorderThickness="0" Margin="2">
+            <!--Camera preview-->
+                <CaptureElement Name="PreviewControl" Stretch="Uniform"/>
+            </StackPanel>
+            <TextBlock Grid.Row="2" x:Name="TextBlockPredictions" Foreground="Blue" FontSize="60" Text="" HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row ="0" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Logs" FontSize="30" Foreground="Blue"></TextBlock>
+            <ScrollViewer
+                Grid.Row ="1"
+                VerticalAlignment="Top"
+                Padding="1"
+                VerticalScrollBarVisibility="Auto"
+                VerticalScrollMode="Auto"
+                IsTabStop="True"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Margin="5"
+                Height="900">
+                <StackPanel >
+                    <TextBlock x:Name="TextBlockLog" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Visibility="Visible" Foreground="Gray" Text="" TextWrapping="Wrap"></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

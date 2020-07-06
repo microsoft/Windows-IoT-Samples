@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="LeafDeviceUWPApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeafDeviceUWPApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid BorderBrush="Black" BorderThickness="1" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Popup x:Name="ConfigureGatewayDevicePopup" IsLightDismissEnabled="True" IsOpen="True"  LightDismissOverlayMode="On"  Closed="ConfigureGatewayDevicePopup_Closed"  Grid.RowSpan="3" Grid.ColumnSpan="3" Height="250" Width="600">
+            <StackPanel Height="250" Width="600" Background="LightSlateGray">
+                <TextBlock Margin="20" FontSize="25" Text="Input gateway device connection values"></TextBlock>
+                <TextBox BorderBrush="Black" BorderThickness="1" Margin="0,20,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="LeafDeviceConnectionStringTextBox" FontSize="25" PlaceholderText="Enter leaf device IoT hub connection string." Width="598"  Foreground="Gray"></TextBox>
+                <StackPanel  Orientation="Horizontal" >
+                    <TextBox BorderBrush="Black" BorderThickness="1" Margin="0,20,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" x:Name="GatewayDNSNameTextBox" PlaceholderText="Enter gateway DNS name." Width="300" MaxLength="20" Foreground="Gray"></TextBox>
+                    <Button x:Name="InitializeGatewayDeviceConnectionButton" Content="OK" Margin="20" Width="60" Click="InitializeGatewayDeviceConnectionButton_Click" ></Button>
+                </StackPanel>
+            </StackPanel>
+        </Popup>
+        <Button x:Name="ConfigureGatewayDeviceButton" Grid.Column="2"  Grid.Row="0" Margin="0" Padding="0" Click="ConfigureGatewayDeviceButton_Click" Height="35" Width="35" Content="⚙️"></Button>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" BorderThickness="0" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Grid.Row="0" BorderThickness="0" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBox BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="MessageTextBox" FontSize="25" PlaceholderText="Enter a message to send." Width="300" MaxLength="20" Foreground="Gray"></TextBox>
+                <Button BorderBrush="Black"  BorderThickness="1" Margin="20" x:Name="SendMessageButton" Content="Send message" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendMessageButton_Click" Foreground="Black"></Button>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="WrapWholeWords" FontSize="35" x:Name="ErrorOrResponseTextBlock"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Logs"  FontSize="25"></TextBlock>
+        <ScrollViewer
+            Padding="50"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto"
+            IsTabStop="True"
+            Grid.Row="3"
+            Grid.Column="1"
+            BorderThickness="1"
+            BorderBrush="Black"
+            Margin="5">
+            <StackPanel>
+                <TextBlock x:Name="TextBlockLog" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Visibility="Visible" Foreground="Gray" TextWrapping="WrapWholeWords"></TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
