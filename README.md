@@ -57,14 +57,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 ## Samples by category
 
-> **Note:**  This is a new repository as of 6/19/2020.  We are working on preparing the initial samples for this repository which we expect to be available by 7/6/2020.
+### Azure IoT Edge
 
-### Azure IoT Edge for Linux on Windows
+| Name           | Description      |  
+|----------------|------------------|  
+| [interop-textmsg-consoleapp](./samples/interop-blog-textmsg-consoleapp) | Basic interop sample demonstrating text messaging between a Windows console app and an Edge module. | 
+| [interop-customvision-textmsg-uwpapp](./samples/interop-customvision-textmsg-uwpapp) | <p>Two more advanced interop samples which demonstrate bidirectional communication between a Windows application and an Edge module. </p><ul><li>Text messaging between a UWP application and an Edge module. </li><li>A 'Custom vision' machine learning interop sample with a fruit classifier which uses a Windows UWP app to send camera frames to an Edge module for identification.</li></ul>|  
 
-<table>
-  <tr>
-    <td>interop-blog-textmsg-consoleapp: Text messaging interop sample with console app on Windows side based on a blog</td>
-    <td>interop-customvision-textmsg-uwpapp: This folder contains two interop samples. A text messaging sample with a UWP app on Windows side, and a 'Custom vision' machine learning interop sample with a fruit classifier. As the setup instructions are similar, they share a single README.md documentation.</td>
-  </tr>
- </table>
 
