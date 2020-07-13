@@ -10,11 +10,11 @@ This document uses two samples to demonstrate how Windows applicatons interopera
 
 This document is structured around the activities required to build and run the samples, including:
 
-- [Steps in the Azure IoT Portal](./readme.md#Steps-in-the-Azure-IoT-Portal)
-- [Development environment setup](./readme.md#Development-environment-setup)
-- [Steps in the Windows OS on the IoT Device](./readme.md#Steps-in-the-Windows-OS-on-the-IoT-Device)
-- [Steps in the Linux environment on the IoT Device](./readme.md#Steps-in-the-Linux-environment-on-the-IoT-Device)
-- [Steps to run the Showcase](./readme.md#Steps-to-run-the-Showcase)
+- [Steps in the Azure IoT Portal](./README.md#Steps-in-the-Azure-IoT-Portal)
+- [Development environment setup](./README.md#Development-environment-setup)
+- [Steps in the Windows OS on the IoT Device](./README.md#Steps-in-the-Windows-OS-on-the-IoT-Device)
+- [Steps in the Linux environment on the IoT Device](./README.md#Steps-in-the-Linux-environment-on-the-IoT-Device)
+- [Steps to run the Showcase](./README.md#Steps-to-run-the-Showcase)
 
 
 **Prerequisites**
@@ -148,7 +148,7 @@ On a Windows device with PowerShell installed, follow these steps to create the 
 
 You are now all set to build the Linux modules and the Windows application in the cloud VM.
 
-Build the sample Linux modules in VS Code and add them to your Azure Registry (we created the registry optionally in [Steps in the Azure IoT Portal](.readme.md#Steps-in-the-Azure-IoT-Portal)):
+Build the sample Linux modules in VS Code and add them to your Azure Registry (we created the registry optionally in [Steps in the Azure IoT Portal](./README.md#Steps-in-the-Azure-IoT-Portal)):
 
 - Open VS Code as an administrator
 
@@ -289,7 +289,7 @@ This subsection describes the configuration and provisioning steps for the Linux
       sudo nano /etc/iotedge/config.yaml
       ```
 
-   - Set the connection string for the IoT Edge Device (queried previously, see [Steps in the Azure IoT Portal](./readme.md#Steps-in-the-Azure-IoT-Portal)). Edit the following part in the configuration file:
+   - Set the connection string for the IoT Edge Device (queried previously, see [Steps in the Azure IoT Portal](./README.md#Steps-in-the-Azure-IoT-Portal)). Edit the following part in the configuration file:
 
       ```
       # Manual provisioning configuration
@@ -298,7 +298,7 @@ This subsection describes the configuration and provisioning steps for the Linux
       device_connection_string: "<IoT Edge Device connection string>"
       ```
 
-   - Enable the following lines to enable using the private key, certificate chain and root CA certificate required for the authenticated communication with the downstream device. This 'configures the edge device to act as a gateway'. The keys were previously deployed onto the Linux environment, see [Steps in the Windows IoT device](./readme.md#Steps-in-the-Windows-IoT-device).
+   - Enable the following lines to enable using the private key, certificate chain and root CA certificate required for the authenticated communication with the downstream device. This 'configures the edge device to act as a gateway'. The keys were previously deployed onto the Linux environment, see [Steps in the Windows IoT device](./README.md#Steps-in-the-Windows-IoT-device).
 
       ```
       certificates:
