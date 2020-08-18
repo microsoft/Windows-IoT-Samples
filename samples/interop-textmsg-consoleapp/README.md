@@ -1,4 +1,4 @@
-# Interop sample: Windows console app to Azure IoT Edge Module
+# Interop Console App with Linux Edge Module
 
 ## Introduction
 When running Linux container modules on Windows there are times when you may want bidirectional communication between an Linux module and a Windows process both running on a local Windows IoT device.  The communication methodology presented in this sample can be adapted to enable many difference scenarios, including:
