@@ -4,7 +4,7 @@
 - [x] [Introduction](../readme.md)  
 - [x] [Step 1 - Setup Development Environment](./Setup%20Development%20Environment.MD)   
 - [x] [Step 2 - Setup Azure Resources](./Setup%20Azure%20Resources.MD)  
-- [ ] [**Step 3 - Develop and publish the IoT Edge Linux module**](./Develop%20and%20publish%20the%20IoT%20edge%20Linux%20module.MD)  
+- [ ] **Step 3 - Develop and publish the IoT Edge Linux module**  
 - [ ] [Step 4 - Develop the Windows C# Console Application](./Develop%20the%20Windows%20C%23%20Console%20Application.MD)  
 - [ ] [Step 5 - Create Certificates for Authentication](./Create%20Certificates%20for%20Authentication.MD)  
 - [ ] [Step 6 - Configuring the IoT Edge Device](./Configuring%20the%20IoT%20Edge%20Device.MD)  

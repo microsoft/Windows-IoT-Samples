@@ -8,7 +8,7 @@
 - [x] [Step 4 - Develop the Windows C# Console Application](./Develop%20the%20Windows%20C%23%20Console%20Application.MD)  
 - [x] [Step 5 - Create Certificates for Authentication](./Create%20Certificates%20for%20Authentication.MD)  
 - [x] [Step 6 - Configuring the IoT Edge Device](./Configuring%20the%20IoT%20Edge%20Device.MD)  
-- [ ] [**Step 7 - Deploy the Modules onto the IoT Edge Device**](./Deploy%20the%20Modules%20onto%20the%20IoT%20Edge%20Device.MD)  
+- [ ] **Step 7 - Deploy the Modules onto the IoT Edge Device**  
 - [ ] [Step 8 - Run the Console Application](./Run%20the%20Console%20Application.MD)  
 ---
 
