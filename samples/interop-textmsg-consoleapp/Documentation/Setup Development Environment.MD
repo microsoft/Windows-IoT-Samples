@@ -1,7 +1,7 @@
 # Interop Console App with Linux Edge Module
 ## Progress
 
-- [x] [Introduction](../readme.md)  
+- [x] [Introduction](../README.md)  
 - [ ] **Step 1 - Setup Development Environment**
 - [ ] [Step 2 - Setup Azure Resources](./Setup%20Azure%20Resources.MD)  
 - [ ] [Step 3 - Develop and publish the IoT Edge Linux module](./Develop%20and%20publish%20the%20IoT%20edge%20Linux%20module.MD)  
