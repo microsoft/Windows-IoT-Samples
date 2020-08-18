@@ -107,3 +107,4 @@ Use the [New-AzContainerRegistry](https://docs.microsoft.com/powershell/module/a
 ```powershell
 New-AzContainerRegistry -ResourceGroupName <My Resource Group> -Name InteropSampleRegistry -Sku "Basic" -EnableAdminUser
 ```
+Go to [Next Step](./Develop%20and%20publish%20the%20IoT%20edge%20Linux%20module.MD)  

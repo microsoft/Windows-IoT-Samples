@@ -319,3 +319,5 @@ It will create a single binary along with the symbols under EdgeSolution\LeafDev
 ```powershell
 EdgeSolution\LeafDeviceApp\bin\Release\netcoreapp3.1\win10-x64\publish\
 ```
+
+Go to [Next Step](./Create%20Certificates%20for%20Authentication.MD)  

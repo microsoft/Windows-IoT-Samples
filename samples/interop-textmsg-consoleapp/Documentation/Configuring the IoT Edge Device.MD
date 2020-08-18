@@ -63,3 +63,5 @@ sudo systemctl restart iotedge
 sudo iotedge check
 ```
 The command checks if IoT Edge is configured correctly. If you find any errors, please refer to [Troubleshoot your IoT Edge device](https://docs.microsoft.com/azure/iot-edge/troubleshoot).
+
+Go to [Next Step](./Deploy%20the%20Modules%20onto%20the%20IoT%20Edge%20Device.MD)  

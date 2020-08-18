@@ -180,3 +180,5 @@ Perform the following steps from `Tutorial: Develop a C# IoT Edge module for Lin
 * [Build and push your module](https://docs.microsoft.com/azure/iot-edge/tutorial-csharp-module#build-and-push-your-module)
 
 Use the container registry credentials of your container registry for the docker login.
+
+Go to [Next Step](./Develop%20the%20Windows%20C%23%20Console%20Application.MD)  

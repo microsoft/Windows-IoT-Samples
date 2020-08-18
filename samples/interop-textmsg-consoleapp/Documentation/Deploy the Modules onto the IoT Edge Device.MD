@@ -29,3 +29,5 @@ Select the file 'deployment.amd64.json' in the folder ‘config’ as manifest f
 ```bash
 sudo iotedge list
 ```
+
+Go to [Next Step](./Run%20the%20Console%20Application.MD)  

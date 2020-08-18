@@ -92,3 +92,5 @@ The scripts can be run on a machine outside of Azure.  This requires a machine o
 1. Restart the machine with the command `Restart-Computer`
 
 1. Enable Visual Studio Code extensions with the command `.\Enable-CodeExtensions.ps1`
+
+Go to [Next Step](./Setup%20Azure%20Resources.MD)  
