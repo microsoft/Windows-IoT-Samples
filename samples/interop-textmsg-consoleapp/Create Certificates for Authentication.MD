@@ -1,0 +1,4 @@
+# Step 5: Create Certificates for Authentication
+This part describes the relevant steps to create sample certificates for the authentication between downstream device and IoT edge.
+*   The following [link](https://docs.microsoft.com/azure/iot-edge/tutorial-machine-learning-edge-05-configure-edge-device#create-certificates) provides a tutorial on how to create a sample PKI with certificate validity for one month. You only need to generate certificates and do not need to upload them to Azure Key Vault. If you want to generate customizable certificates, please follow the appendix [Customizing Sample Certificates](#_Customizing_Sample_Certificates) .
+*   You can also use your own root CA certificate in case you have a (test) PKI for downstream devices and edge devices. In any of the two latter cases, replace the private key, certificate chain, and root CA cert.
