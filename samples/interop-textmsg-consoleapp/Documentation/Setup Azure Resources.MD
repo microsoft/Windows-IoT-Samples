@@ -1,3 +1,15 @@
+# Interop Console App with Linux Edge Module
+## Progress
+
+- [x] [Step 1 - Setup Development Environment](./Setup%20Development%20Environment.MD)   
+- [ ] [**Step 2 - Setup Azure Resources**](./Setup%20Azure%20Resources.MD)  
+- [ ] [Step 3 - Develop and publish the IoT Edge Linux module](./Develop%20and%20publish%20the%20IoT%20edge%20Linux%20module.MD)  
+- [ ] [Step 4 - Develop the Windows C# Console Application](./Develop%20the%20Windows%20C%23%20Console%20Application.MD)  
+- [ ] [Step 5 - Create Certificates for Authentication](./Create%20Certificates%20for%20Authentication.MD)  
+- [ ] [Step 6 - Configuring the IoT Edge Device](./Configuring%20the%20IoT%20Edge%20Device.MD)  
+- [ ] [Step 7 - Deploy the Modules onto the IoT Edge Device](./Deploy%20the%20Modules%20onto%20the%20IoT%20Edge%20Device.MD)  
+- [ ] [Step 8 - Run the Console Application](./Run%20the%20Console%20Application.MD)  
+---
 # Step 2: Set up Azure resources  
 This part describes how to set up the required Azure entities with the [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview). Alternatively you can use [Azure PowerShell](https://docs.microsoft.com/powershell/azure/) module. This should be executed on any Windows host other than the (emulated) target device. We propose using the VM that serves as development environment. 
 
