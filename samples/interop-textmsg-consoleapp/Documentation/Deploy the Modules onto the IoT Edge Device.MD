@@ -19,14 +19,30 @@ Having the IoT Edge device set up, we now deploy the Linux modules onto the devi
 Create an IoT Deployment containing the Linux modules and add it to our sample IoT Edge Device:
 *   This means to deploy the deployment manifest onto your IoT Edge device
 *   Using VS code, follow the steps [here](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode).
+
+```diff 
+- replace here link
+```
+
  * “Sign in to access your IoT hub”
  * “Deploy to your device” as documented  
- 
+
+```diff
+- as documented where?
+```
+
 Select the file 'deployment.amd64.json' in the folder ‘config’ as manifest file to be deployed.
 
 ## Steps in the Linux environment of the IoT Edge Device
 *   Change into the Linux environment, see description above
+```diff
+- What description above
+```
 *   Run the following command which should list the CSharpModule as depicted in the `screenshot` shown below
+```Diff
+- Need to add Screenshot
+```
+
 ```bash
 sudo iotedge list
 ```

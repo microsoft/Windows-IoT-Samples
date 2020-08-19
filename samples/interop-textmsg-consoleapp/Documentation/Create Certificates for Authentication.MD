@@ -13,7 +13,29 @@
 ---
 # Step 5: Create Certificates for Authentication
 This part describes the relevant steps to create sample certificates for the authentication between downstream device and IoT edge.
-*   The following [link](https://docs.microsoft.com/azure/iot-edge/tutorial-machine-learning-edge-05-configure-edge-device#create-certificates) provides a tutorial on how to create a sample PKI with certificate validity for one month. You only need to generate certificates and do not need to upload them to Azure Key Vault. If you want to generate customizable certificates, please follow the appendix [Customizing Sample Certificates](#_Customizing_Sample_Certificates) .
+*   The following [link](https://docs.microsoft.com/azure/iot-edge/tutorial-machine-learning-edge-05-configure-edge-device#create-certificates) provides a tutorial on how to create a sample PKI with certificate validity for one month. You only need to generate certificates and do not need to upload them to Azure Key Vault. 
+
+```diff
+- replace use of following link
+```
+
+If you want to generate customizable certificates, please Follow this [tutorial](https://github.com/Azure-Samples/IoTEdgeAndMlSample/tree/master/CreateCertificates) to create sample certificates for use for the interop solution. It generates certificates with default subject name "turbofanGateway" and 30 days validity. To extend the validity of certificates (or) to change the subject name, make the following modifications and re-build the docker image after that:
+
+```diff
+- replace use of this tutorial
+``` 
+
+*   To extend the certificate validity to 365 days, replace "RUN yum -y install openssl git \" with 
+    * "RUN yum -y install openssl git sed \"
+*   Add following extra lines after "&& chmod 700 startup.sh"
+    * RUN sed -i -e '/days_till_expire/s/30/365/' certGen.sh
+*   To customize the subject name,
+    * add the below line before the "ENTRYPOINT [ "/work/startup.sh" ]
+    * "RUN sed -i -e 's/turbofanGateway/sampleedgedevice/' startup.sh
+
+
+
+
 *   You can also use your own root CA certificate in case you have a (test) PKI for downstream devices and edge devices. In any of the two latter cases, replace the private key, certificate chain, and root CA cert.
 
 Go to [Next Step](./Configuring%20the%20IoT%20Edge%20Device.MD)  

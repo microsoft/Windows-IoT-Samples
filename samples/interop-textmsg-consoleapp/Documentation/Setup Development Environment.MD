@@ -60,7 +60,11 @@ https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM
 
 1. In a PowerShell window navigate to **C:\source\IoTEdgeAndMlSample\ConfigureVM**
 
-1. Execute the Set-ExecutionPolicy cmdlet to allow script execution with the command `Set-ExecutionPolicy Bypass -Scope CurrentUser -Force`
+1. Execute the Set-ExecutionPolicy cmdlet to allow script execution with the following command:
+
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope CurrentUser -Force`
+    ```
 
 1. Run the script `.\Enable-CodeExtensions.ps1`
 
@@ -80,7 +84,10 @@ The scripts can be run on a machine outside of Azure.  This requires a machine o
 
 1. Open PowerShell as an administrator and navigate to directory containing the scripts
 
-1. Execute the Set-ExecutionPolicy cmdlet to allow script execution with the command `Set-ExecutionPolicy Bypass -Scope CurrentUser -Force`
+1. Execute the Set-ExecutionPolicy cmdlet to allow script execution with the followign command:
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
+    ```
 
 1. In PowerShell run the scripts in the following order:
 

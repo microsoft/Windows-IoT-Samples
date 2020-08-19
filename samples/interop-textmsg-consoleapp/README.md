@@ -8,11 +8,9 @@ When running Linux container modules on Windows there are times when you may wan
 ## Prerequisites
 To exercise this sample you will need the following
 * An [Azure Subscription](https://azure.microsoft.com/free/) in which you have rights to deploy resources.  
-* A device with Windows 10 version 1809 or later (build 17763 or later)¹
-    > ¹ Windows 10 Editions Supported
-    > * Windows 10 Professional
-    > * Windows 10 Enterprise
-    > * Windows 10 IoT Enterprise
+* A device running Windows 10 and meets the following criteria
+    > **Edition:** Professional, Enterprise, IoT Enterprise  
+    > **Version:** 1809 or later (build 17763 or higher)
 
 * Setup of Azure IoT Edge for Linux on Windows using one of the two options below
 
