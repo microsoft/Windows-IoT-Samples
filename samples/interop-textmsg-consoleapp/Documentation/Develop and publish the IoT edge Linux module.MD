@@ -14,11 +14,11 @@
 # Step 3: Develop and publish the IoT edge Linux module
 In this part we develop and publish the Linux modules in the development VM using Visual Studio Code.
 
-1. [Prerequisites](Prerequisites)
-1. [Create a new project](CreateProject)  
-1. [Add your registry credentials](AddRegistryCredentials)  
-1. [Update the module with custom code](UpdateModule)
-1. [Build and push your module](BuildAndPush)   
+1. [Prerequisites](#Prerequisites)
+1. [Create a new project](#CreateProject)  
+1. [Add your registry credentials](#AddRegistryCredentials)  
+1. [Update the module with custom code](#UpdateModule)
+1. [Build and push your module](#BuildAndPush)   
 
 ---  
 <a name="Prerequisites"></a>  

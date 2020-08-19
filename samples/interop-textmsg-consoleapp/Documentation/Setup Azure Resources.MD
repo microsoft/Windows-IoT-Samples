@@ -14,14 +14,14 @@
 # Step 2: Set up Azure resources  
 This part describes how to set up the required Azure entities with the [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview). Alternatively you can use [Azure PowerShell](https://docs.microsoft.com/powershell/azure/) module. This should be executed on any Windows host other than the (emulated) target device. We propose using the VM that serves as development environment. 
 
-1. Delete? [Start your PowerShell session](StartPowerShell)  
-1. Delete? [Determine Azure subscription Id](GetSubscriptionId)  
-1. Delete? [Set the subscription Id context](SetAzContext)  
-1. [Create an IoT Edge device](CreateIoTEdgeDevice)  
-1. [Create an IoT Downstream Device](CreateDownstreamDevice)  
-1. [Get Parent device Connection String](GetParentConnectionString)  
-1. [Get Downstream device Connection String](GetDownstreamConnectionString)  
-1. [Setup Container Registry](ContainerRegistry)  
+1. Delete? [Start your PowerShell session](#StartPowerShell)  
+1. Delete? [Determine Azure subscription Id](#GetSubscriptionId)  
+1. Delete? [Set the subscription Id context](#SetAzContext)  
+1. [Create an IoT Edge device](#CreateIoTEdgeDevice)  
+1. [Create an IoT Downstream Device](#CreateDownstreamDevice)  
+1. [Get Parent device Connection String](#GetParentConnectionString)  
+1. [Get Downstream device Connection String](#GetDownstreamConnectionString)  
+1. [Setup Container Registry](#ContainerRegistry)  
 
 ----
 <a name="StartPowerShell"></a>
