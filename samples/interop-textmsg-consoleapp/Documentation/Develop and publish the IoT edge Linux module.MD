@@ -167,7 +167,7 @@ The IoT Edge extension tries to pull your container registry credentials from Az
 
 1. In the VS Code explorer, open the **deployment.template.json** file in your IoT Edge solution workspace.
 
-1. Replace all entries in routes with the following code to redirect the messages received from the windows application to CSharpModule.
+1. Replace all entries in **routes** with the following code to redirect the messages received from the windows application to CSharpModule.
    ```json
    "leafdeviceinputendpoint": "FROM /messages/* WHERE NOT IS_DEFINED($connectionModuleId) INTO BrokeredEndpoint(\"/modules/CSharpModule/inputs/leafdeviceinput\")"
    ```

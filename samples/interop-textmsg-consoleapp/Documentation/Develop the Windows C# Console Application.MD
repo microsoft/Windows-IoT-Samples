@@ -17,7 +17,7 @@ This part describes how to develop the Windows console application in the develo
 1. In VS Code Explorer, open the EdgeSolution folder created earlier.
 1. Go to the terminal window and change to the folder EdgeSolution.
    ```diff
-   - verify this step
+   - verify this step.  How do I open the terminal window if it is not already visible?
    ```
 1. Run below command to create project.  
    ```powershell
@@ -73,6 +73,13 @@ This part describes how to develop the Windows console application in the develo
    * Sending message to iotedge device using “DeviceClient.SentEventSync”
    * Setting direct method callback using “DeviceClient.SetMethodHandlerAsync”
    * Options to read IoT hub connection string, IoT edge device hostname, edge root certificate file path.
+
+   ```diff
+   - Incorporate "Detailed Usage of the Azure SDK API" section from the Appendix in original Word DOC.
+   
+   ```
+
+
     ```csharp
     using System;
     using System.Text;
@@ -263,7 +270,8 @@ This part describes how to develop the Windows console application in the develo
             }
         }
     }
-   ```
+    ```
+
 
 1. In the VS Code explorer, open **EdgeSolution** > **LeafDeviceApp** > **LeafDeviceApp.csproj** and add below entry inside the Project node:  
     ```
