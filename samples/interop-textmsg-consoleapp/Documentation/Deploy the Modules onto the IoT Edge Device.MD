@@ -16,35 +16,33 @@
 Having the IoT Edge device set up, we now deploy the Linux modules onto the device.
 
 ## Steps in the development VM
-Create an IoT Deployment containing the Linux modules and add it to our sample IoT Edge Device:
-*   This means to deploy the deployment manifest onto your IoT Edge device
-*   Using VS code, follow the steps [here](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode).
 
-```diff 
-- replace here link
-```
-
- * “Sign in to access your IoT hub”
- * “Deploy to your device” as documented  
-
-```diff
-- as documented where?
-```
-
-Select the file 'deployment.amd64.json' in the folder ‘config’ as manifest file to be deployed.
+1. Perform the following steps from **Deploy Azure IoT Edge modules from Visual Studio Code** documentation.
+    * [Configure deployment manifest](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#configure-a-deployment-manifest)  
+    ```diff
+    - skip the above step?
+    ```
+    * [Sign in to access your IoT Hub](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#sign-in-to-access-your-iot-hub)  
+    * [Deploy to your device](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#deploy-to-your-device)  
+    (Select the file **deployment.amd64.json** from the **config** folder as manifest file to be deployed.)
+      
+    * [View modules on your device](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#view-modules-on-your-device) 
 
 ## Steps in the Linux environment of the IoT Edge Device
 *   Change into the Linux environment, see description above
-```diff
-- What description above
-```
-*   Run the following command which should list the CSharpModule as depicted in the `screenshot` shown below
-```Diff
-- Need to add Screenshot
-```
+    ```diff
+    - What description above
+    ```
+1. Run the following command to see the modules that have been deployed to your edge device
 
-```bash
-sudo iotedge list
-```
+    ```bash
+    sudo iotedge list
+    ```
+    The CSharpModule should appear as depicted in the screen capture below.
+    
+    ```Diff
+    - Need to add Screenshot
+    ```
+
 
 Go to [Next Step](./Run%20the%20Console%20Application.MD)  
