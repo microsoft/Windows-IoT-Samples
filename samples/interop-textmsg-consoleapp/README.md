@@ -31,8 +31,8 @@ To realize this communication model for the development of both the Windows appl
 
 | Downstream Device | Direction | Edge Module |
 |-------------------|:-----------:|-------------|
-| `DeviceClient.SendEventAsync` | :arrow_right:  🠊 &rarr; | `ModuleClient.SetInputMessageHandlerAsync` | 
-| `DeviceClient.SetMethodHandlerAzync` | :arrow_left:  🠈 &larr; | `DeviceClient.InvokeMethodAzync`
+| `DeviceClient.SendEventAsync` | 🠊 🠊 🠊 | `ModuleClient.SetInputMessageHandlerAsync` | 
+| `DeviceClient.SetMethodHandlerAzync` | 🠈 🠈 🠈  | `DeviceClient.InvokeMethodAzync`
 
 
 
