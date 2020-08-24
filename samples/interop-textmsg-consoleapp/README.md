@@ -15,25 +15,18 @@ The _'downstream device'_, i.e. Windows console application, uses a root CA cert
 This sample also incorporates an Azure IoT Edge for Linux module which processes messages sent by the _'downstream device'_ then sends processed results back to the _'downstream device'_ or to the cloud as needed.
 
 ### Message Routing
-This sample employs concepts described in [Learn how to deploy modules and establish routes in IoT Edge](https://docs.microsoft.com/azure/iot-edge/module-composition) to establish message flow between the _'downstream device'_ (Windows console application) and a custom Azure IoT Edge module. The **IoT Edge Hub module** ($edgeHub) manages communication between modules, IoT Hub, and downstream devices.  Therefore the $edgeHub module twin contains a _desired property_ called **routes** which declares how messages are passed within a deployment.
+This sample employs concepts described in [Learn how to deploy modules and establish routes in IoT Edge](https://docs.microsoft.com/azure/iot-edge/module-composition) to establish message flow between the _'downstream device'_ (Windows console application) and a custom Azure IoT Edge module. The **IoT Edge Hub system module** ($edgeHub) manages communication between modules, IoT Hub, and downstream devices.  Therefore the $edgeHub module twin contains a _desired property_ called **routes** which declares how messages are passed within a deployment.
 
-The routing table defines a set of routing entries, where each entry defines a message routing between two endpoints. Each endpoint can be an input or an output of a module. Each module then defines handlers for messages routed to its input endpoint. After processing the message, the module can send a response to one of its output endpoints.
+The [routing table](https://docs.microsoft.com/azure/iot-edge/module-composition#declare-routes) defines a set of routing entries, where each entry defines a message routing between two endpoints. Each endpoint can be an input or an output of a module. Each module then defines handlers for messages routed to its input endpoint. After processing the message, the module can send a response to one of its output endpoints.
 
 The routing engine uses the module ID to identify the source/destination of a message. However, a downstream device does not have a module ID. Thus, for a module to intercept a message coming from a device, a “special” routing table entry is defined, one that applies to messages with no module ID. This way a ‘device input endpoint’ is created. The processing module can then setup a handler for messages coming from the device input endpoint.
 
-The above model defines how messages coming from a device are routed to a processing module, but it does not provide a similar way to send back ‘results’ from the module to the device. For that purpose, the module can invoke a method directly on the device, providing the results, see [here](https://docs.microsoft.com/azure/iot-edge/module-composition#declare-routes).
-
-```diff
-- Replace see here with appropriate text
-```
-
 To realize this communication model for the development of both the Windows application and Linux module, we use the below APIs from the Azure Devices Client Namespace provided by the Azure SDK:  
 
-| Downstream Device | Direction | Edge Module |
-|-------------------|:-----------:|-------------|
-| `DeviceClient.SendEventAsync` | 🠊 🠊 🠊 | `ModuleClient.SetInputMessageHandlerAsync` | 
-| `DeviceClient.SetMethodHandlerAzync` | 🠈 🠈 🠈  | `DeviceClient.InvokeMethodAzync`
-
+> | Downstream Device (Console App) | Message Direction | Edge Module |
+> |-------------------|:-----------:|-------------|
+> | `DeviceClient.SendEventAsync` | 🠊 🠊 🠊 | `ModuleClient.SetInputMessageHandlerAsync` | 
+> | `DeviceClient.SetMethodHandlerAzync` | 🠈 🠈 🠈  | `DeviceClient.InvokeMethodAzync`
 
 
 ## Prerequisites
