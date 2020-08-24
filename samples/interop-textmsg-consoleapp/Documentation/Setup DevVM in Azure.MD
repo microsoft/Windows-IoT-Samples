@@ -24,7 +24,7 @@ To run these scripts you will need an [Azure Subscription](https://azure.microso
 Where would you like to create your developer environment?  
 
 - [x] Virtual Machine in Azure 
-- [ ] [Virtual Maching on my PC](./Setup%20DevVM%20on%20local%20PC.MD)
+- [ ] [Virtual Maching on Local PC](./Setup%20DevVM%20on%20Local%20PC.MD)
     
 ---
 
