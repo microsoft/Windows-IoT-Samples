@@ -23,18 +23,21 @@ The routing engine uses the module ID to identify the source/destination of a me
 
 To realize this communication model for the development of both the Windows application and Linux module, we use the below APIs from the Azure Devices Client Namespace provided by the Azure SDK:  
 
-> | Downstream Device (Console App) | Message Direction | Edge Module |
-> |-------------------|:-----------:|-------------|
-> | `DeviceClient.SendEventAsync` | 🠊 🠊 🠊 | `ModuleClient.SetInputMessageHandlerAsync` | 
-> | `DeviceClient.SetMethodHandlerAzync` | 🠈 🠈 🠈  | `DeviceClient.InvokeMethodAzync`
+<center>
 
+| Downstream Device (Console App) | Message Direction | Edge Module |
+|-------------------|:-----------:|-------------|
+| [DeviceClient.SendEventAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventasync?view=azure-dotnet) | 🠊 🠊 🠊 | [ModuleClient.SetInputMessageHandlerAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.moduleclient.setmessagehandlerasync?view=azure-dotnet) | 
+| [DeviceClient.SetMethodHandlerAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.setmethodhandlerasync?view=azure-dotnet) | 🠈 🠈 🠈  | [ModuleClient.InvokeMethodAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.moduleclient.invokemethodasync?view=azure-dotnet) | 
+
+</center>
 
 ## Prerequisites
 To exercise this sample you will need the following
 * An [Azure Subscription](https://azure.microsoft.com/free/) in which you have rights to deploy resources.  
 * A device running Windows 10 and meets the following criteria
-    > **Edition:** Professional, Enterprise, IoT Enterprise  
-    > **Version:** 1809 or later (build 17763 or higher)
+   * **Edition:** Professional, Enterprise, IoT Enterprise  
+   * **Version:** 1809 or later (build 17763 or higher)
 
 * Setup of Azure IoT Edge for Linux on Windows using one of the two options below
 
