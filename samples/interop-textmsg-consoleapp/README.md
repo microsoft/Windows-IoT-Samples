@@ -1,8 +1,6 @@
 # Interop Console App with Linux Edge Module
 
----
 ## Introduction
----
 This sample demonstrates bidirectional communication between a Windows console application and an Azure IoT Edge module that is running in a virtual Linux environment hosted on a Windows device.
 
 The underlying communication between the Windows console application (downstream device) and the IoT Edge module is based on [Advanced Messaging Queuing Protocol (AMQP)](https://docs.microsoft.com/azure/iot-hub/iot-hub-amqp-support), a networking protocol that uses TCP and authenticated using a [public key infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure).  
@@ -33,14 +31,12 @@ To realize this communication model for the development of both the Windows appl
 
 | Downstream Device | Direction | Edge Module |
 |-------------------|:-----------:|-------------|
-| `DeviceClient.SendEventAsync` | :arrow_right: | `ModuleClient.SetInputMessageHandlerAsync` | 
-| `DeviceClient.SetMethodHandlerAzync` | :arrow_left: | `DeviceClient.InvokeMethodAzync`
+| `DeviceClient.SendEventAsync` | :arrow_right:  🠊 &rarr; | `ModuleClient.SetInputMessageHandlerAsync` | 
+| `DeviceClient.SetMethodHandlerAzync` | :arrow_left:  🠈 &larr; | `DeviceClient.InvokeMethodAzync`
 
 
 
----
 ## Prerequisites
----
 To exercise this sample you will need the following
 * An [Azure Subscription](https://azure.microsoft.com/free/) in which you have rights to deploy resources.  
 * A device running Windows 10 and meets the following criteria
@@ -57,9 +53,7 @@ To exercise this sample you will need the following
         * See [Install the Azure IoT Edge runtime on Debian-based Linux system](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-linux) documentation
 
 
----
 ## Instructions
----
 [Step 1 - Setup Development Environment](./Documentation/Setup%20Development%20Environment.MD)   
 [Step 2 - Setup Azure Resources](./Documentation/Setup%20Azure%20Resources.MD)  
 [Step 3 - Develop and publish the IoT Edge Linux module](./Documentation/Develop%20and%20publish%20the%20IoT%20edge%20Linux%20module.MD)  
@@ -69,7 +63,5 @@ To exercise this sample you will need the following
 [Step 7 - Deploy the Modules onto the IoT Edge Device](./Documentation/Deploy%20the%20Modules%20onto%20the%20IoT%20Edge%20Device.MD)  
 [Step 8 - Run the Console Application](./Documentation/Run%20the%20Console%20Application.MD)  
 
----
 ## Feedback
----
 If you have problems with this sample, please post an issue in this repository.
