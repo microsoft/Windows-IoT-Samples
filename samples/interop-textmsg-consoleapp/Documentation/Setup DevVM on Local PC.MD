@@ -15,12 +15,6 @@
 
 Over the course of walk-through for this sample we will be performing various developer tasks including coding, compiling, configuring, and deploying IoT Edge module and IoT devices. To provide a common basis for the performing these tasks, we recommend the use of the [DevVM scripts](https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM) in the [IoTEdgeandMLSample](https://github.com/Azure-Samples/IoTEdgeAndMlSample) to create an configure an Azure Virtual Machine (VM) specifically for this walk-through.
 
-**Download Scripts**  
-Download the DevVM scripts from the following project to your local machine:   
-https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM
-> Note:  
-To run these scripts you will need an [Azure Subscription](https://azure.microsoft.com/en-us/free/) in which you have rights to deploy resources.
-
 Where would you like to create your developer environment?  
 
 - [ ] [Virtual Machine in Azure](./Setup%20DevVM%20in%20Azure.MD)  
@@ -28,9 +22,14 @@ Where would you like to create your developer environment?
     
 ---
 
-## Alternate setup using local machine
+1. Download Scripts
+Download the DevVM scripts from the following project to your local machine:   
+https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM  
 
-The scripts can be run on a machine outside of Azure.  This requires physical hardware or virtual machine that is capable of [nested virtualization](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization)
+    > **Note:** To run these scripts you will need an [Azure Subscription](https://azure.microsoft.com/en-us/free/) in which you have rights to deploy resources.
+
+1. Alternate setup using local machine
+    >   **Note:**  The scripts can be run on a machine outside of Azure.  This requires physical hardware or virtual machine that is capable of [nested virtualization](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization)
 
 1. Log into the Windows environment you wish to configure
 

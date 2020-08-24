@@ -15,12 +15,6 @@
 
 Over the course of walk-through for this sample we will be performing various developer tasks including coding, compiling, configuring, and deploying IoT Edge module and IoT devices. To provide a common basis for the performing these tasks, we recommend the use of the [DevVM scripts](https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM) in the [IoTEdgeandMLSample](https://github.com/Azure-Samples/IoTEdgeAndMlSample) to create an configure an Azure Virtual Machine (VM) specifically for this walk-through.
 
-**Download Scripts**  
-Download the DevVM scripts from the following project to your local machine:   
-https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM
-> Note:  
-To run these scripts you will need an [Azure Subscription](https://azure.microsoft.com/en-us/free/) in which you have rights to deploy resources.
-
 Where would you like to create your developer environment?  
 
 - [x] Virtual Machine in Azure 
@@ -28,14 +22,18 @@ Where would you like to create your developer environment?
     
 ---
 
-## **Create an Azure VM for Dev Environment**   
-1.
-    To setup a Dev Environment using a physical device see: [Alternate Setup using local machine](#Alternate_setup_using_local_machine)
+1. Download Scripts
+Download the DevVM scripts from the following project to your local machine:   
+https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM  
+
+    > **Note:** To run these scripts you will need an [Azure Subscription](https://azure.microsoft.com/en-us/free/) in which you have rights to deploy resources.
+
+1.  Create an Azure VM for Dev Environment
 
     Open a **Powershell** and run **Create-AzureDevVm.ps1**
-   ```powershell
-   .\Create-AzureDevVm.ps1
-   ```
+    ```powershell
+    .\Create-AzureDevVm.ps1
+    ```
      When prompted provide the following:
     - **Azure Subscription ID:** found in the Azure Portal 
     - **Resource Group Name:** memorable name for grouping the resources for your walk-through
