@@ -1,23 +1,23 @@
 # Interop Console App with Linux Edge Module
 
+---
 ## Introduction
+---
 This sample demonstrates bidirectional communication between a Windows console application and an Azure IoT Edge module that is running in a virtual Linux environment hosted on a Windows device.
-
-The Windows console application in this sample uses the [Microsoft.Azure.Devices.Client](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient?view=azure-dotnet) namespace from [[Azure IoT libraries for .NET](https://docs.microsoft.com/dotnet/api/overview/azure/iot?view=azure-dotnet).  In this scenario, the Windows console application is being implemented as a [downstream device](https://docs.microsoft.com/azure/iot-edge/how-to-connect-downstream-device), sometimes referred to as a _'leaf device'_. A downstream device can be any application or platform that has an identity created with the Azure IoT Hub cloud service.  A downstream device could even be an application running on the IoT Edge device itself. 
-
-This sample also incorporates an Azure IoT Edge for Linux module which processes messages sent by the _'downstream device'_, which in this case is the Windows console applications, then sends processed results back to the _'downstream device'_ or to the cloud as needed.
 
 The underlying communication between the Windows console application (downstream device) and the IoT Edge module is based on [Advanced Messaging Queuing Protocol (AMQP)](https://docs.microsoft.com/azure/iot-hub/iot-hub-amqp-support), a networking protocol that uses TCP and authenticated using a [public key infrastructure (PKI)](https://en.wikipedia.org/wiki/Public_key_infrastructure).  
 
-The _'downstream device'_, i.e. Windows console application, uses a root CA certificate, to authenticate with the Azure IoT Edge for Linux instance.  The Azure IoT Edge for Linux instance must be configured to use a certificate and associated private key that resides within the PKI to establish a secure communicaiton channel.  The _'downstream device'_ first authenticates once with Azure IoT Hub (using its downstream device connection string), then IoT Hub authenticates the _'downstream device'_ with the IoT Edge Device as described in [Authenticate a downstream device to Azure IoT Hub](https://docs.microsoft.com/azure/iot-edge/how-to-authenticate-downstream-device).  The connection between the _'downstream device'_ and the IoT Hub is required for the initial authentication but then continues to function when the IoT Edge device is offline.
+### Windows Console Application
+The Windows console application in this sample uses the [Microsoft.Azure.Devices.Client](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient?view=azure-dotnet) namespace from [[Azure IoT libraries for .NET](https://docs.microsoft.com/dotnet/api/overview/azure/iot?view=azure-dotnet).  In this scenario, the Windows console application is being implemented as a [downstream device](https://docs.microsoft.com/azure/iot-edge/how-to-connect-downstream-device), sometimes referred to as a _'leaf device'_. A downstream device can be any application or platform that has an identity created with the Azure IoT Hub cloud service.  A downstream device could even be an application running on the IoT Edge device itself. 
 
-## Interop Communcation
-```diff
-- The following description dives deeper and provides a more detailed description on how we use the existing Azure IoT edge architecture for implementing the interoperability between the native Windows application and Azure IoT edge modules running in the Linux VM.
-```
+The _'downstream device'_, i.e. Windows console application, uses a root CA certificate, to authenticate with the Azure IoT Edge for Linux instance.  The Azure IoT Edge for Linux instance must be configured to use a certificate and associated private key that resides within the PKI to establish a secure communication channel.  The _'downstream device'_ first authenticates once with Azure IoT Hub (using its downstream device connection string), then IoT Hub authenticates the _'downstream device'_ with the IoT Edge Device as described in [Authenticate a downstream device to Azure IoT Hub](https://docs.microsoft.com/azure/iot-edge/how-to-authenticate-downstream-device).  The connection between the _'downstream device'_ and the IoT Hub is required for the initial authentication but then continues to function when the IoT Edge device is offline.
+
+
+### Azure IoT Edge Linux based Module 
+This sample also incorporates an Azure IoT Edge for Linux module which processes messages sent by the _'downstream device'_ then sends processed results back to the _'downstream device'_ or to the cloud as needed.
+
+### Message Routing
 This sample employs concepts described in [Learn how to deploy modules and establish routes in IoT Edge](https://docs.microsoft.com/azure/iot-edge/module-composition) to establish message flow between the _'downstream device'_ (Windows console application) and a custom Azure IoT Edge module. The **IoT Edge Hub module** ($edgeHub) manages communication between modules, IoT Hub, and downstream devices.  Therefore the $edgeHub module twin contains a _desired property_ called **routes** which declares how messages are passed within a deployment.
-
-
 
 The routing table defines a set of routing entries, where each entry defines a message routing between two endpoints. Each endpoint can be an input or an output of a module. Each module then defines handlers for messages routed to its input endpoint. After processing the message, the module can send a response to one of its output endpoints.
 
@@ -25,21 +25,22 @@ The routing engine uses the module ID to identify the source/destination of a me
 
 The above model defines how messages coming from a device are routed to a processing module, but it does not provide a similar way to send back ‘results’ from the module to the device. For that purpose, the module can invoke a method directly on the device, providing the results, see [here](https://docs.microsoft.com/azure/iot-edge/module-composition#declare-routes).
 
+```diff
+- Replace see here with appropriate text
+```
+
 To realize this communication model for the development of both the Windows application and Linux module, we use the below APIs from the Azure Devices Client Namespace provided by the Azure SDK:  
 
-On the downstream device, i.e., Windows application side, use the DeviceClient Class:
-* Device to module messaging: DeviceClient.SendEventAsync Method
-* Message handler registration (from module): DeviceClient.SetMethodHandlerAsync Method
-  * Message handler callback: MethodCallback Delegate
-
-On the module side, use the ModuleClient Class:
-* Module to device messaging: ModuleClient.InvokeMethodAsync Method 
-* Message handler registration (from device): ModuleClient.SetInputMessageHandlerAsync Method
-    * Module handler callback: MessageHandler delegate
-Find more about the detailed usage of these functions along with code snippets in the appendix Detailed usage of Azure SDK APIs.
+| Downstream Device | Direction | Edge Module |
+|-------------------|:-----------:|-------------|
+| `DeviceClient.SendEventAsync` | :arrow_right: | `ModuleClient.SetInputMessageHandlerAsync` | 
+| `DeviceClient.SetMethodHandlerAzync` | :arrow_left: | `DeviceClient.InvokeMethodAzync`
 
 
+
+---
 ## Prerequisites
+---
 To exercise this sample you will need the following
 * An [Azure Subscription](https://azure.microsoft.com/free/) in which you have rights to deploy resources.  
 * A device running Windows 10 and meets the following criteria
@@ -56,8 +57,9 @@ To exercise this sample you will need the following
         * See [Install the Azure IoT Edge runtime on Debian-based Linux system](https://docs.microsoft.com/azure/iot-edge/how-to-install-iot-edge-linux) documentation
 
 
+---
 ## Instructions
-
+---
 [Step 1 - Setup Development Environment](./Documentation/Setup%20Development%20Environment.MD)   
 [Step 2 - Setup Azure Resources](./Documentation/Setup%20Azure%20Resources.MD)  
 [Step 3 - Develop and publish the IoT Edge Linux module](./Documentation/Develop%20and%20publish%20the%20IoT%20edge%20Linux%20module.MD)  
@@ -67,5 +69,7 @@ To exercise this sample you will need the following
 [Step 7 - Deploy the Modules onto the IoT Edge Device](./Documentation/Deploy%20the%20Modules%20onto%20the%20IoT%20Edge%20Device.MD)  
 [Step 8 - Run the Console Application](./Documentation/Run%20the%20Console%20Application.MD)  
 
+---
 ## Feedback
+---
 If you have problems with this sample, please post an issue in this repository.
