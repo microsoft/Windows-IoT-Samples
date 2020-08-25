@@ -45,9 +45,7 @@ Linux VM
     * Copy the certificates created in [Step 5](./Create%20Certificates%20for%20Authentication.MD) to the `~/certs` folder of your Linux environment. 
 
         <table>
-	    <col style="width:50%">
-	    <col style="width:50%">
-        <tr><thead><th>WSL2</th><th>Linux VM</th></thead</tr>
+        <tr><thead><th>WSL2<img width=1000/></th><th>Linux VM<img width=1000/></th></thead</tr>
         <tr>
         <td>
 
