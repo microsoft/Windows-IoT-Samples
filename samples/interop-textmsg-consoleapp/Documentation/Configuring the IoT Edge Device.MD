@@ -15,89 +15,107 @@
 # Step 6: Configuring the IoT Edge Device.
 In this part we configure the Azure IoT Edge for Linux instance on the IoT edge device.
 
-## Steps on the Windows OS on the IoT Edge Device
-```diff
-+ Copy certificates to Linux environment
+WSL2  
+Linux VM
 
- Consider moving this section to Step 5 to create and publish the certificates
-```
-In the next steps we copy the sample certificates to the Linux environment. Copy the private key, certificate chain, root CA cert for authenticating the IoT Edge Device from the development VM to this Windows IoT device ('new-edge-device.key.pem', 'new-edge-device-full-chain.cert.pem', 'azure-iot-test-only.root.ca.cert.pem') to the '~/certs' folder.
-* **WSL2** 
-    1. Copy the files, for instance, via accessing the Linux filesystem through the patch '\wsl$' in File Explorer
-* **Linux VM** 
-    1. Use SSH to create a folder in the Linux environment and scp to copy the private key, certificate chain, and root CA cert:
-        ```powershell
-        ssh <username>@<VM IP/hostname> mkdir -p ~/certs 
-        scp .\certs\* <username>@<VM IP Address>:~/certs/
-        ```
-## Steps in the Linux environment of the IoT Edge Device
-1. Log in to the Linux environment
-    * **WSL2** 
-        1. Follow the [blog post](https://aka.ms/winiot-low) to change into the WSL environment
-            ```diff
-            - Replace blog post reference
-            ```
 
-    * **Linux VM** 
-        1. Use SSH to log in to the Linux environment.
-            ```powershell
-            ssh <username>@<VM IP address>
-            ```
+1. **Copy Certificates to Linux environment**
 
-1. Set up the Linux firewall for the interop of Windows application and Linux module. As the Azure Device Client Namespace is used, we use the underlying AMQP protocol for the exchange of messages. We need to specifically allow incoming packets on the ports required by the AMQP protocol. We thus adapt the firewall rules as follows and persist them across reboots:
+    Copy the certificates created in Step 5 to the `~/certs` folder of your Linux environment. 
+
+    <table>
+   	<col style="width:50%">
+	<col style="width:50%">
+    <tr><thead><th>WSL2</th><th>Linux VM</th></thead</tr>
+    <tr>
+    <td>
+
+    ```diff
+    - How?
+    ```
+    </td>
+    <td>Use SSH to create a folder in the Linux environment and scp to copy the private key, certificate chain, and root CA cert:  
+
+    ```powershell
+    ssh <username>@<VM IP/hostname> mkdir -p ~/certs 
+    scp .\certs\* <username>@<VM IP Address>:~/certs/
+    ```
+    </td>
+    </tr>
+    </table>
+    <hr>
+    
+1. **Log in to the Linux environment**
+    <table>
+   	<col style="width:50%">
+	<col style="width:50%">
+    <tr><thead><th>WSL2</th><th>Linux VM</th></thead</tr>
+    <tr>
+    <td>Return to WSL and perform steps 5 and 6 as defined in the [Linux modules with Azure IoT Edge on Windows 10 IoT Enterprise](https://aka.ms/winiot-low) blog.
+    </td>
+    <td>Use SSH to log in to the Linux environment.
+
+    ```powershell
+    ssh <username>@<VM IP address>
+    ```
+    </td>
+    </tr>
+   </table>
+   <hr>
+
+1. **Set up the Linux firewall**   
+As the Azure Device Client Namespace is used, we use the underlying AMQP protocol for the exchange of messages. We need to specifically allow incoming packets on the ports required by the AMQP protocol. We thus adapt the firewall rules as follows and persist them across reboots:
     ```bash
     sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT 
     sudo iptables -A INPUT -p tcp --dport 5671 -j ACCEPT 
     sudo iptables-save | sudo tee /etc/systemd/scripts/ip4save > /dev/null
     ```
-1. Run the following command to allow Azure IoT Edge to read the certificates.
+1. **Read the certificates**  
+    Run the following command to allow Azure IoT Edge to read the certificates.
     ```bash
     sudo chown -R iotedge: ~/certs
     ```
-## Provision the Azure IoT Edge for Linux configuration:  
-1.    To edit config.yaml run the following command:
-        ```bash
-        sudo nano /etc/iotedge/config.yaml
-        ```    
-1. To set the connection string for the IoT Edge Device (queried previously, see _Steps in the Azure IoT Portal_), set the device connection string in the configuration file:
-
-    ```diff
-    - Where did we collect the connection string? "Steps in the Azure IoT Portal" is only referenced once in this document.
-    ```
+1. **Provision the Azure IoT Edge for Linux configuration**  
+    To edit config.yaml run the following command:
+    ```bash
+    sudo nano /etc/iotedge/config.yaml
+    ```    
+    * Replace `"<IoT Edge Device connection string>"` in the 'Manual provisioning configuration with the connection string that you obtained in Step 2-6.
     
-    ```yaml
-    # Manual provisioning configuration
-    provisioning:
-      source: "manual"
-      device_connection_string: "<IoT Edge Device connection string>"
-    ```
-1. Enable the following lines to enable using the private key, certificate chain and root CA certificate required for the authenticated communication with the downstream device. This 'configures the edge device to act as a gateway'. The keys were previously deployed onto the VM, see _Steps in the Windows IoT device_.
+        ```yaml
+        # Manual provisioning configuration
+        provisioning:
+          source: "manual"
+          device_connection_string: "<IoT Edge Device connection string>"
+        ```
 
-    ```diff
-    - "Steps in the Windows IoT device" is only referenced once in this document.
-    ```
+    * Set the location of the certificates that were copied ot the device earlier.
+        ```yaml
+        certificates:
+          device_ca_cert: "/home/efl-user/certs/new-edge-device-full-chain.cert.pem"
+          device_ca_pk: "/home/efl-user/certs/new-edge-device.key.pem"
+          trusted_ca_certs: "/home/efl-user/certs/azure-iot-test-only.root.ca.cert.pem"
+        ```
+    **Note:** Skip the next step if you are on a network with dynamic DNS, then edge modules will automatically be able to resolve the VM’s IP address from its hostname. 
 
-    ```yaml
-    certificates:
-      device_ca_cert: "/home/efl-user/certs/new-edge-device-full-chain.cert.pem"
-      device_ca_pk: "/home/efl-user/certs/new-edge-device.key.pem"
-      trusted_ca_certs: "/home/efl-user/certs/azure-iot-test-only.root.ca.cert.pem"
-    ```
-1. If you are on a network with dynamic DNS, then edge modules will automatically be able to resolve the VM’s IP address from its hostname. If you are on a network without dynamic DNS, you will need to assign the VM a static IP address and change the line 'hostname: "…"' to 'hostname: "`<VM IP Address>`'.
+    * If you are on a network without dynamic DNS, you will need to assign the VM a static IP address and replace the line
+    `hostname: "…"` with `hostname: "<VM IP Address>"`.
 
-    ```diff
-    - It is unclear what the user needs to do here
-    ```
+        ```diff
+        - How do we assign the VM a static IP address?
+        ```
 
-1. To save the file and exit nano, press <kbd>CTRL</kbd>+<kbd>x</kbd>, confirm save and exit with <kbd>Y</kbd> and press <kbd>Enter</kbd>. This concludes the provisioning and configuration.
-1. Restart the iotedge by running the below command.
+    * To save the file and exit nano, press <kbd>CTRL</kbd>+<kbd>x</kbd>, confirm save and exit with <kbd>Y</kbd> and press <kbd>Enter</kbd>. This concludes the provisioning and configuration.
+1. **Restart IoT Edge**    
+    Restart IoT Edge by running the following command.
     ```base
     sudo systemctl restart iotedge
     ```
-1. Check the iotedge configured correctly by running the below command.
+1. **Check the IoT Edge configuration**  
+    Check that IoT Edge is configured correctly by running the below command.
     ```bash
     sudo iotedge check
     ```
-    The command checks if IoT Edge is configured correctly. If you find any errors, please refer to [Troubleshoot your IoT Edge device](https://docs.microsoft.com/azure/iot-edge/troubleshoot).
+    The command checks if IoT Edge is configured correctly.  If you find any errors, please refer to [Troubleshoot your IoT Edge device](https://docs.microsoft.com/azure/iot-edge/troubleshoot).
 
 Go to [Next Step](./Deploy%20the%20Modules%20onto%20the%20IoT%20Edge%20Device.MD)  
