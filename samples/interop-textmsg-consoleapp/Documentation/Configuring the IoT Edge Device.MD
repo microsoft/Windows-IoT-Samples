@@ -23,9 +23,7 @@ Linux VM
     * Create directory where certificates are to be copied 
 
         <table>
-	    <col style="width:50%">
-	    <col style="width:50%">
-        <tr><thead><th>WSL2</th><th>Linux VM</th></thead</tr>
+        <tr><thead><th>WSL2<img width=1000/></th><th>Linux VM<img width=1000/></th></thead</tr>
         <tr>
         <td>
 
@@ -70,9 +68,7 @@ Linux VM
     
 1. **Log in to the Linux environment**
     <table>
-	<col style="width:50%">
-	<col style="width:50%">
-    <tr><thead><th>WSL2</th><th>Linux VM</th></thead</tr>
+    <tr><thead><th>WSL2<img width=1000/></th><th>Linux VM<img width=1000/></th></thead</tr>
     <tr>
     <td>Return to WSL and perform steps 5 and 6 as defined in the [Linux modules with Azure IoT Edge on Windows 10 IoT Enterprise](https://aka.ms/winiot-low) blog.
     </td>
