@@ -15,10 +15,9 @@
 This part describes how to develop the Windows console application in the development VM.
 
 1. In VS Code Explorer, open the EdgeSolution folder created earlier.
-1. Go to the terminal window and change to the folder EdgeSolution.
-   ```diff
-   - verify this step.  How do I open the terminal window if it is not already visible?
-   ```
+
+1. Open the VS Code integrated terminal by selecting **View** > **Terminal**.
+
 1. Run below command to create project.  
    ```powershell
    dotnet new console -n LeafDeviceApp
@@ -69,15 +68,13 @@ This part describes how to develop the Windows console application in the develo
        }
        ```
 
-1. Replace the EdgeSolution\LeafDeviceApp\Program.cs file with the below code which includes
-   * Sending message to iotedge device using “DeviceClient.SentEventSync”
-   * Setting direct method callback using “DeviceClient.SetMethodHandlerAsync”
-   * Options to read IoT hub connection string, IoT edge device hostname, edge root certificate file path.
+1. Replace the EdgeSolution\LeafDeviceApp\Program.cs file with the below code which includes:
 
-   ```diff
-   - Incorporate "Detailed Usage of the Azure SDK API" section from the Appendix in original Word DOC.
-   
-   ```
+    * Sending message to iotedge device using [DeviceClient.SentEventAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventasync)
+    * Initialize DeviceClient object by using [DeviceClient.CreateFromConnectionString](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventasync) method.
+    * Create message object and invoke [DeviceClient.SendEventAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.sendeventasync) method to to pass the message.
+    * Define and register message handler using the [DeviceClient.SetMethodHandlerAsync](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.setmethoddefaulthandlerasync) method.
+    * Options to read IoT hub connection string, IoT edge device hostname, edge root certificate file path.
 
 
     ```csharp
@@ -281,20 +278,13 @@ This part describes how to develop the Windows console application in the develo
     </ItemGroup>
     ```
 
-1. Go back to the previous terminal, change to the folder EdgeSolution\LeafDeviceApp\ and run below command for building the project.
-   ```diff
-   - Previous terminal?
-   ```
+1. Open the VS Code integrated terminal by selecting **View** > **Terminal** then, change to the folder EdgeSolution\LeafDeviceApp\ and run below command for building the project.
 
    ```powershell
    dotnet build
    ```
 
-1. Run the below command to publish the binary, see more [here](https://docs.microsoft.com/dotnet/core/deploying/trim-self-contained).
-
-   ```diff
-   - replace here with description
-   ```
+1. Publish your binary a [trim self-contained executable](https://docs.microsoft.com/dotnet/core/deploying/trim-self-contained) using the following command: 
 
    ```powershell
    dotnet publish -c Release -r win10-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
