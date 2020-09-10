@@ -29,10 +29,10 @@ Using the Linux command shell that you signed into in [Step 6.2](./Configuring%2
 
     ```bash
     sudo iotedge list
-    ```
+    ```  
     
-    You should see the CSharpModule like the following:
-      ![Console Application](./Images/IoTEdgeList.png)   
+You should see the CSharpModule like the following:
+![Console Application](./Images/IoTEdgeList.png)   
 
 
 Go to [Next Step](./Run%20the%20Console%20Application.MD)  
