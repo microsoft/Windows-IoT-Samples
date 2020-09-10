@@ -18,10 +18,6 @@ Having the IoT Edge device set up, we now deploy the Linux modules onto the devi
 ## Steps in the development VM
 
 1. Perform the following steps from **Deploy Azure IoT Edge modules from Visual Studio Code** documentation.
-    * [Configure deployment manifest](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#configure-a-deployment-manifest)  
-    ```diff
-    - skip the above step?
-    ```
     * [Sign in to access your IoT Hub](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#sign-in-to-access-your-iot-hub)  
     * [Deploy to your device](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#deploy-to-your-device)  
     (Select the file **deployment.amd64.json** from the **config** folder as manifest file to be deployed.)
