@@ -24,10 +24,7 @@ We now deploy the Windows application onto the IoT device and run it to let it i
 
     Please find the screenshot of the running the console application:
 
-    ```Diff
-    - Need to add screenshot
-    ```
-    
+      ![Console Application](./images/consoleapprunning.jpg)    
 1. Run the below command to see the edge logs
     ```bash
     sudo iotedge logs CSharpModule
