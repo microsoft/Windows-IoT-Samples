@@ -14,9 +14,8 @@
 # Step 2: Set up Azure resources  
 This part describes how to set up the required Azure entities with the [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview). Alternatively you can use [Azure PowerShell](https://docs.microsoft.com/powershell/azure/) module. This should be executed on any Windows host other than the (emulated) target device. We propose using the VM that serves as development environment. 
 
-1. Delete? [Start your PowerShell session](#StartPowerShell)  
-1. Delete? [Determine Azure subscription Id](#GetSubscriptionId)  
-1. Delete? [Set the subscription Id context](#SetAzContext)  
+1. [Determine Azure subscription Id](#GetSubscriptionId)  
+1. [Set the subscription Id context](#SetAzContext)  
 1. [Create an IoT Edge device](#CreateIoTEdgeDevice)  
 1. [Create an IoT Downstream Device](#CreateDownstreamDevice)  
 1. [Get Parent device Connection String](#GetParentConnectionString)  
@@ -24,27 +23,9 @@ This part describes how to set up the required Azure entities with the [Azure Cl
 1. [Setup Container Registry](#ContainerRegistry)  
 
 ----
-<a name="StartPowerShell"></a>
-1. **Start your PowerShell session**
-   ```diff
-   - Is this step necessary assuming that we will continue with the PowerShell session from Step 1?
-   ```
-
-   * To use [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart-powershell) see [Start Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart-powershell#start-cloud-shell) instructions
-  
-   * To use [Azure PowerShell](https://docs.microsoft.com/powershell/azure/), load the Az PowerShell module 
-     * Click Start, type `PowerShell`  
-     * Right-click Windows PowerShell, then click Run as administrator.
-     * Set PowerShell execution policy with `powershell -ExecutionPolicy Bypass`
-     * Import the Az module with `Import-Module Az`
-     * Sign in to the Azure Portal with `Connect-AzAccount`
-
    <a name="GetSubscriptionId"></a>  
 1. **Determine Azure subscription Id**  
-   ```diff
-   - Is this step necessary given that the Subscription Id was provided when creating the Dev VM in Step 1-3?
-   ```
-
+   
    Use [Get-AzSubscription](https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription?view=azps-4.5.0) to list the subscriptions associated with your account then copy the value in the **Id** column associated with the Name of your subscription
    ```powershell
    Get-AzSubscription
@@ -52,10 +33,7 @@ This part describes how to set up the required Azure entities with the [Azure Cl
 
     <a name="SetAzContext"></a>
 1. **Set the subscription Id context**  
-   ```diff
-   - Is this step necessary given that the Subscription Id was provided when creating the Dev VM in Step 1-3?
-   ```
-
+   
    Use the [Set-AzContext](https://docs.microsoft.com/powershell/module/az.accounts/set-azcontext) command to set the subscription ID context.  
    > Replace **Id** with the Id copied from above.
    ```powershell

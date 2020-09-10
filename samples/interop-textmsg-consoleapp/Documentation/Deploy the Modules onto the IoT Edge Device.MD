@@ -25,20 +25,14 @@ Having the IoT Edge device set up, we now deploy the Linux modules onto the devi
     * [View modules on your device](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-modules-vscode#view-modules-on-your-device) 
 
 ## Steps in the Linux environment of the IoT Edge Device
-*   Change into the Linux environment, see description above
-    ```diff
-    - What description above
-    ```
-1. Run the following command to see the modules that have been deployed to your edge device
+Using the Linux command shell that you signed into in [Step 6.2](./Configuring%20the%20IoT%20Edge%20Device.MD), run the following command to see the modules that have been deployed to your edge device.
 
     ```bash
     sudo iotedge list
     ```
-    The CSharpModule should appear as depicted in the screen capture below.
     
-    ```Diff
-    - Need to add Screenshot
-    ```
+    You should see the CSharpModule like the following:
+      ![Console Application](./Images/IoTEdgeList.png)   
 
 
 Go to [Next Step](./Run%20the%20Console%20Application.MD)  

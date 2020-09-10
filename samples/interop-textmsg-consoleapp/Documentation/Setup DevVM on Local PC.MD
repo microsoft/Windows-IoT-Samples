@@ -34,7 +34,7 @@ https://github.com/Azure-Samples/IoTEdgeAndMlSample/blob/master/DevVM
 
 1. Open PowerShell as an administrator and navigate to directory containing the scripts
 
-1. Execute the **Set-ExecutionPolicy** cmdlet to allow script execution with the followign command:
+1. Execute the **Set-ExecutionPolicy** cmdlet to allow script execution with the following command:
     ```powershell
     Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
     ```

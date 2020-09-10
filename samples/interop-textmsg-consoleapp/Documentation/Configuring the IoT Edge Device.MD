@@ -19,50 +19,19 @@ WSL2
 Linux VM
 
 
-1. **Copy Certificates to Linux environment**
-    * Create directory where certificates are to be copied 
-
-        <table>
-        <tr><thead><th>WSL2<img width=1000/></th><th>Linux VM<img width=1000/></th></thead</tr>
-        <tr>
-        <td>
-
-        ```diff
-        - How?
-        ```
-        </td>
-        <td>Use SSH to create a folder in the Linux environment  
+1. **Copy Certificates to Linux VM environment**
+    * Use SSH to create a folder in the Linux environment  
 
         ```powershell
         ssh <username>@<VM IP/hostname> mkdir -p ~/certs
-        ```  
+        ``` 
 
-        </td>
-        </tr>
-        </table>
-        <hr>
 
-    * Copy the certificates created in [Step 5](./Create%20Certificates%20for%20Authentication.MD) to the `~/certs` folder of your Linux environment. 
-
-        <table>
-        <tr><thead><th>WSL2<img width=1000/></th><th>Linux VM<img width=1000/></th></thead</tr>
-        <tr>
-        <td>
-
-        ```diff
-        - How?
-        ```
-        </td>
-        <td>Use SCP to copy certificates to ~/certs/ folder  
+    * Use SCP to copy the certificates created in [Step 5](./Create%20Certificates%20for%20Authentication.MD) to the `~/certs` folder of your Linux environment.  
 
         ```powershell
         scp .\certs\* <username>@<VM IP Address>:~/certs/
         ```
-
-        </td>
-        </tr>
-        </table>
-        <hr>
     
 1. **Log in to the Linux environment**
     <table>

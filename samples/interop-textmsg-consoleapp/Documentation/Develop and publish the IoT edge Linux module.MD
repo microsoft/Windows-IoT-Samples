@@ -14,30 +14,13 @@
 # Step 3: Develop and publish the IoT edge Linux module
 In this part we develop and publish the Linux modules in the development VM using Visual Studio Code.
 
-1. [Prerequisites](#Prerequisites)
+
 1. [Create a new project](#CreateProject)  
 1. [Add your registry credentials](#AddRegistryCredentials)  
 1. [Update the module with custom code](#UpdateModule)
 1. [Build and push your module](#BuildAndPush)   
 
 ---  
-<a name="Prerequisites"></a>  
-
-## Prerequisites  
-   Perform the following steps from `Tutorial: Develop a C# IoT Edge module for Linux devices`
-
-   * [Prerequisites](https://docs.microsoft.com/azure/iot-edge/tutorial-csharp-module#prerequisites)
-   ```diff
-   - What specific items are needed from Prerequisites?  It appears that are some details items that would lead the reader down a path that is not necessary, such as:
-   -       A Linux device running Azure IoT Edge
-   -       Container Registry was setup in Step 2
-   -
-   - If we only need the following then we should just list them rather than prerequisites:
-   -       C# for Visual Studio Code (powered by OmniSharp)extension.
-   -       .NET Core 2.1 SDK
-   ```
-
----
 <a name="CreateProject"></a>  
 
 ## Create a new project  
