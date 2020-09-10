@@ -22,10 +22,12 @@ We now deploy the Windows application onto the IoT device and run it to let it i
     ```
     Press <kbd>1</kbd> to send a message to the Linux module.
 
-    Please find the screenshot of the running the console application:
+    You shoud see something like the following:
 
       ![Console Application](./Images/ConsoleAppRunning.png)    
 1. Run the below command to see the edge logs
     ```bash
     sudo iotedge logs CSharpModule
     ```
+    You should see something like the following:
+      ![Console Application](./Images/IoTEdgeLogs.png)    
