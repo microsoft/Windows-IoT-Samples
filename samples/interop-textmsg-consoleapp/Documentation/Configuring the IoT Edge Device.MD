@@ -23,7 +23,7 @@ In this part we configure the Azure IoT Edge for Linux instance on the IoT edge 
         ``` 
 
 
-    * Use SCP to copy the certificates created in [Step 5](./Create%20Certificates%20for%20Authentication.MD) to the `~/certs` folder of your Linux environment.  
+    * Use SCP to copy the certificates created in [Step 4](./Create%20Certificates%20for%20Authentication.MD) to the `~/certs` folder of your Linux environment.  
 
         ```powershell
         scp .\certs\* <username>@<VM IP Address>:~/certs/
