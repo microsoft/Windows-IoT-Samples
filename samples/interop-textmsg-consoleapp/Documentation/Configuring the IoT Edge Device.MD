@@ -15,10 +15,6 @@
 # Step 6: Configuring the IoT Edge Device.
 In this part we configure the Azure IoT Edge for Linux instance on the IoT edge device.
 
-WSL2  
-Linux VM
-
-
 1. **Copy Certificates to Linux VM environment**
     * Use SSH to create a folder in the Linux environment  
 
@@ -87,10 +83,7 @@ As the Azure Device Client Namespace is used, we use the underlying AMQP protoco
     * If you are on a network without dynamic DNS, you will need to assign the VM a static IP address and replace the line
     `hostname: "…"` with `hostname: "<VM IP Address>"`.
 
-        ```diff
-        - How do we assign the VM a static IP address?
-        ```
-
+ 
     * To save the file and exit nano, press <kbd>CTRL</kbd>+<kbd>x</kbd>, confirm save and exit with <kbd>Y</kbd> and press <kbd>Enter</kbd>. This concludes the provisioning and configuration.
 1. **Restart IoT Edge**    
     Restart IoT Edge by running the following command.

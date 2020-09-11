@@ -36,4 +36,4 @@ Follow the steps described in [Generate test certificates for Edge Gateway](http
             ```
 You can also use your own root CA certificate in case you have a (test) PKI for downstream devices and edge devices. In any of the two latter cases, replace the private key, certificate chain, and root CA cert.
 
-Go to [Next Step](./Configuring%20the%20IoT%20Edge%20Device.MD)  
+Go to [Next Step](./Develop%20the%20Windows%20C%23%20Console%20Application.MD)  

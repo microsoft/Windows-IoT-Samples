@@ -296,4 +296,4 @@ This part describes how to develop the Windows console application in the develo
    EdgeSolution\LeafDeviceApp\bin\Release\netcoreapp3.1\win10-x64\publish\
    ```
 
-Go to [Next Step](./Create%20Certificates%20for%20Authentication.MD)  
+Go to [Next Step](./Configuring%20the%20IoT%20Edge%20Device.MD)  

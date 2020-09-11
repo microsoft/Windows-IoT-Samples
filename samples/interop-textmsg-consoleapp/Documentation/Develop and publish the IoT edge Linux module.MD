@@ -203,4 +203,4 @@ In the previous section, you created an IoT Edge solution and added code to the 
 
    This process may take several minutes the first time, but is faster the next time that you run the commands.
 
-Go to [Next Step](./Develop%20the%20Windows%20C%23%20Console%20Application.MD)  
+Go to [Next Step](./Create%20Certificates%20for%20Authentication.MD) 
