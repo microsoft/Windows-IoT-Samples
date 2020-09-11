@@ -33,7 +33,7 @@ In this part we configure the Azure IoT Edge for Linux instance on the IoT edge 
     <table>
     <tr><thead><th>WSL2<img width=1000/></th><th>Linux VM<img width=1000/></th></thead</tr>
     <tr>
-    <td>Return to WSL and perform steps 5 and 6 as defined in the [Linux modules with Azure IoT Edge on Windows 10 IoT Enterprise](https://aka.ms/winiot-low) blog.
+    <td>Return to WSL and perform steps 5 and 6 as defined in the <a href="https://aka.ms/winiot-low">Linux modules with Azure IoT Edge on Windows 10 IoT Enterprise</a> blog.
     </td>
     <td>Use SSH to log in to the Linux environment.
 
