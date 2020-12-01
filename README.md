@@ -61,7 +61,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 | Name           | Description      |  
 |----------------|------------------|  
-| [interop-textmsg-consoleapp](./samples/interop-blog-textmsg-consoleapp) | Basic interop sample demonstrating text messaging between a Windows console app and an Edge module. | 
-| [interop-customvision-textmsg-uwpapp](./samples/interop-customvision-textmsg-uwpapp) | <p>Two more advanced interop samples which demonstrate bidirectional communication between a Windows application and an Edge module. </p><ul><li>Text messaging between a UWP application and an Edge module. </li><li>A 'Custom vision' machine learning interop sample with a fruit classifier which uses a Windows UWP app to send camera frames to an Edge module for identification.</li></ul>|  
+| [interop-textmsg-consoleapp](https://aka.ms/WinIoTSamples-interop-textmsg-consoleapp) | Basic interop sample demonstrating text messaging between a Windows console app and an Edge module. | 
+| [interop-customvision-textmsg-uwpapp](https://aka.ms/WinIoTSamples-interop-customvision-textmsg-uwpapp) | <p>Two more advanced interop samples which demonstrate bidirectional communication between a Windows application and an Edge module. </p><ul><li>Text messaging between a UWP application and an Edge module. </li><li>A 'Custom vision' machine learning interop sample with a fruit classifier which uses a Windows UWP app to send camera frames to an Edge module for identification.</li></ul>|  
 
 
