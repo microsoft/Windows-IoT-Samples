@@ -1,13 +1,14 @@
-<!--
-   samplefwlink:  https://aka.ms/WinIoTSamples
---->
+
  ██╗       ██╗ ██╗ ███╗  ██╗ ██████╗   █████╗  ██╗       ██╗  ██████╗      ██╗        ████████╗
  ██║  ██╗  ██║ ██║ ████╗ ██║ ██╔══██╗ ██╔══██╗ ██║  ██╗  ██║ ██╔════╝      ██║        ╚══██╔══╝
  ╚██╗████╗██╔╝ ██║ ██╔██╗██║ ██║  ██║ ██║  ██║ ╚██╗████╗██╔╝ ╚█████╗       ██║  █████╗   ██║ 
   ████╔═████║  ██║ ██║╚████║ ██║  ██║ ██║  ██║  ████╔═████║   ╚═══██╗      ██║ ██╔══██║  ██║ 
   ╚██╔╝ ╚██╔╝  ██║ ██║ ╚███║ ██████╔╝ ╚█████╔╝  ╚██╔╝ ╚██╔╝  ██████╔╝      ██║ ╚█████╔╝  ██║  
    ╚═╝   ╚═╝   ╚═╝ ╚═╝  ╚══╝ ╚═════╝   ╚════╝    ╚═╝   ╚═╝   ╚═════╝       ╚═╝  ╚════╝   ╚═╝
-               
+<!--
+   samplefwlink:  https://aka.ms/WinIoTSamples
+--->
+
 # Windows 10 Internet of Things (IoT) Samples
 
 This repo contains samples that demonstrate usage patterns for Microsoft's Windows 10 IoT.  These code samples were created with templates available in Visual Studio and are designed, but not limited to, run on devices using Windows IoT Enterprise.
