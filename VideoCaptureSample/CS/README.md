@@ -1,8 +1,7 @@
+
 # Video Capture Sample
 
 Initialize a video capture device, record video to a file, preview video feed, and playback recorded video.
-
-This is a headed sample.  To better understand what headed mode is and how to configure your device to be headed, follow the instructions [here](https://docs.microsoft.com/en-us/windows/iot-core/learn-about-hardware/headlessmode).
 
 ### Connecting your Video Capture device
 
@@ -12,19 +11,35 @@ You'll need:
 
 Connect the web cam to one of USB ports on the IoT Device
 
-### Deploy your app
+### Deploy your app  
+  
+If you're building for UPBoard, select `x64` as the architecture.   
+  
+Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 
-If you're building for Minnowboard Max, select `x86` as the architecture. If you're building for Raspberry Pi 2 or 3 or DragonBoard , select `ARM`.
+### Generate an app package
 
-**DragonBoard only:** Before deploying this app, disable the on-board mic and audio drivers. This is required on every reboot when running this app
-``` xml
-DragonBoard - Commands to disable audio and mic drivers:
+Steps to follow :
 
-devcon remove AUDD\QCOM2451
-devcon remove ADCM\QCOM242E
-```
+* In Solution Explorer, open the solution for your application project.
+* Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+* Select Sideloading in the first page of the wizard and then click Next.
+* On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+* Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
 
-Select **Remote Machine** to point to IoT device and hit F5 to deploy to your device. Go back to the basic 'Hello World' [sample](/Samples/HelloWorld) if you need guidance.
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package)  
+  
+### Install your app package using an install script
+
+Steps to follow :
+* Open the *_Test folder.
+* Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+* When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)  
+  
+ Click the Start button to search for the app by name, and then launch it.
+ 
 
 ### Test your app
 
@@ -44,7 +59,7 @@ The sample app when deployed displays 3 buttons `Start Capturing`, `End Capturin
 * Reads recorded video data from cameraCapture.wmv file.
 * View stream will appear under Video Review Window section of the canvas.
 
-**NOTE:** In order to hear the audio, an audio device (ex: earphones) must be connected to the analog audio output on Raspberry Pi2. On MinnowBoard Max, audio output is available via HDMI
+**NOTE:** On UPBoard , audio output is available via HDMI.
 
 Congratulations! You created your first video recording app.
 
