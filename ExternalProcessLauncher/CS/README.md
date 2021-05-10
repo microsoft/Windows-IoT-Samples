@@ -17,7 +17,7 @@ The code for the ProcessLauncher sample can be found under: <samples root folder
  
 For building on UP-Board, select `x64` as the architecture.
 
-Select **Remote Machine** to point to IoT device and hit F5 to deploy to your device. 
+Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 
 ### Generate an app package
 
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 }
 ```  
 
-The application has been added to the solution as a *console application*. To create your own console application, please refer to the [Console Application Sample](/Samples/memorystatus).
+The application has been added to the solution as a *console application*.
 
 To be able to find and invoke the SampleConsoleApplication exe at runtime, we need to package the output exe with the AppX. We've already added it to the sample application. However, to do the same in your own application, you can follow these steps:
 
