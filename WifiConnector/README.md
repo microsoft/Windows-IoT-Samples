@@ -59,13 +59,13 @@ Steps to follow :
 
 The sample app when deployed displays a screen similar to the one below.
 
-![App Started](../../Resources/images/WiFiConnectSample/WiFiSample0.png)
+![App Started](../Resources/images/WiFiConnectSample/WiFiSample0.png)
 
 If you have a WiFi adapter connected to your board, click on the "Scan Available WiFi Networks" button to start scanning and displaying the list of WiFi networks in the vicinity.
 
 Each WiFi network is identified by its SSID along with an icon showing the signal strength.
 
-![WiFi SSID list](../../Resources/images/WiFiConnectSample/WiFiSample1.png)
+![WiFi SSID list](../Resources/images/WiFiConnectSample/WiFiSample1.png)
 
 The selected network shows some information about the SSID including the signal strength, channel frequency and authentication mode. The connection status is also shown for each.
 
@@ -73,15 +73,15 @@ You can connect to the your SSID by clicking on the one you need. If a security 
 
 If WiFi Protected Setup (WPS) is supported a WPS button is shown. To use this button first click on the WPS button on your router and then on the WPS button in the application.
 
-![WiFi Selected Network](../../Resources/images/WiFiConnectSample/WifiSampleSelectedNetwork.PNG)
+![WiFi Selected Network](../Resources/images/WiFiConnectSample/WifiSampleSelectedNetwork.PNG)
 
 For networks that support Extensible Authentication Protocol (EAP), also known as Enterprise WiFi authentication, a password checkbox will be shown. If your enterprise network device is configured with the required certificates, you can simply click **Connect**.
 
-![WiFi EAP](../../Resources/images/WiFiConnectSample/WifiSamplePasswordUnchecked.PNG )
+![WiFi EAP](../Resources/images/WiFiConnectSample/WifiSamplePasswordUnchecked.PNG )
 
 If you must enter a user name and password to connected your network then select the **Password** checkbox and then enter the **User** and **Password**.  The **Domain** is optional and only needs to be entered on networks that require it.
 
-![WiFi EAP](../../Resources/images/WiFiConnectSample/WifiSamplePasswordChecked.PNG )
+![WiFi EAP](../Resources/images/WiFiConnectSample/WifiSamplePasswordChecked.PNG )
 
 A message on the status bar will indicate if the connection has been successful, or if not the reason the connection could not be made.
 
@@ -89,7 +89,7 @@ Because some networks, like WiFi hotspots, may require additional information th
 
 Selecting the currently connected network also displays a **Disconnect** button that can be used to disconnect from the network.
 
-![WiFi SSID list](../../Resources/images/WiFiConnectSample/WiFiSample2.png)
+![WiFi SSID list](../Resources/images/WiFiConnectSample/WiFiSample2.png)
 
 
 ## Let's look at the code
