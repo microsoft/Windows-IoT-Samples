@@ -6,7 +6,7 @@ languages:
 products:
   - windows 10
   - windows-iot
-  - windoes-10-iot-Enterprise
+  - windows-10-iot-Enterprise
 description: Learn how to find and connect to WiFi networks using a Universal Windows Platform (UWP) app that makes use of the Windows.Devices.WiFi.WiFiAdapter API.
 ---
 
