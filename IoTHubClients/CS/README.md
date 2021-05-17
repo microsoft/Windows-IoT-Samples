@@ -68,7 +68,7 @@ Steps to follow :
 
 The application should launch on the device, and will look something like this:
 
-<img src="../Resources/images/Azure/IoTHubClients/IoTHubClientScreenshot.png">
+<img src="../../Resources/images/Azure/IoTHubClients/IoTHubClientScreenshot.png">
 
 In Microsoft IoT Central, you can see how the code running on the Up-Board interacts with the application:
 
