@@ -1,8 +1,5 @@
 # HID Injection
 
-Input injection is needed for many reasons. One of the most requested reasons is to support SPI screens, which have capacitive or resistive touch panels which can be read via I2C. 
-How do you translate this touch input from the display panel to something Windows can consume?    
-
 Windows 10 IoT Enterprise HID Injector sample will allow you to deploy a driver to perform low level injection of touch, keyboard and mouse events, and can be used until the SendInput equivelent API is available.
 
 The HID Injection sample leverages the [Virtual HID Framework](https://msdn.microsoft.com/en-us/library/windows/hardware/dn925056(v=vs.85).aspx). 
@@ -28,7 +25,7 @@ Optional:
 
 ### Copying the HID Injector to your device
   1. Open a network share on your IoT Enterprise device by opening the Run dialog (Win-R), then entering \\```IP for your IoT Enteprise device\c$```. Enter credentials if prompted.
-  2. Create a ```deploy``` folder on your IoT Core device. 
+  2. Create a ```deploy``` folder on your IoT Enterprise device. 
   3. In Visual Studio, Right Click on the HidInjectorKd project, then select ```Open Folder in File Explorer```.
   4. In the File Explorer that opened on your project, Navigate to the driver directory.
   5. Now, copy the Microsoft.HidInjectionSample.HidInjectionSample.cab to the network folder you opened in the first step.
