@@ -50,7 +50,7 @@ The ADXL345 breakout board has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
+![Breadboard connections](../Resources/breadboard_assembled_upboard1.png)
 
 Here are the schematics:
 
