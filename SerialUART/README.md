@@ -151,7 +151,7 @@ To send data from one device to the other connected device do the following:
 
 The app on the transmitting device will display the sent message and "bytes written successfully!" in the status text box in the bottom of the app display.
 
-[Send message](../../Resources/SendMessageB.png)
+[Send message](../Resources/SendMessageB.png)
 
 The device that is receiving the message will automatically display the text in the 'Read Data:' window.
 
