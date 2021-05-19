@@ -29,11 +29,11 @@ You'll need a few components:
 
 Visit the **UpBoard** sections below depending on which device you have:
 
-![Electrical Components](../../Resources/components.png)
+![Electrical Components](../Resources/components.png)
 
 #### UpBoard
 If you have a UPBOARD, we need to hook up power, ground, and the SPI lines to the accelerometer.
- See the [UPBOARD pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the Upboard IO pins.
+ See the [UPBOARD pin mapping page](../Resources/PinMappingsUpBoard.png) for more details on the Upboard IO pins.
 
 **Note: Make sure to power off the Upboard when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
@@ -50,13 +50,13 @@ The ADXL345 breakout board has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../../Resources/breadboard_assembled_upboard.png)
+![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
 
 <sub>*Image made with [Fritzing](http://fritzing.org/)*</sub>
 
 Here are the schematics:
 
-![Accelerometer schematics](../../Resources/schematics_upboard.png)
+![Accelerometer schematics](../Resources/schematics_upboard.png)
 
 ### Deploy and run the app
 
@@ -99,7 +99,7 @@ The SPIAccelerometer app will deploy and start, and you should see accelerometer
  This is normal and is due to minute vibrations and electrical noise. If you tilt or shake the sensor, you should see the values change in response. Note that this sample configures the device in 4G mode,
 so you wont be able to see G readings higher than 4Gs.
 
-![SPI Accelerometer running](../../Resources/spiaccelerometer_screenshot.png)
+![SPI Accelerometer running](../Resources/spiaccelerometer_screenshot.png)
 
 Congratulations! You've connected an SPI accelerometer.
 
