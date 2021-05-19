@@ -119,7 +119,7 @@ Steps to follow :
 
 When the SerialSample app is launched on the PC, a window will open with the user interface similar to the screenshot shown below. When launched on the UpBoard, the SerialSample will display the user interface shown below on the entire screen.
 
-[Serial Sample on PC](../Resources/SerialSampleRunningPC.PNG)
+[Serial Sample on PC](../Resources/SerialSampleRunningPC.png)
 
 #### Selecting a Serial Device
 
@@ -137,7 +137,7 @@ Select and connect to a serial device on the PC and UpBoard by doing the followi
 
 The app will attempt to connect and configure the selected serial device. When the app has successfully connected to the attached serial device it will display the configuration of the serial device. By default, the app configures the serial device for 9600 Baud, eight data bits, no parity bits and one stop bit (no handshaking).
 
-[Connect device](../Resources/SerialSampleRunningPC_ConnectDevice.PNG)
+[Connect device](../Resources/SerialSampleRunningPC_ConnectDevice.png)
 
 #### Sending and Receiving Data
 
@@ -151,7 +151,7 @@ To send data from one device to the other connected device do the following:
 
 The app on the transmitting device will display the sent message and "bytes written successfully!" in the status text box in the bottom of the app display.
 
-[Send message](../../Resources/SendMessageB.PNG)
+[Send message](../../Resources/SendMessageB.png)
 
 The device that is receiving the message will automatically display the text in the 'Read Data:' window.
 
