@@ -29,7 +29,7 @@ You have two options for wiring up your board:
 
 #### <a name="UpBoard_UART"></a>On-board UART (UpBoard)
 
-The UpBoard has two on-board UARTs. See the [UpBoard pin mapping page](../Resources/PinMappingsUpBoard) for more details on the UpBoard GPIO pins. 
+The UpBoard has two on-board UARTs. See the [UpBoard pin mapping page](../Resources/PinMappingsUpBoard.png) for more details on the UpBoard GPIO pins. 
 
 * UART uses GPIO pins 6, 8, 10  
 
@@ -151,7 +151,7 @@ To send data from one device to the other connected device do the following:
 
 The app on the transmitting device will display the sent message and "bytes written successfully!" in the status text box in the bottom of the app display.
 
-[Send message](../../Resources/images/SerialSample/SendMessageB.PNG)
+[Send message](../../Resources/SendMessageB.PNG)
 
 The device that is receiving the message will automatically display the text in the 'Read Data:' window.
 
