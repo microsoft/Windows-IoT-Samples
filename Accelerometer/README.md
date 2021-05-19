@@ -52,8 +52,6 @@ Here are the connections shown on a breadboard:
 
 ![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
 
-<sub>*Image made with [Fritzing](http://fritzing.org/)*</sub>
-
 Here are the schematics:
 
 ![Accelerometer schematics](../Resources/schematics_upboard.png)
