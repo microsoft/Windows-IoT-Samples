@@ -9,14 +9,13 @@ products:
   - windows-10-iot-Enterprise
 description: The current IoT Enterprise Default App, a fully featured sample app for Windows 10 IoT Enterprise.
 ---
-
 # Windows 10 IoT Enterprise Default App Overview
 
-When you initially flash this sample, you will be presented with the Windows 10 IoT Enterprise Default App, which looks like this:
+This article will give you a rundown of the different features that the Windows 10 IoT Enterprise Default App offers as well as how you can leverage these different features for your own applications.
 
-![Screenshot of the IoT Enterprise Default App](../../Resources/DeviceInfoPage-Screenshot.png)
+Windows 10 IoT Enterprise Default App looks like this:
 
-The purpose of this application is not only to provide you with a friendly shell to interact with when you first boot up Windows 10 IoT Enterprise, but we have open-sourced the code for this application sample, so that you can plug and play with these features on your own custom application(s).
+![Screenshot of the IoT Enterprise Default App](../Resources/DeviceInfoPage-Screenshot.png)
 
 This article will give you a rundown of the different features that the Windows 10 IoT Enterprise Default App offers as well as how you can leverage these different features for your own applications.
 
@@ -62,8 +61,8 @@ As shown below, in some cases you may configure default settings and features on
 
 The out-of-box experience for the IoT Enterprise Default App is as lean as it gets. The first pages will ask for a default language and wi-fi settings. From there, in order for your app to be GDPR-compliant, you must have a diagnostic data screen and, if you're planning to track location, you will need to have a location permissions screen too. Examples of both are shown below. 
 
-![Location settings for OOBE](../../Resources/OOBE3.jpg)
-![Diagnostic settings for OOBE](../../Resources/OOBE4.jpg)
+![Location settings for OOBE](../Resources/OOBE3.jpg)
+![Diagnostic settings for OOBE](../Resources/OOBE4.jpg)
 
 ## Command Bar
 The Command Bar is the persistant horizonatal bar located at the bottom of the screen. This provides easy access to the following funtionality:
@@ -75,7 +74,7 @@ The Command Bar is the persistant horizonatal bar located at the bottom of the s
 
 There are a lot buttons in the Command Bar, and sometimes those buttons can be confusing or hidden. To expand the Command Bar and access those buttons, please press the menu button in the bottom right:
 
-![How to expand Command Bar](../../Resources/CommandBar.gif)
+![How to expand Command Bar](../Resources/CommandBar.gif)
 
 ## Start Menu - Play
 
@@ -137,10 +136,6 @@ You'll be able to configure a number of settings here including Wi-Fi, Bluetooth
 The **App Settings** section allows you to configure various settings for pages in the app.  
 
 Some of the settings you can customize are:
-
-##### General Settings
-* Set the default page that appears when the app is started
-* Enable/disable the screensaver
 
 ##### Weather Settings
 * Change the location
