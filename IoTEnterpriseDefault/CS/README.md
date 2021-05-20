@@ -1,14 +1,3 @@
----
-page_type: sample
-urlFragment: iotEnterprise-defaultapp
-languages: 
-  - csharp
-products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: The current IoT Enterprise Default App, a fully featured sample app for Windows 10 IoT Enterprise.
----
 
 # Windows 10 IoT Enterprise Default App Overview
 
