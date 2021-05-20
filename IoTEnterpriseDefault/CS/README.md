@@ -1,10 +1,10 @@
 # Windows 10 IoT Enterprise Default App Overview
 
-When you initially flash this sample, you will be presented with the Windows 10 IoT Enterprise Default App, which looks like this:
+This article will give you a rundown of the different features that the Windows 10 IoT Enterprise Default App offers as well as how you can leverage these different features for your own applications.
+
+Windows 10 IoT Enterprise Default App looks like this:
 
 ![Screenshot of the IoT Enterprise Default App](../../Resources/DeviceInfoPage-Screenshot.png)
-
-The purpose of this application is not only to provide you with a friendly shell to interact with when you first boot up Windows 10 IoT Enterprise, but we have open-sourced the code for this application sample, so that you can plug and play with these features on your own custom application(s).
 
 This article will give you a rundown of the different features that the Windows 10 IoT Enterprise Default App offers as well as how you can leverage these different features for your own applications.
 
