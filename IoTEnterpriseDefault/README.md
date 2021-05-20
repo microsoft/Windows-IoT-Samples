@@ -87,10 +87,6 @@ This page will list any auto-generated crash or error logs, which then can be ta
 ### GitHub
 This page will take you to the open-sourced GitHub location of the IoT Enterprise Default App code.
 
-## Start Menu - Windows Device Portal
-
-The pages in this section leverage the Windows Device Portal REST APIs, which requires you to sign in using your Windows Device Portal credentials.
-
 ## Device Information
 
 This page allows you to see the different features for your device including Ethernet, OS version, connected devices, and more.
