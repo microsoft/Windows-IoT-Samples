@@ -1,7 +1,6 @@
-
 # Windows 10 IoT Enterprise Default App Overview
 
-When you initially flash Windows 10 IoT Enterprise, you will be presented with the Windows 10 IoT Enterprise Default App upon startup, which looks like this:
+When you initially flash this sample, you will be presented with the Windows 10 IoT Enterprise Default App, which looks like this:
 
 ![Screenshot of the IoT Enterprise Default App](../../Resources/DeviceInfoPage-Screenshot.png)
 
@@ -11,7 +10,34 @@ This article will give you a rundown of the different features that the Windows 
 
 ## Leveraging the IoT Enterprise Default App 
 
-The IoT Enterprise Default App can be customized and extended, or you can use the source code as an example for your own app. To try this out for yourself, download the zip of our samples or check out the code for the IoT Enterprise Default App.
+The IoT Enterprise Default App can be customized and extended, or you can use the source code as an example for your own app. 
+
+To try this out for yourself, download the zip of our samples or check out the code for the IoT Enterprise Default App. Open the project from Visual Studio 2019, 
+
+For UpBoard, set the target architecture to 'x64'.
+
+### Generate an app package
+
+Steps to follow :
+
+ * In Solution Explorer, open the solution for your application project.
+ * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ * Select Sideloading in the first page of the wizard and then click Next.
+ * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ * Open the *_Test folder.
+ * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+  
+ Click the Start button to search for the app by name, and then launch it.
 
 As shown below, in some cases you may configure default settings and features on your customer system on behalf of the end user. However, if you turn these settings and features on by default or if diagnostics are above the basic setting, you must:
 
@@ -99,10 +125,6 @@ You'll be able to configure a number of settings here including Wi-Fi, Bluetooth
 The **App Settings** section allows you to configure various settings for pages in the app.  
 
 Some of the settings you can customize are:
-
-##### General Settings
-* Set the default page that appears when the app is started
-* Enable/disable the screensaver
 
 ##### Weather Settings
 * Change the location
