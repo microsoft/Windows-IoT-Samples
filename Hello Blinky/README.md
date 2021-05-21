@@ -33,7 +33,7 @@ You’ll need a few components:
 
 *   a breadboard and a couple of connector wires
 
-![Electrical Components](../../Resources/components.png)
+![Electrical Components](../Resources/components.png)
 
 ### For UpBoard
 
@@ -44,11 +44,11 @@ You’ll need a few components:
 
 And here is the pinout of the UpBoard:
 
-![](../../Resources/UpBoard_Pinout.png)
+![](../Resources/UpBoard_Pinout.png)
 
 Here is an example of what your breadboard might look like with the circuit assembled:
 
-![](../../Resources/breadboard_assembled_UpBoard_kit.png)
+![](../Resources/breadboard_assembled_UpBoard_kit.png)
 
 ## Deploy your app
 
@@ -81,7 +81,7 @@ Steps to follow :
 
 The Blinky app will deploy and start on the Windows IoT device, and you should see the LED blink in sync with the simulation on the screen.
 
-![](../../Resources/blinky-screenshot.png)
+![](../Resources/blinky-screenshot.png)
 
 Congratulations! You controlled one of the GPIO pins on your Windows IoT device.
 
