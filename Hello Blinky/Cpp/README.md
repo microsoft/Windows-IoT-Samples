@@ -1,16 +1,3 @@
----
-page_type: sample
-urlFragment: hello-blinky
-languages: 
-  - csharp
-  - cpp
-products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: A sample that shows how to make an LED attached to a GPIO pin blink on and off for Windows 10 IoT Enterprise.
----
-
 # “Hello, blinky!”
 
 We’ll create a simple LED blinking app and connect a LED to your Windows 10 IoT Enterprise device.
