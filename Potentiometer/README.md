@@ -36,12 +36,12 @@ Below are the pinouts of the MCP3002 and MCP3208 ADCs.
 
 | MCP3002                                                              | MCP3008 or MCP3208                                                              |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| ![MCP3002 Pinout](../../Resources/MCP3002.PNG) | ![MCP3208 Pinout](../../Resources/images/MCP3208.PNG) |
+| ![MCP3002 Pinout](../Resources/MCP3002.PNG) | ![MCP3208 Pinout](../Resources/images/MCP3208.PNG) |
 
 
 #### Upboard Pinout
 
-![UpBoard pinout](../../Resources/Upboard_Pinout.png)
+![UpBoard pinout](../Resources/Upboard_Pinout.png)
 
 #### Wiring & Connections
 
@@ -50,7 +50,7 @@ If you chose to use the **MCP3208** or **MCP3008**, assemble the circuit as foll
 
 Detailed connection:
 
-![Overall Schematics](../../Resources/OverallCon-3208.PNG)
+![Overall Schematics](../Resources/OverallCon-3208.PNG)
 
 The MCP3208 should be connected as follows:
 
@@ -127,8 +127,8 @@ When you turn the potentiometer knob, you will see the number change on the scre
 When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
 
 | ----------------------------------------------------------------------------------------- |-| ---------------------------------------------------------------------------------- |
-| ![App Running LED Off](../../../Resources/images/Potentiometer/AppRunning-LEDOff.png)       | | ![App Running LED On](../../../Resources/images/Potentiometer/AppRunning-LEDOn.png)  |
-| ![Breadboard LED Off](../../../Resources/images/Potentiometer/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../../../Resources/images/Potentiometer/Breadboard-LEDOn.png)   |
+| ![App Running LED Off](../Resources/images/Potentiometer/AppRunning-LEDOff.png)       | | ![App Running LED On](../Resources/images/Potentiometer/AppRunning-LEDOn.png)  |
+| ![Breadboard LED Off](../Resources/images/Potentiometer/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../Resources/images/Potentiometer/Breadboard-LEDOn.png)   |
 
 ## Let's look at the code
 
