@@ -1,15 +1,3 @@
----
-page_type: sample
-urlFragment: rgb-led
-languages:
-  - csharp
-products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: A sample that makes an LED blink red, green, and blue with Windows 10 IoT Enterprise.
----
-
 # RGB LED Sample
 
 In this sample, we will connect a Tri-color LED to UpBoard. The LED will blink changing colors from Red, Blue, and Green.
