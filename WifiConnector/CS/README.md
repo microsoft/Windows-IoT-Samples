@@ -30,7 +30,7 @@ Steps to follow :
  * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
  * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
 
- If you need guidance click Link: [here].(https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package)  
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
   
 ### Install your app package using an install script
 
@@ -39,7 +39,7 @@ Steps to follow :
  * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
  * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
 
- If you need guidance click Link: [here].(https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)  
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
   
  * Click the Start button to search for the app by name, and then launch it.
 
