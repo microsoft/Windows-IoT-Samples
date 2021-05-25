@@ -36,7 +36,7 @@ Below are the pinouts of the MCP3002 and MCP3208 ADCs.
 
 | MCP3002                                                              | MCP3008 or MCP3208                                                              |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| ![MCP3002 Pinout](../Resources/MCP3002.PNG) | ![MCP3208 Pinout](../Resources/images/MCP3208.PNG) |
+| ![MCP3002 Pinout](../Resources/MCP3002.png) | ![MCP3208 Pinout](../Resources/MCP3208.png) |
 
 
 #### Upboard Pinout
@@ -45,22 +45,40 @@ Below are the pinouts of the MCP3002 and MCP3208 ADCs.
 
 #### Wiring & Connections
 
+##### MCP3002
+If you chose to use the **MCP3002**, assemble the circuit as follows. Note that the wiper pin (the middle pin on the 10k potentiometer) should be connected to `CH0` on MCP3002. You can also refer to the [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/21294E.pdf) for more information.
+
+Detailed connection:
+
+![Overall Schematics](../Resources/OverallCon-3002.PNG)
+
+The MCP3002 should be connected as follows:
+
+- MCP3002: VDD/VREF - 3.3V on Raspberry Pi 2 or 3
+- MCP3002: CLK - "SPI0 SCLK" on Raspberry Pi 2 or 3
+- MCP3002: Dout - "SPI0 MISO" on Raspberry Pi 2 or 3
+- MCP3002: Din - "SPI0 MOSI" on Raspberry Pi 2 or 3
+- MCP3002: CS/SHDN - "SPI0 CS0" on Raspberry Pi 2 or 3
+- MCP3002: Vss - GND on Raspberry Pi 2 or 3
+- MCP3002: CH0 - Potentiometer wiper pin
+
+
 ##### MCP3208 or MCP3008
 If you chose to use the **MCP3208** or **MCP3008**, assemble the circuit as follows. Note that the wiper pin (the middle pin on the 10k potentiometer) should be connected to `CH0` on MCP3208. You can also refer to the [MCP3208 datasheet](http://pdf.datasheetcatalog.com/datasheets2/43/435228_1.pdf) or the [MCP3008 datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/21295C.pdf) for more information.
 
 Detailed connection:
 
-![Overall Schematics](../Resources/OverallCon-3208.PNG)
+![Overall Schematics](../Resources/OverallCon-3208.png)
 
 The MCP3208 should be connected as follows:
 
 - MCP3208: VDD - 3.3V on UPBOARD
 - MCP3208: VREF - 3.3V on UPBAORD
 - MCP3208: AGND - GND on UPBAORD
-- MCP3208: CLK - "SPI0 SCLK" on UPBAORD
-- MCP3208: Dout - "SPI0 MISO" on UPBAORD
-- MCP3208: Din - "SPI0 MOSI" on UPBAORD
-- MCP3208: CS/SHDN - "SPI0 CS0" on UPBAORD
+- MCP3208: CLK - "SPI SCLK" on UPBAORD
+- MCP3208: Dout - "SPI MISO" on UPBAORD
+- MCP3208: Din - "SPI MOSI" on UPBAORD
+- MCP3208: CS/SHDN - "SPI CS0" on UPBAORD
 - MCP3208: DGND - GND on UPBAORD
 - MCP3208: CH0 - Potentiometer wiper pin
 
@@ -89,7 +107,7 @@ Steps to follow :
  On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
  Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
 
- If you need guidance click Link: [here].(https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package)  
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
   
 ### Install your app package using an install script
 
@@ -98,7 +116,7 @@ Steps to follow :
  Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
  When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
 
- If you need guidance click Link: [here].(https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)  
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
   
  Click the Start button to search for the app by name, and then launch it.
 
@@ -126,9 +144,9 @@ If you need guidance click Link: [here](https://www.annabooks.com/Articles/Artic
 When you turn the potentiometer knob, you will see the number change on the screen indicating the potentiometer knob position. 
 When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
 
-| ----------------------------------------------------------------------------------------- |-| ---------------------------------------------------------------------------------- |
-| ![App Running LED Off](../Resources/images/Potentiometer/AppRunning-LEDOff.png)       | | ![App Running LED On](../Resources/images/Potentiometer/AppRunning-LEDOn.png)  |
-| ![Breadboard LED Off](../Resources/images/Potentiometer/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../Resources/images/Potentiometer/Breadboard-LEDOn.png)   |
+| ----------------------------------------------------------------------------------------- |-| --------------------------------------------------------------------------------
+| ![App Running LED Off](../Resources/AppRunning-LEDOff.png)       | | ![App Running LED On](../Resources/AppRunning-LEDOn.png)  |
+| ![Breadboard LED Off](../Resources/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../Resources/Breadboard-LEDOn.png)   |
 
 ## Let's look at the code
 
@@ -192,7 +210,7 @@ private async Task InitSPI()
 * We start by specifying some configuration settings for our SPI bus:
 1. We specify which chip select line we want to use. We wired the ADC into chip select line 0, so that's what we use here.
 2. The clock frequency is conservatively set to 1MHz, which is well within the ADC capabilities.
-3. **settings.Mode** is set to **SpiMode.Mode0**. This configures clock polarity and phase for the bus.
+3. **settings.Mode** is set to **SpiMode.Mode**. This configures clock polarity and phase for the bus.
 
 * Next, we get the class selection string for our SPI controller. This controller controls the SPI lines on the exposed pin header. We then use the selection string to get the SPI bus controller matching our string name.
 
