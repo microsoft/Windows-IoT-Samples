@@ -80,6 +80,8 @@ Steps to follow :
 
  If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
  
+ If you are using UPBOARD, you have to setup the BIOS SPI configuration.
+ 
  ### BIOS Settings for UPBOARD
 
 Steps to follow:
