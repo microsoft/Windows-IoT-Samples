@@ -164,7 +164,7 @@ If you are using DragonBoard uncomment below block of code in MainPage.xaml.cs
                     }*/
 ```
 
-If we're not running on
+If we're running on
 UpBoard, we take the first 3 available pins. There is also logic to skip
 pins connected to onboard functions on known hardware platforms.
 
