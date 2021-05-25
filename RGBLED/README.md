@@ -209,7 +209,7 @@ var deviceModel = GetDeviceModel();
 
 Next, we initialize the pins as outputs driven LOW, which causes the LED
 to be OFF. We also display which pin numbers are in use. If you're
-not using UpBoard, hook up the RGB LED to the pins shown on the display.
+using UpBoard, hook up the RGB LED to the pins shown on the display.
 
 ```csharp
 redpin.Write(GpioPinValue.High);
