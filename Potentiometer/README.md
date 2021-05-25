@@ -54,12 +54,12 @@ Detailed connection:
 
 The MCP3002 should be connected as follows:
 
-- MCP3002: VDD/VREF - 3.3V on Raspberry Pi 2 or 3
-- MCP3002: CLK - "SPI0 SCLK" on Raspberry Pi 2 or 3
-- MCP3002: Dout - "SPI0 MISO" on Raspberry Pi 2 or 3
-- MCP3002: Din - "SPI0 MOSI" on Raspberry Pi 2 or 3
-- MCP3002: CS/SHDN - "SPI0 CS0" on Raspberry Pi 2 or 3
-- MCP3002: Vss - GND on Raspberry Pi 2 or 3
+- MCP3002: VDD/VREF - 3.3V on UPBOARD
+- MCP3002: CLK - "SPI0 SCLK" on UPBOARD
+- MCP3002: Dout - "SPI0 MISO" on UPBOARD
+- MCP3002: Din - "SPI0 MOSI" on UPBOARD
+- MCP3002: CS/SHDN - "SPI0 CS0" on UPBOARD
+- MCP3002: Vss - GND on UPBOARD
 - MCP3002: CH0 - Potentiometer wiper pin
 
 
