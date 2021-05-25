@@ -33,3 +33,22 @@ msbuild /p:Platform=x64 /p:Configuration=Release
 Valid values of Platform are: `ARM, ARM64, x86, x64`
 
 Valid values of Configuration are: `Release, Debug`
+
+If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+
+### BIOS Settings for UPBOARD
+
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3)	Under the "Advance" Tab:
+    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
+
+(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+
+If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+ 
