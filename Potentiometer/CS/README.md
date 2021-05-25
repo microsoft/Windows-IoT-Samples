@@ -1,38 +1,47 @@
+---
+page_type: sample
+urlFragment: potentiometer-sensor
+languages:
+  - csharp
+products:
+  - windows
+  - windows-iot
+  - windows-10-iot-Enterprise
+description: Connect a rotary potentiometer and LED to your Windows 10 IoT Enterprise device.
+---
+
 # Potentiometer sensor
 
-This sample shows how to connect a rotary potentiometer and LED to a Raspberry Pi 2 or 3 or a DragonBoard 410c. We use a SPI-based ADC (Analog to Digital Converter) to read values from the potentiometer 
+This sample shows how to connect a rotary potentiometer and LED to a Upboard. We use a SPI-based ADC (Analog to Digital Converter) to read values from the potentiometer 
 and control an LED based on the knob position.
 
 ## Parts needed
 - [1 LED](http://www.digikey.com/product-detail/en/C5SMF-RJS-CT0W0BB1/C5SMF-RJS-CT0W0BB1-ND/2341832)
 - [1 330 &#x2126; resistor](http://www.digikey.com/product-detail/en/CFR-25JB-52-330R/330QBK-ND/1636)
 - ADC
-    - Raspberry Pi 2 or 3
-        - [1 MCP3002 10-bit ADC](http://www.digikey.com/product-detail/en/MCP3002-I%2FP/MCP3002-I%2FP-ND/319412) or [1 MCP3208 12-bit ADC](http://www.digikey.com/product-search/en?KeyWords=mcp3208%20ci%2Fp&WT.z_header=search_go)
-    - DragonBoard 410c
+    - Upboard
         - [1 MCP3008 10-bit ADC](http://www.microchip.com/wwwproducts/Devices.aspx?dDocName=en010530) or [1 MCP3208 12-bit ADC](http://www.digikey.com/product-search/en?KeyWords=mcp3208%20ci%2Fp&WT.z_header=search_go)
         - [1 Voltage-Level Translator Breakout](https://www.sparkfun.com/products/11771)
 - [1 10k &#x2126; Trimmer Potentiometer](http://www.digikey.com/product-detail/en/3362P-1-103TLF/3362P-103TLF-ND/1232540)
-- Raspberry Pi 2 or 3 or DragonBoard 410c single board computer
+- Upboard
 - 1 breadboard and a couple of wires
 - HDMI Monitor and HDMI cable
 
 ## Parts Review
 
-In this sample, you have the option of using either the MCP3002, MCP3008, or MCP3208 ADC (Analog to Digital Converter). 
-The differences between the chips are the number of input channels and resolution. 12-bit resolution is more accurate than the 10-bit options, and the number of channels determines how many different inputs you can read. Any of these options will work fine for this sample.
+In this sample, you have the option of using either the MCP3002 or MCP3208 ADC (Analog to Digital Converter). 
+The differences between the chips are the number of input channels and resolution. 12-bit resolution is more accurate than the 10-bit options, and the number of channels determines how many different inputs you can read.
 
 Below are the pinouts of the MCP3002 and MCP3208 ADCs. 
 
 | MCP3002                                                              | MCP3008 or MCP3208                                                              |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| ![MCP3002 Pinout](../../../Resources/images/Potentiometer/MCP3002.PNG) | ![MCP3208 Pinout](../../../Resources/images/Potentiometer/MCP3208.PNG) |
+| ![MCP3002 Pinout](../../Resources/MCP3002.png) | ![MCP3208 Pinout](../../Resources/MCP3208.png) |
 
-### Raspberry Pi
 
-#### Raspbery Pi 2 and 3 Pinout
+#### Upboard Pinout
 
-![Raspberry Pi 2 and 3 pinout](../../../Resources/images/PinMappings/RP2_Pinout.png)
+![UpBoard pinout](../../Resources/Upboard_Pinout.png)
 
 #### Wiring & Connections
 
@@ -41,16 +50,16 @@ If you chose to use the **MCP3002**, assemble the circuit as follows. Note that 
 
 Detailed connection:
 
-![Overall Schematics](../../../Resources/images/Potentiometer/OverallCon-3002.PNG)
+![Overall Schematics](../../Resources/OverallCon-3002.PNG)
 
 The MCP3002 should be connected as follows:
 
-- MCP3002: VDD/VREF - 3.3V on Raspberry Pi 2 or 3
-- MCP3002: CLK - "SPI0 SCLK" on Raspberry Pi 2 or 3
-- MCP3002: Dout - "SPI0 MISO" on Raspberry Pi 2 or 3
-- MCP3002: Din - "SPI0 MOSI" on Raspberry Pi 2 or 3
-- MCP3002: CS/SHDN - "SPI0 CS0" on Raspberry Pi 2 or 3
-- MCP3002: Vss - GND on Raspberry Pi 2 or 3
+- MCP3002: VDD/VREF - 3.3V on UPBOARD
+- MCP3002: CLK - "SPI0 SCLK" on UPBOARD
+- MCP3002: Dout - "SPI0 MISO" on UPBOARD
+- MCP3002: Din - "SPI0 MOSI" on UPBOARD
+- MCP3002: CS/SHDN - "SPI0 CS0" on UPBOARD
+- MCP3002: Vss - GND on UPBOARD
 - MCP3002: CH0 - Potentiometer wiper pin
 
 
@@ -59,63 +68,25 @@ If you chose to use the **MCP3208** or **MCP3008**, assemble the circuit as foll
 
 Detailed connection:
 
-![Overall Schematics](../../../Resources/images/Potentiometer/OverallCon-3208.PNG)
+![Overall Schematics](../Resources/OverallCon-3208.png)
 
 The MCP3208 should be connected as follows:
 
-- MCP3208: VDD - 3.3V on Raspberry Pi 2 or 3
-- MCP3208: VREF - 3.3V on Raspberry Pi 2 or 3
-- MCP3208: AGND - GND on Raspberry Pi 2 or 3
-- MCP3208: CLK - "SPI0 SCLK" on Raspberry Pi 2 or 3
-- MCP3208: Dout - "SPI0 MISO" on Raspberry Pi 2 or 3
-- MCP3208: Din - "SPI0 MOSI" on Raspberry Pi 2 or 3
-- MCP3208: CS/SHDN - "SPI0 CS0" on Raspberry Pi 2 or 3
-- MCP3208: DGND - GND on Raspberry Pi 2 or 3
+- MCP3208: VDD - 3.3V on UPBOARD
+- MCP3208: VREF - 3.3V on UPBAORD
+- MCP3208: AGND - GND on UPBAORD
+- MCP3208: CLK - "SPI SCLK" on UPBAORD
+- MCP3208: Dout - "SPI MISO" on UPBAORD
+- MCP3208: Din - "SPI MOSI" on UPBAORD
+- MCP3208: CS/SHDN - "SPI CS0" on UPBAORD
+- MCP3208: DGND - GND on UPBAORD
 - MCP3208: CH0 - Potentiometer wiper pin
 
-### DragonBoard 410c
-
-For the DragonBoard 410c, you will require a [Voltage-Level Translator Breakout](https://www.sparkfun.com/products/11771).
-
-#### DragonBoard Pinout
-
-![DragonBoard Pinout](../../../Resources/images/PinMappings/DB_Pinout.png)
-
-#### Wiring & Connections
-
-##### MCP3208
-
-Connect the MCP3208 to the Voltage-Level Translator breakout as follows:
-
-* Connect Vdd to VccB on the Translator breakout(5 V)
-* Connect Vref to VccB on the Translator breakout(5 V)
-* Connect AGND to GND on the Translator breakout
-* Connect CLK to B1 on the Translator breakout
-* Connect DOUT to B3 on the Translator breakout
-* Connect DIN to B2 on the Translator breakout
-* Connect CS to B4 on the Translator breakout
-* Connect DGND to GND 
-* Connect channel 0 to the potentiometer wiper pin (leg 2)
-* Connect leg 1 of the potentiometer to GND 
-* Connect leg 3 of the potentiometer to VccB (5 V) 
-* Connect leg 3 of the potentiometer to a 330 &#x2126; resistor
-* Connect the 330 &#x2126; resistor to the cathode of the LED
-* Connect the anode of the LED to pin 24 (GPIO 12) on the DragonBoard
-* Connect A1 on the Translator breakout to pin 8 (SPI0 SCLK)
-* Connect A3 on the Translator breakout to pin 10 (SPI0 MISO)
-* Connect A2 on the Translator breakout to pin 14 (SPI0 MOSI)
-* Connect A4 on the Translator breakout to pin 12 (SPI CS N)
-* Connect VccA on the Translator breakout to pin 35 (1.8 V) on the DragonBoard
-* Connect VccB on the Translator breakout to pin 37 (5 V) on the DragonBoard
-
-Here is an illustration of what your breadboard might look like with the circuit assembled:
-
-![DragonBoard Potentiometer Breadboard](../../../Resources/images/Potentiometer/breadboard_db410c.png)
 
 Finally, the LED_PIN variable of the **MainPage.xaml.cs** file of the sample code will need the following modification:
 
 ~~~
-private const int LED_PIN = 12;
+private const int LED_PIN = 3;
 ~~~
 {: .language-c#}
 
@@ -124,22 +95,58 @@ If you chose to use the **MCP3008**, you can switch the MCP3208 for the MCP3008 
 
 ### Building and running the sample
 
-1. Download a zip of all of our samples [here](https://github.com/Microsoft/Windows-iotcore-samples/archive/master.zip).
-2. Open `samples-develop\PotentiometerSensor\CS\PotentiometerSensor.csproj` in Visual Studio.
-3. Find the `ADC_DEVICE` variable in **MainPage.xaml.cs** and change it to either **AdcDevice.MCP3002**, **AdcDevice.MCP3208** or **AdcDevice.MCP3008** depending on the ADC you wired up above
-4. Verify the GPIO pin number is correct for your board. (GPIO 5 for Raspberry Pi 2 or 3 and MinnowBoard Max. GPIO 12 for DragonBoard)
-5. Select `ARM` for the target architecture if you are using a Raspberry Pi 2 or 3 or a DragonBoard. Select `x86` for MinnowBoard Max.
-6. Go to `Build -> Build Solution`
-7. Select `Remote Machine` from the debug target
-8. Hit F5 to deploy and debug. Enter the IP address of your device
-   and select `Universal` for the authentication type
+1. You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from Visual Studio 2019.
+
+### Generate an app package
+
+Steps to follow :
+
+ In Solution Explorer, open the solution for your application project.
+ Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ Select Sideloading in the first page of the wizard and then click Next.
+ On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ Open the *_Test folder.
+ Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+  
+ Click the Start button to search for the app by name, and then launch it.
+
+ If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+
+### BIOS Settings for UPBOARD
+
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3)	Under the "Advance" Tab:
+    Select "Hat Configuration", make "LPSS SPISupport" as "Enabled" then Click on "GPIO Configuration in Pin Order".
+
+(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+
+    In this sample make PIN 3 as "OUTPUT" and initial value as "LOW".
+
+If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+ 
  
 When you turn the potentiometer knob, you will see the number change on the screen indicating the potentiometer knob position. 
-When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **2048**) the LED will turn ON. Otherwise, it turns OFF.
+When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
 
-| ----------------------------------------------------------------------------------------- |-| ---------------------------------------------------------------------------------- |
-| ![App Running LED Off](../../../Resources/images/Potentiometer/AppRunning-LEDOff.png)       | | ![App Running LED On](../../../Resources/images/Potentiometer/AppRunning-LEDOn.png)  |
-| ![Breadboard LED Off](../../../Resources/images/Potentiometer/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../../../Resources/images/Potentiometer/Breadboard-LEDOn.png)   |
+| ----------------------------------------------------------------------------------------- |-| --------------------------------------------------------------------------------
+| ![App Running LED Off](../Resources/AppRunning-LEDOff.png)       | | ![App Running LED On](../Resources/AppRunning-LEDOn.png)  |
+| ![Breadboard LED Off](../Resources/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../Resources/Breadboard-LEDOn.png)   |
 
 ## Let's look at the code
 
@@ -172,11 +179,11 @@ private void InitGpio()
 
 * We start by retrieving the default GPIO controller on the device with the **GpioController.GetDefault()** function.
 
-* Since we connected the LED to GPIO 4, we open this pin on the GPIO controller.
+* Since we connected the LED to GPIO 0, we open this pin on the GPIO controller.
 
 * Finally we write a default value to the pin before setting it as output.
 
-Next, we initialize the SPI bus. This allows the RPi2 or RPi3 to communicate with the ADC to read in potentiometer positions.
+Next, we initialize the SPI bus. This allows the UPBOARD to communicate with the ADC to read in potentiometer positions.
 
 ```csharp
 private async Task InitSPI()
@@ -184,7 +191,7 @@ private async Task InitSPI()
 	try
 	{
 		var settings = new SpiConnectionSettings(SPI_CHIP_SELECT_LINE);
-		settings.ClockFrequency = 500000;   /* 0.5MHz clock rate                                        */
+		settings.ClockFrequency = 1000000;   /* 1MHz clock rate                                        */
 		settings.Mode = SpiMode.Mode0;      /* The ADC expects idle-low clock polarity so we use Mode0  */
 
 		string spiAqs = SpiDevice.GetDeviceSelector(SPI_CONTROLLER_NAME);
@@ -202,8 +209,8 @@ private async Task InitSPI()
 
 * We start by specifying some configuration settings for our SPI bus:
 1. We specify which chip select line we want to use. We wired the ADC into chip select line 0, so that's what we use here.
-2. The clock frequency is conservatively set to 0.5MHz, which is well within the ADC capabilities.
-3. **settings.Mode** is set to **SpiMode.Mode0**. This configures clock polarity and phase for the bus.
+2. The clock frequency is conservatively set to 1MHz, which is well within the ADC capabilities.
+3. **settings.Mode** is set to **SpiMode.Mode**. This configures clock polarity and phase for the bus.
 
 * Next, we get the class selection string for our SPI controller. This controller controls the SPI lines on the exposed pin header. We then use the selection string to get the SPI bus controller matching our string name.
 
@@ -294,4 +301,5 @@ private void LightLED()
 
 * If the potentiometer is rotated more than halfway through its range, we turn on the LED. Otherwise it's turned off.
 
-That's it! Now that you've learned how to use an ADC, you can hook up a variety of analog sensors to your Raspberry Pi 2 or 3.
+That's it! Now that you've learned how to use an ADC, you can hook up a variety of analog sensors to your Upboard.
+
