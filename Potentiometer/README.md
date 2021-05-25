@@ -56,9 +56,9 @@ The MCP3002 should be connected as follows:
 
 - MCP3002: VDD/VREF - 3.3V on UPBOARD
 - MCP3002: CLK - "SPI0 SCLK" on UPBOARD
-- MCP3002: Dout - "SPI0 MISO" on UPBOARD
-- MCP3002: Din - "SPI0 MOSI" on UPBOARD
-- MCP3002: CS/SHDN - "SPI0 CS0" on UPBOARD
+- MCP3002: Dout - "SPI MISO" on UPBOARD
+- MCP3002: Din - "SPI MOSI" on UPBOARD
+- MCP3002: CS/SHDN - "SPI CS0" on UPBOARD
 - MCP3002: Vss - GND on UPBOARD
 - MCP3002: CH0 - Potentiometer wiper pin
 
@@ -144,9 +144,9 @@ If you need guidance click Link: [here](https://www.annabooks.com/Articles/Artic
 When you turn the potentiometer knob, you will see the number change on the screen indicating the potentiometer knob position. 
 When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
 
-| ----------------------------------------------------------------------------------------- |-| --------------------------------------------------------------------------------
-| ![App Running LED Off](../Resources/AppRunning-LEDOff.png)       | | ![App Running LED On](../Resources/AppRunning-LEDOn.png)  |
-| ![Breadboard LED Off](../Resources/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../Resources/Breadboard-LEDOn.png)   |
+| ----------------------------------------------------------------------------------------- |-| -------------------------------------------------------------------
+| ![App Running LED Off](../Resources/AppRunning-LEDOff.png)    | | ![App Running LED On](../Resources/AppRunning-LEDOn.png)  |
+| ![Breadboard LED Off](../Resources/Breadboard-LEDOff.png)     | | ![Breadboard LED On](../Resources/Breadboard-LEDOn.png)   |
 
 ## Let's look at the code
 
