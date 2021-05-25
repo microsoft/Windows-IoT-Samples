@@ -50,7 +50,7 @@ If you chose to use the **MCP3002**, assemble the circuit as follows. Note that 
 
 Detailed connection:
 
-![Overall Schematics](../Resources/OverallCon-3002.PNG)
+![Overall Schematics](../Resources/OverallCon-3002.png)
 
 The MCP3002 should be connected as follows:
 
