@@ -67,7 +67,7 @@ namespace PotentiometerSensor
             try
             {
                 var settings = new SpiConnectionSettings(SPI_CHIP_SELECT_LINE);
-                settings.ClockFrequency = 500000;   /* 0.5MHz clock rate                                        */
+                settings.ClockFrequency = 1000000;   /* 1MHz clock rate                                        */
                 settings.Mode = SpiMode.Mode0;      /* The ADC expects idle-low clock polarity so we use Mode0  */
 
                 var controller = await SpiController.GetDefaultAsync();
@@ -208,10 +208,10 @@ namespace PotentiometerSensor
         /* Important! Change this to either AdcDevice.MCP3002, AdcDevice.MCP3208 or AdcDevice.MCP3008 depending on which ADC you chose     */
         private AdcDevice ADC_DEVICE = AdcDevice.NONE;
 
-        private const int LED_PIN = 4; // Use pin 12 if you are using DragonBoard
+        private const int LED_PIN = 0; // Connected to PIN-3 UPBOARD
         private GpioPin ledPin;
 
-        private const string SPI_CONTROLLER_NAME = "SPI0";  /* Friendly name for Raspberry Pi 2 SPI controller          */
+        private const string SPI_CONTROLLER_NAME = "SPI0";  /* Friendly name for Upboard SPI controller          */
         private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Rpi2        */
         private SpiDevice SpiADC;
 
