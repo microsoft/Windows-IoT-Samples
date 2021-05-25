@@ -68,7 +68,7 @@ If you chose to use the **MCP3208** or **MCP3008**, assemble the circuit as foll
 
 Detailed connection:
 
-![Overall Schematics](../Resources/OverallCon-3208.png)
+![Overall Schematics](../../Resources/OverallCon-3208.png)
 
 The MCP3208 should be connected as follows:
 
@@ -145,8 +145,8 @@ When you turn the potentiometer knob, you will see the number change on the scre
 When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
 
 | ----------------------------------------------------------------------------------------- |-| --------------------------------------------------------------------------------
-| ![App Running LED Off](../Resources/AppRunning-LEDOff.png)       | | ![App Running LED On](../Resources/AppRunning-LEDOn.png)  |
-| ![Breadboard LED Off](../Resources/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../Resources/Breadboard-LEDOn.png)   |
+| ![App Running LED Off](../../Resources/AppRunning-LEDOff.png)       | | ![App Running LED On](../../Resources/AppRunning-LEDOn.png)  |
+| ![Breadboard LED Off](../../Resources/Breadboard-LEDOff.png)        | | ![Breadboard LED On](../../Resources/Breadboard-LEDOn.png)   |
 
 ## Let's look at the code
 
