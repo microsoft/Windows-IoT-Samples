@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -31,7 +31,9 @@ namespace RGBLED
             }
 
             var deviceModel = GetDeviceModel();
-            if (deviceModel == DeviceModel.RaspberryPi2)
+            // if you are using raspberry pi uncomment below block of code
+
+            /*if (deviceModel == DeviceModel.RaspberryPi2)
             {
                 // Use pin numbers compatible with documentation
                 const int RPI2_RED_LED_PIN = 5;
@@ -42,20 +44,20 @@ namespace RGBLED
                 greenpin = gpio.OpenPin(RPI2_GREEN_LED_PIN);
                 bluepin = gpio.OpenPin(RPI2_BLUE_LED_PIN);
             }
-            else
+            else*/
             {
                 // take the first 3 available GPIO pins
                 var pins = new List<GpioPin>(3);
                 for (int pinNumber = 0; pinNumber < gpio.PinCount; pinNumber++)
                 {
-                    // ignore pins used for onboard LEDs
-                    switch (deviceModel)
+                    // If you are using DragonBoard uncomment below block of code
+                    /*switch (deviceModel)
                     {
                         case DeviceModel.DragonBoard410:
                             if (pinNumber == 21 || pinNumber == 120)
                                 continue;
                             break;
-                    }
+                    }*/
 
                     GpioPin pin;
                     GpioOpenStatus status;
