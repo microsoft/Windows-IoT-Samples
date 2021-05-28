@@ -1,16 +1,10 @@
 # Push button
 
-In this sample, we connect a push button to your Raspberry Pi 2 or 3, Up Squared*, or the DragonBoard 410c and use it to control an LED. We use GPIO interrupts to detect when the button is pressed and toggle the LED in response.
+In this sample, we connect a push button to your Upboard and use it to control an LED. We use GPIO interrupts to detect when the button is pressed and toggle the LED in response.
 
-*The Up Squared should be used in place of the Minnowboard Max. We are in the process of updating our documentation to reflect this change.  
+![Push Button Image](../../Resources/PushButtonSample.png)
 
-![Push Button Image](../../../Resources/images/PushButton/PushButtonSample.png)
-
-This is a headed sample, so please ensure that your device is in headed
-mode by running this command: `setbootoption.exe headed` (changing the headed/headless state will require a reboot).
-
-Also, be aware that the GPIO APIs are only available on Windows IoT Core, so this sample cannot run on your desktop.
-
+Also, be aware that the GPIO APIs are only available on Windows IoT Enterprise, so this sample cannot run on your desktop.
 
 ### Components
 
@@ -22,116 +16,99 @@ You will need the following components :
 
 * [330 &#x2126; resistor](http://www.digikey.com/product-detail/en/CFR-25JB-52-330R/330QBK-ND/1636)
 
-* Breadboard and several male-to-female for the Raspberry Pi 2 or 3 or MinnowBoard Max or male-to-male wires for the DragonBoard
+* Breadboard and several male-to-male for the Upboard.
 
 ### Connect the circuit to your device
 
-Let's start by wiring up the components on a breadboard. Visit the corresponding **Raspberry Pi 2 or 3, MinnowBoard Max, or DragonBoard 410c** sections below depending on your device.
+Let's start by wiring up the components on a breadboard. Visit the corresponding **Upboard** sections below depending on your device.
 
-#### Raspberry Pi 2 or 3
-
-| Breadboard Diagram                                                                        | Schematic                                                                          |
-| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| ![Breadboard connections](../../../Resources/images/PushButton/RPi2_PushButton_bb.png)      | ![Circuit Schematic](../../../Resources/images/PushButton/RPi2_PushButton_schem.png) |
-
-<sub>*Images made with [Fritzing](http://fritzing.org/)*</sub>
-
-##### Connecting the LED
-
-* Connect the cathode (the shorter leg) of the LED to Pin 31 (GPIO 6) of the Raspberry Pi 2 or 3
-
-* Connect the anode (the longer leg) of the LED to one lead of the 330 &#x2126; resistor
-
-* Connect the other end of the 330 &#x2126; resistor to Pin 1 (3.3V) on Raspberry Pi 2 or 3
-
-##### Connecting the Push Button
-
-* Connect one pin of the push button to Pin 29 (GPIO 5) of the Raspberry Pi 2 or 3
-
-* Connect the other pin of the push button to the ground
-
-Here is the pinout of the RPi2 and RPi3:
-
-![Raspberry Pi 2 and 3 pinout](../../../Resources/images/PinMappings/RP2_Pinout.png)
-
-<sub>*Image made with [Fritzing](http://fritzing.org/)*</sub>
-
-#### MinnowBoard Max
+#### Upboard
 
 | Breadboard Diagram                                                                        | Schematic                                                                          |
 | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| ![Breadboard connections](../../../Resources/images/PushButton/MBM_PushButton_bb.png)       | ![Circuit Schematic](../../../Resources/images/PushButton/MBM_PushButton_schem.png)  |
+| ![Breadboard connections](../../Resources/Upboard_PushButton_bb.png)      | ![Circuit Schematic](../../Resources/Upboard_PushButton_schem.png) |
 
-<sub>*Images made with [Fritzing](http://fritzing.org/)*</sub>
 
 ##### Connecting the LED
 
-* Connect the cathode (the shorter leg) of the LED to Pin 20 (GPIO 6) of the MinnowBoard Max
+* Connect the cathode (the shorter leg) of the LED to Pin 31 (GPIO 11) of the Upboard
 
 * Connect the anode (the longer leg) of the LED to one lead of the 330 &#x2126; resistor
 
-* Connect the other end of the 330 &#x2126; resistor to Pin 4 (3.3V) on MinnowBoard Max
+* Connect the other end of the 330 &#x2126; resistor to Pin 1 (3.3V) on Upboard
 
 ##### Connecting the Push Button
 
-* Connect one pin of the push button to Pin 18 (GPIO 5) of the MinnowBoard Max
+* Connect one pin of the push button to Pin 29 (GPIO 10) of the Upboard
 
-* Connect the other pin of the push button to the Pin 2 (Ground)
+* Connect the other pin of the push button to one lead of the 330 &#x2126; resistor
 
-Here is the pinout of the MBM:
+* Connect the other end of the 330 &#x2126; resistor to ground
 
-![MinnowBoard Max pinout](../../../Resources/images/PinMappings/MBM_Pinout.png)
+Here is the pinout of the Upboard
 
-<sub>*Image made with [Fritzing](http://fritzing.org/)*</sub>
+![Upboard pinout](../../Resources/Upboard_Pinout.png)
 
-#### DragonBoard 410c
-
-For reference, the functionality of the low-speed expansion connector is outlined in the following diagram
-
-![DragonBoard Low-Speed Expansion Connector](../../../Resources/images/PinMappings/DB_Pinout.png)
-
-Perform the following steps to connect the LED:
-
-* Connect the cathode (the shorter leg) of the LED to pin 25 (GPIO 13)
-* Connect the annode (the longer leg) of the LED to one lead of the 330 &#x2126; resistor
-* Connect the other end of the 330 &#x2126; resistor to pin 35 (1.8V PWR)
-
-Perform the following steps to connect the push button:
-
-* Connect one pin of the push button to pin 23 (GPIO 36)
-* Connect the other pin of the push button to pin 1 (GND)
-
-The breadboard might look similar to the following with the circuit assembled:
-
-![DragonBoard Push Button Breadboard](../../../Resources/images/PushButton/DB_PushButton_bb.png)
-
-A schematic for the circuit is shown in the diagram below:
-
-![DragonBoard Push Button Schematic](../../../Resources/images/PushButton/DB_PushButton_schem.png)
-
-Finally, the LED_PIN and BUTTON_PIN variables of the **MainPage.xaml.cs** file of the sample code will need the following modification:
 
 ```csharp
-private const int LED_PIN = 13;
-private const int BUTTON_PIN = 36;
+private const int LED_PIN = 31;
+private const int BUTTON_PIN = 29;
 ```
 
 ### Building and running the sample
 
-1. Download a zip of all of our samples [here](https://github.com/Microsoft/Windows-iotcore-samples/archive/master.zip).
+1. Download a zip of all of our samples.
 1. Open `samples-develop\PushButton\CS\PushButton.csproj` in Visual Studio.
-1. If you have **Raspberry Pi 2 or 3** or **DragonBoard 410c**, Select `ARM` for the target architecture. Otherwise, for **MinnowBoard Max** select `x86`
-1. Go to `Build -> Build Solution`
-1. Select `Remote Machine` from the debug target
-1. Hit F5 to deploy and debug. Enter the IP address of your device
-   and select `Universal` for the authentication type.
+1. If you have **Upboard**, Select `Release x64` for the target architecture.
+1. Go to `Build -> Build Solution`.
+
+### Generate an app package
+
+Steps to follow :
+
+ In Solution Explorer, open the solution for your application project.
+ Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ Select Sideloading in the first page of the wizard and then click Next.
+ On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ Open the *_Test folder.
+ Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+  
+ Click the Start button to search for the app by name, and then launch it.
+
+ If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+
+### BIOS Settings for UPBOARD
+
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3)	Under the "Advance" Tab:
+    Select "Hat Configuration", then Click on "GPIO Configuration in Pin Order".
+
+(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+
+    In this sample make PIN 31 as "OUTPUT" and PIN 29 as "INPUT".
 
 ### Let's look at the code
 
 First, we open the GpioPin resources we'll be using. The button is connected to
-GPIO5 in active LOW configuration, meaning the signal will be HIGH when the
+GPIO10 in active LOW configuration, meaning the signal will be HIGH when the
 button is not pressed and the signal will go LOW when the button is pressed.
-We'll be using the LED, connected to GPIO6, which is connected in
+We'll be using the LED, connected to GPIO11, which is connected in
 active LOW configuration, meaning driving the pin HIGH will turn off the LED
 and driving the pin LOW will turn on the LED.
 
@@ -154,9 +131,8 @@ ledPin.Write(GpioPinValue.High);
 ledPin.SetDriveMode(GpioPinDriveMode.Output);
 ```
 
-Next, we set up the button pin. For the Raspberry Pi 2 or 3 or the DragonBoard 410c, we take advantage of the fact that it has 
+Next, we set up the button pin. For the Upboard, we take advantage of the fact that it has 
 built-in pull up resistors that we can activate. We use the built-in pull up resistor so that we don't need to supply a resistor externally. 
-The MinnowBoard Max has 10k&#x2126; pull-up resistors that are on by default and not configurable, so we insert a check to make sure this drive mode is supported.
 
 ```csharp
 // Check if input pull-up resistors are supported
