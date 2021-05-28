@@ -22,7 +22,7 @@ See more information at [ShellLauncher node on Assigned Access CSP](https://docs
 
 ## Xml Namespace
 
-In order to invoke Shell Launcher V2, instead of legacy Shell Launcher (which uses eshell.exe), you must specify the v2 namespace http://schemas.microsoft.com/ShellLauncher/2019/Configuration in the xml. 
+In order to invoke Shell Launcher V2, instead of legacy Shell Launcher (which uses eshell.exe), you must specify the v2 namespace in the xml. 
 
 * When you want to use an UWP app as shell, use the v2 attribute AppType (v2:AppType="UWP")
 * The V2 namespace also provides a new switch to force all windows full screen, V2:AllAppsFullScreen="true"
