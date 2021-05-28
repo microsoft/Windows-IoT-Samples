@@ -6,6 +6,7 @@ languages:
 products:
   - windows
   - windows-iot
+  - windows-10-iot-Enterprise
 description: sample apps demonstrating Shell Launcher V2 on Windows 10 Enterprise from 1903 release
 ---
 
