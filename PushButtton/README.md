@@ -14,7 +14,7 @@ description: Make an LED blink with the push of a button with Windows 10 IoT Ent
 
 In this sample, we connect a push button to your Upboard and use it to control an LED. We use GPIO interrupts to detect when the button is pressed and toggle the LED in response.
 
-![Push Button Image](../PushButtonSample.png)
+![Push Button Image](../Resources/PushButtonSample.png)
 
 Also, be aware that the GPIO APIs are only available on Windows IoT Enterprise, so this sample cannot run on your desktop.
 
@@ -38,7 +38,7 @@ Let's start by wiring up the components on a breadboard. Visit the corresponding
 
 | Breadboard Diagram                                                                        | Schematic                                                                          |
 | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| ![Breadboard connections](../Resources/Upboard_PushButton_bb.png)      | ![Circuit Schematic](../Resources/images/Upboard_PushButton_schem.png) |
+| ![Breadboard connections](../Resources/Upboard_PushButton_bb.png)      | ![Circuit Schematic](../Resources/Upboard_PushButton_schem.png) |
 
 
 ##### Connecting the LED
@@ -59,7 +59,7 @@ Let's start by wiring up the components on a breadboard. Visit the corresponding
 
 Here is the pinout of the Upboard
 
-![Upboard pinout](../Upboard_Pinout.png)
+![Upboard pinout](../Resources/Upboard_Pinout.png)
 
 
 ```csharp
