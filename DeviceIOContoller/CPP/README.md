@@ -1,14 +1,3 @@
----
-page_type: sample
-urlFragment: deviceIO-controller
-languages:
-  - cpp
-products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: This sample shows how to access devices from UWP applications using familiar win32 APIs like CreateFile(), ReadFile(), WriteFile(), and DeviceIoControl() with Windows 10 IoT Enterprise.
----
 
 # Device IO Controller
 
