@@ -1,19 +1,67 @@
 # Using an app service to blink an LED
-We’ll create a simple Blinky [app service](https://docs.microsoft.com/en-us/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service) and connect a LED to your Windows IoT Core device (Raspberry Pi 2 or 3, Up Squared or DragonBoard). We'll also create a simple app service client that blinks the LED. Be aware that the GPIO APIs are only available on Windows IoT Core, so this sample cannot run on your desktop.
+We’ll create a simple Blinky [app service](https://docs.microsoft.com/en-us/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service) and connect a LED to your Windows IoT Enterprise device (Up-Board). We'll also create a simple app service client that blinks the LED. Be aware that the GPIO APIs are only available on Windows IoT Enterprise, so this sample cannot run on your desktop.
 
 ## Set up your hardware
 ___
-The hardware setup for this sample is the same as the [C# ‘Blinky’ sample](https://github.com/Microsoft/Windows-iotcore-samples/tree/master/Samples/HelloBlinky/CS).
+The hardware setup for this sample is the same as the Blinky sample.
 Note that the app will not run successfully if it cannot find any available GPIO ports.
 
 ## Load the projects in Visual Studio
 ___
 
-You can find the source code for this sample by downloading a zip of all of our samples [here](https://github.com/Microsoft/Windows-iotcore-samples/archive/master.zip) and navigating to the `samples-develop\AppServiceBlinky`.  Make a copy of the folder on your disk and open the projects from Visual Studio.  BlinkyService.sln implements the app service and must be started first.  BlinkyClient.sln implements the app service client.
+You can find the source code for this sample by downloading a zip of all of our samples in WIndows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`.  Make a copy of the folder on your disk and open the projects from Visual Studio.  BlinkyService.sln implements the app service and must be started first.  BlinkyClient.sln implements the app service client.
+Verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService. If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for #StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
 
-Once the project is open and builds, the next step is to [deploy](https://github.com/MicrosoftDocs/windows-iotcore-docs/blob/master/windows-iotcore/develop-your-app/AppDeployment.md) the application to your device.
+## Deploy your app
 
-When everything is set up, you should be able to press F5 from each instance of Visual Studio.  The BlinkyService app will deploy and start on the Windows IoT device, and you should see the package family name printed the debug output window on Visual Studio.  Before pressing F5 for BlinkyClient app verify that the value of connection.PackageFamilyName matches the value output in the output window by BlinkyService.  When you press F5 for BlinkyClient you should see the attached LED blink.
+* * *
+
+With the application open in Visual Studio 2019, set the architecture in the toolbar dropdown. If you’re building for UpBaord, select `x64`.
+
+### Generate an app package
+
+Steps to follow :
+
+ * In Solution Explorer, open the solution for your application project.
+ * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ * Select Sideloading in the first page of the wizard and then click Next.
+ * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ * Open the *_Test folder.
+ * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+  
+ Click the Start button to search for the app by name, and then launch it.
+
+ If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+
+### BIOS Settings for UPBOARD
+
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3)	Under the "Advance" Tab:
+    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
+
+(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+
+    In this sample make PIN 15 as "OUTPUT" and initial value as "HIGH".
+
+If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+ 
+ Click the Start button to search for the app by name, and then launch it.
 
 ## Let's look at the code
 ___
