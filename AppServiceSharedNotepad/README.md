@@ -31,8 +31,7 @@ The NotepadService app will deploy and start on the Windows IoT device, and you 
 Before pressing F5 for NotepadClientBackgroundApplication and NotepadServiceClientApp projects verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService.
 
 If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for 
-
-# StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
+StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
 
 Next start NotepadServiceClientApp and then NotepadServiceClientApp.
 
