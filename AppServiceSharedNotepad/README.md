@@ -52,10 +52,10 @@ Steps to follow :
 
 
 When you run the client app you should see
-![No messages yet](../../Resources/AppServiceSharedNotepad-NoMessages.jpg)
+![No messages yet](../Resources/AppServiceSharedNotepad-NoMessages.jpg)
 
 After a 30 seconds or so the text in the button should change to black from gray.  Clicking the button will show the messages from the clipboard service.
-![Message from clipboard service](../../Resources/AppServiceSharedNotepad-Messages.jpg)
+![Message from clipboard service](../Resources/AppServiceSharedNotepad-Messages.jpg)
 
 ## Let's look at the code
 ___
