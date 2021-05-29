@@ -24,7 +24,14 @@ You can find the source code for this sample by downloading a zip of all of our 
 
 With the application open in Visual Studio 2019, set the architecture in the toolbar dropdown. If you’re building for UpBaord, select `x64`.
 
-When everything is set up, you should be able to press F5 from each instance of Visual Studio.  The NotepadService app will deploy and start on the Windows IoT device, and you should see the package family name printed the debug output window on Visual Studio.  Before pressing F5 for NotepadClientBackgroundApplication and NotepadServiceClientApp projects verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService. If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for #StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
+When everything is set up, you should be able to press F5 from each instance of Visual Studio. 
+
+The NotepadService app will deploy and start on the Windows IoT device, and you should see the package family name printed the debug output window on Visual Studio.  
+
+Before pressing F5 for NotepadClientBackgroundApplication and NotepadServiceClientApp projects verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService.
+
+If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for # StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
+
 Next start NotepadServiceClientApp and then NotepadServiceClientApp.
 
 ### Generate an app package
