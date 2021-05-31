@@ -21,7 +21,7 @@ In order to build this driver you will need the following:
   * [Windows 10 Driver Development Kit](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
   * [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/).
 
-## Building and Deploying the HID Injector
+## Building and Deploying the GPIO KMDF
   1. Be sure you've installed the Visual Studio update and the Windows 10 Driver Development kit before continuing.
   2. On your development machine, use Windows Explorer to navigate to the folder where you downloaded or cloned samples.
   3. Open the project located ```Samples\GPIOKMDFDemo\GPIOkmdf.sln```.
