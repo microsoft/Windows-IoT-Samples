@@ -67,8 +67,6 @@ Steps to follow :
  * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
 
  If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
 
  If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
 
@@ -88,6 +86,8 @@ Steps to follow:
     In this sample make Pin 2 as INPUT.
 
 If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+
+ Click the Start button to search for the app by name, and then launch it.
 
 The app will deploy and start on the Windows IoT device, and you should see a gauge control fill the screen.
 
