@@ -24,21 +24,19 @@ Optional:
   5. You can now build the solution.
 
 ### Copying the HID Injector to your device
-  1. Open a network share on your IoT Enterprise device by opening the Run dialog (Win-R), then entering \\```IP for your IoT Enteprise device\c$```. Enter credentials if prompted.
-  2. Create a ```deploy``` folder on your IoT Enterprise device. 
-  3. In Visual Studio, Right Click on the HidInjectorKd project, then select ```Open Folder in File Explorer```.
-  4. In the File Explorer that opened on your project, Navigate to the driver directory.
-  5. Now, copy the Microsoft.HidInjectionSample.HidInjectionSample.cab to the network folder you opened in the first step.
+  1. Under the driver Directory you will find the inf and sys file, Copy that folder and send it to IoT Enterprise device
+  2. Copy the testvhid application file from release folder.
+  3. Send this file to the IoT Enterprise device
 
 ### Installing the HID Injector
-   1. Use [Powershell](/en-us/win10/samples/PowerShell.htm) to connect to your device. 
-   2. Once connected, change to your deployment direcory by typing ```cd deploy```.
-   3. Now prepare the install of the driver by typing ```ApplyUpdate -stage Microsoft.HidInjectionSample.HidInjectionSample.cab```.
-   4. Now commit the install by typing ```ApplyUpdate -commit```.
-   5. Your IoT Enterprise device will reboot, and apply the update.
+   1. Install the inf file in the Windows IoT Enterprise device.
+   2. You will see the dialogue box of "The operation completed successful".
+   3. Run the "Testvhid.exe" file in command prompt under Administrator mode.
+   4. You will see the message ".... sending control to the device". without any error message.
+   5. The HID injector device installed in IoT device
 
 ### Verify installation
-If you've installed the driver, verify the install by navigating to the Web management console http://<your device ip>:8080/devicemanager.htm and looking for the HID Injection Sample node.
+If you've installed the driver, verify the install by navigating to the Device Manager and looking for the HID Injection Sample node.
 
 ## Using the HID Injector
 Included in the solution is a C++ console application used to demonstrate communication with the Hid injection Driver. The Driver is discovered by class using "CM_Get_Device_Interface_List". 
