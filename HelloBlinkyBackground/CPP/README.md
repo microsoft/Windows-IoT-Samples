@@ -102,3 +102,10 @@ this.pin.Write(GpioPinValue.High);
 ```
 
 Remember that we connected the other end of the LED to the 3.3 Volts power supply, so we need to drive the pin to low to have current flow into the LED.
+
+## Note
+
+Make sure that LowLevel Capabilities in set in PackageAppManifest.
+* To do that go to Package.appxmanifesto and view the code
+* Under Capabilities if you can find "DeviceCapability Name="lowLevel"/" then your lowLevel Capabilities is enabled.
+* If this line "DeviceCapability Name="lowLevel"/" is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
