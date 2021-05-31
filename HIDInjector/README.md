@@ -26,14 +26,14 @@ Optional:
 ### Copying the HID Injector to your device
   1. Under the driver Directory you will find the inf and sys file, Copy that folder and send it to IoT Enterprise device
   2. Copy the testvhid application file from release folder.
-  3. Send this file to the IoT Enterprise device
+  3. Send this file to the IoT Enterprise device.
 
 ### Installing the HID Injector
    1. Install the inf file in the Windows IoT Enterprise device.
    2. You will see the dialogue box of "The operation completed successful".
    3. Run the "Testvhid.exe" file in command prompt under Administrator mode.
    4. You will see the message ".... sending control to the device". without any error message.
-   5. The HID injector device installed in IoT device
+   5. The HID injector device installed in IoT device.
 
 ### Verify installation
 If you've installed the driver, verify the install by navigating to the Device Manager and looking for the HID Injection Sample node.
