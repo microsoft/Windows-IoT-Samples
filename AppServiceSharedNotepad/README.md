@@ -16,7 +16,7 @@ We’ll create a simple notepad [app service](https://docs.microsoft.com/en-us/w
 ## Load the projects in Visual Studio
 ___
 
-You can find the source code for this sample by downloading a zip of all of our samples in WIndows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`.  Make a copy of the folder on your disk and open the projects from Visual Studio.  BlinkyService.sln implements the app service and must be started first.  BlinkyClient.sln implements the app service client.
+You can find the source code for this sample by downloading a zip of all of our samples in WIndows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`.  Make a copy of the folder on your disk and open the projects from Visual Studio.  NotepadService.sln implements the app service and must be started first.  NotepadClientBackground.sln implements the app service client.
 
 ## Deploy your app
 
