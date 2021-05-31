@@ -1,6 +1,38 @@
-# GPIO OneWire DHT11 reader
+# GPIO OneWire DHT11/22 reader
 
-Note what follows below is a bit out of date-  the latest version on Github is a 2 wire operation requiring pin4 as input and pin 5 as output.
+These are the available versions of this Windows 10 IoT Enterprise sample:
+
+* [C++](./CPP/ReadMe.md)
+
+| Minimum SDK Version | 19041 |
+|---------------------|-------|
+| Minimum OS Version  | 19041 |
+
+This sample has been updated to use the `GpioChangeReader` API which is
+new as of build 19041. You must install SDK version 19041 or later to build
+this sample.
+
+The sample has been temporarily modified to use two pins instead of one to
+drive the DHT22. `GpioChangeReader` requires interrupts to be
+enabled. `GpioPin.SetDriveMode()` currently takes
+much longer when interrupts are enabled than when they are
+disabled. If you try to change a pin from output to input when interrupts
+are enabled, you will miss the response from the DHT22.
+As a workaround, two pins are used to interface with the DHT22.
+One pin is configured as an output and is used to assert the data line LOW
+to request a sample. The other pin is configured as input and is used to
+capture changes on the data line.
+
+Your breadboard should be wired as follows. You can use either a MOSFET or
+BJT transistor. If you use a BJT, be sure to put a resistor in series with the
+base of the transistor.
+
+![Schematic](../../Resources/schematic.png)
+
+
+## GPIO OneWire DHT11 reader
+
+Note what follows below is a bit out of date-  the latest version on Github is a 2 wire operation requiring pin 4 as input and pin 5 as output.
 
 This sample shows how to read from the [DHT11](https://www.adafruit.com/product/386)
 from a Universal Windows Application. The DHT11 is a low cost temperature and
@@ -16,14 +48,14 @@ from the DHT11.
 For a description of the protocol used by the DHT11, see
 [this article](http://embedded-lab.com/blog/?p=4333). The datasheet is [here](http://akizukidenshi.com/download/ds/aosong/DHT11.pdf).
 
-![Screenshot](../../../Resources/images/GpioOneWire/GpioOneWireScreen1.png)
+![Screenshot](../../Resources/GpioOneWireScreen1.png)
 
 ### Requirements
 
 {:.table.table-bordered}
 | Minimum supported build | 10.0.10556                      |
 |-------------------------|---------------------------------|
-| Supported Hardware      | Raspberry Pi 2 or 3<br />Dragonboard 410C |
+| Supported Hardware      | Upboard |
 
 ### Hardware Setup
 
@@ -34,19 +66,55 @@ You will need the following hardware to run this demo:
 
 Connect the components as shown in the following diagram:
 
-![Schematic](../../../Resources/images/GpioOneWire/GpioOneWireSchematic.png)
-![Wiring Diagram](../../../Resources/images/GpioOneWire/GpioOneWireFritz.png)
+![Schematic](../../Resources/GpioOneWireSchematic.png)
+![Wiring Diagram](../../Resources/GpioOneWireFritz.png)
 
-### Running the Demo
+### Running the Solution
 
- 1. Clone the [Microsoft/Windows-iotcore-samples git repository](https://github.com/microsoft/Windows-iotcore-samples/tree/master/Samples/GpioOneWire).
-    and open GpioOneWire/GpioOneWire.vcxproj in Visual Studio 2017.
- 1. Right click on the project in the solution explorer, and click `Properties`.
- 1. In the project properties dialog, select the `Debugging` tab.
- 1. Enter the IP address of your device in the `Machine Name` field.
- 1. Set `Authentication Type` to `Universal (Unencrypted Protocol)`
- 1. Hit `F5` to build, deploy, and debug the project. You should see temperature
-    and humidity samples updated on the screen every 2 seconds.
+ 1. Clone the Microsoft IoT Enterprise Repository and open GpioOneWire/GpioOneWire.vcxproj in Visual Studio 2019.
+ 2. Build the solution in Release x64 mode.
+
+### Generate an app package
+
+Steps to follow :
+
+ * In Solution Explorer, open the solution for your application project.
+ * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ * Select Sideloading in the first page of the wizard and then click Next.
+ * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ * Open the *_Test folder.
+ * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+  
+ Click the Start button to search for the app by name, and then launch it.
+
+ If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+
+### BIOS Settings for UPBOARD
+
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3)	Under the "Advance" Tab:
+    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
+
+(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+    In this sample make Pin 4 as INPUT and Pin 5 as OUTPUT
+
+If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
 ### How it works
 
@@ -175,3 +243,10 @@ parameter.
 
     return S_OK;
 ```
+
+## Note
+
+Make sure that LowLevel Capabilities in set in PackageAppManifest.
+* To do that go to Package.appxmanifesto and view the code
+* Under <Capabilities> if you can find <DeviceCapability Name="lowLevel"/> then your lowLevel Capabilities is enabled.
+* If this line <DeviceCapability Name="lowLevel"/> is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
