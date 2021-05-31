@@ -9,8 +9,12 @@ Note that the app will not run successfully if it cannot find any available GPIO
 ## Load the projects in Visual Studio
 ___
 
-You can find the source code for this sample by downloading a zip of all of our samples in WIndows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`.  Make a copy of the folder on your disk and open the projects from Visual Studio.  BlinkyService.sln implements the app service and must be started first.  BlinkyClient.sln implements the app service client.
-Verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService. If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for #StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
+You can find the source code for this sample by downloading a zip of all of our samples in WIndows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`.  
+Make a copy of the folder on your disk and open the projects from Visual Studio.  
+BlinkyService.sln implements the app service and must be started first.  
+BlinkyClient.sln implements the app service client.
+Verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService. 
+If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for #StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
 
 ## Deploy your app
 
@@ -38,8 +42,6 @@ Steps to follow :
  * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
 
  If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
 
  If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
 
