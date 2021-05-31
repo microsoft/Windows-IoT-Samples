@@ -172,7 +172,5 @@ If you need guidance click Link: [here](https://www.annabooks.com/Articles/Artic
 
 Make sure that LowLevel Capabilities in set in PackageAppManifest.
 * To do that go to Package.appxmanifesto and view the code
-* Under <Capabilities> if you can find <DeviceCapability Name="lowLevel"/> then your lowLevel Capabilities is enabled.
-* If this line <DeviceCapability Name="lowLevel"/> is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
-
-
+* Under Capabilities if you can find "DeviceCapability Name="lowLevel"/" then your lowLevel Capabilities is enabled.
+* If this line "DeviceCapability Name="lowLevel"/" is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
