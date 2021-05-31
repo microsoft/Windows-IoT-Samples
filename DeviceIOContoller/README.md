@@ -179,6 +179,13 @@ Add a call to `AccessComPort()` in the MainPage constructor:
   
 * Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 
+Build the project, which should succeed because we made desktop APIs visible at compile time.
+
+Set a breakpoint on the `throw` statement after the file handle validity check, as indicated in the source code above.
+
+* Debug the application on UPBoard. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
+* We run an application on UPBoard when will come Access Denied error on that time UWP application crashs. If we set a proper security descriptor on the device object so it can be accessed by UWP applications.
+* 
 ### Generate an app package
 
 Steps to follow :
@@ -202,14 +209,6 @@ Steps to follow :
   
  Click the Start button to search for the app by name, and then launch it.
  
-
-Build the project, which should succeed because we made desktop APIs visible at compile time.
-
-Set a breakpoint on the `throw` statement after the file handle validity check, as indicated in the source code above.
-
-* Debug the application on UPBoard. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
-* We run an application on UPBoard when will come Access Denied error on that time UWP application crashs. If we set a proper security descriptor on the device object so it can be accessed by UWP applications.
-
 ## Granting Access to AppContainer Processes
 
 Every device object in the system has an associated security descriptor. The security descriptor determines who has what access to a device object. Security descriptors have a binary representation which is used by the system to compute access to objects, and a human readable form called an SDDL string. Some examples of SDDL strings are:
