@@ -185,7 +185,7 @@ Set a breakpoint on the `throw` statement after the file handle validity check, 
 
 * Debug the application on UPBoard. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
 * We run an application on UPBoard when will come Access Denied error on that time UWP application crashs. If we set a proper security descriptor on the device object so it can be accessed by UWP applications.
-* 
+
 ### Generate an app package
 
 Steps to follow :
