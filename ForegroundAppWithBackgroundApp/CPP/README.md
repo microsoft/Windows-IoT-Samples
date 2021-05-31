@@ -16,7 +16,7 @@ If you want to create a solution that builds the foreground application and the 
 
 3. Select desired target version and click OK when prompted for target version
 
-![step 3](../../Resources/step3.png)
+![step 3](../../Resources/step3.PNG)
 
 4.	In Solution Explorer right-click on the solution and choose Add>New Project …
 
@@ -28,7 +28,7 @@ If you want to create a solution that builds the foreground application and the 
 
 6.	Select desired target version and click OK when prompted for target version
 
-![step 6](../../Resources/step6.png)
+![step 6](../../Resources/step6.PNG)
 
 7.	In Solution Explorer right-click on the background application Package.appxmanifest and choose View Code
 
