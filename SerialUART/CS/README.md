@@ -39,7 +39,7 @@ Make the following connections:
 
 You will need:
 
-* 1 X USB-to-TTL module (This is what we will connect to our Up-Board. We used [this Silicon Labs CP2102 based USB-to-TTL module](http://www.amazon.com/gp/product/B00LODGRV8))
+* 1 X USB-to-TTL module (This is what we will connect to our Upboard. We used [this Silicon Labs CP2102 based USB-to-TTL module](http://www.amazon.com/gp/product/B00LODGRV8))
 
 * 1 X USB-to-TTL cable (This will connect to our PC. We used [this one](http://www.adafruit.com/products/954))
 
