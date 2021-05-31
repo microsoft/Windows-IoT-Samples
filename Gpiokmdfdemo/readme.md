@@ -24,7 +24,7 @@ In order to build this driver you will need the following:
 ## Building and Deploying the GPIO KMDF
   1. Be sure you've installed the Visual Studio update and the Windows 10 Driver Development kit before continuing.
   2. On your development machine, use Windows Explorer to navigate to the folder where you downloaded or cloned samples.
-  3. Open the project located ```Samples\GPIOKMDFDemo\GPIOkmdf.sln```.
+  3. Open the project located ```Samples\GPIOKMDFDemo\GPIOkmdfdemo.sln```.
   4. Select the architecture you intend to deploy to: x64 for UP-BOARD.
   5. You can now build the solution.
 
