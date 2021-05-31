@@ -47,7 +47,7 @@ Make the following connections:
 
 * Insert the USB end of the USB-to-TTL **cable** into a USB port on the PC
 
-* Insert the USB end of the USB-to-TTL **module** into a USB port on the Up-Board 
+* Insert the USB end of the USB-to-TTL **module** into a USB port on the Upboard 
 
 * Connect the GND pin of the USB-to-TTL **module** to the GND wire of the USB-to-TTL cable 
 
@@ -57,7 +57,7 @@ Make the following connections:
 
 Leave the power pin of the USB-to-TTL cable unconnected. It is not needed.
 
-Below is an image of our USB-to-TTL module connected to a USB port in our Up-Board. The GND, TX, and RX pins of the module are connected to the GND, RX, TX wires of the USB-to-TTL cable that is connected to our PC.
+Below is an image of our USB-to-TTL module connected to a USB port in our Upboard. The GND, TX, and RX pins of the module are connected to the GND, RX, TX wires of the USB-to-TTL cable that is connected to our PC.
 
 [CP 2102 Connections](../../Resources/CP2102_Connections_500.png)
 
