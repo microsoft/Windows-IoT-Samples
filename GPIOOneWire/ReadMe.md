@@ -124,6 +124,7 @@ Steps to follow:
     Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
 
 (4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+   
     In this sample make Pin 4 as INPUT and Pin 5 as OUTPUT
 
 If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
