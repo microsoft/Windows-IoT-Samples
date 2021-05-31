@@ -27,7 +27,7 @@ This folder contains tools that let you interact with Gpio, I2c, Pwm, Spi, and U
 1. Navigate to the root of this repository and run:
 
 ```powershell
-msbuild /p:Platform=ARM /p:Configuration=Release
+msbuild /p:Platform=x64 /p:Configuration=Release
 ```
 
 Valid values of Platform are: `ARM, ARM64, x86, x64`
