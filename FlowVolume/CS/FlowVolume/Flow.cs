@@ -17,7 +17,7 @@ namespace Keg.DAL
         private Measurement lastMeasurement; // this value accumulates over time.  Consumers should note the starting measurement and then compare that to a future measurement.
 
         //RPI
-        private static readonly Int32 FLOWGPIOPIN = 3;
+        private static readonly Int32 FLOWGPIOPIN = 2;
         private GpioPin _pin;
         private int _second = -1;
         private float _persecond = 0.0f;
