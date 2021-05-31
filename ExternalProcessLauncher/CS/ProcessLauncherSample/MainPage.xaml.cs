@@ -38,7 +38,6 @@ namespace ProcessLauncherSample
             options.StandardOutput = standardOutput;
             options.StandardError = standardError;
 
-        
             await CoreWindow.GetForCurrentThread().Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 try
