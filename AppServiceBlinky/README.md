@@ -51,8 +51,6 @@ Steps to follow :
  * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
 
  If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
 
  If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
 
