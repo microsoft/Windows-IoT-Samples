@@ -39,7 +39,7 @@ Your breadboard should be wired as follows. You can use either a MOSFET or
 BJT transistor. If you use a BJT, be sure to put a resistor in series with the
 base of the transistor.
 
-![Schematic](../../Resources/schematic.png)
+![Schematic](../Resources/schematic.png)
 
 
 ## GPIO OneWire DHT11 reader
@@ -60,7 +60,7 @@ from the DHT11.
 For a description of the protocol used by the DHT11, see
 [this article](http://embedded-lab.com/blog/?p=4333). The datasheet is [here](http://akizukidenshi.com/download/ds/aosong/DHT11.pdf).
 
-![Screenshot](../../Resources/GpioOneWireScreen1.png)
+![Screenshot](../Resources/GpioOneWireScreen1.png)
 
 ### Requirements
 
@@ -78,8 +78,8 @@ You will need the following hardware to run this demo:
 
 Connect the components as shown in the following diagram:
 
-![Schematic](../../Resources/GpioOneWireSchematic.png)
-![Wiring Diagram](../../Resources/GpioOneWireFritz.png)
+![Schematic](../Resources/GpioOneWireSchematic.png)
+![Wiring Diagram](../Resources/GpioOneWireFritz.png)
 
 ### Running the Solution
 
