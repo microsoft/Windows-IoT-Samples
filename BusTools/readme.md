@@ -15,10 +15,10 @@ description: "IoT Bus tools to interact with Gpio, I2c, Pwm, Spi and UART."
 This folder contains tools that let you interact with GPIO, I2C, PWM, SPI, and UART on the command line. They will run on any edition of Windows, including [Windows 10 IoT Enterprise](https://docs.microsoft.com/windows/iot/iot-enterprise/getting_started) and [Windows 10 IoT Core](https://docs.microsoft.com/windows/iot-core/windows-iot-core).
 
 The tools are:
-- GpioTestTool
-- I2cTestTool
-- PwmTestTool
-- SpiTestTool
+- GPIOTestTool
+- I2CTestTool
+- PWMTestTool
+- SPITestTool
 - MinComm (UART)
 
 ## Steps to Build the Project
