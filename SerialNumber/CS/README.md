@@ -39,7 +39,7 @@ In order for this to work the restricted capability must be declared in the appx
   
 ## Step 5: Launch the application 
 
-## SerialNumber Sample Code
+## Serial Number Sample Code
 
 ```
 namespace serialnumber
