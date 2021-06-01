@@ -117,7 +117,7 @@ private async void InitSPI()
     try
     {
         var settings = new SpiConnectionSettings(SPI_CHIP_SELECT_LINE);
-        settings.ClockFrequency = 1000000; // 10000000;
+        settings.ClockFrequency = 1000000;// For Upboard use 1MHzs and For Rpi use 500KHzs
         settings.Mode = SpiMode.Mode0; //Mode3;
 
         string spiAqs = SpiDevice.GetDeviceSelector(SPI_CONTROLLER_NAME);
@@ -138,7 +138,7 @@ private async void InitSPI()
 ```csharp
 
 /*Upboard  Parameters*/
-private const string SPI_CONTROLLER_NAME = "SPI2";  /* For Update, use SPI2                             */
+private const string SPI_CONTROLLER_NAME = "SPI2";  /*  For Upboard, use SPI2. and For Raspberry Pi 2, use SPI0     */
 private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Upboard        */
 
 /*Channel configuration for MCP3208, Uncomment this if you are using MCP3208*/
@@ -215,7 +215,7 @@ Steps to follow :
  If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
  
 
- If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+ If you are using UPBOARD, you have to setup the BIOS SPI configuration.
 
 ### BIOS Settings for UPBOARD
 
@@ -226,11 +226,7 @@ Steps to follow:
 (2)	Under the "Boot -> OS Image ID" Tab:
     Select "Windows 10 IoT Core".
  
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
-
-(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
-    In this sample make Pin 4 as INPUT and Pin 5 as OUTPUT
+(3) Under the "Advance" Tab: Select "Hat Configuration" and make "LPSS SPISupport" as "Enabled".
 
 If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
