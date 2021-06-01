@@ -1,45 +1,47 @@
+---
+page_type: sample
+urlFragment: serial-number
+languages: 
+  - csharp
+products:
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: Read the device serial number for a Windows 10 IoT Core device.
+---
 
-# Serialnumber app 
+# Serial Number
 
-Read the device serial number for a Windows 10 IoT Enterprise device. 
+This sample demonstrates how to get the device serial number as documented here: [Access SMBIOS information from a Universal Windows App](https://docs.microsoft.com/en-us/windows/desktop/SysInfo/access-smbios-information-from-a-universal-windows-app).
+
+In order for this to work the restricted capability must be declared in the appxmanifest, and the minimum target version for the project must be 17134 or higher.
+   
+## Step 1: Load the project in Visual Studio  
+
+1. Make sure you have a local copy of the Windows IoT Samples. (Download a zip of this repository, and make a copy of the folder on your disk). 
+
+1. Open this sample (Serial Number) in Visual Studio 2019. This is a Universal Windows application. 
+
+## Step 2: Deployment
+
+1. Select your architecture. 
+> [!NOTE]
+>
+> If you're building for the UP Board, select `x64` as the architecture.   
   
-### Load the project in Visual Studio  
+1. Select **Local Machine** to point to IoT device
+
+1. Press **F5** on your keyboard to deploy to your device. 
+
+## Step 3: [Generate an App Package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
   
-You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from Visual Studio 2019.  
+## Step 4: [Install Your App Package using an Install Script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
   
-This is a Universal Windows application 
+## Step 5: Launch the application 
 
-### Deploy your app  
-  
-If you're building for UPBoard, select `x64` as the architecture.   
-  
-Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
+## SerialNumber Sample Code
 
-### Generate an app package
-
-Steps to follow :
-
- In Solution Explorer, open the solution for your application project.
- Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- Select Sideloading in the first page of the wizard and then click Next.
- On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here].(https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package)  
-  
-### Install your app package using an install script
-
-Steps to follow :
- Open the *_Test folder.
- Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here].(https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)  
-  
- Click the Start button to search for the app by name, and then launch it.
-
-### SerialNumber Sample Code
-
+```
 namespace serialnumber
 {
     public sealed partial class MainPage : Page
@@ -72,8 +74,4 @@ namespace serialnumber
         }
     }
 }
-
-*This sample demonstrates how to get the device serial number as documented here: [Access SMBIOS information from a Universal Windows App](https://docs.microsoft.com/en-us/windows/desktop/SysInfo/access-smbios-information-from-a-universal-windows-app).
-
-*In order for this to work the restricted capability must be declared in the appxmanifest, and the minimum target version for the project must be 15063 or higher.
-
+```
