@@ -1,14 +1,11 @@
-# RFID scanner with Windows 10 IoTCore
+# RFID scanner with Windows 10 IoTEnterprise
 
-In this sample, we will demonstrate how to use a relatively inexpensive device and a Raspberry Pi to measure the volume of liquid flowing through a hose.
-Keep in mind that the GPIO APIs are only available on Windows 10 IoT Core, so this sample cannot run on your desktop.
-
-This is a headed sample. To better understand what headed mode is and how to configure your device to be headed, follow the instructions [here](https://docs.microsoft.com/en-us/windows/iot-core/learn-about-hardware/headlessmode).
-
+In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans.
+Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise, so this sample cannot run on your desktop.
 
 ## Load the project in Visual Studio
 
-## Connect the MFRC522 to your Windows 10 IoT Core device
+## Connect the MFRC522 to your Windows 10 IoT Enterprise device
 
 You'll need a few components:
 
@@ -16,7 +13,7 @@ You'll need a few components:
 * a Piezo Buzzer (If you want a beep when a card scans)
 * a breadboard and a couple of connetor wires
 
-### For Raspberry Pi 2 or 3 (RPi2 or RPi3)
+### For Upboard (Upboard)
 
 1. Connect RFID SDA to Pin 24
 2. Connect RFID SCK to Pin 23
@@ -26,35 +23,59 @@ You'll need a few components:
 6. Connect RFID RST to Pin 22
 7. Connect RFID 3.3V to Pin 1 (For some higher frequency cards this might need 5V)
 
-For reference, here is the pinout of the RPi2 and RPi3:
+For reference, here is the pinout of the Upboard:
 
-![](../../../Resources/images/PinMappings/RP2_Pinout.png)
+![](../../Resources/Upboard_Pinout.png)
 
 ## Deploy your app
 
-1.  With the application open in Visual Studio, set the architecture in the toolbar dropdown. We use `ARM` since we used the Raspberry Pi, but if you’re building for MinnowBoard Max, remember to select `x86`.
+* If you are using  Upboard Choose `Release` and `x64` configuration.
+* Compile the Solution file
 
-2.  Next, in the Visual Studio toolbar, click on the `Local Machine` dropdown and select `Remote Machine`
+### Generate an app package
 
-    ![RemoteMachine Target](../../../Resources/images/HelloWorld/cs-remote-machine-debugging.png)
+Steps to follow :
 
-3.  At this point, Visual Studio will present the **Remote Connections** dialog. If you previously used [PowerShell](https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/powershell) to set a unique name for your device, you can enter it here (in this example, we’re using **my-device**). Otherwise, use the IP address of your Windows IoT Core device. After entering the device name/IP select `Universal` for Windows Authentication, then click **Select**.
+ * In Solution Explorer, open the solution for your application project.
+ * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ * Select Sideloading in the first page of the wizard and then click Next.
+ * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
 
-    ![Remote Machine Debugging](../../../Resources/images/HelloWorld/cs-remote-connections.PNG)
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
 
-4.  You can verify or modify these values by navigating to the project properties (select **Properties** in the Solution Explorer) and choosing the `Debug` tab on the left:
+Steps to follow :
+ * Open the *_Test folder.
+ * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
 
-    ![Project Properties Debug Tab](../../../Resources/images/HelloWorld/cs-debug-project-properties.PNG)
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+ 
 
-	When everything is set up, you should be able to press F5 from Visual Studio. If there are any missing packages that you did not install during setup, Visual Studio may prompt you to acquire those now. The app will deploy and start on the Windows IoT device, and you should see a text block for returned ID from the scanner.
+ If you are using UPBOARD, you have to setup the BIOS SPI configuration.
 
-	![](../../../Resources/images/RFIDForIoT/RFIDForIot.jpg)
+### BIOS Settings for UPBOARD
 
-	Scan the 13.56Mhz sample card that comes with the scanner. You should be able to see a card ID pop up on the screen.
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3) Under the "Advance" Tab: Select "Hat Configuration" and make "LPSS SPISupport" as "Enabled".
 
-	Congratulations! You just read an ID off of a RFID card.
+If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
-	## Let’s look at the code
+ Click the Start button to search for the app by name, and then launch it.
+
+Scan the 13.56Mhz sample card that comes with the scanner. You should be able to see a card ID pop up on the screen.
+
+Congratulations! You just read an ID off of a RFID card.
+
+## Let’s look at the code
 
 	This sample app relies on MFRC522 library written by a github user Michiel Lowijs. The original library can be found here [MFRC522](https://github.com/mlowijs/mfrc522-netmf).
 	We have adapted this library to Universal Windows platform. The adapted library can be found in the project directory by the name Mfrc522Lib.
@@ -62,7 +83,13 @@ For reference, here is the pinout of the RPi2 and RPi3:
 
 	
 ## Additional resources
-* [Windows 10 IoT Core home page](https://developer.microsoft.com/en-us/windows/iot/)
 * [Documentation for all samples](https://developer.microsoft.com/en-us/windows/iot/samples)
 
 This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact <opencode@microsoft.com> with any additional questions or comments.
+
+## Note
+
+Make sure that LowLevel Capabilities in set in PackageAppManifest.
+* To do that go to Package.appxmanifesto and view the code
+* Under Capabilities if you can find "DeviceCapability Name="lowLevel"/" then your lowLevel Capabilities is enabled.
+* If this line "DeviceCapability Name="lowLevel"/" is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
