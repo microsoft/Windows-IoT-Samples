@@ -6,7 +6,7 @@ languages:
 products:
   - windows 10
   - windows-iot
-  - windows-10-iot-Enterprise
+  - windows-10-iot-enterprise
 description: "IoT Bus tools to interact with Gpio, I2c, Pwm, Spi and UART."
 ---
 
