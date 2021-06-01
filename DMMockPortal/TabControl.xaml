@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="DMMockPortal.TabControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DMMockPortal"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Canvas>
+            <Border Canvas.Top="0" Canvas.Left="99" Width="400" Height="100" SnapsToDevicePixels="True"  BorderThickness="1" BorderBrush="#444444" Background="#222222">
+
+                <Grid x:Name="ContentGrid">
+                    <TextBox
+                        Margin="10"
+                        HorizontalAlignment="Stretch"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        FontFamily="Consolas"
+                        VerticalScrollBarVisibility="Auto"
+                        x:Name="DesiredPropertiesValueBox"
+                        Visibility="Visible"/>
+                    <TextBlock Margin="3" Text="2nd Tab Content" Visibility="Collapsed"/>
+                    <TextBlock Margin="3" Text="3rd Tab Content" Visibility="Collapsed"/>
+                </Grid>
+                <!--
+                <ContentPresenter x:Name="ContentPresenterPart"/>
+                -->
+            </Border>
+            <RadioButton Canvas.Top="0" Canvas.Left="0" GroupName="TabGroup" Style="{StaticResource TabHeader}" IsChecked="True" Checked="OnTabClicked">
+                <TextBlock Margin="3" Text="Raw Json" HorizontalAlignment="Stretch"/>
+            </RadioButton>
+            <RadioButton Canvas.Top="24" Canvas.Left="0" GroupName="TabGroup" Style="{StaticResource TabHeader}" IsChecked="False" Checked="OnTabClicked">
+                <TextBlock Margin="3" Text="Raw Json" HorizontalAlignment="Stretch"/>
+            </RadioButton>
+            <RadioButton Canvas.Top="48" Canvas.Left="0" GroupName="TabGroup" Style="{StaticResource TabHeader}" IsChecked="False" Checked="OnTabClicked">
+                <TextBlock Margin="3" Text="Raw Json" HorizontalAlignment="Stretch"/>
+            </RadioButton>
+        </Canvas>
+    </Grid>
+</UserControl>
