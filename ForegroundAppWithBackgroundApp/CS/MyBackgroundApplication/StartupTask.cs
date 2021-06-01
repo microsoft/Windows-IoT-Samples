@@ -13,7 +13,7 @@ namespace MyBackgroundApplication
         ThreadPoolTimer timer;
         GpioPin pin;
         GpioPinValue pinValue;
-        const int LED_PIN = 0;
+        const int LED_PIN = 5;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
