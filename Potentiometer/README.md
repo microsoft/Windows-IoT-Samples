@@ -86,7 +86,7 @@ The MCP3208 should be connected as follows:
 Finally, the LED_PIN variable of the **MainPage.xaml.cs** file of the sample code will need the following modification:
 
 ~~~
-private const int LED_PIN = 3;
+private const int LED_PIN = 0;
 ~~~
 {: .language-c#}
 
