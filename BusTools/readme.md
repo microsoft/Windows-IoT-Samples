@@ -5,7 +5,7 @@ languages:
   - cpp
 products:
   - Windows 10
-  - Windows Iot
+  - Windows IoT
   - Windows 10 IoT Enterprise
 description: "IoT Bus tools to interact with GPIO, I2C, PWM, SPI and UART."
 ---
