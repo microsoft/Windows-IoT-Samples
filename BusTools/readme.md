@@ -12,18 +12,24 @@ description: "IoT Bus tools to interact with Gpio, I2c, Pwm, Spi and UART."
 
 # Windows IoT Bus Tools
 
-This folder contains tools that let you interact with Gpio, I2c, Pwm, Spi, and UART on the command line. They will run on any edition of Windows, including Windows IoT Core and Windows 10 IoT Enterprise. The tools are:
+This folder contains tools that let you interact with GPIO, I2C, PWM, SPI, and UART on the command line. They will run on any edition of Windows, including [Windows 10 IoT Enterprise](https://docs.microsoft.com/windows/iot/iot-enterprise/getting_started) and [Windows 10 IoT Core](https://docs.microsoft.com/windows/iot-core/windows-iot-core).
 
+The tools are:
 - GpioTestTool
 - I2cTestTool
 - PwmTestTool
 - SpiTestTool
 - MinComm (UART)
 
-## Building
+## Steps to Build the Project
+1. Download [Visual Studio 2019](https://www.visualstudio.com/downloads/).
 
-1. Download [Visual Studio 2019](https://www.visualstudio.com/downloads/). Select options for C++, Windows UWP, and Windows Desktop app development. You may need to download the latest version of the [Windows SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
+1. Select packages for C++, Windows UWP, and Windows Desktop app development.
+
+1. Download the latest version of the [Windows SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
+
 1. From the start menu, run `Developer Command Prompt for VS 2019`
+
 1. Navigate to the root of this repository and run:
 
 ```powershell
@@ -34,21 +40,20 @@ Valid values of Platform are: `ARM, ARM64, x86, x64`
 
 Valid values of Configuration are: `Release, Debug`
 
-If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+### BIOS Settings for the UP Board
 
-### BIOS Settings for UPBOARD
+>[!NOTE]
+>
+> If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS GPIO configuration.
 
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
+Configure the BIOS GPIO on the Up Board:
 
-(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
- 
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+
+For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
