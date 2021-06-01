@@ -4,10 +4,10 @@ urlFragment: bustools
 languages:
   - cpp
 products:
-  - windows 10
-  - windows-iot
-  - windows-10-iot-enterprise
-description: "IoT Bus tools to interact with Gpio, I2c, Pwm, Spi and UART."
+  - Windows 10
+  - Windows Iot
+  - Windows 10 IoT Enterprise
+description: "IoT Bus tools to interact with GPIO, I2C, PWM, SPI and UART."
 ---
 
 # Windows IoT Bus Tools
