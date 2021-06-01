@@ -208,7 +208,7 @@ namespace PotentiometerSensor
         /* Important! Change this to either AdcDevice.MCP3002, AdcDevice.MCP3208 or AdcDevice.MCP3008 depending on which ADC you chose     */
         private AdcDevice ADC_DEVICE = AdcDevice.NONE;
 
-        private const int LED_PIN = 3; // Connected to PIN-11 UPBOARD
+        private const int LED_PIN = 0; // Connected to PIN-3 UPBOARD
         private GpioPin ledPin;
 
         private const string SPI_CONTROLLER_NAME = "SPI2";  /* Friendly name for Upboard SPI controller          */
