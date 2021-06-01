@@ -78,8 +78,8 @@ namespace PushButton
             });
         }
 
-        private const int LED_PIN = 6;
-        private const int BUTTON_PIN = 5;
+        private const int LED_PIN = 11;
+        private const int BUTTON_PIN = 10;
         private GpioPin ledPin;
         private GpioPin buttonPin;
         private GpioPinValue ledPinValue = GpioPinValue.High;
