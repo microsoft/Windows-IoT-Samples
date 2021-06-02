@@ -1,3 +1,14 @@
+---
+page_type: sample
+urlFragment: custom-device-accessor
+languages:
+  - cpp
+products:
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: This sample shows how to access devices from UWP applications using familiar win32 APIs like CreateFile(), ReadFile(), WriteFile(), and DeviceIoControl() with Windows 10 IoT Enterprise.
+---
 
 # Custom Device Accessor
 
@@ -166,38 +177,16 @@ Add a call to `AccessComPort()` in the MainPage constructor:
 
 ### Deploy your app  
   
-* If you're building for UPBoard, select `x64` as the architecture.   
-  
+* If you're building for [UP Board](https://up-board.org/up/specifications/), select `x64` as the architecture.  
 * Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 * Build the project, which should succeed because we made desktop APIs visible at compile time.
-
 * Set a breakpoint on the `throw` statement after the file handle validity check, as indicated in the source code above.
+* Debug the application on MinnowBoardMax. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
 
-* Debug the application on MinnowBoardMax. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set     a proper security descriptor on the device object so it can be accessed by UWP applications.
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-### Generate an app package
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
-Steps to follow :
-
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
- 
 ## Granting Access to AppContainer Processes
 
 Every device object in the system has an associated security descriptor. The security descriptor determines who has what access to a device object. Security descriptors have a binary representation which is used by the system to compute access to objects, and a human readable form called an SDDL string. Some examples of SDDL strings are:
