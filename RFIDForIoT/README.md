@@ -39,7 +39,7 @@ You'll need a few components:
 
 For reference, here is the pinout of the Upboard:
 
-![](../Resources/Upboard_pinout.png)
+![](../Resources/Upboard_Pinout.png)
 
 ## Deploy your app
 
