@@ -113,7 +113,3 @@ For example, we have [adm.windows_telemetry_x64_v1.json](adm.windows_telemetry_x
 **Note 2**: By default, we have device info and device schemas reported on start-up. This allows deployments to use their reported properties for targeting.
 
 <img src="dm-mock-portal.png"/>
-
------
-
-[Home](../../README.md)
