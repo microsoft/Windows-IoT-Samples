@@ -1,7 +1,18 @@
+---
+page_type: sample
+urlFragment: serial-uart
+languages: 
+  - csharp
+products:
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: Communicate between a PC and a Windows 10 IoT Enterprise device over a serial interface.
+---
 
 # Serial UART 
 
-We'll create a simple app that allows communication between a desktop and an IoT device over a serial interface.
+We'll create a simple app that allows communication between a PC and an IoT device over a serial interface.
 
 ### Load the project in Visual Studio
 
@@ -16,18 +27,18 @@ You have two options for wiring up your board:
 1. using the On-board UART controller
 2. using a USB-to-TTL adapter cable such as [this one](http://www.adafruit.com/products/954).
 
-#### <a name="UpBoard_UART"></a>On-board UART (UpBoard)
+#### <a name="UpBoard_UART"></a>On-board UART (UP Board)
 
-The UpBoard has an on-board UART. See the [UpBoard pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the UpBoard GPIO pins. 
+The UP Board has an on-board UART. See the [UP Board pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the UpBoard GPIO pins. 
 
 * UART uses GPIO pins 6, 8, 10  
 
 Make the following connections:
 
 * Insert the USB end of the USB-to-TTL cable into a USB port on the PC
-* Connect the GND wire of the USB-to-TTL cable to Pin 6 (GND) on the Upboard
-* Connect the RX wire (white) of the USB-to-TTL cable to Pin 8 (TX) on the  Upboard
-* Connect the TX wire (green) of the USB-to-TTL cable to Pin 10 (RX) on the Upboard
+* Connect the GND wire of the USB-to-TTL cable to Pin 6 (GND) on the UP Board
+* Connect the RX wire (white) of the USB-to-TTL cable to Pin 8 (TX) on the  UP Board
+* Connect the TX wire (green) of the USB-to-TTL cable to Pin 10 (RX) on the UP Board
 
 *Note: Leave the power wire of the USB-to-TTL cable unconnected.*
 
@@ -35,11 +46,11 @@ Make the following connections:
 
 ### <a name="USB_TTL_Adapter"></a>Using USB-to-TTL Adapter
 
-**Note: Only USB-to-TTL cables and modules with Silicon Labs chipsets are natively supported on UpBoard.**
+**Note: Only USB-to-TTL cables and modules with Silicon Labs chipsets are natively supported on UP Board.**
 
 You will need:
 
-* 1 X USB-to-TTL module (This is what we will connect to our Upboard. We used [this Silicon Labs CP2102 based USB-to-TTL module](http://www.amazon.com/gp/product/B00LODGRV8))
+* 1 X USB-to-TTL module (This is what we will connect to our UP Board. We used [this Silicon Labs CP2102 based USB-to-TTL module](http://www.amazon.com/gp/product/B00LODGRV8))
 
 * 1 X USB-to-TTL cable (This will connect to our PC. We used [this one](http://www.adafruit.com/products/954))
 
@@ -47,7 +58,7 @@ Make the following connections:
 
 * Insert the USB end of the USB-to-TTL **cable** into a USB port on the PC
 
-* Insert the USB end of the USB-to-TTL **module** into a USB port on the Upboard 
+* Insert the USB end of the USB-to-TTL **module** into a USB port on the UP Board 
 
 * Connect the GND pin of the USB-to-TTL **module** to the GND wire of the USB-to-TTL cable 
 
@@ -57,13 +68,13 @@ Make the following connections:
 
 Leave the power pin of the USB-to-TTL cable unconnected. It is not needed.
 
-Below is an image of our USB-to-TTL module connected to a USB port in our Upboard. The GND, TX, and RX pins of the module are connected to the GND, RX, TX wires of the USB-to-TTL cable that is connected to our PC.
+Below is an image of our USB-to-TTL module connected to a USB port in our UP Board. The GND, TX, and RX pins of the module are connected to the GND, RX, TX wires of the USB-to-TTL cable that is connected to our PC.
 
 [CP 2102 Connections](../../Resources/CP2102_Connections_500.png)
 
 ### Deploy and Launch the SerialSample App
 
-Now that our UpBoard is connected, let's setup and deploy the app.
+Now that our UP Board is connected, let's setup and deploy the app.
 
 1. Navigate to the SerialSample source project. 
 
@@ -75,54 +86,33 @@ Now that our UpBoard is connected, let's setup and deploy the app.
 
 5. Open the PC copy of the SerialSample app in VS Instance B.
 
-6. In VS Instance A, configure the app for deployment to your UpBoard.
+6. In VS Instance A, configure the app for deployment to your UP Board.
 	
-	*For UpBoard, set the target architecture to 'x64'
+	*For UP Board, set the target architecture to 'x64'
 
 7. In VS Instance B, set the target architecture to 'x64'. This will be the instance of the sample we run on the PC.
 
-### Generate an app package
+8. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+9. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+10. If you are using an UP Board, you have to setup the BIOS UART configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+    1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+
+  	1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+  	1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+
+  	1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+
+  	1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
   
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
- 
-  If you are using UPBOARD, you have to setup the BIOS UART configuration.
-
-### BIOS Settings for UPBOARD
-
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and make "LPSS HSUART #1 Support" as "Enabled".
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
-
-Click the Start button to search for the app by name, and then launch it.
+11. Click the Start button to search for the app by name, and then launch it.
 
 ### Using the SerialSample App 
 
-When the SerialSample app is launched on the PC, a window will open with the user interface similar to the screenshot shown below. When launched on the UpBoard, the SerialSample will display the user interface shown below on the entire screen.
+When the SerialSample app is launched on the PC, a window will open with the user interface similar to the screenshot shown below. When launched on the UP Board, the SerialSample will display the user interface shown below on the entire screen.
 
 [Serial Sample on PC](../../Resources/SerialSampleRunningPC.png)
 
@@ -130,13 +120,13 @@ When the SerialSample app is launched on the PC, a window will open with the use
 
 When the SerialSample app launches, it looks for all the serial devices that are connected to the device. The device ids of all the serial devices found connected to the device will be listed in the top ListBox of the SerialSample app window.
 
-Select and connect to a serial device on the PC and UpBoard by doing the following:
+Select and connect to a serial device on the PC and UP Board by doing the following:
 
 1. Select the desired serial device by clicking on the device ID string in the top ListBox next to "Select Device:". 
 
 	* On the PC, the device ID for the USB-to-TTL cable connected in this example begins with '\\?\USB#VID_067B'.
 	
-	* On the UpBoard, if using the USB-to-TTL adapter module, select the device ID that begins with **\\?\USB#**. For the USB-to-TTL module used in this example, the device ID should begin with '\\?\USB#VID_10C4'.
+	* On the UP Board, if using the USB-to-TTL adapter module, select the device ID that begins with **\\?\USB#**. For the USB-to-TTL module used in this example, the device ID should begin with '\\?\USB#VID_10C4'.
 
 2. Click 'Connect'.	
 
@@ -146,7 +136,7 @@ The app will attempt to connect and configure the selected serial device. When t
 
 #### Sending and Receiving Data
 
-After connecting the desired serial device in the SerialSample apps running on both the PC and the UpBoard we can begin sending and receiving data over the serial connection between the two devices.
+After connecting the desired serial device in the SerialSample apps running on both the PC and the UP Board we can begin sending and receiving data over the serial connection between the two devices.
 
 To send data from one device to the other connected device do the following:
 
@@ -164,7 +154,7 @@ The device that is receiving the message will automatically display the text in 
 
 * When connecting to the USB-to-TTL device for the first time from the IoT Device, you may see the error "Object was not instantiated" when you click on `Connect`. If you see this, un-plug the device, plug it back in and refresh the connection or redeploy the app.
 * If you have more than one Silicon Labs USB-to-TTL devices connected to your IoT device, only the device that was first connected will be recognized. In order to run this sample, connect only one device
-* When connecting USB-to-TTL device to UpBoard, use a powered USB hub or the bottom USB port
+* When connecting USB-to-TTL device to UP Board, use a powered USB hub or the bottom USB port
 
 
 ### Let's look at the code
@@ -173,7 +163,7 @@ The code for this sample uses the [Windows.Devices.SerialCommunication](https://
 
 The SerialDevice class will be used to enumerate, connect, read, and write to the serial devices connected to the device. 
 
-**NOTE:** The SerialDevice class can be used only for supported USB-to-TTL devices (on PC and UpBoard).
+**NOTE:** The SerialDevice class can be used only for supported USB-to-TTL devices (on PC and UP Board).
 
 For accessing the serial port, you must add the **DeviceCapability** to the **Package.appxmanifest** file in your project. 
 
