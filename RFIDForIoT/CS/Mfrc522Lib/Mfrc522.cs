@@ -21,9 +21,9 @@ namespace Mfrc522Lib
         public GpioPin _resetPowerDown { get; private set; }
         public int pincount;
 
-        private const string SPI_CONTROLLER_NAME = "SPI0";
+        private const string SPI_CONTROLLER_NAME = "SPI2";
         private const Int32 SPI_CHIP_SELECT_LINE = 0;
-        private const Int32 RESET_PIN = 25;
+        private const Int32 RESET_PIN = 26;
 
         public async Task InitIO()
         {
