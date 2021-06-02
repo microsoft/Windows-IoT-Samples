@@ -10,7 +10,7 @@ products:
 description: "This sample shows how to read the RFID Tag from RFID Scanner in your Windows 10 IoT Enterprise device."
 ---
 
-# RFID scanner with Windows 10 IoTEnterprise
+# RFID scanner with Windows 10 IoT Enterprise
 
 In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans.
 Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise, so this sample cannot run on your desktop.
@@ -74,12 +74,17 @@ Steps to follow :
 
 Steps to follow:
  
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+(1)  After power on the Upboard, Press Del or F7 to enter the BIOS setting.
  
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
+(2)  Under the "Boot -> OS Image ID" Tab:
+     Select "Windows 10 IoT Core".
  
-(3) Under the "Advance" Tab: Select "Hat Configuration" and make "LPSS SPISupport" as "Enabled".
+(3)  Under the "Advance" Tab:
+     Select "Hat Configuration", make "LPSS SPISupport" as "Enabled" then Click on "GPIO Configuration in Pin Order".
+
+(4)  Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
+
+    In this sample make PIN 32 as "OUTPUT" and initial value as "LOW".
 
 If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
@@ -91,9 +96,10 @@ Congratulations! You just read an ID off of a RFID card.
 
 ## Let’s look at the code
 
-	This sample app relies on MFRC522 library written by a github user Michiel Lowijs. The original library can be found here [MFRC522](https://github.com/mlowijs/mfrc522-netmf).
-	We have adapted this library to Universal Windows platform. The adapted library can be found in the project directory by the name Mfrc522Lib.
-	Along with the Mfrc522Lib, the samples directory also contains a PeizoBuzzerLib if you want to use the Piezo Buzzer with the sample.
+This sample app relies on MFRC522 library written by a github user Michiel Lowijs.
+The original library can be found here [MFRC522](https://github.com/mlowijs/mfrc522-netmf).
+We have adapted this library to Universal Windows platform. The adapted library can be found in the project directory by the name Mfrc522Lib.
+Along with the Mfrc522Lib, the samples directory also contains a PeizoBuzzerLib if you want to use the Piezo Buzzer with the sample.
 
 	
 ## Additional resources
