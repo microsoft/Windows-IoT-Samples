@@ -32,12 +32,14 @@ You'll need a few components:
 3. Connect RFID MOSI to Pin 19
 4. Connect RFID MISO to Pin 21
 5. Connect RFID GND to Pin 6
-6. Connect RFID RST to Pin 22
+6. Connect RFID RST to Pin 38
 7. Connect RFID 3.3V to Pin 1 (For some higher frequency cards this might need 5V)
+8. Connect Piezo Buzzer '+' to Pin 32
+9. Connect Piezzo Buzzer '-' to Pin 6
 
 For reference, here is the pinout of the Upboard:
 
-![](../Resources/Upboard_Pinout.png)
+![](../Resources/Upboard_pinout.png)
 
 ## Deploy your app
 
