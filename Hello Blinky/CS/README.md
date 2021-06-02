@@ -17,14 +17,14 @@ We will create a simple LED blinking app and connect a LED to your Windows 10 Io
 
 > [!NOTE]
 >
-> GPIO APIs are not available on Desktop - this sample will be based on the Up Board. 
+> GPIO APIs are not available on Desktop - this sample will be based on the UP Board. 
 
 ## Step 1: Load the project in Visual Studio 2019
 
 * * *
 
 1. Open the application in Visual Studio 2019
-2. Set the architecture in the toolbar dropdown. If you’re building for Up Board, select `x64`.
+2. Set the architecture in the toolbar dropdown. If you’re building for the UP Board, select `x64`.
 
 ## Step 2: Connect the LED to your Windows IoT device
 
@@ -34,20 +34,20 @@ You’ll need a few components:
 
 *   a LED (any color you like)
 
-*   a 220 Ω resistor for the Up Board
+*   a 220 Ω resistor for the UP Board
 
 *   a breadboard and a couple of connector wires
 
 ![Electrical Components](../../Resources/components.png)
 
-### For Up Board
+### For UP Board
 
-1.  Connect the shorter leg of the LED to GPIO 5 (pin 15 on the expansion header) on the Up Board.
+1.  Connect the shorter leg of the LED to GPIO 5 (pin 15 on the expansion header) on the UP Board.
 2.  Connect the longer leg of the LED to the resistor.
-3.  Connect the other end of the resistor to one of the 3.3V pins on the Up Board.
+3.  Connect the other end of the resistor to one of the 3.3V pins on the UP Board.
 4.  Note that the polarity of the LED is important. (This configuration is commonly known as Active Low)
 
-And here is the pinout of the Up Board:
+And here is the pinout of the UP Board:
 
 ![](../../Resources/UpBoard_Pinout.png)
 
@@ -61,7 +61,7 @@ Here is an example of what your breadboard might look like with the circuit asse
 
 1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 2. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
-3. If you are using an Up Board, you have to setup the BIOS UART configuration.
+3. If you are using an UP Board, you have to setup the BIOS UART configuration.
 	1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
   	1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
