@@ -44,9 +44,9 @@ Valid values of Configuration are: `Release, Debug`
 
 >[!NOTE]
 >
-> If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS GPIO configuration.
+> If you are using the [UP Board](https://up-board.org/up/specifications/), you will have to set up the BIOS GPIO configuration.
 
-Configure the BIOS GPIO on the Up Board:
+Configure the BIOS GPIO on the UP Board:
 
 1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
