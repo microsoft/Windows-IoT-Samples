@@ -11,7 +11,7 @@
     }
   },
   "targetCondition":  "properties.desired.deviceInfo.processorArchitecture='0'",
-  "successCondition": "properties.desired.deviceInfo.processorArchitecture='0'",
+  "successCondition": "properties.reported.windowsTelemetry.__meta.deploymentStatus='succeeded' properties.desired.deviceInfo.processorArchitecture='0'",
   "failureCondition": "properties.desired.windowsTelemetry.__meta.deploymentStatus='failed' and properties.desired.deviceInfo.processorArchitecture='0'",
   "pendingCondition": "properties.desired.windowsTelemetry.__meta.deploymentStatus='pending' and properties.desired.deviceInfo.processorArchitecture='0'"
 }
