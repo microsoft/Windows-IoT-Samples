@@ -9,7 +9,7 @@ namespace PiezoBuzzerLib
 {
     public class Buzzer
     {
-        public const int PIEZO_PIN = 24;
+        public const int PIEZO_PIN = 24; // CONNECT TO 32th PIN OF upboard
         public GpioPin pin;
 
         public GpioPin InitPiezoGPIO()
