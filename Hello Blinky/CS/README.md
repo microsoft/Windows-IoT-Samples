@@ -61,7 +61,7 @@ Here is an example of what your breadboard might look like with the circuit asse
 
 1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 2. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
-3. If you are using UPBOARD, you have to setup the BIOS UART configuration.
+3. If you are using an Up Board, you have to setup the BIOS UART configuration.
 	1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
   	1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
