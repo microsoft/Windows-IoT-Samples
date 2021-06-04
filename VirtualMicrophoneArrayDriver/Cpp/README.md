@@ -15,7 +15,7 @@ We will now be walking you through the process of creating and installing a devi
 The name of the driver in this sample is `virtualaudiomicarray`.  
 
 ## Source Code And Binaries
-You can find the source code for this sample by downloading a zip of all of our samples, Then navigated to the `samples\VirtualMicrophoneArrayDriver`.  Make a copy of the folder on your disk and open the solution file from Visual Studio.
+You can find the source code for this sample by downloading a zip of all of our sample folder, and navigating to the `samples\VirtualMicrophoneArrayDriver`.  Make a copy of the folder on your disk and open the solution file from Visual Studio.
 
 Originally derived from the [SYSVAD driver sample](https://github.com/Microsoft/Windows-driver-samples/tree/master/audio/sysvad), this sample illustrates how to construct a virtual microphone array at runtime using monoaural audio devices present on the system.
 
