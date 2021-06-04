@@ -7,7 +7,7 @@ products:
   - windows
   - windows-iot
   - windows-10-iot-Enterprise
-description: An app service to blink an LED and a client app to call it with Windows 10 IoT Enterprise.
+description: An app for creating and installing a device driver for virtualaudiomicarray.
 ---
 
 # Virtual Audio Microphone Array
