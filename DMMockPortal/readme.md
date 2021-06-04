@@ -2,7 +2,7 @@
 page_type: sample
 urlFragment: DMMockPortal
 languages:
-  - cs
+  - csharp
 products:
   - windows
   - windows-iot
