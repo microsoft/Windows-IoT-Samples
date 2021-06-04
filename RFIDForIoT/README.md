@@ -2,7 +2,7 @@
 page_type: sample
 urlFragment: RFIDForIoT
 languages:
-  - cs
+  - csharp
 products:
   - windows
   - windows-iot
