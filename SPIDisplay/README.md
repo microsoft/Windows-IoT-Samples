@@ -43,7 +43,7 @@ The OLED display has 8 IO pins, connect them as follows:
 1. **DATA:**  Connect to MOSI on the Upboard (Pin 19). This is the SPI master data out line.
 2. **CLK:**     Connect to SCLK on the Upboard (Pin 23). This is the SPI clock line.
 3. **SA0/DC:**   Connect to GPIO 22 on the Upboard (Pin 26). This is the Data/Command line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
-4. **RST:** Connect to GPIO 23 on the Upboard (Pin 16). This is the hardware Reset line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
+4. **RST:** Connect to GPIO 23 on the Upboard (Pin 28). This is the hardware Reset line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
 5. **CS:** Connect to CE0 on the Upboard (Pin 24). This is the SPI chip select line.
 6. **3V3:**  Leave unconnected. The display has its own on-board power regulator which provides it with 3.3V
 7. **VIN:**  Connect 5V the Upboard (Pin 2).
