@@ -55,7 +55,7 @@ Here are the connections shown on a breadboard:
 
 Here are the schematics:
 
-![SPI schematics](../Resources/schematics_upboard.png)
+![SPI schematics](../Resources/schematics_upboard1.png)
 
 ### Deploy and run the app
 
