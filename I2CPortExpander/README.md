@@ -59,7 +59,7 @@ Place the MCP23008 Port Expander on your breadboard such that it straddles the c
 
 The pinout of the MCP23008 is shown below and can be found in the [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/21919e.pdf).
 
-![MCP23008 Pinout](../Resources/MCP23008_Pinout.PNG)
+![MCP23008 Pinout](../Resources/MCP23008_Pinout.png)
 
 
 Make the following connections on the MCP23008 Port Expander:
