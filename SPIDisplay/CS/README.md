@@ -1,15 +1,3 @@
----
-page_type: sample
-urlFragment: spi-display
-languages:
-  - csharp
-products:
-  - windows
-  - windows-iot
-  - windows-10-iot- Enterprise
-description: Write lines of text to an SPI LED display.
----
-
 # SPI display
 
 In this sample, we interface a SPI based [OLED display](http://www.adafruit.com/product/938) to your Upboard. We then create an app that lets us write lines of text to the display. Step-by-step instructions are provided, so no background knowledge of SPI is needed. However, if you want to learn more, SparkFun provides a great [tutorial on SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi).
@@ -31,7 +19,7 @@ First, we need to wire up the display to your device. You'll need a few componen
 
 Visit the **Upboard** sections below depending on which device you have:
 
-![Electrical Components](../../Resources/components.png)
+![Electrical Components](../Resources/components.png)
 
 #### Upboard
 For the Upboard, we need to hook up power, ground, SPI, and a few GPIO pins to the OLED display.
@@ -43,7 +31,7 @@ The OLED display has 8 IO pins, connect them as follows:
 1. **DATA:**  Connect to MOSI on the Upboard (Pin 19). This is the SPI master data out line.
 2. **CLK:**     Connect to SCLK on the Upboard (Pin 23). This is the SPI clock line.
 3. **SA0/DC:**   Connect to GPIO 22 on the Upboard (Pin 26). This is the Data/Command line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
-4. **RST:** Connect to GPIO 23 on the Upboard (Pin 16). This is the hardware Reset line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
+4. **RST:** Connect to GPIO 0 on the Upboard (Pin 3). This is the hardware Reset line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
 5. **CS:** Connect to CE0 on the Upboard (Pin 24). This is the SPI chip select line.
 6. **3V3:**  Leave unconnected. The display has its own on-board power regulator which provides it with 3.3V
 7. **VIN:**  Connect 5V the Upboard (Pin 2).
@@ -51,11 +39,11 @@ The OLED display has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../../Resources/breadboard_assembled_upboard.png)
+![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
 
 Here are the schematics:
 
-![SPI schematics](../../Resources/schematics_upboard.png)
+![SPI schematics](../Resources/schematics_upboard1.png)
 
 ### Deploy and run the app
 
@@ -76,7 +64,7 @@ public sealed partial class MainPage : Page
         //private const string SPI_CONTROLLER_NAME = "SPI2";  /* For Upboard, use SPI2                             */
         //private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Upboard        */
         //private const Int32 DATA_COMMAND_PIN = 22;          /* We use GPIO 22 since it's conveniently near the SPI pins */
-        //private const Int32 RESET_PIN = 23;                 /* We use GPIO 23 since it's conveniently near the SPI pins */
+        //private const Int32 RESET_PIN = 0;                 /* We use GPIO 0 */
 
         /* Uncomment for DragonBoard 410c */
         //private const string SPI_CONTROLLER_NAME = "SPI0";  /* For DragonBoard, use SPI0                                */
@@ -127,7 +115,7 @@ If you need guidance click Link: [here](https://www.annabooks.com/Articles/Artic
  
 You can now type into the app and have the text mirrored on the attached OLED display.
 
-![SPI running](../../Resources/spidisplay_screenshot.png)
+![SPI running](../Resources/spidisplay_screenshot.png)
 
 Congratulations! You've connected a SPI graphics display.
 
