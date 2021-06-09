@@ -33,3 +33,21 @@ msbuild /p:Platform=x64 /p:Configuration=Release
 Valid values of Platform are: `ARM, ARM64, x86, x64`
 
 Valid values of Configuration are: `Release, Debug`
+
+### BIOS Settings for the UP Board
+
+>[!NOTE]
+>
+> If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS I2C configuration.
+
+Configure the BIOS GPIO on the Up Board:
+
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+
+For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
