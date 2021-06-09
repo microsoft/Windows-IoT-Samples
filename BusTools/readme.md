@@ -40,9 +40,6 @@ Valid values of Configuration are: `Release, Debug`
 
 If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS I2C configuration.
 
-
-### BIOS Settings for UPBOARD
-
 Steps to follow:
  
 (1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
