@@ -37,7 +37,7 @@ namespace SPIDisplay
         private const string SPI_CONTROLLER_NAME = "SPI2";  /* For Upboard, use SPI2                             */
         private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Rpi2        */
         private const Int32 DATA_COMMAND_PIN = 22;          /* We use GPIO 22 since it's conveniently near the SPI pins */
-        private const Int32 RESET_PIN = 23;                 /* We use GPIO 23 since it's conveniently near the SPI pins */
+        private const Int32 RESET_PIN = 0;                 /* We use GPIO 0  */
 
         /* Uncomment for DragonBoard 410c */
         //private const string SPI_CONTROLLER_NAME = "SPI0";  /* For DragonBoard, use SPI0                                */
