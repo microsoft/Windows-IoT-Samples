@@ -1,18 +1,13 @@
 # I2C port expander 
 
-![I2C Port Expander Image](../../../Resources/images/I2CPortExpander/PortExpanderProjectPicture_480.png)
-
-In this sample, we'll connect an I2C port expander to your Raspberry Pi 2 or 3 and create a simple app that uses the port expander to read the status of a tactile switch and control an LED. No background knowledge of I2C or port expanders is needed.
+In this sample, we'll connect an I2C port expander to your Upboard and create a simple app that uses the port expander to read the status of a tactile switch and control an LED. No background knowledge of I2C or port expanders is needed.
 If you want to know more about I2C, SparkFun provides a great [tutorial on I2C](https://learn.sparkfun.com/tutorials/i2c).
-
-This is a headed sample, so please ensure that your device is in headed
-mode by running this command: `setbootoption.exe headed` (changing the headed/headless state will require a reboot).
 
 ### Connect the I2C Port Expander to your device
 
 You will need the following components:
 
-* 1 Raspberry Pi 2 or 3
+* 1 Upboard
 
 * <a name="I2C_PortExpander"></a>1 [MCP23008 8-bit I/O Port Expander](http://www.digikey.com/product-detail/en/MCP23008-E%2FP/MCP23008-E%2FP-ND/735951) in PDIP package
 
@@ -30,47 +25,36 @@ You will need the following components:
 
 Let's start by wiring up the components on the breadboard as shown in the diagram below.
 
-**Note: Make sure to power off the RPi2 or RPi3 when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
+**Note: Make sure to power off the Upboard when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
-![Breadboard connections](../../../Resources/images/I2CPortExpander/I2cPortExpanderDrawing_bb_750.png)
-
-*Image made with [Fritzing](http://fritzing.org/)*
+![Breadboard connections](../../Resources/I2cPortExpanderDrawing_bb_750.png)
 
 
 Here is the schematic:
 
-![Circuit Schematic](../../../Resources/images/I2CPortExpander/I2cPortExpanderDrawing_schem.png)
-
-*Image made with [Fritzing](http://fritzing.org/)*
+![Circuit Schematic](../../Resources/I2cPortExpanderDrawing_schem.png)
 
 
 #### Connecting the MCP23008 Port Expander
 
 Place the MCP23008 Port Expander on your breadboard such that it straddles the center gap of the breadboard.
 
-![Breadboard IC Placement](../../../Resources/images/BreadBoardICPlacement.png)
-
-*Image made with [Fritzing](http://fritzing.org/)*
-
+![Breadboard IC Placement](../../Resources/BreadBoardICPlacement.png)
 
  Locate pin 1 of the port expander by finding the notch on the IC. If you orient the IC so that the end with the notch is facing left, pin 1 will be the first pin in the lower left below the notch.
 
-![MCP23008 PinLocations](../../../Resources/images/I2CPortExpander/MCP23008_PortExpander_bb.png)
-
-*Image made with [Fritzing](http://fritzing.org/)*
+![MCP23008 PinLocations](../../Resources/MCP23008_PortExpander_bb.png)
 
 The pinout of the MCP23008 is shown below and can be found in the [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/21919e.pdf).
 
-![MCP23008 Pinout](../../../Resources/images/I2CPortExpander/MCP23008_Pinout.PNG)
-
-*Image made with [Fritzing](http://fritzing.org/)*
+![MCP23008 Pinout](../../Resources/MCP23008_Pinout.png)
 
 
 Make the following connections on the MCP23008 Port Expander:
 
-* Pin 1  **SCL**: Connect to **I2C1 SCL** (Pin 5) on the RPi2 or RPi3 (pin mapping is below)
+* Pin 1  **SCL**: Connect to **I2C1 SCL** (Pin 28) on the Upboard (pin mapping is below)
 
-* Pin 2  **SDA**: Connect to **I2C1 SDA** (Pin 3) on the RPi2 or RPi3
+* Pin 2  **SDA**: Connect to **I2C1 SDA** (Pin 27) on the Upboard
 
 * Pin 3  **A2**:  Connect to the ground rail on the side of the breadboard (blue stripe)
 
@@ -111,29 +95,70 @@ Leave the remaining pins on the MCP23008 unconnected.
 * Connect the other pin of the tactile switch to the ground rail on the side of the breadboard (blue stripe)
 
 
-#### Connecting the Raspberry Pi 2 or 3
+#### Connecting the Upboard
 
-We need to hook up power, ground, and the I2C lines from on the Raspberry Pi 2 or 3 to the MCP23008 Port Expander and the breadboard.
+We need to hook up power, ground, and the I2C lines from on the Upboard to the MCP23008 Port Expander and the breadboard.
 
-![Raspberry Pi 2 or 3 pinout](../../../Resources/images/PinMappings/RP2_Pinout.png)
+![Upboard pinout](../../Resources/Upboard_Pinout.png)
 
 * Pin 1 **3.3V PWR** Connect to the voltage supply rail on the side of the breadboard (red stripe)
 
-* Pin 3 **I2C1 SDA** If not already connected, connect to Pin 2 of the MCP23008 Port Expander
+* Pin 27 **I2C0 SDA** If not already connected, connect to Pin 2 of the MCP23008 Port Expander
 
-* Pin 5 **I2C1 SCL** If not already connected, connect to pin 1 of the MCP23008 Port Expander
+* Pin 28 **I2C0 SCL** If not already connected, connect to pin 1 of the MCP23008 Port Expander
 
 * Pin 6 **GND** Connect to the ground rail on the side of the breadboard (blue stripe)
 
-The I2C bus requires pull-up resistors on the SDA and SCL lines. However, the Raspberry Pi 2 and 3 SDA and SCL pins we are using in this sample already have pull-up resistors connected on the RPi2 or RPi3, so we don't need to add any additional external pull-ups.
- See the [Raspberry Pi 2 or 3 pin mapping page]({{site.baseurl}}/{{page.lang}}/Samples/PinMappingsRPi2) for more details on the RPi2 and RPi3 IO pins.
-
+The I2C bus requires pull-up resistors on the SDA and SCL lines. However, the Upboard SDA and SCL pins we are using in this sample already have pull-up resistors connected on the Upboard, so we don't need to add any additional external pull-ups.
+ 
 ### Create the sample app
 
-When everything is set up, power your device back on. You can find the source code for this sample by downloading a zip of all of our samples [here](https://github.com/ms-iot/samples/archive/develop.zip) and navigating to the `samples-develop\I2CPortExpander`, 
+When everything is set up, power your device back on. You can find the source code for this sample by downloading a zip of all of our samples, navigate to the `samples-develop\I2CPortExpander`, 
 but as an exercise, this tutorial will take you through the complete steps to create this app from scratch. 
-Open up Visual Studio and create a new C# Windows Universal Blank App. Click **File -> New -> Project** then select **Templates -> Visual C# -> Windows -> Universal -> Blank App (Universal Windows)**. 
+Open up Visual Studio 2019. 
 For this sample, we named ours **I2cPortExpanderLedSample**.
+
+## Deploy the sample
+
+* Choose `Release` and `x64` configuration.
+* Compile the Solution file
+
+### Generate an app package
+
+Steps to follow :
+
+ * In Solution Explorer, open the solution for your application project.
+ * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ * Select Sideloading in the first page of the wizard and then click Next.
+ * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ * Open the *_Test folder.
+ * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+ 
+
+ If you are using UPBOARD, you have to setup the BIOS SPI configuration.
+
+### BIOS Settings for UPBOARD
+
+Steps to follow:
+ 
+(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+ 
+(2)	Under the "Boot -> OS Image ID" Tab:
+    Select "Windows 10 IoT Core".
+ 
+(3) Under the "Advance" Tab: Select "Hat Configuration" and make "I2C0/GPIO SELECTION" as "I2C0".
+
+If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
 The code in this sample does several things:
 
@@ -143,7 +168,7 @@ The code in this sample does several things:
 
 3. Communicates over I2C with the port expander to check the status of the tactile switch (is it pressed or not) at regular intervals
 
-4. Displays the LED on/off status and the tactile switch pressed/released status to the display attached to the Raspberry Pi 2 or 3
+4. Displays the LED on/off status and the tactile switch pressed/released status to the display attached to the Upboard
 
 5. Stops flashing the LED when the tactile switch is pressed and restarts flashing the LED when the tactile switch is released
 
@@ -151,7 +176,7 @@ The code in this sample does several things:
 
 #### Add content to MainPage.xaml
 
-Let's add some content to the MainPage which will be displayed on a screen connected to the Raspberry Pi 2 or 3. We want to add a Circle, a couple TextBoxes and a Slider. The circle will emulate the on/off status of the LED. The Slider allows the user to control the frequency that the LED flashes. The Textboxes will provide info about the slider and report the tactile button status.
+Let's add some content to the MainPage which will be displayed on a screen connected to the Upboard. We want to add a Circle, a couple TextBoxes and a Slider. The circle will emulate the on/off status of the LED. The Slider allows the user to control the frequency that the LED flashes. The Textboxes will provide info about the slider and report the tactile button status.
 
 * From Solution Explorer, select the MainPage.xaml file.
 
@@ -195,7 +220,7 @@ Variables and Constants
 
 ```csharp
 // use these constants for controlling how the I2C bus is setup
-private const string I2C_CONTROLLER_NAME = "I2C1"; //specific to RPi2 or RPi3
+private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to Upboard
 private const byte PORT_EXPANDER_I2C_ADDRESS = 0x20; // 7-bit I2C address of the port expander
 private const byte PORT_EXPANDER_IODIR_REGISTER_ADDRESS = 0x00; // IODIR register controls the direction of the GPIO on the port expander
 private const byte PORT_EXPANDER_GPIO_REGISTER_ADDRESS = 0x09; // GPIO register is used to read the pins input
@@ -223,7 +248,7 @@ private SolidColorBrush grayBrush = new SolidColorBrush(Windows.UI.Colors.LightG
 
 Here are what some of these constants and variables represent
 
- * `I2C_CONTROLLER_NAME` holds the string constant `I2C1` which is the name of the I2C controller on the Raspberry Pi 2 or 3.
+ * `I2C_CONTROLLER_NAME` holds the string constant `I2C0` which is the name of the I2C controller on the Upboard.
 
  * `PORT_EXPANDER_I2C_ADDRESS` is the I2C address of the port expander we are using. \*
 
@@ -241,7 +266,7 @@ The method `InitializeSystem()`
 
 `InitializeSystem()` does the following:
 
- * Sets up the I2C communications on the Raspberry Pi 2 or 3
+ * Sets up the I2C communications on the Upboard
 
  * Configures the port expander to be able to turn the LED on and off and to get the tactile switch status
 
@@ -249,7 +274,7 @@ The method `InitializeSystem()`
 
  * Sets up two timers - One for controlling the LED and another for checking the tactile switch status
 
-When complete, the variable `i2cPortExpander` will be our handle to the Raspberry Pi 2 or 3 I2C bus.
+When complete, the variable `i2cPortExpander` will be our handle to the Upboard I2C bus.
 
 ```csharp
 private async void InitializeSystem()
@@ -331,7 +356,7 @@ private async void InitializeSystem()
 
 The method `FlipLED()`
 
-`FlipLED()` is called by the ledTimer whenever the LED timer has reached the end of its interval length. Initially, this is 500 milliseconds but can be changed by a user via the slider displayed on a monitor connected to the RPi2 or RPi3.
+`FlipLED()` is called by the ledTimer whenever the LED timer has reached the end of its interval length. Initially, this is 500 milliseconds but can be changed by a user via the slider displayed on a monitor connected to the Upboard.
 
  This method determines if the LED is currently on or off.
 
@@ -393,17 +418,13 @@ private void CheckButtonStatus()
 
 ### Build, Deploy and Run the App
 
-Let's build, deploy and run the app on our Raspberry Pi 2 or 3.
+Let's build, deploy and run the app on our Upboard.
 
 * If not already open, open in Visual Studio the app you created with the code above.
 
-* Follow the instructions to [setup remote debugging and deploy the app]({{site.baseurl}}/{{page.lang}}/Docs/AppDeployment.htm#csharp).
+After several moments, you will see the screen attached to the Upboard change to show a circle, some text, and a slider. The LED on the breadboard will begin to turn on and off.
 
-After several moments, you will see the screen attached to the RPi2 or RPi3 change to show a circle, some text, and a slider. The LED on the breadboard will begin to turn on and off.
-
-![I2C Port Expander Screenshot](../../../Resources/images/I2CPortExpander/I2CPortExpanderScreenShot_300p.png)
-
-Congratulations! You've successfully connected an I2C port expander to your Raspberry Pi 2 or 3.
+Congratulations! You've successfully connected an I2C port expander to your Upboard.
 
 ### The complete MainPage.xaml.cs code
 
@@ -436,7 +457,7 @@ namespace I2cPortExpanderLedSample
     public sealed partial class MainPage : Page
     {
         // use these constants for controlling how the I2C bus is setup
-        private const string I2C_CONTROLLER_NAME = "I2C1"; //specific to RPi2 or RPi3
+        private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to Upboard
         private const byte PORT_EXPANDER_I2C_ADDRESS = 0x20; // 7-bit I2C address of the port expander
         private const byte PORT_EXPANDER_IODIR_REGISTER_ADDRESS = 0x00; // IODIR register controls the direction of the GPIO on the port expander
         private const byte PORT_EXPANDER_GPIO_REGISTER_ADDRESS = 0x09; // GPIO register is used to read the pins input
