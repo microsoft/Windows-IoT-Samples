@@ -1,7 +1,7 @@
 # Build the Speech Translator Project
 
 ### Component Lists
-- An IoT Device (e.g. 2 Raspberry Pi 2 or 3 boards)
+- An IoT Device (e.g. Upboard)
 - A Headset [e.g. the Microsoft LifeChat-3000 Headset](http://www.microsoft.com/hardware/en-us/p/lifechat-lx-3000/JUG-00013) 
 - A Mouse
 - A router connected to the Internet 
@@ -13,7 +13,7 @@
 1. Install the Windows ADK for Windows 10, version from [here](https://developer.microsoft.com/en-us/windows/hardware/windows-assessment-deployment-kit)
     - Ensure that "Imaging And Configuration Designer" (ICD) is selected.
     - Install to the default location.    
-2. Install the Windows IoT Core ADK Add-Ons from [here](https://developer.microsoft.com/en-us/windows/hardware/windows-assessment-deployment-kit)
+2. Install the Windows IoT Enterprise ADK Add-Ons from [here](https://developer.microsoft.com/en-us/windows/hardware/windows-assessment-deployment-kit)
     - Install to the default location.
   
 ### Setup your IoT Device
@@ -51,7 +51,7 @@
 10. Wait for your device to reboot
 
 ### Setup Azure with Cognitive Services
-1. Follow [these instructions](http://docs.microsofttranslator.com/text-translate.html) to configure your Azure account with the Cognitive Services APIs.
+1. Configure [these Service](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/reference/v3-0-translate) to your Azure account with the Cognitive Services APIs.
 2. After creating your account and subscribing to the Cogntive Services APIs make note of one of the subscription keys for your account.
     From Azure Web Portal Select:
     - "All Resources" (may appear as a 3x3 grid icon).
@@ -60,16 +60,36 @@
     - Make note of *either* Key 1 or Key 2, you will need to add this key to the sample source before rebuilding.
     
 ### Setup your sample
-1. Download the sample from [here](https://github.com/Microsoft/Windows-iotcore-samples/archive/master.zip) to your local PC.
+1. Download the sample from Windows IoT Enterprise to your local PC.
 2. Open the solution file in visual studio.
 3. Open the constantParam.cs file.
 4. Replace the subscriptionKey with either Key 1 or Key 2 [from instructions above](#Setup-Azure-with-Cognitive-Services).
 5. Rebuild the solution.
-6. Deploy and run on your device.
-7. While wearing your headset, Press "Start Talk".
-8. Say something in English, the "Message Recognized" box should contain the spoken English phrase.
-9. Press "Stop Talk".
-10. After a moment the Translated Message should appear in the dialog box, and you should hear the spoken phrase through your headset.
-11. The process can be reversed, by changing the "Recognizer Language" to your installed language (e.g. Spanish) and speaking a phrase in that language.
 
-	
+### Generate an app package
+
+Steps to follow :
+
+ * In Solution Explorer, open the solution for your application project.
+ * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
+ * Select Sideloading in the first page of the wizard and then click Next.
+ * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
+ * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+  
+### Install your app package using an install script
+
+Steps to follow :
+ * Open the *_Test folder.
+ * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
+ * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+
+ If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
+  
+ Click the Start button to search for the app by name, and then launch it.
+
+* Deploy and run on your device.
+* While wearing your headset, Press "Start Talk".
+* Say something in English, the "Message Recognized" box should contain the spoken English phrase.
+* Press "Stop Talk".
