@@ -128,7 +128,7 @@ The I2C bus requires pull-up resistors on the SDA and SCL lines. However, the Up
 When everything is set up, power your device back on. You can find the source code for this sample by downloading a zip of all of our samples, navigate to the `samples-develop\I2CPortExpander`, 
 but as an exercise, this tutorial will take you through the complete steps to create this app from scratch. 
 Open up Visual Studio 2019. 
-For this sample, we named ours **I2cPortExpanderLedSample**.
+For this sample, we named **I2cPortExpanderLedSample**.
 
 ## Deploy the sample
 
