@@ -19,7 +19,7 @@ First, we need to wire up the display to your device. You'll need a few componen
 
 Visit the **Upboard** sections below depending on which device you have:
 
-![Electrical Components](../Resources/components.png)
+![Electrical Components](../../Resources/components.png)
 
 #### Upboard
 For the Upboard, we need to hook up power, ground, SPI, and a few GPIO pins to the OLED display.
@@ -39,11 +39,11 @@ The OLED display has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
+![Breadboard connections](../../Resources/breadboard_assembled_upboard.png)
 
 Here are the schematics:
 
-![SPI schematics](../Resources/schematics_upboard1.png)
+![SPI schematics](../../Resources/schematics_upboard1.png)
 
 ### Deploy and run the app
 
@@ -115,7 +115,7 @@ If you need guidance click Link: [here](https://www.annabooks.com/Articles/Artic
  
 You can now type into the app and have the text mirrored on the attached OLED display.
 
-![SPI running](../Resources/spidisplay_screenshot.png)
+![SPI running](../../Resources/spidisplay_screenshot.png)
 
 Congratulations! You've connected a SPI graphics display.
 
