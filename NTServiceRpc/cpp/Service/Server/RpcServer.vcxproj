@@ -232,7 +232,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);ucrt.lib;rpcrt4.lib;libcmt.lib;libvcruntime.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
