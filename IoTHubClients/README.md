@@ -9,14 +9,14 @@ The sample is Microsoft IoT Central compatible. See below for a complete walk-th
 
 #### In this article
 
-This article describes how, as a device developer, to connect a device running a Windows 10 IoT Enterprise device (like Up-Board) to your Microsoft IoT Central application using the C# programming language.
+This article describes how, as a device developer, to connect a device running a Windows 10 IoT Enterprise device (like Upboard) to your Microsoft IoT Central application using the C# programming language.
 
 ### Before you begin
 
 To complete the steps in this article, you need the following:
 
 - A Microsoft IoT Central application created from the Sample Devkits application template. For more information, see [Create your Microsoft IoT Central Application](https://docs.microsoft.com/en-us/microsoft-iot-central/howto-create-application).
-- A device running the Windows 10 IoT Enterprise system.  For this walkthrough, we will use a Up-Board.  
+- A device running the Windows 10 IoT Enterprise system.  For this walkthrough, we will use an Upboard.  
 - Visual Studio 2019 installed (only needed if you are going to build/deploy the source code). 
   - With 'The Universal Windows Platform development' workload installed.
 
