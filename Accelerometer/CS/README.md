@@ -1,6 +1,6 @@
 # SPI Accelerometer
 
-We'll connect an SPI accelerometer to your UpBoard and create a simple app to read data from it. We'll walk you through step-by-step, so no background knowledge of SPI is needed.
+We'll connect an SPI accelerometer to your Upboard and create a simple app to read data from it. We'll walk you through step-by-step, so no background knowledge of SPI is needed.
 However, if you're curious, SparkFun provides a great [tutorial on SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi).
 
 ### Load the project in Visual Studio
@@ -15,13 +15,13 @@ You'll need a few components:
 
 * a breadboard and a couple of male-to-female connector wires
 
-Visit the **UpBoard** sections below depending on which device you have:
+Visit the **Upboard** sections below depending on which device you have:
 
 ![Electrical Components](../../Resources/components.png)
 
-#### UpBoard
-If you have a UPBOARD, we need to hook up power, ground, and the SPI lines to the accelerometer.
- See the [UPBOARD pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the Upboard IO pins.
+#### Upboard
+If you have Upboard, we need to hook up power, ground, and the SPI lines to the accelerometer.
+ See the [Upboard pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the Upboard IO pins.
 
 **Note: Make sure to power off the Upboard when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
