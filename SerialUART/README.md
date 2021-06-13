@@ -1,4 +1,3 @@
-
 ---
 page_type: sample
 urlFragment: serial-uart
@@ -10,6 +9,7 @@ products:
   - Windows 10 IoT Enterprise
 description: Communicate between a PC and a Windows 10 IoT Enterprise device over a serial interface.
 ---
+
 
 # Serial UART 
 
