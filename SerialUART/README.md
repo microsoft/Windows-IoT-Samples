@@ -1,18 +1,17 @@
----
 page_type: sample
 urlFragment: serial-uart
 languages: 
   - csharp
 products:
-  - windows 
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: Communicate between a desktop and a Windows 10 IoT Enterprise device over a serial interface.
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: Communicate between a PC and a Windows 10 IoT Enterprise device over a serial interface.
 ---
 
 # Serial UART 
 
-We'll create a simple app that allows communication between a desktop and an IoT device over a serial interface.
+We'll create a simple app that allows communication between a PC and an IoT device over a serial interface.
 
 ### Load the project in Visual Studio
 
@@ -24,33 +23,33 @@ This app is a Universal Windows app and will run on both the PC and your IoT dev
 
 You have two options for wiring up your board:
 
-1. using the On-board UART controller
-2. using a USB-to-TTL adapter cable such as [this one](http://www.adafruit.com/products/954).
+1. Using the On-board UART controller
+2. Using a USB-to-TTL adapter cable such as [this one](http://www.adafruit.com/products/954).
 
-#### <a name="UpBoard_UART"></a>On-board UART (UpBoard)
+#### <a name="UpBoard_UART"></a>On-board UART (UP Board)
 
-The UpBoard has an on-board UART. See the [UpBoard pin mapping page](../Resources/PinMappingsUpBoard.png) for more details on the UpBoard GPIO pins. 
+The UP Board has an on-board UART. See the [UP Board pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the UP Board GPIO pins. 
 
 * UART uses GPIO pins 6, 8, 10  
 
 Make the following connections:
 
 * Insert the USB end of the USB-to-TTL cable into a USB port on the PC
-* Connect the GND wire of the USB-to-TTL cable to Pin 6 (GND) on the Upboard
-* Connect the RX wire (white) of the USB-to-TTL cable to Pin 8 (TX) on the  Upboard
-* Connect the TX wire (green) of the USB-to-TTL cable to Pin 10 (RX) on the Upboard
+* Connect the GND wire of the USB-to-TTL cable to Pin 6 (GND) on the UP Board
+* Connect the RX wire (white) of the USB-to-TTL cable to Pin 8 (TX) on the  UP Board
+* Connect the TX wire (green) of the USB-to-TTL cable to Pin 10 (RX) on the UP Board
 
 *Note: Leave the power wire of the USB-to-TTL cable unconnected.*
 
-[UART](../Resources/SiLabs-UART.png)
+[UART](../../Resources/SiLabs-UART.png)
 
 ### <a name="USB_TTL_Adapter"></a>Using USB-to-TTL Adapter
 
-**Note: Only USB-to-TTL cables and modules with Silicon Labs chipsets are natively supported on UpBoard.**
+**Note: Only USB-to-TTL cables and modules with Silicon Labs chipsets are natively supported on UP Board.**
 
 You will need:
 
-* 1 X USB-to-TTL module (This is what we will connect to our Upboard. We used [this Silicon Labs CP2102 based USB-to-TTL module](http://www.amazon.com/gp/product/B00LODGRV8))
+* 1 X USB-to-TTL module (This is what we will connect to our UP Board. We used [this Silicon Labs CP2102 based USB-to-TTL module](http://www.amazon.com/gp/product/B00LODGRV8))
 
 * 1 X USB-to-TTL cable (This will connect to our PC. We used [this one](http://www.adafruit.com/products/954))
 
@@ -58,7 +57,7 @@ Make the following connections:
 
 * Insert the USB end of the USB-to-TTL **cable** into a USB port on the PC
 
-* Insert the USB end of the USB-to-TTL **module** into a USB port on the Upboard 
+* Insert the USB end of the USB-to-TTL **module** into a USB port on the UP Board 
 
 * Connect the GND pin of the USB-to-TTL **module** to the GND wire of the USB-to-TTL cable 
 
@@ -68,13 +67,13 @@ Make the following connections:
 
 Leave the power pin of the USB-to-TTL cable unconnected. It is not needed.
 
-Below is an image of our USB-to-TTL module connected to a USB port in our Upboard. The GND, TX, and RX pins of the module are connected to the GND, RX, TX wires of the USB-to-TTL cable that is connected to our PC.
+Below is an image of our USB-to-TTL module connected to a USB port in our UP Board. The GND, TX, and RX pins of the module are connected to the GND, RX, TX wires of the USB-to-TTL cable that is connected to our PC.
 
-[CP 2102 Connections](../Resources/CP2102_Connections_500.png)
+[CP 2102 Connections](../../Resources/CP2102_Connections_500.png)
 
 ### Deploy and Launch the SerialSample App
 
-Now that our UpBoard is connected, let's setup and deploy the app.
+Now that our UP Board is connected, let's setup and deploy the app.
 
 1. Navigate to the SerialSample source project. 
 
@@ -86,78 +85,57 @@ Now that our UpBoard is connected, let's setup and deploy the app.
 
 5. Open the PC copy of the SerialSample app in VS Instance B.
 
-6. In VS Instance A, configure the app for deployment to your UpBoard.
-	
-	*For UpBoard, set the target architecture to 'x64'
+6. In VS Instance A, configure the app for deployment to your UP Board.
+
+	*For UP Board, set the target architecture to 'x64'
 
 7. In VS Instance B, set the target architecture to 'x64'. This will be the instance of the sample we run on the PC.
 
-### Generate an app package
+8. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+9. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+10. If you are using an UP Board, you have to setup the BIOS UART configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+    1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+  	1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
- 
-  If you are using UPBOARD, you have to setup the BIOS UART configuration.
+  	1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
 
-### BIOS Settings for UPBOARD
+  	1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
 
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and make "LPSS HSUART #1 Support" as "Enabled".
+  	1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
-
- Click the Start button to search for the app by name, and then launch it.
+11. Click the Start button to search for the app by name, and then launch it.
 
 ### Using the SerialSample App 
 
-When the SerialSample app is launched on the PC, a window will open with the user interface similar to the screenshot shown below. When launched on the UpBoard, the SerialSample will display the user interface shown below on the entire screen.
+When the SerialSample app is launched on the PC, a window will open with the user interface similar to the screenshot shown below. When launched on the UP Board, the SerialSample will display the user interface shown below on the entire screen.
 
-[Serial Sample on PC](../Resources/SerialSampleRunningPC.png)
+[Serial Sample on PC](../../Resources/SerialSampleRunningPC.png)
 
 #### Selecting a Serial Device
 
 When the SerialSample app launches, it looks for all the serial devices that are connected to the device. The device ids of all the serial devices found connected to the device will be listed in the top ListBox of the SerialSample app window.
 
-Select and connect to a serial device on the PC and UpBoard by doing the following:
+Select and connect to a serial device on the PC and UP Board by doing the following:
 
 1. Select the desired serial device by clicking on the device ID string in the top ListBox next to "Select Device:". 
 
 	* On the PC, the device ID for the USB-to-TTL cable connected in this example begins with '\\?\USB#VID_067B'.
-	
-	* On the UpBoard, if using the USB-to-TTL adapter module, select the device ID that begins with **\\?\USB#**. For the USB-to-TTL module used in this example, the device ID should begin with '\\?\USB#VID_10C4'.
+
+	* On the UP Board, if using the USB-to-TTL adapter module, select the device ID that begins with **\\?\USB#**. For the USB-to-TTL module used in this example, the device ID should begin with '\\?\USB#VID_10C4'.
 
 2. Click 'Connect'.	
 
 The app will attempt to connect and configure the selected serial device. When the app has successfully connected to the attached serial device it will display the configuration of the serial device. By default, the app configures the serial device for 9600 Baud, eight data bits, no parity bits and one stop bit (no handshaking).
 
-[Connect device](../Resources/SerialSampleRunningPC_ConnectDevice.png)
+[Connect device](../../Resources/SerialSampleRunningPC_ConnectDevice.png)
 
 #### Sending and Receiving Data
 
-After connecting the desired serial device in the SerialSample apps running on both the PC and the UpBoard we can begin sending and receiving data over the serial connection between the two devices.
+After connecting the desired serial device in the SerialSample apps running on both the PC and the UP Board we can begin sending and receiving data over the serial connection between the two devices.
 
 To send data from one device to the other connected device do the following:
 
@@ -167,7 +145,7 @@ To send data from one device to the other connected device do the following:
 
 The app on the transmitting device will display the sent message and "bytes written successfully!" in the status text box in the bottom of the app display.
 
-[Send message](../Resources/SendMessageB.png)
+[Send message](../../Resources/SendMessageB.png)
 
 The device that is receiving the message will automatically display the text in the 'Read Data:' window.
 
@@ -175,7 +153,7 @@ The device that is receiving the message will automatically display the text in 
 
 * When connecting to the USB-to-TTL device for the first time from the IoT Device, you may see the error "Object was not instantiated" when you click on `Connect`. If you see this, un-plug the device, plug it back in and refresh the connection or redeploy the app.
 * If you have more than one Silicon Labs USB-to-TTL devices connected to your IoT device, only the device that was first connected will be recognized. In order to run this sample, connect only one device
-* When connecting USB-to-TTL device to UpBoard, use a powered USB hub or the bottom USB port
+* When connecting USB-to-TTL device to UP Board, use a powered USB hub or the bottom USB port
 
 
 ### Let's look at the code
@@ -184,7 +162,7 @@ The code for this sample uses the [Windows.Devices.SerialCommunication](https://
 
 The SerialDevice class will be used to enumerate, connect, read, and write to the serial devices connected to the device. 
 
-**NOTE:** The SerialDevice class can be used only for supported USB-to-TTL devices (on PC and UpBoard).
+**NOTE:** The SerialDevice class can be used only for supported USB-to-TTL devices (on PC and UP Board).
 
 For accessing the serial port, you must add the **DeviceCapability** to the **Package.appxmanifest** file in your project. 
 
@@ -210,17 +188,12 @@ This sample app enumerates all serial devices connected to the device and displa
 private async void comPortInput_Click(object sender, RoutedEventArgs e)
 {
     var selection = ConnectDevices.SelectedItems; // Get selected items from ListBox
-
     // ...
-
     DeviceInformation entry = (DeviceInformation)selection[0];         
-
     try
     {                
         serialPort = await SerialDevice.FromIdAsync(entry.Id);
-
         // ...
-
         // Configure serial settings
         serialPort.WriteTimeout = TimeSpan.FromMilliseconds(1000);
         serialPort.ReadTimeout = TimeSpan.FromMilliseconds(1000);                
@@ -228,7 +201,6 @@ private async void comPortInput_Click(object sender, RoutedEventArgs e)
         serialPort.Parity = SerialParity.None;
         serialPort.StopBits = SerialStopBitCount.One;
         serialPort.DataBits = 8;
-
         // ...
     }
     catch (Exception ex)
@@ -247,7 +219,6 @@ Due to differences in handling concurrent tasks, the implementations of **Listen
 * C# allows awaiting **ReadAsync()**. All we do is keep reading the serial port in an infinite loop interrupted only when an exception is thrown (triggered by the cancellation token).
 
 ```csharp
-
 private async void Listen()
 {
     try
@@ -255,7 +226,6 @@ private async void Listen()
         if (serialPort != null)
         {
             dataReaderObject = new DataReader(serialPort.InputStream);
-
             // keep reading the serial input
             while (true)
             {
@@ -272,22 +242,16 @@ private async void Listen()
         ...
     }
 }
-
 private async Task ReadAsync(CancellationToken cancellationToken)
 {
     Task<UInt32> loadAsyncTask;
-
     uint ReadBufferLength = 1024;
-
     // If task cancellation was requested, comply
     cancellationToken.ThrowIfCancellationRequested();
-
     // Set InputStreamOptions to complete the asynchronous read operation when one or more bytes is available
     dataReaderObject.InputStreamOptions = InputStreamOptions.Partial;
-
     // Create a task object to wait for data on the serialPort.InputStream
     loadAsyncTask = dataReaderObject.LoadAsync(ReadBufferLength).AsTask(cancellationToken);
-
     // Launch the task and wait
     UInt32 bytesRead = await loadAsyncTask;
     if (bytesRead > 0)
@@ -301,7 +265,6 @@ private async Task ReadAsync(CancellationToken cancellationToken)
 * C++ does not allow awaiting **ReadAsync()** in Windows Runtime STA (Single Threaded Apartment) threads due to blocking the UI. In order to chain continuation reads from the serial port, we dynamically generate repeating tasks via "recursive" task creation - "recursively" call **Listen()** at the end of the continuation chain. The "recursive" call is not a true recursion. It will not accumulate stack since every recursive is made in a new task.
 
 ``` c++
-
 void MainPage::Listen()
 {
     try
@@ -317,7 +280,6 @@ void MainPage::Listen()
         ...
     }
 }
-
 Concurrency::task<void> MainPage::ReadAsync(Concurrency::cancellation_token cancellationToken)
 {
     unsigned int _readBufferLength = 1024;
@@ -328,12 +290,10 @@ Concurrency::task<void> MainPage::ReadAsync(Concurrency::cancellation_token canc
         {
             rcvdText->Text = _dataReaderObject->ReadString(bytesRead);
             status->Text = "bytes read successfully!";
-
             /*
             Dynamically generate repeating tasks via "recursive" task creation - "recursively" call Listen() at the end of the continuation chain.
             The "recursive" call is not true recursion. It will not accumulate stack since every recursive is made in a new task.
             */
-
             // start listening again after done with this chunk of incoming data
             Listen();
         }
@@ -352,28 +312,22 @@ private async void sendTextButton_Click(object sender, RoutedEventArgs e)
 	
     // Create the DataWriter object and attach to OutputStream   
     dataWriteObject = new DataWriter(serialPort.OutputStream);
-
     //Launch the WriteAsync task to perform the write
     await WriteAsync();   
 	
     // ..
-
     dataWriteObject.DetachStream();
     dataWriteObject = null;	
 }
-
 private async Task WriteAsync()
 {
     Task<UInt32> storeAsyncTask;
-
     // ...
 	
     // Load the text from the sendText input text box to the dataWriter object
     dataWriteObject.WriteString(sendText.Text);                
-
     // Launch an async task to complete the write operation
     storeAsyncTask = dataWriteObject.StoreAsync().AsTask();
-
     // ...    
 }
 ```
@@ -383,32 +337,24 @@ private async Task WriteAsync()
 You can cancel the read operation by using **CancellationToken** on the Task. Initialize the **CancellationToken** object and pass that as an argument to the read task.
 
 ```csharp
-
 private async void comPortInput_Click(object sender, RoutedEventArgs e)
 {
     // ...
-
     // Create cancellation token object to close I/O operations when closing the device
     ReadCancellationTokenSource = new CancellationTokenSource();
 	
     // ...	
 }
-
 private async void rcvdText_TextChanged(object sender, TextChangedEventArgs e)
 {
     // ...
-
     await ReadAsync(ReadCancellationTokenSource.Token);
-
     // ...	
 }
-
 private async Task ReadAsync(CancellationToken cancellationToken)
 {
     Task<UInt32> loadAsyncTask;
-
     uint ReadBufferLength = 1024;
-
     cancellationToken.ThrowIfCancellationRequested();
     
     // ...
@@ -447,14 +393,12 @@ private void closeDevice_Click(object sender, RoutedEventArgs e)
        // ...
     }          
 }    
-
 private void CloseDevice()
 {            
     if (serialPort != null)
     {
         serialPort.Dispose();
     }    
-
     // ...
 }    
 ```
@@ -471,3 +415,45 @@ To summarize:
 * We add the ability to cancel the read task using the **CancellationToken**.
 
 * Finally, we close the device connection and clean up when done.
+ 40  SerialUART/CPP/SerialSampleCpp.sln 
+@@ -0,0 +1,40 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SerialSampleCpp", "SerialSampleCpp.vcxproj", "{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|ARM.ActiveCfg = Debug|ARM
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|ARM.Build.0 = Debug|ARM
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|ARM.Deploy.0 = Debug|ARM
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|x64.ActiveCfg = Debug|x64
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|x64.Build.0 = Debug|x64
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|x64.Deploy.0 = Debug|x64
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|x86.ActiveCfg = Debug|Win32
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|x86.Build.0 = Debug|Win32
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Debug|x86.Deploy.0 = Debug|Win32
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|ARM.ActiveCfg = Release|ARM
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|ARM.Build.0 = Release|ARM
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|ARM.Deploy.0 = Release|ARM
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|x64.ActiveCfg = Release|x64
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|x64.Build.0 = Release|x64
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|x64.Deploy.0 = Release|x64
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|x86.ActiveCfg = Release|Win32
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|x86.Build.0 = Release|Win32
+		{B5690B48-A2FA-44F8-A7A4-18AF7EA247E6}.Release|x86.Deploy.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
