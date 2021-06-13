@@ -1,3 +1,5 @@
+
+---
 page_type: sample
 urlFragment: serial-uart
 languages: 
