@@ -24,8 +24,8 @@ This app is a Universal Windows app and will run on both the PC and your IoT dev
 
 You have two options for wiring up your board:
 
-1. using the On-board UART controller
-2. using a USB-to-TTL adapter cable such as [this one](http://www.adafruit.com/products/954).
+1. Using the On-board UART controller
+2. Using a USB-to-TTL adapter cable such as [this one](http://www.adafruit.com/products/954).
 
 #### <a name="UpBoard_UART"></a>On-board UART (UP Board)
 
