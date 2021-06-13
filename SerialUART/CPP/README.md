@@ -29,7 +29,7 @@ You have two options for wiring up your board:
 
 #### <a name="UpBoard_UART"></a>On-board UART (UP Board)
 
-The UP Board has an on-board UART. See the [UP Board pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the UpBoard GPIO pins. 
+The UP Board has an on-board UART. See the [UP Board pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the UP Board GPIO pins. 
 
 * UART uses GPIO pins 6, 8, 10  
 
