@@ -4,9 +4,9 @@ urlFragment: wifi-connector
 languages:
   - csharp
 products:
-  - windows 10
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise 
 description: Learn how to find and connect to WiFi networks using a Universal Windows Platform (UWP) app that makes use of the Windows.Devices.WiFi.WiFiAdapter API.
 ---
 
@@ -15,57 +15,48 @@ description: Learn how to find and connect to WiFi networks using a Universal Wi
 We'll learn how to find and connect to WiFi networks using a Universal Windows Platform (UWP) app that makes use of the [`Windows.Devices.WiFi.WiFiAdapter`](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.wifi.wifiadapter.aspx) API.
 
 
-### Load the project in Visual Studio
+## Step 1: Load the project in Visual Studio
 
-You can find the source code for this sample in our Windows IoT Enterprise git repository. Clone the project to your machine and open the project from Visual Studio.
+Open the application in Visual Studio 2019 Set the architecture in the toolbar dropdown. If you’re building for the UP Board, select x64.
 
-The code for the WiFi Connect sample can be found under \WiFiConnector\CS 
-
-### Connecting your WiFi adapter
+## Step 2: Connect your WiFi adapter
 
 You'll need:
 
-* A Windows 10 IoT Enterprise capable board, such as the UP-Board and
+* A Windows 10 IoT Enterprise capable board (this examples uses an UP Board)
 * A USB WiFi adapter. 
 
-### Deploy your app
+## Step 3: Deploy your app
 
-For UP-Board, select `x64`.
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-### Generate an app package
+1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
-Steps to follow :
+1. If you are using an UP Board, you have to setup the BIOS UART configuration.
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+    1. Once you power on the UP board, select the Del or F7 key on your keyboard to enter the BIOS setting.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+    1. Navigate to Boot > OS Image ID tab, and select Windows 10 IoT Core.
 
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+    1. Navigate to the Advance tab and select the Hat Configuration and select GPIO Configuration in Pin Order.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- * Click the Start button to search for the app by name, and then launch it.
+    1. Configure the Pins you are using in the sample as INPUT or OUTPUT.
 
-### Test your app
+    1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+
+1. Click the Start button to search for the app by name, and then launch it.
+
+## Step 4: Test your app
 
 The sample app when deployed displays a screen similar to the one below.
 
-![App Started](../Resources/images/WifiConnectSample/WiFiSample0.png)
+![App Started](../../Resources/images/WifiConnectSample/WiFiSample0.png)
 
 If you have a WiFi adapter connected to your board, click on the "Scan Available WiFi Networks" button to start scanning and displaying the list of WiFi networks in the vicinity.
 
 Each WiFi network is identified by its SSID along with an icon showing the signal strength.
 
-![WiFi SSID list](../Resources/images/WifiConnectSample/WiFiSample1.png)
+![WiFi SSID list](../../Resources/images/WifiConnectSample/WiFiSample1.png)
 
 The selected network shows some information about the SSID including the signal strength, channel frequency and authentication mode. The connection status is also shown for each.
 
@@ -73,15 +64,15 @@ You can connect to the your SSID by clicking on the one you need. If a security 
 
 If WiFi Protected Setup (WPS) is supported a WPS button is shown. To use this button first click on the WPS button on your router and then on the WPS button in the application.
 
-![WiFi Selected Network](../Resources/images/WifiConnectSample/WifiSampleSelectedNetwork.PNG)
+![WiFi Selected Network](../../Resources/images/WifiConnectSample/WifiSampleSelectedNetwork.PNG)
 
 For networks that support Extensible Authentication Protocol (EAP), also known as Enterprise WiFi authentication, a password checkbox will be shown. If your enterprise network device is configured with the required certificates, you can simply click **Connect**.
 
-![WiFi EAP](../Resources/images/WifiConnectSample/WifiSamplePasswordUnchecked.PNG )
+![WiFi EAP](../../Resources/images/WifiConnectSample/WifiSamplePasswordUnchecked.PNG )
 
 If you must enter a user name and password to connected your network then select the **Password** checkbox and then enter the **User** and **Password**.  The **Domain** is optional and only needs to be entered on networks that require it.
 
-![WiFi EAP](../Resources/images/WifiConnectSample/WifiSamplePasswordChecked.PNG )
+![WiFi EAP](../../Resources/images/WifiConnectSample/WifiSamplePasswordChecked.PNG )
 
 A message on the status bar will indicate if the connection has been successful, or if not the reason the connection could not be made.
 
@@ -89,7 +80,7 @@ Because some networks, like WiFi hotspots, may require additional information th
 
 Selecting the currently connected network also displays a **Disconnect** button that can be used to disconnect from the network.
 
-![WiFi SSID list](../Resources/images/WifiConnectSample/WiFiSample2.png)
+![WiFi SSID list](../../Resources/images/WifiConnectSample/WiFiSample2.png)
 
 
 ## Let's look at the code
@@ -163,7 +154,7 @@ if (result.Count >= 1)
 ```
 
 
-### Scanning for WiFi networks
+## Step 5: Scanning for WiFi networks
 
 The next step is to scan for available WiFi networks, this can be achieved using the `WiFiAdapter.ScanAsync()` method.
 
@@ -214,7 +205,7 @@ When the scan is complete, the `WiFiAdapter.NetworkReport` property is updated w
 
 ```
 
-### Connecting to a WiFi network
+## Step 6: Connecting to a WiFi network
 
 When a WiFi network is selected from the ones displayed, we need to determine if we want to collect the password credential. The WiFi network authentication type is what we need to determine that:
 
