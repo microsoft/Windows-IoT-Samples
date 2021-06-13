@@ -1,1 +1,45 @@
+<<<<<<< HEAD
 
+=======
+---
+page_type: sample
+urlFragment: bustools
+languages:
+  - cpp
+products:
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: "IoT Bus tools to interact with GPIO, I2C, PWM, SPI and UART."
+---
+
+# Windows IoT Bus Tools
+
+This folder contains tools that let you interact with GPIO, I2C, PWM, SPI, and UART on the command line. They will run on any edition of Windows, including [Windows 10 IoT Enterprise](https://docs.microsoft.com/windows/iot/iot-enterprise/getting_started) and [Windows 10 IoT Core](https://docs.microsoft.com/windows/iot-core/windows-iot-core).
+
+The tools are:
+- GPIOTestTool
+- I2CTestTool
+- PWMTestTool
+- SPITestTool
+- MinComm (UART)
+
+## Steps to Build the Project
+1. Download [Visual Studio 2019](https://www.visualstudio.com/downloads/).
+
+1. Select packages for C++, Windows UWP, and Windows Desktop app development.
+
+1. Download the latest version of the [Windows SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
+
+1. From the start menu, run `Developer Command Prompt for VS 2019`
+
+1. Navigate to the root of this repository and run:
+
+```powershell
+msbuild /p:Platform=x64 /p:Configuration=Release
+```
+
+Valid values of Platform are: `ARM, ARM64, x86, x64`
+
+Valid values of Configuration are: `Release, Debug`
+>>>>>>> parent of 96e401f... Moving MinComm to BusTools Folder
