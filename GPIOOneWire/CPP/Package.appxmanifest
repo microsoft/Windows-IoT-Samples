@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="65daff96-e3d2-415b-8956-066fb727c7d4"
+    Name="GpioOneWire"
     Publisher="CN=MSFT"
     Version="1.0.0.0" />
 
