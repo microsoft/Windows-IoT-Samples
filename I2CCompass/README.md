@@ -4,65 +4,47 @@ urlFragment: I2CCompass
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
 description: This sample uses I2C on Windows 10 IoT Enterprise to communicate with an HMC5883L Magnetometer device.
 ---
 
 # I2C Compass
 
-This sample uses I2C on Windows IoT Core to communicate with an HMC5883L Magnetometer device.
+This sample uses I2C on Windows IoT Enterprise to communicate with an HMC5883L Magnetometer device.
 
-## Set up your hardware
+## Step 1: Set up your hardware
 Please reference the datasheet for the HMC5883L found [here](https://github.com/microsoft/Windows-iotcore-samples/blob/develop/Samples/I2CCompass/HMC5883L_3-Axis_Digital_Compass_IC.pdf).
 
 For more information on compass heading using magnetometers please see [here](https://github.com/microsoft/Windows-iotcore-samples/blob/develop/Samples/I2CCompass/AN203_Compass_Heading_Using_Magnetometers.pdf).
 
-## Load the project in Visual Studio
+## Step 2: Load the project in Visual Studio
 You can find the source code for this sample by downloading a zip of all of our samples. Extract the zip to your disk, then open the `Samples\I2CCompass\CS\I2CCompass.sln` project from Visual Studio.
 
-## Deploy the sample
+## Step 3: Deploy the sample
 
 * Choose `Release` and `x64` configuration.
 * Compile the Solution file
 
-### Generate an app package
 
-Steps to follow :
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+### BIOS Settings for UP Board
+If you are using an UP Board, you have to setup the BIOS SPI configuration.
 
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
- 
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
- If you are using UPBOARD, you have to setup the BIOS SPI configuration.
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and set **I2C0/GPIO SELECTION** as **I2C0**.
 
-### BIOS Settings for UPBOARD
+1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3) Under the "Advance" Tab: Select "Hat Configuration" and make "I2C0/GPIO SELECTION" as "I2C0".
+1. Click the Start button to search for the app by name, and then launch it.
 
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
 ## Additional information
 The HMC3883L device is accessed through the [Windows.Devices.I2c API](https://docs.microsoft.com/en-us/uwp/api/windows.devices.i2c) using the default I2C controller and the address 0x1E.
