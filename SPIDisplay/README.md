@@ -51,11 +51,11 @@ The OLED display has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../Resources/breadboard_assembled_UP Board.png)
+![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
 
 Here are the schematics:
 
-![SPI schematics](../Resources/schematics_UP Board1.png)
+![SPI schematics](../Resources/schematics_upboard1.png)
 
 ### Step 3: Deploy and run the app
 
