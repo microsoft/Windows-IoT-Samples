@@ -7,7 +7,7 @@ products:
   - Windows 10
   - Windows IoT 
   - Windows 10 IoT Enterprise
-description: Create a simple notepad app service as well as two simple app service clients for Windows 10 IoT Core.
+description: Create a simple notepad app service as well as two simple app service clients for Windows 10 IoT Enterprise.
 ---
 
 # Using an app service with multiple clients
@@ -49,11 +49,11 @@ Next start NotepadServiceClientApp and then NotepadServiceClientApp.
 
 When you run the client app you should see
 
-![No messages yet](../Resources/AppServiceSharedNotepad-NoMessages.jpg)
+![No messages yet](../../Resources/AppServiceSharedNotepad-NoMessages.jpg)
 
 After a 30 seconds or so the text in the button should change to black from gray.  Clicking the button will show the messages from the clipboard service.
 
-![Message from clipboard service](../Resources/AppServiceSharedNotepad-Messages.jpg)
+![Message from clipboard service](../../Resources/AppServiceSharedNotepad-Messages.jpg)
 
 ## Let's look at the code
 ___
