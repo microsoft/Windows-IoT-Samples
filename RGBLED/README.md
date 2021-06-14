@@ -33,16 +33,16 @@ You will need the following components :
 
 Let's start by wiring up the components on the breadboard as shown in the diagram below.
 
-![Breadboard connections](../../Resources/RGBLED_bb.png)
+![Breadboard connections](../Resources/RGBLED_bb.png)
 
 
 Here is the schematic:
 
-![Circuit Schematic](../../Resources/RGBLED-schematic_schem.png)
+![Circuit Schematic](../Resources/RGBLED-schematic_schem.png)
 
 The pinout of the Tri-color LED is shown below and can be found in the [datasheet](http://www.kingbrightusa.com/images/catalog/SPEC/WP154A4SUREQBFZGC.pdf)
 
-![Tri-color LED Pinout](../../Resources/RGBLED_Pinout.png)
+![Tri-color LED Pinout](../Resources/RGBLED_Pinout.png)
 
 #### Connecting the Tri-color LED
 
@@ -64,7 +64,7 @@ The pinout of the Tri-color LED is shown below and can be found in the [datashee
 
 Here is the pinout of the UpBoard:
 
-![UpBoard pinout](../../Resources/Upboard_Pinout.png)
+![UpBoard pinout](../Resources/Upboard_Pinout.png)
 
 ## Step 2: Deploy your app
 
@@ -146,7 +146,7 @@ UpBoard, we take the first 3 available pins. There is also logic to skip
 pins connected to onboard functions on known hardware platforms.
 
 ```csharp
-var deviceModel = GetDeviceModel();
+//var deviceModel = GetDeviceModel();
 
     // take the first 3 available GPIO pins
     var pins = new List<GpioPin>(3);
