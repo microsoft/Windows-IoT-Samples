@@ -4,16 +4,16 @@ urlFragment: accelerometer
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10 
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
 description: Create a simple app with an SPI accelerometer build with Windows 10 IoT Enterprise.
 ---
 
 # SPI Accelerometer
 
-We'll connect an SPI accelerometer to your Upboard and create a simple app to read data from it. We'll walk you through step-by-step, so no background knowledge of SPI is needed.
-However, if you're curious, SparkFun provides a great [tutorial on SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi).
+We'll connect an SPI accelerometer to your UP Board and create a simple app to read data from it. 
+We'll walk you through step-by-step, so no background knowledge of SPI is needed. However, if you're curious, SparkFun provides a great [tutorial on SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi).
 
 ### Load the project in Visual Studio
 
@@ -27,36 +27,34 @@ You'll need a few components:
 
 * a breadboard and a couple of male-to-female connector wires
 
-Visit the **Upboard** sections below depending on which device you have:
+![Electrical Components](../../Resources/components.png)
 
-![Electrical Components](../Resources/components.png)
+#### UP Board
+If you have UP Board, we need to hook up power, ground, and the SPI lines to the accelerometer.
+ See the [UP Board pin mapping page](../../Resources/PinMappingsUP Board.png) for more details on the UP Board IO pins.
 
-#### Upboard
-If you have Upboard, we need to hook up power, ground, and the SPI lines to the accelerometer.
- See the [Upboard pin mapping page](../Resources/PinMappingsUpBoard.png) for more details on the Upboard IO pins.
-
-**Note: Make sure to power off the Upboard when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
+**Note: Make sure to power off the UP Board when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
 The ADXL345 breakout board has 8 IO pins, connect them as follows:
 
-1. **GND:**  Connect to ground on the Upboard (Pin 6)
-2. **VCC:**  Connect to 3.3V on the Upboard (Pin 1)
-3. **CS:**   Connect to SPI0 CS0 on the Upboard (Pin 24). This is the chip-select line for the SPI bus.
+1. **GND:**  Connect to ground on the UP Board (Pin 6)
+2. **VCC:**  Connect to 3.3V on the UP Board (Pin 1)
+3. **CS:**   Connect to SPI0 CS0 on the UP Board (Pin 24). This is the chip-select line for the SPI bus.
 4. **INT1:** Leave unconnected, we're not using this pin
 5. **INT2:** Leave unconnected, we're not using this pin
-6. **SDO:**  Connect to SPI0 MISO on the Upboard (Pin 21)
-7. **SDA:**  Connect to SPI0 MOSI on the Upboard (Pin 19)
-8. **SCL:**  Connect to SPI0 SCLK on the Upboard (Pin 23). This is the clock line for the SPI bus.
+6. **SDO:**  Connect to SPI0 MISO on the UP Board (Pin 21)
+7. **SDA:**  Connect to SPI0 MOSI on the UP Board (Pin 19)
+8. **SCL:**  Connect to SPI0 SCLK on the UP Board (Pin 23). This is the clock line for the SPI bus.
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../Resources/breadboard_assembled_upboard1.png)
+![Breadboard connections](../../Resources/breadboard_assembled_UP Board1.png)
 
 Here are the schematics:
 
-![Accelerometer schematics](../Resources/schematics_upboard.png)
+![Accelerometer schematics](../../Resources/schematics_UP Board.png)
 
-### Deploy and run the app
+### Deploy the app 
 
  Click the Start button to search for the app by name, and then launch it.
 
@@ -71,49 +69,27 @@ public sealed partial class MainPage : Page
 }
 ``` 
 
-### Generate an app package
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+### BIOS Settings for UP Board
+If you are using UP Board, you have to setup the BIOS SPI configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select "LPSS SPISupport" as "Enabled".
+
+1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
   
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
- 
- If you are using UPBOARD, you have to setup the BIOS SPI configuration.
-
-### BIOS Settings for UPBOARD
-
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and make "LPSS SPISupport" as "Enabled".
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
- 
+### Run the app
 The SPIAccelerometer app will deploy and start, and you should see accelerometer data show up on screen.
- If you have your accelerometer flat on a surface, the Z axis should read close to 1.000G, while X and Y are close to 0.000G. The values will fluctuate a little even if the device is standing still.
- This is normal and is due to minute vibrations and electrical noise. If you tilt or shake the sensor, you should see the values change in response. Note that this sample configures the device in 4G mode,
-so you wont be able to see G readings higher than 4Gs.
+If you have your accelerometer flat on a surface, the Z axis should read close to 1.000G, while X and Y are close to 0.000G. The values will fluctuate a little even if the device is standing still.
+This is normal and is due to minute vibrations and electrical noise. If you tilt or shake the sensor, you should see the values change in response. Note that this sample configures the device in 4G mode, so you wont be able to see G readings higher than 4Gs.
 
-![SPI Accelerometer running](../Resources/spiaccelerometer_screenshot.png)
+![SPI Accelerometer running](../../Resources/spiaccelerometer_screenshot.png)
 
 Congratulations! You've connected an SPI accelerometer.
 
