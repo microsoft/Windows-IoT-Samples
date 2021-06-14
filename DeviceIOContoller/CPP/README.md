@@ -1,3 +1,14 @@
+---
+page_type: sample
+urlFragment: deviceIO-controller
+languages:
+  - cpp
+products:
+  - Windows 10 
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: Sample for leveraging Device IO Controller.
+---
 
 # Device IO Controller
 
@@ -17,16 +28,16 @@ The high level steps involved are:
  3. Use CreateFile/ReadFile/WriteFile/DeviceIoControl in your code
  4. Make the device accessible to appcontainer processes
 
-## Exposing the COM port to usermode
+## Step 1: Exposing the COM port to usermode
 
 Before we can access the COM port, we need to add the `PortName` registry value under the device's hardware key so that serial.sys will create a device interface and symbolic link. On desktop flavors of Windows, this is handled by the ports class coinstaller (msports.dll), but since coinstallers are not supported on onecore-based editions, we need to add this reg key manually.
 
     Reg add "HKLM\SYSTEM\ControlSet001\Enum\ACPI\PNP0501\1\Device Parameters" /v PortName /t REG_SZ /d COM1
     Devcon restart acpi\pnp0501
 
-If you now run `mincomm -list`, you should see ACPI\PNP0501\1 in the list of COM ports. Mincomm is available at ms-iot samples.
+If you now run `mincomm -list`, you should see ACPI\PNP0501\1 in the list of COM ports. Mincomm is available in the Windows IoT samples repository.
 
-## Enabling access to desktop APIs in a C++/CX UWP Application
+## Step 2: Enabling access to desktop APIs in a C++/CX UWP Application
 
 Create a new project by going to File -> New -> Project -> Visual C++ -> Windows-> Universal -> Blank App (Universal Windows), and click OK.
 
@@ -61,7 +72,7 @@ We also need to link against onecoreuap.lib, which exports all symbols available
 &lt;/ItemDefinitionGroup&gt;</b>
 </pre>
 
-## Use CreateFile/DeviceIoControl in your Application
+## Step 3: Use CreateFile/DeviceIoControl in your Application
 
 Add the following code to pch.h:
 
@@ -162,44 +173,25 @@ Add a call to `AccessComPort()` in the MainPage constructor:
     }
 ```
 
-### Deploy your app  
+## Step 4: Deploy your app  
   
-* If you're building for UPBoard, select `x64` as the architecture.   
+* If you're building for UP Board, select `x64` as the architecture.   
   
-* Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
+* Select **Local Machine** to point to IoT device and select *F5* on your keyboard to deploy to your device. 
 
-### Generate an app package
+## Step 5: [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+## Step 6: [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
+## Step 7: Build the project
  
-
-Build the project, which should succeed because we made desktop APIs visible at compile time.
+This build should succeed since we made desktop APIs visible at compile time.
 
 Set a breakpoint on the `throw` statement after the file handle validity check, as indicated in the source code above.
 
-* Debug the application on UPBoard. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
-* We run an application on UPBoard when will come Access Denied error on that time UWP application crashs. If we set a proper security descriptor on the device object so it can be accessed by UWP applications.
+* Debug the application on UP Board. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
 
-## Granting Access to AppContainer Processes
+## Step 8: Granting Access to AppContainer Processes
 
 Every device object in the system has an associated security descriptor. The security descriptor determines who has what access to a device object. Security descriptors have a binary representation which is used by the system to compute access to objects, and a human readable form called an SDDL string. Some examples of SDDL strings are:
 
@@ -273,7 +265,7 @@ Now, debug the universal application again. The COM port should be opened succes
 
 Congratulations, you have successfully opened a device and sent an IOCTL to it!
 
-## Granting Access to a Specific Application
+## Step 9: Granting Access to a Specific Application
 
 The security identifier "AC" identifies all application packages, and will grant all apps access to the device. If you want to grant access to a specific application only, you can replace "AC" in the SDDL above with the app-specific SID of the application you'd like to target. You can inspect the app-specific SID with [process explorer](https://technet.microsoft.com/en-us/sysinternals/bb896653).
 
