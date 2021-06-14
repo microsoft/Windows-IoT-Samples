@@ -11,7 +11,7 @@ products:
 description: A sample that will allow you to deploy a driver to perform low level injection of touch, keyboard and mouse event. 
 ---
 
-# HID Injection
+# HID Injector
 
 Windows 10 IoT Enterprise HID Injector sample will allow you to deploy a driver to perform low level injection of touch, keyboard and mouse events, and can be used until the SendInput equivalent API is available.
 
