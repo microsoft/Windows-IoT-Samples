@@ -9,14 +9,14 @@
 
   <Identity
     Name="MyForegroundAppCpp"
-    Publisher="CN=paulmon"
+    Publisher="CN=MSFT"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="20bf12a2-f486-45b3-a101-871c4f728165" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>MyForegroundAppCpp</DisplayName>
-    <PublisherDisplayName>paulmon</PublisherDisplayName>
+    <PublisherDisplayName>MSFT</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
