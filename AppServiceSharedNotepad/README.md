@@ -21,7 +21,7 @@ ___
 * Make a copy of the folder on your disk and open the projects from Visual Studio. 
 * NotepadService.sln implements the app service and must be started first.
 * NotepadClientBackgroundApplication.sln implements a client that writes messages to the app service.
-* NotepadServiceClientApp.sln implements a windows that retrieves messages from the client and displays them.
+* NotepadServiceClientApp.sln implements a window that retrieves messages from the client and displays them.
 * Make a copy of the folder on your disk and open the projects from Visual Studio. 
 * NotepadService.sln implements the app service and must be started first. 
 * NotepadClientBackgroundApplication.sln implements the app service client.
