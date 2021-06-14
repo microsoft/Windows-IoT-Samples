@@ -28,7 +28,7 @@ The other pin is configured as input and is used to capture changes on the data 
 Your breadboard should be wired as follows. You can use either a MOSFET(2N700) or BJT transistor(2N3904). 
 If you use a BJT(2N3904), be sure to put a resistor in series with the base of the transistor.
 
-![Schematic](../Resources/schematic.png)
+![Schematic](../../Resources/schematic.png)
 
 ## GPIO OneWire DHT11 reader
 
@@ -45,7 +45,7 @@ For a description of the protocol used by the DHT11, see [this article](http://e
 
 The datasheet is [here](http://akizukidenshi.com/download/ds/aosong/DHT11.pdf).
 
-![Screenshot](../Resources/GpioOneWireScreen1.png)
+![Screenshot](../../Resources/GpioOneWireScreen1.png)
 
 ### Requirements
 
@@ -63,8 +63,8 @@ You will need the following hardware to run this demo:
 
 Connect the components as shown in the following diagram:
 
-![Schematic](../Resources/GpioOneWireSchematic.png)
-![Wiring Diagram](../Resources/GpioOneWireFritz.png)
+![Schematic](../../Resources/GpioOneWireSchematic.png)
+![Wiring Diagram](../../Resources/GpioOneWireFritz.png)
 
 ### Running the Solution
 
