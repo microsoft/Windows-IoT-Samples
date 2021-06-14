@@ -59,7 +59,7 @@ Let's start by wiring up the components on a breadboard. Visit the corresponding
 
 Here is the pinout of the UP Board
 
-![UP Board pinout](../../Resources/UP Board_Pinout.png)
+![UP Board pinout](../../Resources/Upboard_Pinout.png)
 
 
 ```csharp
