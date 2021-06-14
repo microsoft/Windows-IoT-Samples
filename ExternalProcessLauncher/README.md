@@ -38,7 +38,7 @@ The code for the ProcessLauncher sample can be found under: <samples root folder
   
 The sample app when deployed displays a screen similar to this one: 
 
-![App Started](../../Resources/images/ProcessLauncherSample/ProcessLauncher0.png)
+![App Started](../Resources/images/ProcessLauncherSample/ProcessLauncher0.png)
 
 Go ahead, click the **Run Command** button to launch the application specified in the **Command** edit box, SampleConsoleApplication.exe, which is an executable Win32 application built and deployed from the sample app as well.
 
