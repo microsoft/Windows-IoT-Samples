@@ -4,26 +4,26 @@ urlFragment: potentiometer-sensor
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
 description: Connect a rotary potentiometer and LED to your Windows 10 IoT Enterprise device.
 ---
 
 # Potentiometer sensor
 
-This sample shows how to connect a rotary potentiometer and LED to a Upboard. We use a SPI-based ADC (Analog to Digital Converter) to read values from the potentiometer 
+This sample shows how to connect a rotary potentiometer and LED to a UP Board. We use a SPI-based ADC (Analog to Digital Converter) to read values from the potentiometer 
 and control an LED based on the knob position.
 
 ## Parts needed
 - [1 LED](http://www.digikey.com/product-detail/en/C5SMF-RJS-CT0W0BB1/C5SMF-RJS-CT0W0BB1-ND/2341832)
 - [1 330 &#x2126; resistor](http://www.digikey.com/product-detail/en/CFR-25JB-52-330R/330QBK-ND/1636)
 - ADC
-    - Upboard
+    - UP Board
         - [1 MCP3008 10-bit ADC](http://www.microchip.com/wwwproducts/Devices.aspx?dDocName=en010530) or [1 MCP3208 12-bit ADC](http://www.digikey.com/product-search/en?KeyWords=mcp3208%20ci%2Fp&WT.z_header=search_go)
         - [1 Voltage-Level Translator Breakout](https://www.sparkfun.com/products/11771)
 - [1 10k &#x2126; Trimmer Potentiometer](http://www.digikey.com/product-detail/en/3362P-1-103TLF/3362P-103TLF-ND/1232540)
-- Upboard
+- UP Board
 - 1 breadboard and a couple of wires
 - HDMI Monitor and HDMI cable
 
@@ -39,9 +39,9 @@ Below are the pinouts of the MCP3002 and MCP3208 ADCs.
 | ![MCP3002 Pinout](../../Resources/MCP3002.png) | ![MCP3208 Pinout](../../Resources/MCP3208.png) |
 
 
-#### Upboard Pinout
+#### UP Board Pinout
 
-![UpBoard pinout](../../Resources/Upboard_Pinout.png)
+![Up Board pinout](../../Resources/Upboard_Pinout.png)
 
 #### Wiring & Connections
 
@@ -54,12 +54,12 @@ Detailed connection:
 
 The MCP3002 should be connected as follows:
 
-- MCP3002: VDD/VREF - 3.3V on UPBOARD
-- MCP3002: CLK - "SPI CLK" on UPBOARD
-- MCP3002: Dout - "SPI MISO" on UPBOARD
-- MCP3002: Din - "SPI MOSI" on UPBOARD
-- MCP3002: CS/SHDN - "SPI CS0" on UPBOARD
-- MCP3002: Vss - GND on UPBOARD
+- MCP3002: VDD/VREF - 3.3V on UP BOARD
+- MCP3002: CLK - "SPI CLK" on UP BOARD
+- MCP3002: Dout - "SPI MISO" on UP BOARD
+- MCP3002: Din - "SPI MOSI" on UP BOARD
+- MCP3002: CS/SHDN - "SPI CS0" on UP BOARD
+- MCP3002: Vss - GND on UP BOARD
 - MCP3002: CH0 - Potentiometer wiper pin
 
 
@@ -72,14 +72,14 @@ Detailed connection:
 
 The MCP3208 should be connected as follows:
 
-- MCP3208: VDD - 3.3V on UPBOARD
-- MCP3208: VREF - 3.3V on UPBOARD
-- MCP3208: AGND - GND on UPBOARD
-- MCP3208: CLK - "SPI CLK" on UPBOARD
-- MCP3208: Dout - "SPI MISO" on UPBOARD
-- MCP3208: Din - "SPI MOSI" on UPBOARD
-- MCP3208: CS/SHDN - "SPI CS0" on UPBOARD
-- MCP3208: DGND - GND on UPBOARD
+- MCP3208: VDD - 3.3V on UP BOARD
+- MCP3208: VREF - 3.3V on UP BOARD
+- MCP3208: AGND - GND on UP BOARD
+- MCP3208: CLK - "SPI CLK" on UP BOARD
+- MCP3208: Dout - "SPI MISO" on UP BOARD
+- MCP3208: Din - "SPI MOSI" on U PBOARD
+- MCP3208: CS/SHDN - "SPI CS0" on UP BOARD
+- MCP3208: DGND - GND on UP BOARD
 - MCP3208: CH0 - Potentiometer wiper pin
 
 
@@ -97,52 +97,26 @@ If you chose to use the **MCP3008**, you can switch the MCP3208 for the MCP3008 
 
 1. You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from Visual Studio 2019.
 
-### Generate an app package
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- In Solution Explorer, open the solution for your application project.
- Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- Select Sideloading in the first page of the wizard and then click Next.
- On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+1. If you are using UP Board, you have to setup the BIOS GPIO configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+    1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-Steps to follow :
- Open the *_Test folder.
- Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+    1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
+    1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
 
- If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+    1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
 
-### BIOS Settings for UPBOARD
-
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration", make "LPSS SPISupport" as "Enabled" then Click on "GPIO Configuration in Pin Order".
-
-(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
-
-    In this sample make PIN 3 as "OUTPUT" and initial value as "LOW".
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+    1. For more information, please review the [UP Board Firmware Settings.](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf)
  
  
-When you turn the potentiometer knob, you will see the number change on the screen indicating the potentiometer knob position. 
-When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
+1. When you turn the potentiometer knob, you will see the number change on the screen indicating the potentiometer knob position. 
+
+1. When the number is larger than half the ADC resolution (For **MCP3002**, this number is **512**. For **MCP3008** or **MCP3208**, it's **4096**) the LED will turn ON. Otherwise, it turns OFF.
 
 | ----------------------------------------------------------------------------------------- |-| ----------------------------------------------------------------
 | ![App Running LED Off](../../Resources/AppRunning-LEDOff.png)       | | ![App Running LED On](../../Resources/AppRunning-LEDOn.png)  |
@@ -183,7 +157,7 @@ private void InitGpio()
 
 * Finally we write a default value to the pin before setting it as output.
 
-Next, we initialize the SPI bus. This allows the UPBOARD to communicate with the ADC to read in potentiometer positions.
+Next, we initialize the SPI bus. This allows the UP Board to communicate with the ADC to read in potentiometer positions.
 
 ```csharp
 private async Task InitSPI()
@@ -301,5 +275,5 @@ private void LightLED()
 
 * If the potentiometer is rotated more than halfway through its range, we turn on the LED. Otherwise it's turned off.
 
-That's it! Now that you've learned how to use an ADC, you can hook up a variety of analog sensors to your Upboard.
+That's it! Now that you've learned how to use an ADC, you can hook up a variety of analog sensors to your Up Board.
 
