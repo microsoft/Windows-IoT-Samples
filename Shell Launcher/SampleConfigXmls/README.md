@@ -4,9 +4,9 @@ urlFragment: SampleConfigXmls
 languages:
   - xml
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
 description: sample shell launcher configuration xmls using Assigned Access CSP
 ---
 
