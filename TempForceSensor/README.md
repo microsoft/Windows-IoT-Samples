@@ -47,12 +47,12 @@ This sample assumes that UP Board has already been set up as below:
 
 Below are the pinouts of the MCP3002 and MCP3208 analog-to-digital converters (ADC) used in this sample.
 
-![Electrical Components](../../Resources/MCP3002.png)
-![Electrical Components](../../Resources/MCP3208.png)
+![Electrical Components](../Resources/MCP3002.png)
+![Electrical Components](../Resources/MCP3208.png)
 
 * UP Board
 
- ![UP Board Pinout](../../Resources/UP Board_Pinout.png)
+ ![UP Board Pinout](../Resources/Upboard_Pinout.png)
 
 ## Parts Connection
 
@@ -63,8 +63,8 @@ and connect the other Leg to `CH0` on MCP3002
 
 Detailed connection:
 
-![Overall Schematics](../../Resources/temp_mcp3002.png);
-![Overall Schematics](../../Resources/force_mcp3002.png);
+![Overall Schematics](../Resources/temp_mcp3002.png);
+![Overall Schematics](../Resources/force_mcp3002.png);
 
 With each model of UP Board, the pin layout might be a little different. But the pin connection with MCP3002 should be as below:
 
@@ -80,7 +80,7 @@ With each model of UP Board, the pin layout might be a little different. But the
 
 Detailed connection:
 
-![Overall Schematics](../../Resources/OverallCon_mcp3208.png )
+![Overall Schematics](../Resources/OverallCon_mcp3208.png )
 
 With each model of UP Board, the pin layout might be a little different.
 But the pin connection with MCP3208 should be as below:
@@ -224,7 +224,7 @@ Click the Start button to search for the app by name, and then launch it.
 If you are using Temp sensor, you can try to hold the sensor or apply some heat on it to see how the output change. If you are using Force sensor, you can hold it hard or gentle to see
 how the output change on the screen. You can also switch the sensor to a light sensor to play around with it.
 
-[Deploy temperature sensor](../../Resources/Deploy.png)
+[Deploy temperature sensor](../Resources/Deploy.png)
 
 ## Additional Notes
 
