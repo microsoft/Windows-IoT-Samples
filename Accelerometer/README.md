@@ -31,7 +31,7 @@ You'll need a few components:
 
 #### UP Board
 If you have UP Board, we need to hook up power, ground, and the SPI lines to the accelerometer.
- See the [UP Board pin mapping page](../Resources/PinMappingsUP Board.png) for more details on the UP Board IO pins.
+ See the [UP Board pin mapping page](../Resources/PinMappingsUpBoard.png) for more details on the UP Board IO pins.
 
 **Note: Make sure to power off the UP Board when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
@@ -48,11 +48,11 @@ The ADXL345 breakout board has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../Resources/breadboard_assembled_UP Board1.png)
+![Breadboard connections](../Resources/breadboard_assembled_upboard1.png)
 
 Here are the schematics:
 
-![Accelerometer schematics](../Resources/schematics_Upboard.png)
+![Accelerometer schematics](../Resources/schematics_upboard.png)
 
 ### Deploy the app 
 
