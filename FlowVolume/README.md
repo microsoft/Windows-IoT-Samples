@@ -57,7 +57,7 @@ For reference, here is the pinout of the UP Board:
 1. Click the Start button to search for the app by name, and then launch it.
 1. The app will deploy and start on the Windows IoT device, and you should see a gauge control fill the screen.
 
-![](../../Resources/Screenshot.jpg)
+![](../Resources/Screenshot.jpg)
 
 The easiest way to test is to gently blow in one end of the flow meter.  The application listens for data coming from the device and the gauge should move up and back down as the flow rises and then stops.
 
