@@ -1,54 +1,38 @@
 ---
 page_type: sample
-urlFragment: iotEnterprise-defaultapp
+urlFragment: iotcore-defaultapp
 languages: 
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: The current IoT Enterprise Default App, a fully featured sample app for Windows 10 IoT Enterprise.
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: The current IoT Core Default App, a fully featured sample app for Windows 10 IoT Enterprise.
 ---
+
 # Windows 10 IoT Enterprise Default App Overview
 
 This article will give you a rundown of the different features that the Windows 10 IoT Enterprise Default App offers as well as how you can leverage these different features for your own applications.
 
 Windows 10 IoT Enterprise Default App looks like this:
 
-![Screenshot of the IoT Enterprise Default App](../Resources/DeviceInfoPage-Screenshot.png)
+![Screenshot of the IoT Enterprise Default App](../../Resources/DeviceInfoPage-Screenshot.png)
 
 This article will give you a rundown of the different features that the Windows 10 IoT Enterprise Default App offers as well as how you can leverage these different features for your own applications.
 
-## Leveraging the IoT Enterprise Default App 
+## Leveraging the Windows IoT Enterprise Default App 
 
-The IoT Enterprise Default App can be customized and extended, or you can use the source code as an example for your own app. 
+The Windows IoT Enterprise Default App can be customized and extended, or you can use the source code as an example for your own app. 
 
-To try this out for yourself, download the zip of our samples or check out the code for the IoT Enterprise Default App. Open the project from Visual Studio 2019, 
+To try this out for yourself, download the zip of our samples or check out the code for the Windows IoT Enterprise Default App. Open the project from Visual Studio 2019.  
 
-For UpBoard, set the target architecture to 'x64'.
+For UP Board, set the target architecture to 'x64'.
 
-### Generate an app package
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
+Click the Start button to search for the app by name, and then launch it.
 
 As shown below, in some cases you may configure default settings and features on your customer system on behalf of the end user. However, if you turn these settings and features on by default or if diagnostics are above the basic setting, you must:
 
@@ -61,8 +45,8 @@ As shown below, in some cases you may configure default settings and features on
 
 The out-of-box experience for the IoT Enterprise Default App is as lean as it gets. The first pages will ask for a default language and wi-fi settings. From there, in order for your app to be GDPR-compliant, you must have a diagnostic data screen and, if you're planning to track location, you will need to have a location permissions screen too. Examples of both are shown below. 
 
-![Location settings for OOBE](../Resources/OOBE3.jpg)
-![Diagnostic settings for OOBE](../Resources/OOBE4.jpg)
+![Location settings for OOBE](../../Resources/OOBE3.jpg)
+![Diagnostic settings for OOBE](../../Resources/OOBE4.jpg)
 
 ## Command Bar
 The Command Bar is the persistant horizonatal bar located at the bottom of the screen. This provides easy access to the following funtionality:
@@ -74,7 +58,7 @@ The Command Bar is the persistant horizonatal bar located at the bottom of the s
 
 There are a lot buttons in the Command Bar, and sometimes those buttons can be confusing or hidden. To expand the Command Bar and access those buttons, please press the menu button in the bottom right:
 
-![How to expand Command Bar](../Resources/CommandBar.gif)
+![How to expand Command Bar](../../Resources/CommandBar.gif)
 
 ## Start Menu - Play
 
