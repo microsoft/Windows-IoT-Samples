@@ -14,7 +14,7 @@ description: "This sample shows how to read from the DHT11 from a Universal Wind
 
 | Minimum SDK Version | 19041 |
 |---------------------|-------|
-| Minimum OS Version  | 19041 |
+| Minimum OS Version  | 15063 |
 
 This sample has been updated to use the `GpioChangeReader` API which is new as of build 19041. You must install SDK version 19041 or later to build this sample.
 
