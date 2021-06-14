@@ -7,8 +7,8 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="31f136b0-653a-4969-a9d8-db3a11c9332f"
-    Publisher="CN=I2CPortExpander"
+    Name="I2CPortExpander"
+    Publisher="CN=MSFT"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="31f136b0-653a-4969-a9d8-db3a11c9332f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
