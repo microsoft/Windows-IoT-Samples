@@ -14,7 +14,7 @@ description: Make an LED blink with the push of a button with Windows 10 IoT Ent
 
 In this sample, we connect a push button to your UP Board and use it to control an LED. We use GPIO interrupts to detect when the button is pressed and toggle the LED in response.
 
-![Push Button Image](../../Resources/PushButtonSample.png)
+![Push Button Image](../Resources/PushButtonSample.png)
 
 Also, be aware that the GPIO APIs are only available on boards, so this sample cannot run on your desktop.
 
