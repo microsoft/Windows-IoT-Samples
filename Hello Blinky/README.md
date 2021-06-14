@@ -23,7 +23,7 @@ We will create a simple LED blinking app and connect a LED to your Windows 10 Io
 
 * * *
 
-1. Open the application in Visual Studio 2019
+1. Open the application in [Visual Studio 2019](https://www.visualstudio.com/downloads/)
 2. Set the architecture in the toolbar dropdown. If you’re building for Up Board, select `x64`.
 
 ## Step 2: Connect the LED to your Windows IoT device
