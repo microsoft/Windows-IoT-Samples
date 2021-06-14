@@ -1,43 +1,44 @@
+---
+page_type: sample
+urlFragment: memory-status
+languages:
+  - cpp
+products:
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: Create a console app that monitors memory usage on devices running Windows 10 IoT Enterprise.
+---
 
 # Memory Status Monitor
 
-This sample is intended to show how to create a console application that can be used to query the memory usage on your Windows IoT Enterprise device (UPBoard).
-
-### Usage
-
-1. You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk.
-2. Open the project in Visual Studio 2019.
-
-### Deploy your app  
-  
-If you're building for UPBoard, select `x64` as the architecture.   
-  
-Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
+This sample is intended to show how to create a console application that can be used to query the memory usage on your Windows 10 IoT Enterprise device.
 
 
-### Generate an app package
+## Step 1: Load the project in Visual Studio 2019
+1. Open the application in Visual Studio 2019
+2. Set the architecture in the toolbar dropdown. If you’re building for the UP Board, select x64.
+3. Select **Local Machine** to point to IoT device and hit F5 to deploy to your device.
 
-Steps to follow :
 
- In Solution Explorer, open the solution for your application project.
- Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- Select Sideloading in the first page of the wizard and then click Next.
- On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+## Step 2: Deploy your app  
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
-Steps to follow :
- Open the *_Test folder.
- Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+1. If you are using an UP Board, you have to setup the BIOS UART configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
- 
+    1. Once you power on the UP board, select the Del or F7 key on your keyboard to enter the BIOS setting.
+
+    1. Navigate to Boot > OS Image ID tab, and select Windows 10 IoT Core.
+
+    1. Navigate to the Advance tab and select the Hat Configuration and select GPIO Configuration in Pin Order.
+
+    1. Configure the Pins you are using in the sample as INPUT or OUTPUT.
+
+    1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+
+1. Click the Start button to search for the app by name, and then launch it.
 
 * To add some functionality to our console, add the following memory status query and display code:
 
