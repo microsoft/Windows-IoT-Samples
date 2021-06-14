@@ -1,5 +1,18 @@
+---
+page_type: sample
+urlFragment: appservice-blinky
+languages:
+  - csharp
+  - cpp
+products:
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: Create a simple Blinky app service and connect a LED to your Windows IoT Enterprise device.
+---
+
 # Using an app service to blink an LED
-We’ll create a simple Blinky [app service](https://docs.microsoft.com/en-us/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service) and connect a LED to your Windows IoT Enterprise device (Up-Board). We'll also create a simple app service client that blinks the LED. Be aware that the GPIO APIs are only available on Windows IoT Enterprise, so this sample cannot run on your desktop.
+We’ll create a simple Blinky [app service](https://docs.microsoft.com/en-us/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service) and connect a LED to your Windows IoT Enterprise device (Up-Board). We'll also create a simple app service client that blinks the LED. Be aware that the GPIO APIs are only available on the board, so this sample cannot run on your desktop.
 
 ## Set up your hardware
 ___
@@ -9,61 +22,37 @@ Note that the app will not run successfully if it cannot find any available GPIO
 ## Load the projects in Visual Studio
 ___
 
-* You can find the source code for this sample by downloading a zip of all of our samples in WIndows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`. 
+* You can find the source code for this sample by downloading a zip of all of our samples in Windows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`. 
 * Make a copy of the folder on your disk and open the projects from Visual Studio.  
 * BlinkyService.sln implements the app service and must be started first.  
 * BlinkyClient.sln implements the app service client.
 * Verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService.
-* If it doesnot any value output, You will get the value by marking the breakpoint in debug mode for #StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
+* If it does not have any value output, you will get the value by marking the breakpoint in debug mode for #StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
 
 ## Deploy your app
 
 * * *
 
-With the application open in Visual Studio 2019, set the architecture in the toolbar dropdown. If you’re building for UpBaord, select `x64`.
+With the application open in Visual Studio 2019, set the architecture in the toolbar dropdown. If you’re building for UP Board, select `x64`.
 
-### Generate an app package
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+### BIOS Settings for UP Board
+If you are using an UP Board, you have to setup the BIOS GPIO configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+
+1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
   
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-
- If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
-
-### BIOS Settings for UPBOARD
-
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
-
-(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
-
-    In this sample make PIN 15 as "OUTPUT" and initial value as "HIGH".
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
- 
- Click the Start button to search for the app by name, and then launch it.
+1. Click the Start button to search for the app by name, and then launch it.
 
 ## Let's look at the code
 ___
@@ -227,7 +216,7 @@ await connection.SendMessageAsync(message);
 
 Remember that we connected the other end of the LED to the 3.3 Volts power supply, so we need to drive the pin to low to have current flow into the LED.
 
-## Note
+## Additional Notes
 
 Make sure that LowLevel Capabilities in set in PackageAppManifest.
 * To do that go to Package.appxmanifesto and view the code
