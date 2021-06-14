@@ -40,27 +40,27 @@ Let's start by wiring up the components on the breadboard as shown in the diagra
 
 **Note: Make sure to power off the UP Board when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
-![Breadboard connections](../../Resources/I2cPortExpanderDrawing_bb_750.png)
+![Breadboard connections](../Resources/I2cPortExpanderDrawing_bb_750.png)
 
 
 Here is the schematic:
 
-![Circuit Schematic](../../Resources/I2cPortExpanderDrawing_schem.png)
+![Circuit Schematic](../Resources/I2cPortExpanderDrawing_schem.png)
 
 
 ## Step 2: Connecting the MCP23008 Port Expander
 
 Place the MCP23008 Port Expander on your breadboard such that it straddles the center gap of the breadboard.
 
-![Breadboard IC Placement](../../Resources/BreadBoardICPlacement.png)
+![Breadboard IC Placement](../Resources/BreadBoardICPlacement.png)
 
  Locate pin 1 of the port expander by finding the notch on the IC. If you orient the IC so that the end with the notch is facing left, pin 1 will be the first pin in the lower left below the notch.
 
-![MCP23008 PinLocations](../../Resources/MCP23008_PortExpander_bb.png)
+![MCP23008 PinLocations](../Resources/MCP23008_PortExpander_bb.png)
 
 The pinout of the MCP23008 is shown below and can be found in the [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/21919e.pdf).
 
-![MCP23008 Pinout](../../Resources/MCP23008_Pinout.png)
+![MCP23008 Pinout](../Resources/MCP23008_Pinout.png)
 
 
 Make the following connections on the MCP23008 Port Expander:
@@ -112,7 +112,7 @@ Leave the remaining pins on the MCP23008 unconnected.
 
 We need to hook up power, ground, and the I2C lines from on the UP Board to the MCP23008 Port Expander and the breadboard.
 
-![UP Bboard pinout](../../Resources/Upboard_Pinout.png)
+![UP Bboard pinout](../Resources/Upboard_Pinout.png)
 
 * Pin 1 **3.3V PWR** Connect to the voltage supply rail on the side of the breadboard (red stripe)
 
