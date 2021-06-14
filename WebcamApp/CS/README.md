@@ -1,15 +1,25 @@
+---
+page_type: sample
+urlFragment: webcam-app
+languages:
+  - csharp
+products:
+  - windows
+  - windows-iot
+description: Create an app that initializes a web cam, takes pictures, and records video and audio.
+---
 
 # Basic webcam app 
 
 Initialize a webcam, take pictures, and record video and audio.  
   
-### Load the project in Visual Studio  
+## Step 1: Load the project in Visual Studio  
   
 You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from Visual Studio.  
   
 This is a Universal Windows application  
   
-### Connecting your webcam  
+## Step 2: Connect your webcam  
   
 You'll need:  
   
@@ -17,43 +27,17 @@ You'll need:
   
 Connect the web cam to one of USB ports on the IoT Device  
   
-### Deploy your app  
+## Step 3: Deploy your app  
   
-If you're building for UPBoard, select `x64` as the architecture.   
+If you're building for UP Board, select `x64` as the architecture.   
   
 Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 
-### Generate an app package
+## Step 4: [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+## Step 5: [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- 
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- 
- * Select Sideloading in the first page of the wizard and then click Next.
- 
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- 
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package)  
-  
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- 
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- 
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)  
-  
- Click the Start button to search for the app by name, and then launch it.
- 
-
-### Test your app   
+## Step 6: Test your app   
   
 The sample app when deployed displays 2 buttons `Initialize Audio and Video` and `Initialize Audio Only`. Below is a description of the actions available when the buttons are clicked.  
   
@@ -67,7 +51,7 @@ The sample app when deployed displays 2 buttons `Initialize Audio and Video` and
   
 * `Start Audio Record` when clicked will begin recording. When done press `Stop Audio Record` to save the audio. Audio is automtically played back.  
   
-**NOTE:** On UPBoard , audio output is available via HDMI.  
+**NOTE:** On UP Board, audio output is available via HDMI.  
   
 Congratulations! You created your first web cam app.  
  
@@ -191,7 +175,7 @@ When this button is clicked **recordVideo_Click** is called and we read the cont
   
 The code below shows how we accomplish this. Once the recording is stopped, we store the video in the default storage location and play it back in the XAML canvas element.  
   
-**NOTE:** On UPBoard , audio output is available via HDMI.
+**NOTE:** On UP Board, audio output is available via HDMI.
   
 ```csharp  
 private async void recordVideo_Click(object sender, RoutedEventArgs e)  
@@ -245,7 +229,7 @@ When this button is clicked **recordAudio_Click** is called and we read the cont
   
 The code below shows how we accomplish this. Once the recording is stopped, we store the audio in the default storage location and play it back in the XAML canvas element.  
   
-**NOTE:** On UPBoard , audio output is available via HDMI.
+**NOTE:** On UP Board, audio output is available via HDMI.
   
 ```csharp  
 private async void recordAudio_Click(object sender, RoutedEventArgs e)  
