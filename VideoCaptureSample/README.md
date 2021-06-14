@@ -48,7 +48,7 @@ The sample app when deployed displays 3 buttons `Start Capturing`, `End Capturin
 * Reads recorded video data from cameraCapture.wmv file.
 * View stream will appear under Video Review Window section of the canvas.
 
-**NOTE:** On UP Board , audio output is available via HDMI.
+**NOTE:** On UP Board, audio output is available via HDMI.
 
 Congratulations! You created your first video recording app.
 
