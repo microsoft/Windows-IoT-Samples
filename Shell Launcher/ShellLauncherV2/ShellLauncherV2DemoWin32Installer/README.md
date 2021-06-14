@@ -4,9 +4,9 @@ urlFragment: ShellLauncherV2DemoWin32Installer
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
 description: sample UWP app demonstrating Shell Launcher V2 on Windows 10 Enterprise from 1903 release
 ---
 
