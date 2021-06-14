@@ -4,21 +4,23 @@ urlFragment: virtual-microphone-array-driver
 languages:
   - cpp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: An app for creating and installing a device driver for virtualaudiomicarray.
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise 
+description: An app service to blink an LED and a client app to call it with Windows 10 IoT Core.
 ---
 
 # Virtual Audio Microphone Array
 
-If you are not very familiar with Windows universal drivers yet, we strongly encourage you to start by reading the following materials:
+If you are not very familiar with Windows universal drivers yet, we strongly encourage you to start by checking out the following video:
 
 * [Building Universal Drivers - Channel 9 Video](https://channel9.msdn.com/Blogs/WinHEC/Building-a-Universal-Driver)
 
-## Did you set up your development environment yet?
+## Set Up
 
-* Additionally, you will need to install the Windows Driver Kit (WDK) which you can download from [here](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). 
+* Download [Visual Studio 2019](https://www.visualstudio.com/downloads/)
+
+* Install [Windows Driver Kit (WDK)](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). 
 
 ## Overview
 We will now be walking you through the process of creating and installing a device driver that will run on any Windows 10 IoT Enterprise device.  This driver will be specifically built to be a universal driver.
@@ -36,5 +38,5 @@ Before running the sample, the INF must be updated to setup registry keys under 
 Limitations in the sample:
 * All input streams must use the same format - this sample performs no format conversion.
 * There is no mechanism to control the gain of the input streams.
-* The metadata for the microphone array geometry is hardcoded and CMicArrayMiniportTopology::PropertyHandlerMicArrayGeometry should be
- updated in micarraytopo.cpp should be updated to reflect the actual physical characteristics of the microphone array.
+* The metadata for the microphone array geometry is hardcoded
+* CMicArrayMiniportTopology::PropertyHandlerMicArrayGeometry should be updated in micarraytopo.cpp to reflect the actual physical characteristics of the microphone array.
