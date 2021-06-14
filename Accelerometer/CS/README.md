@@ -31,7 +31,7 @@ You'll need a few components:
 
 #### UP Board
 If you have UP Board, we need to hook up power, ground, and the SPI lines to the accelerometer.
- See the [UP Board pin mapping page](../Resources/PinMappingsUpBoard.png) for more details on the UP Board IO pins.
+ See the [UP Board pin mapping page](../../Resources/PinMappingsUpBoard.png) for more details on the UP Board IO pins.
 
 **Note: Make sure to power off the UP Board when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
