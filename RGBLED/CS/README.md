@@ -1,8 +1,20 @@
+---
+page_type: sample
+urlFragment: rgb-led
+languages:
+  - csharp
+products:
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: A sample that makes an LED blink red, green, and blue with Windows 10 IoT Enterprise.
+---
+
 # RGB LED Sample
 
-In this sample, we will connect a Tri-color LED to UpBoard. The LED will blink changing colors from Red, Blue, and Green.
+In this sample, we will connect a Tri-color LED to Windows 10 IoT Enterprise compatible device (UP Board). The LED will blink changing colors from Red, Blue, and Green.
 
-Also, be aware that the GPIO APIs are only available on Windows IoT Enterprise Board, so this sample cannot run on your desktop.
+Also, be aware that the GPIO APIs are only available on boards, so this sample cannot run on a desktop.
 
 
 ### Components
@@ -17,7 +29,7 @@ You will need the following components :
 
 * a breadboard and several male-to-female and male-to-male connector wires
 
-### Connect to your Device
+## Step 1: Connect to your Device
 
 Let's start by wiring up the components on the breadboard as shown in the diagram below.
 
@@ -54,54 +66,31 @@ Here is the pinout of the UpBoard:
 
 ![UpBoard pinout](../../Resources/Upboard_Pinout.png)
 
-### Deploy your app
+## Step 2: Deploy your app
 
 You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from Visual Studio 2019.  
   
 This is a Universal Windows application 
 
-### Generate an app package
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+If you are using the UP Board, you have to setup the BIOS GPIO configuration.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+### BIOS Settings for UP Board
 
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
-If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
 
-### BIOS Settings for UPBOARD
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
 
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
+1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
-(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
-
-    In this sample make PIN 3, 5, 7 as "OUTPUT" and initial value as "LOW".
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+1. Click the **Start** button to search for the app by name, and then launch it.
  
 ### Let's look at the code
 
