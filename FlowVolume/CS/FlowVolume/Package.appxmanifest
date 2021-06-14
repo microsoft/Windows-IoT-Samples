@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="1134320c-e8ab-4ee5-8f75-0b6773e9f703"
-    Publisher="CN=FlowVolume"
+    Name="FlowVolume"
+    Publisher="CN=MSFT"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="1134320c-e8ab-4ee5-8f75-0b6773e9f703" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>FlowVolume</DisplayName>
-    <PublisherDisplayName>marksn</PublisherDisplayName>
+    <PublisherDisplayName>MSFT</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
