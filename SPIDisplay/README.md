@@ -31,7 +31,7 @@ First, we need to wire up the display to your device. You'll need a few componen
 
 * <a name="SPI_Display"></a>If you are using a DragonBoard 410c, you'll also need a [8-channel Bi-directional Logic Level Converter](http://www.adafruit.com/products/395) from Adafruit with pin headers soldered on
 
-![Electrical Components](../../Resources/components.png)
+![Electrical Components](../Resources/components.png)
 
 #### UP Board
 For the UP Board, we need to hook up power, ground, SPI, and a few GPIO pins to the OLED display.
@@ -51,11 +51,11 @@ The OLED display has 8 IO pins, connect them as follows:
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../../Resources/breadboard_assembled_UP Board.png)
+![Breadboard connections](../Resources/breadboard_assembled_UP Board.png)
 
 Here are the schematics:
 
-![SPI schematics](../../Resources/schematics_UP Board1.png)
+![SPI schematics](../Resources/schematics_UP Board1.png)
 
 ### Step 3: Deploy and run the app
 
@@ -106,7 +106,7 @@ Next, right-click on the **SPIDisplay** project in **Solution Explorer** and sel
  
 1. You can now type into the app and have the text mirrored on the attached OLED display.
 
-![SPI running](../../Resources/spidisplay_screenshot.png)
+![SPI running](../Resources/spidisplay_screenshot.png)
 
 Congratulations! You've connected a SPI graphics display.
 
