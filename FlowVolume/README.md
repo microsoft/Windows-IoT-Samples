@@ -24,11 +24,11 @@ You’ll need a few components:
 
 *   a Hall-effect flow sensor (we used a FL-S402B flow meter by DIGITEN)
 
-![Flow Sensor](../../Resources/FlowSensor.jpg)
+![Flow Sensor](../Resources/FlowSensor.jpg)
 
 *   a microcontroller board running Windows IoT Enterprise (we used a UP Board) with a free GPIO pin
 
-![Assembled Components](../../Resources/Assembled.jpg)
+![Assembled Components](../Resources/Assembled.jpg)
 
 ### For UP Board
 
@@ -39,7 +39,7 @@ You’ll need a few components:
 
 For reference, here is the pinout of the UP Board:
 
-![](../../Resources/UP Board_Pinout.png)
+![](../Resources/upboard_Pinout.png)
 
 ## Step 2: Deploy your app
 
