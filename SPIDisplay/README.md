@@ -4,60 +4,60 @@ urlFragment: spi-display
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot- Enterprise
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
 description: Write lines of text to an SPI LED display.
 ---
 
 # SPI display
 
-In this sample, we interface a SPI based [OLED display](http://www.adafruit.com/product/938) to your Upboard. We then create an app that lets us write lines of text to the display. Step-by-step instructions are provided, so no background knowledge of SPI is needed. However, if you want to learn more, SparkFun provides a great [tutorial on SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi).
+In this sample, we interface a SPI based [OLED display](http://www.adafruit.com/product/938) to your Windows 10 IoT Enterprise device. We then create an app that lets us write lines of text to the display. 
 
-### Load the project in Visual Studio
+Step-by-step instructions are provided, so no background knowledge of SPI is needed. However, if you want to learn more, SparkFun provides a great [tutorial on SPI](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi).
+
+## Step 1: Load the project in Visual Studio
 
 You can find the source code for this sample by downloading a zip of all of our samples, and navigate to the `samples-develop\SPIDisplay`.  Make a copy of the folder on your disk and open the project from Visual Studio. 
 Note that this app requires a device with a physical SPI port and will not work if running in an emulated environment.
 
-### Connect the SPI Display to your device
+## Step 2: Connect the SPI Display to your device
 
 First, we need to wire up the display to your device. You'll need a few components:
 
 * <a name="SPI_Display"></a>a [Monochrome 1.3" 128x64 OLED graphic display](http://www.adafruit.com/product/938) from Adafruit with pin headers soldered on
 
-* a breadboard and several male-to-female connector wires (Upboard)
+* a breadboard and several male-to-female connector wires (UP Board)
 
 * <a name="SPI_Display"></a>If you are using a DragonBoard 410c, you'll also need a [8-channel Bi-directional Logic Level Converter](http://www.adafruit.com/products/395) from Adafruit with pin headers soldered on
 
-Visit the **Upboard** sections below depending on which device you have:
+![Electrical Components](../../Resources/components.png)
 
-![Electrical Components](../Resources/components.png)
+#### UP Board
+For the UP Board, we need to hook up power, ground, SPI, and a few GPIO pins to the OLED display.
 
-#### Upboard
-For the Upboard, we need to hook up power, ground, SPI, and a few GPIO pins to the OLED display.
-
-**Note: Make sure to power off the Upboard when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
+**Note: Make sure to power off the UP Board when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
 The OLED display has 8 IO pins, connect them as follows:
 
-1. **DATA:**  Connect to MOSI on the Upboard (Pin 19). This is the SPI master data out line.
-2. **CLK:**     Connect to SCLK on the Upboard (Pin 23). This is the SPI clock line.
-3. **SA0/DC:**   Connect to GPIO 22 on the Upboard (Pin 26). This is the Data/Command line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
-4. **RST:** Connect to GPIO 0 on the Upboard (Pin 3). This is the hardware Reset line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
-5. **CS:** Connect to CE0 on the Upboard (Pin 24). This is the SPI chip select line.
+1. **DATA:**  Connect to MOSI on the UP Board (Pin 19). This is the SPI master data out line.
+2. **CLK:**     Connect to SCLK on the UP Board (Pin 23). This is the SPI clock line.
+3. **SA0/DC:**   Connect to GPIO 22 on the UP Board (Pin 26). This is the Data/Command line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
+4. **RST:** Connect to GPIO 0 on the UP Board (Pin 3). This is the hardware Reset line for the display. (See the [datasheet](http://www.adafruit.com/datasheets/SSD1306.pdf){:target="_blank"} for more information about the display pin functions)
+5. **CS:** Connect to CE0 on the UP Board (Pin 24). This is the SPI chip select line.
 6. **3V3:**  Leave unconnected. The display has its own on-board power regulator which provides it with 3.3V
-7. **VIN:**  Connect 5V the Upboard (Pin 2).
-8. **GND:**  Connect to ground on Upboard (Pin 6).
+7. **VIN:**  Connect 5V the UP Board (Pin 2).
+8. **GND:**  Connect to ground on UP Board (Pin 6).
 
 Here are the connections shown on a breadboard:
 
-![Breadboard connections](../Resources/breadboard_assembled_upboard.png)
+![Breadboard connections](../../Resources/breadboard_assembled_UP Board.png)
 
 Here are the schematics:
 
-![SPI schematics](../Resources/schematics_upboard1.png)
+![SPI schematics](../../Resources/schematics_UP Board1.png)
 
-### Deploy and run the app
+### Step 3: Deploy and run the app
 
 When everything is set up, power your device back on, and open up the sample app in Visual Studio. Configure the code depending on which device you are using.
 
@@ -72,9 +72,9 @@ public sealed partial class MainPage : Page
         //private const Int32 DATA_COMMAND_PIN = 3;           /* We use GPIO 3 since it's conveniently near the SPI pins  */
         //private const Int32 RESET_PIN = 4;                  /* We use GPIO 4 since it's conveniently near the SPI pins  */
 
-        /* Uncomment for Upboard */
-        //private const string SPI_CONTROLLER_NAME = "SPI2";  /* For Upboard, use SPI2                             */
-        //private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Upboard        */
+        /* Uncomment for UP Board */
+        //private const string SPI_CONTROLLER_NAME = "SPI2";  /* For UP Board, use SPI2                             */
+        //private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the UP Board        */
         //private const Int32 DATA_COMMAND_PIN = 22;          /* We use GPIO 22 since it's conveniently near the SPI pins */
         //private const Int32 RESET_PIN = 0;                 /* We use GPIO 0 */
 
@@ -90,44 +90,23 @@ public sealed partial class MainPage : Page
 
 Next, right-click on the **SPIDisplay** project in **Solution Explorer** and select **"Set as StartUp Project"**.
 
-### Generate an app package
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+### BIOS Settings for UP Board 
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+	
+    1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+	
+  	1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **LPSS SPISupport** as **Enabled**.
 
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-
-### BIOS Settings for UPBOARD 
-
-Steps to follow:
+  	1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
  
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and make "LPSS SPISupport" as "Enabled".
+1. You can now type into the app and have the text mirrored on the attached OLED display.
 
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
- 
-You can now type into the app and have the text mirrored on the attached OLED display.
-
-![SPI running](../Resources/spidisplay_screenshot.png)
+![SPI running](../../Resources/spidisplay_screenshot.png)
 
 Congratulations! You've connected a SPI graphics display.
 
