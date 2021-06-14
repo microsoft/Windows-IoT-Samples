@@ -6,29 +6,30 @@ languages:
   - cpp
   - vb
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
 description: A sample that shows how to make an LED attached to a GPIO pin blink on and off from a background service for Windows 10 IoT Enterprise.
 ---
 
 # "Hello, blinky!" background service
 
-We'll create a simple Blinky app and connect a LED to your Windows IoT Enterprise device (UpBoard).  Be aware that the GPIO APIs are
-only available on Windows IoT Enterprise, so this sample cannot run on your desktop.
+We'll create a simple Blinky app and connect a LED to your Windows IoT Enterprise device (UP Board). 
+
+Be aware that the GPIO APIs are only available on the board, so this sample cannot run on your desktop.
 
 ## Load the project in Visual Studio
 ___
 
 You can find the source code for this sample by downloading a zip of all of our samples and navigating to the `samples\HelloBlinkyBackground`.  The sample code is available in either C++ or C#, however the documentation here only details the C# variant. Make a copy of the folder on your disk and open the project from Visual Studio 2019.
 
-Make sure you connect the LED to your board. Go back to the basic 'Blinky'if you need guidance.
+Make sure you connect the LED to your board. Go back to the basic 'Blinky' if you need guidance.
 
 Note that the app will not run successfully if it cannot find any available GPIO ports.
 
-Once the project is open and builds, the next step is to [deploy] the application to your device.
+Once the project is open and builds, the next step is to deploy the application to your device.
 
-When everything is set up, you should be able to press F5 from Visual Studio.  The Blinky app will deploy and start on the Windows IoT device.
+When everything is set up, you should be able to press *F5* from Visual Studio.  The Blinky app will deploy and start on the Windows IoT device.
 
 ## Let's look at the code
 ___
@@ -117,7 +118,7 @@ this.pin.Write(GpioPinValue.High);
 
 Remember that we connected the other end of the LED to the 3.3 Volts power supply, so we need to drive the pin to low to have current flow into the LED.
 
-## Note
+## Additional Notes
 
 Make sure that LowLevel Capabilities in set in PackageAppManifest.
 * To do that go to Package.appxmanifesto and view the code
