@@ -7,7 +7,7 @@ products:
   - Windows 10
   - Windows IoT 
   - Windows 10 IoT Enterprise
-description: Create a simple notepad app service as well as two simple app service clients for Windows 10 IoT Core.
+description: Create a simple notepad app service as well as two simple app service clients for Windows 10 IoT Enterprise.
 ---
 
 # Using an app service with multiple clients
