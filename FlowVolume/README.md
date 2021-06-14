@@ -4,19 +4,19 @@ urlFragment: flow-volume
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: This sample demonstrates how to use a relatively inexpensive device and a Upboard to measure the volume of liquid flowing through a hose.
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: This sample demonstrates how to use a relatively inexpensive device and a UP Board to measure the volume of liquid flowing through a hose.
 ---
 
 # Flow Volume
 
-In this sample, we will demonstrate how to use a relatively inexpensive device and a Upboard to measure the volume of liquid flowing through a hose.
+In this sample, we will demonstrate how to use a relatively inexpensive device and a UP Board to measure the volume of liquid flowing through a hose.
 
 Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise, so this sample cannot run on your desktop.
 
-## Set up your hardware
+## Step 1: Set up your hardware
 ___
 The hardware setup for this sample is relatively simple.
 
@@ -24,75 +24,40 @@ You’ll need a few components:
 
 *   a Hall-effect flow sensor (we used a FL-S402B flow meter by DIGITEN)
 
-![Flow Sensor](../Resources/FlowSensor.jpg)
+![Flow Sensor](../../Resources/FlowSensor.jpg)
 
-*   a microcontroller board running Windows IoT Enterprise (we used a Upboard) with a free GPIO pin
+*   a microcontroller board running Windows IoT Enterprise (we used a UP Board) with a free GPIO pin
 
-![Assembled Components](../Resources/Assembled.jpg)
+![Assembled Components](../../Resources/Assembled.jpg)
 
-### For Upboard
+### For UP Board
 
-1.  Connect the red wire to 3.3V (pin 1 on the expansion header) on the Upboard.
+1.  Connect the red wire to 3.3V (pin 1 on the expansion header) on the UP Board.
 2.  Connect the black wire to ground (pin 9).
 3.  Connect the yellow wire, the data pin, to the GPIO-2 pin that we will read from (we used pin 7 for convenience, since it is right there between pins 1 and 9).
 4.  Connect the monitor to your device (we used an HDMI cable to connect our Upbaord to a standard monitor).
 
-For reference, here is the pinout of the Upboard:
+For reference, here is the pinout of the UP Board:
 
-![](../Resources/Upboard_Pinout.png)
+![](../../Resources/UP Board_Pinout.png)
 
-## Deploy your app
+## Step 2: Deploy your app
 
-1.  With the application open in Visual Studio, set the architecture in the toolbar dropdown. We use `x64` since we used the Upboard.
+1. With the application open in Visual Studio, set the architecture in the toolbar dropdown. We use `x64` since we used the UP Board.
+1. When everything is set up, you should be able to press **F5** from Visual Studio. If there are any missing packages that you did not install during setup, Visual Studio may prompt you to acquire those now. 
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
+1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
+1. If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+1. Select **Pin 2** as **INPUT**.
+1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+1. Click the Start button to search for the app by name, and then launch it.
+1. The app will deploy and start on the Windows IoT device, and you should see a gauge control fill the screen.
 
-When everything is set up, you should be able to press F5 from Visual Studio. If there are any missing packages that you did not install during setup, Visual Studio may prompt you to acquire those now. 
-
-### Generate an app package
-
-Steps to follow :
-
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
-
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-
- If you are using UPBOARD, you have to setup the BIOS GPIO configuration.
-
-### BIOS Settings for UPBOARD
-
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3)	Under the "Advance" Tab:
-    Select "Hat Configuration" and Click on "GPIO Configuration in Pin Order".
-
-(4) Configure the Pins you are using in the sample as "INPUT" or "OUTPUT".
-   
-    In this sample make Pin 2 as INPUT.
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
-
- Click the Start button to search for the app by name, and then launch it.
-
-The app will deploy and start on the Windows IoT device, and you should see a gauge control fill the screen.
-
-![](../Resources/Screenshot.jpg)
+![](../../Resources/Screenshot.jpg)
 
 The easiest way to test is to gently blow in one end of the flow meter.  The application listens for data coming from the device and the gauge should move up and back down as the flow rises and then stops.
 
