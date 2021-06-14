@@ -62,19 +62,19 @@ Here is an example of what your breadboard might look like with the circuit asse
 
 1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
-1. If you are using an UP Board, you have to setup the BIOS UART configuration.
+1. If you are using an UP Board, you have to setup the BIOS GPIO configuration.
 
-    1. Once you power on the UP board, select the Del or F7 key on your keyboard to enter the BIOS setting.
+    1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-    1. Navigate to Boot > OS Image ID tab, and select Windows 10 IoT Core.
+    1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
-    1. Navigate to the Advance tab and select the Hat Configuration and select GPIO Configuration in Pin Order.
+    1. Navigate to the Advance tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
 
-    1. Configure the Pins you are using in the sample as INPUT or OUTPUT.
+    1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
 
     1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
-1. Click the Start button to search for the app by name, and then launch it.
+1. Click the **Start** button to search for the app by name, and then launch it.
 
 1. The Blinky app will deploy and start on the Windows IoT device, and you should see the LED blink in sync with the simulation on the screen.
 
