@@ -4,8 +4,9 @@ urlFragment: webcam-app
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
 description: Create an app that initializes a web cam, takes pictures, and records video and audio.
 ---
 
