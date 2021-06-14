@@ -1,188 +1,95 @@
 ---
 page_type: sample
-urlFragment: hello-blinky
+urlFragment: RFIDForIoT
 languages:
   - csharp
-  - cpp
 products:
   - Windows 10
-  - Windows IoT
-  - Windows 10 IoT Enterprise
-description: A sample that shows how to make an LED attached to a GPIO pin blink on and off for Windows 10 IoT Enterprise.
+  - Windows IoT 
+  - Windows 10 IoT Enterprise 
+description: Sample to show how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans
 ---
 
-# “Hello, blinky!”
+# RFID scanner with Windows 10 IoT Enterprise
 
-We will create a simple LED blinking app and connect a LED to your Windows 10 IoT Enterprise device.
+In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans.
+Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise boards, so this sample cannot run on your desktop.
 
->[!NOTE]
->
-> GPIO APIs are not available on Desktop - this sample will be based on the UP Board.
+## Step 1: Load the project in Visual Studio
 
-## Step 1: Load the project in Visual Studio 2019
+## Step 2: Connect the MFRC522 to your Windows 10 IoT Enterprise device
 
-* * *
+You'll need a few components:
 
-Open the application in Visual Studio 2019
-Set the architecture in the toolbar dropdown. If you’re building for the UP Board, select x64.
-
-## Step 2: Connect the LED to your Windows IoT device
-
-* * *
-
-You’ll need a few components:
-
-*   a LED (any color you like)
-
-*   a 220 Ω resistor for the UpBoard
-
-*   a breadboard and a couple of connector wires
-
-![Electrical Components](../Resources/components.png)
+* MFRC522 scanner
+* a Piezo Buzzer (If you want a beep when a card scans)
+* a breadboard and a couple of connetor wires
 
 ### For UP Board
 
-1.  Connect the shorter leg of the LED to GPIO 5 (pin 15 on the expansion header) on the UpBoard.
-2.  Connect the longer leg of the LED to the resistor.
-3.  Connect the other end of the resistor to one of the 3.3V pins on the UpBoard.
-4.  Note that the polarity of the LED is important. (This configuration is commonly known as Active Low)
+1. Connect RFID SDA to Pin 24
+2. Connect RFID SCK to Pin 23
+3. Connect RFID MOSI to Pin 19
+4. Connect RFID MISO to Pin 21
+5. Connect RFID GND to Pin 6
+6. Connect RFID RST to Pin 38
+7. Connect RFID 3.3V to Pin 1 (For some higher frequency cards this might need 5V)
+8. Connect Piezo Buzzer '+' to Pin 32
+9. Connect Piezzo Buzzer '-' to Pin 6
 
-And here is the pinout of the UpBoard:
+For reference, here is the pinout of the UP Board:
 
-![](../Resources/UpBoard_Pinout.png)
-
-Here is an example of what your breadboard might look like with the circuit assembled:
-
-![](../Resources/breadboard_assembled_UpBoard_kit.png)
+![](../../Resources/Upboard_Pinout.png)
 
 ## Step 3: Deploy your app
 
-* * *
-1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
+* If you are using  UP Board Choose `Release` and `x64` configuration.
+* Compile the Solution file
 
-1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
+## Step 4: [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-1. If you are using an UP Board, you have to setup the BIOS GPIO configuration.
+## Step 5: [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
-    1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-    1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
-    1. Navigate to the Advance tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+## Step 6: BIOS Settings for UP Board
 
-    1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+If you are using UP Board, you have to setup the BIOS SPI configuration.
 
-    1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+
+   1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+   1. Navigate to the Advance tab and select the **Hat Configuration**, select **LPSS SPISupport** as **Enabled** and then Click on "GPIO Configuration in Pin Order".
+
+   1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+
+   1. In this sample make PIN 32 as "OUTPUT" and initial value as "LOW".
+
+   1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
 1. Click the **Start** button to search for the app by name, and then launch it.
 
-1. The Blinky app will deploy and start on the Windows IoT device, and you should see the LED blink in sync with the simulation on the screen.
+1. Scan the 13.56Mhz sample card that comes with the scanner. You should be able to see a card ID pop up on the screen.
 
-![](../Resources/blinky-screenshot.png)
-
-Congratulations! You controlled one of the GPIO pins on your Windows IoT device.
+Congratulations! You just read an ID off of a RFID card.
 
 ## Let’s look at the code
 
-* * *
+This sample app relies on MFRC522 library written by a github user Michiel Lowijs.
+The original library can be found here [MFRC522](https://github.com/mlowijs/mfrc522-netmf).
+We have adapted this library to Universal Windows platform. The adapted library can be found in the project directory by the name Mfrc522Lib.
+Along with the Mfrc522Lib, the samples directory also contains a PeizoBuzzerLib if you want to use the Piezo Buzzer with the sample.
 
-The code for this sample is pretty simple. We use a timer, and each time the ‘Tick’ event is called, we flip the state of the LED.
-
-### Timer code
-
-Here is how you set up the timer in C#:
-
-
-	public MainPage()
-	{
-		// ...
-
-		timer = new DispatcherTimer();
-		timer.Interval = TimeSpan.FromMilliseconds(500);
-		timer.Tick += Timer_Tick;
-		InitGPIO();
-		if (pin != null)
-		{
-			timer.Start();
-		}
-
-		// ...
-	}
-
-	private void Timer_Tick(object sender, object e)
-	{
-		if (pinValue == GpioPinValue.High)
-		{
-			pinValue = GpioPinValue.Low;
-			pin.Write(pinValue);
-			LED.Fill = redBrush;
-		}
-		else
-		{
-			pinValue = GpioPinValue.High;
-			pin.Write(pinValue);
-			LED.Fill = grayBrush;
-		}
-	}
-
-### Initialize the GPIO pin
-
-To drive the GPIO pin, first we need to initialize it. Here is the C# code (notice how we leverage the new WinRT classes in the Windows.Devices.Gpio namespace):
-
-
-	using Windows.Devices.Gpio;
-
-	private void InitGPIO()
-	{
-		var gpio = GpioController.GetDefault();
-
-		// Show an error if there is no GPIO controller
-		if (gpio == null)
-		{
-			pin = null;
-			GpioStatus.Text = "There is no GPIO controller on this device.";
-			return;
-		}
-
-		pin = gpio.OpenPin(LED_PIN);
-		pinValue = GpioPinValue.High;
-		pin.Write(pinValue);
-		pin.SetDriveMode(GpioPinDriveMode.Output);
-
-		GpioStatus.Text = "GPIO pin initialized correctly.";
-
-	}
-
-Let’s break this down a little:
-
-*   First, we use `GpioController.GetDefault()` to get the GPIO controller.
-
-*   If the device does not have a GPIO controller, this function will return `null`.
-
-*   Then we attempt to open the pin by calling `GpioController.OpenPin()` with the `LED_PIN` value.
-
-*   Once we have the `pin`, we set it to be off (High) by default using the `GpioPin.Write()` function.
-
-*   We also set the `pin` to run in output mode using the `GpioPin.SetDriveMode()` function.
-
-### Modify the state of the GPIO pin
-
-Once we have access to the `GpioOutputPin` instance, it’s trivial to change the state of the pin to turn the LED on or off.
-
-To turn the LED on, simply write the value `GpioPinValue.Low` to the pin:
-
-	pin.Write(GpioPinValue.Low);
-
-and of course, write `GpioPinValue.High` to turn the LED off:
-
-	pin.Write(GpioPinValue.High);
-
-
-Remember that we connected the other end of the LED to the 3.3 Volts power supply, so we need to drive the pin to low to have current flow into the LED.
-
+	
 ## Additional resources
-
-* [Windows 10 IoT Enterprise Documentation](https://docs.microsoft.com/windows/iot/iot-enterprise/getting_started)
 * [Documentation for all samples](https://developer.microsoft.com/en-us/windows/iot/samples)
 
 This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact <opencode@microsoft.com> with any additional questions or comments.
+
+## Additional Notes
+
+Make sure that LowLevel Capabilities in set in PackageAppManifest.
+* To do that go to Package.appxmanifesto and view the code
+* Under Capabilities if you can find "DeviceCapability Name="lowLevel"/" then your lowLevel Capabilities is enabled.
+* If this line "DeviceCapability Name="lowLevel"/" is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
