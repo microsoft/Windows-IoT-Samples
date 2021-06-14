@@ -170,7 +170,7 @@ namespace RGBLED
             }
         }
 
-       /* If your using raspberry Pi uncomment this.
+       /* If your using raspberry Pi, MinnowBoard,DragonBoard uncomment this.
         public enum DeviceModel { RaspberryPi2, MinnowBoardMax, DragonBoard410, Unknown };
 
         static DeviceModel GetDeviceModel()
