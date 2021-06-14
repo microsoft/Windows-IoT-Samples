@@ -9,14 +9,14 @@
 
   <Identity
     Name="MyBackgroundApplicationCpp-uwp"
-    Publisher="CN=paulmon"
+    Publisher="CN=MSFT"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="65d0a90b-aa00-485b-a16e-175384ba5388" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>MyBackgroundApplicationCpp</DisplayName>
-    <PublisherDisplayName>paulmon</PublisherDisplayName>
+    <PublisherDisplayName>MSFT</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
