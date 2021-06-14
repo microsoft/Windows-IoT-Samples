@@ -1,13 +1,26 @@
+---
+page_type: sample
+urlFragment: I2CPortExpander
+languages: 
+  - csharp
+products:
+  - Windows 10 
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: A sample that shows how to use a port expander to read the status of a tactile switch and control an LED for Windows 10 IoT Enterprise.
+---
+
 # I2C port expander 
 
-In this sample, we'll connect an I2C port expander to your Upboard and create a simple app that uses the port expander to read the status of a tactile switch and control an LED. No background knowledge of I2C or port expanders is needed.
-If you want to know more about I2C, SparkFun provides a great [tutorial on I2C](https://learn.sparkfun.com/tutorials/i2c).
+In this sample, we'll connect an I2C port expander to your Windows 10 IoT Enterprise device and create a simple app that uses the port expander to read the status of a tactile switch and control an LED. 
 
-### Connect the I2C Port Expander to your device
+No background knowledge of I2C or port expanders is needed. If you want to know more about I2C, SparkFun provides a great [tutorial on I2C](https://learn.sparkfun.com/tutorials/i2c).
+
+## Step 1: Connect the I2C Port Expander to your device
 
 You will need the following components:
 
-* 1 Upboard
+* 1 Windows 10 IoT Enterprise Compatible Board (This example uses an [UP Board](https://up-board.org/up/specifications/))
 
 * <a name="I2C_PortExpander"></a>1 [MCP23008 8-bit I/O Port Expander](http://www.digikey.com/product-detail/en/MCP23008-E%2FP/MCP23008-E%2FP-ND/735951) in PDIP package
 
@@ -25,7 +38,7 @@ You will need the following components:
 
 Let's start by wiring up the components on the breadboard as shown in the diagram below.
 
-**Note: Make sure to power off the Upboard when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
+**Note: Make sure to power off the UP Board when connecting your circuit. This is good practice to reduce the chance of an accidental short circuit during construction.**
 
 ![Breadboard connections](../../Resources/I2cPortExpanderDrawing_bb_750.png)
 
@@ -35,7 +48,7 @@ Here is the schematic:
 ![Circuit Schematic](../../Resources/I2cPortExpanderDrawing_schem.png)
 
 
-#### Connecting the MCP23008 Port Expander
+## Step 2: Connecting the MCP23008 Port Expander
 
 Place the MCP23008 Port Expander on your breadboard such that it straddles the center gap of the breadboard.
 
@@ -52,9 +65,9 @@ The pinout of the MCP23008 is shown below and can be found in the [datasheet](ht
 
 Make the following connections on the MCP23008 Port Expander:
 
-* Pin 1  **SCL**: Connect to **I2C1 SCL** (Pin 28) on the Upboard (pin mapping is below)
+* Pin 1  **SCL**: Connect to **I2C1 SCL** (Pin 28) on the UP Board (pin mapping is below)
 
-* Pin 2  **SDA**: Connect to **I2C1 SDA** (Pin 27) on the Upboard
+* Pin 2  **SDA**: Connect to **I2C1 SDA** (Pin 27) on the UP Board
 
 * Pin 3  **A2**:  Connect to the ground rail on the side of the breadboard (blue stripe)
 
@@ -75,7 +88,7 @@ Make the following connections on the MCP23008 Port Expander:
 Leave the remaining pins on the MCP23008 unconnected.
 
 
-#### Connecting the LED
+## Step 3: Connecting the LED
 
 * If not already connected, connect the cathode (the shorter leg) of the LED to Pin 10 of the MCP23008 Port Expander
 
@@ -84,7 +97,7 @@ Leave the remaining pins on the MCP23008 unconnected.
 * Connect the other end of the 330 &#x2126; resistor to the voltage supply rail on the side of the breadboard (red stripe)
 
 
-#### Connecting the Tactile Switch
+## Step 4: Connecting the Tactile Switch
 
 * If not already connected, connect one lead of the 10k &#x2126; resistor to Pin 11 of the MCP23008 Port Expander
 
@@ -95,11 +108,11 @@ Leave the remaining pins on the MCP23008 unconnected.
 * Connect the other pin of the tactile switch to the ground rail on the side of the breadboard (blue stripe)
 
 
-#### Connecting the Upboard
+## Step 5: Connecting the UP Board
 
-We need to hook up power, ground, and the I2C lines from on the Upboard to the MCP23008 Port Expander and the breadboard.
+We need to hook up power, ground, and the I2C lines from on the UP Board to the MCP23008 Port Expander and the breadboard.
 
-![Upboard pinout](../../Resources/Upboard_Pinout.png)
+![UP Bboard pinout](../../Resources/Upboard_Pinout.png)
 
 * Pin 1 **3.3V PWR** Connect to the voltage supply rail on the side of the breadboard (red stripe)
 
@@ -109,56 +122,35 @@ We need to hook up power, ground, and the I2C lines from on the Upboard to the M
 
 * Pin 6 **GND** Connect to the ground rail on the side of the breadboard (blue stripe)
 
-The I2C bus requires pull-up resistors on the SDA and SCL lines. However, the Upboard SDA and SCL pins we are using in this sample already have pull-up resistors connected on the Upboard, so we don't need to add any additional external pull-ups.
- 
-### Create the sample app
+The I2C bus requires pull-up resistors on the SDA and SCL lines. However, the UP Board SDA and SCL pins we are using in this sample already have pull-up resistors connected on the UP Board, so we don't need to add any additional external pull-ups.
+
+## Step 6: Create the sample app
 
 When everything is set up, power your device back on. You can find the source code for this sample by downloading a zip of all of our samples, navigate to the `samples-develop\I2CPortExpander`, 
 but as an exercise, this tutorial will take you through the complete steps to create this app from scratch. 
 Open up Visual Studio 2019. 
 For this sample, we named **I2cPortExpanderLedSample**.
 
-## Deploy the sample
+## Step 7: Compile the sample
 
 * Choose `Release` and `x64` configuration.
 * Compile the Solution file
 
-### Generate an app package
+## Step 8: Generate an app package
 
-Steps to follow :
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
- * In Solution Explorer, open the solution for your application project.
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
- * Select Sideloading in the first page of the wizard and then click Next.
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
+1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
+1. If you are using an UP Board, you have to setup the BIOS SPI configuration.
 
-Steps to follow :
- * Open the *_Test folder.
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
+    1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
- 
+    1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
- If you are using UPBOARD, you have to setup the BIOS SPI configuration.
+    1. Navigate to the **Advance** tab and select the **Hat Configuration** and change "I2C0/GPIO SELECTION" to "I2C0".
 
-### BIOS Settings for UPBOARD
-
-Steps to follow:
- 
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
- 
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
- 
-(3) Under the "Advance" Tab: Select "Hat Configuration" and make "I2C0/GPIO SELECTION" as "I2C0".
-
-If you need guidance click Link: [here](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+    1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
 
 The code in this sample does several things:
 
@@ -168,7 +160,7 @@ The code in this sample does several things:
 
 3. Communicates over I2C with the port expander to check the status of the tactile switch (is it pressed or not) at regular intervals
 
-4. Displays the LED on/off status and the tactile switch pressed/released status to the display attached to the Upboard
+4. Displays the LED on/off status and the tactile switch pressed/released status to the display attached to the UP Board
 
 5. Stops flashing the LED when the tactile switch is pressed and restarts flashing the LED when the tactile switch is released
 
@@ -176,7 +168,7 @@ The code in this sample does several things:
 
 #### Add content to MainPage.xaml
 
-Let's add some content to the MainPage which will be displayed on a screen connected to the Upboard. We want to add a Circle, a couple TextBoxes and a Slider. The circle will emulate the on/off status of the LED. The Slider allows the user to control the frequency that the LED flashes. The Textboxes will provide info about the slider and report the tactile button status.
+Let's add some content to the MainPage which will be displayed on a screen connected to the UP Board. We want to add a circle, a couple text boxes and a slider. The circle will emulate the on/off status of the LED. The Slider allows the user to control the frequency that the LED flashes. The Textboxes will provide info about the slider and report the tactile button status.
 
 * From Solution Explorer, select the MainPage.xaml file.
 
@@ -192,21 +184,13 @@ Let's add some content to the MainPage which will be displayed on a screen conne
     </StackPanel>
 </Grid>
 ```
-
 #### Add code to MainPage.xaml.cs
-
 Before we add any code to MainPage.xaml.cs, we need to add a reference to the Windows IoT Extension SDK.
-
  * In Solution Explorer, right-click on **References** and select **Add Reference...**
-
  * In the Reference Manager window, click the arrow next to **Windows Universal** then click on **Extensions**
-
  * Place a check mark in the box next to **Windows IoT Extension SDK** and click **OK**
-
  * Open MainPage.xaml.cs from Solution Explorer (you may need to click on the arrow next to MainPage.xaml first)
-
  * Add the following lines at the top of MainPage.xaml.cs
-
 ```csharp
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
@@ -220,35 +204,30 @@ Variables and Constants
 
 ```csharp
 // use these constants for controlling how the I2C bus is setup
-private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to Upboard
+private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to UP Board
 private const byte PORT_EXPANDER_I2C_ADDRESS = 0x20; // 7-bit I2C address of the port expander
 private const byte PORT_EXPANDER_IODIR_REGISTER_ADDRESS = 0x00; // IODIR register controls the direction of the GPIO on the port expander
 private const byte PORT_EXPANDER_GPIO_REGISTER_ADDRESS = 0x09; // GPIO register is used to read the pins input
 private const byte PORT_EXPANDER_OLAT_REGISTER_ADDRESS = 0x0A; // Output Latch register is used to set the pins output high/low
 private const double TIMER_INTERVAL = 500; // value is milliseconds and denotes the timer interval
 private const double BUTTON_STATUS_CHECK_TIMER_INTERVAL = 50;
-
 private byte LED_GPIO_PIN = 0x01; // using GPIO pin 0 on the port expander for the LED
 private byte PUSHBUTTON_GPIO_PIN = 0x02; // using GPIO pin 1 on the port expander for reading the toggle button status
-
 private byte iodirRegister; // local copy of I2C Port Expander IODIR register
 private byte gpioRegister; // local copy of I2C Port Expander GPIO register
 private byte olatRegister; // local copy of I2C Port Expander OLAT register
-
 private I2cDevice i2cPortExpander;
 private DispatcherTimer ledTimer;
 private DispatcherTimer buttonStatusCheckTimer;
-
 private bool isLedOn = false;
 private bool isButtonPressed = false;
-
 private SolidColorBrush redBrush = new SolidColorBrush(Windows.UI.Colors.Red);
 private SolidColorBrush grayBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
 ```
 
 Here are what some of these constants and variables represent
 
- * `I2C_CONTROLLER_NAME` holds the string constant `I2C0` which is the name of the I2C controller on the Upboard.
+ * `I2C_CONTROLLER_NAME` holds the string constant `I2C0` which is the name of the I2C controller on the UP Board.
 
  * `PORT_EXPANDER_I2C_ADDRESS` is the I2C address of the port expander we are using. \*
 
@@ -266,7 +245,7 @@ The method `InitializeSystem()`
 
 `InitializeSystem()` does the following:
 
- * Sets up the I2C communications on the Upboard
+ * Sets up the I2C communications on the UP Board
 
  * Configures the port expander to be able to turn the LED on and off and to get the tactile switch status
 
@@ -274,7 +253,7 @@ The method `InitializeSystem()`
 
  * Sets up two timers - One for controlling the LED and another for checking the tactile switch status
 
-When complete, the variable `i2cPortExpander` will be our handle to the Upboard I2C bus.
+When complete, the variable `i2cPortExpander` will be our handle to the UP Board I2C bus.
 
 ```csharp
 private async void InitializeSystem()
@@ -282,7 +261,6 @@ private async void InitializeSystem()
     byte[] i2CWriteBuffer;
     byte[] i2CReadBuffer;
     byte bitMask;
-
     // initialize I2C communications
     try
     {
@@ -296,43 +274,35 @@ private async void InitializeSystem()
         System.Diagnostics.Debug.WriteLine("Exception: {0}", e.Message);
         return;
     }
-
     // initialize I2C Port Expander registers
     try
     {
         // initialize local copies of the IODIR, GPIO, and OLAT registers
         i2CReadBuffer = new byte[1];
-
         // read in each register value on register at a time (could do this all at once but
         // for example clarity purposes we do it this way)
         i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_IODIR_REGISTER_ADDRESS }, i2CReadBuffer);
         iodirRegister = i2CReadBuffer[0];
-
         i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_GPIO_REGISTER_ADDRESS }, i2CReadBuffer);
         gpioRegister = i2CReadBuffer[0];
-
         i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_OLAT_REGISTER_ADDRESS }, i2CReadBuffer);
         olatRegister = i2CReadBuffer[0];
-
         // configure the LED pin output to be logic high, leave the other pins as they are.
         olatRegister |= LED_GPIO_PIN;
         i2CWriteBuffer = new byte[] { PORT_EXPANDER_OLAT_REGISTER_ADDRESS, olatRegister };
         i2cPortExpander.Write(i2CWriteBuffer);
-
         // configure only the LED pin to be an output and leave the other pins as they are.
         // input is logic low, output is logic high
         bitMask = (byte)(0xFF ^ LED_GPIO_PIN); // set the LED GPIO pin mask bit to '0', all other bits to '1'
         iodirRegister &= bitMask;
         i2CWriteBuffer = new byte[] { PORT_EXPANDER_IODIR_REGISTER_ADDRESS, iodirRegister };
         i2cPortExpander.Write(i2CWriteBuffer);
-
     }
     catch (Exception e)
     {
         System.Diagnostics.Debug.WriteLine("Exception: {0}", e.Message);
         return;
     }
-
     // setup our timers, one for the LED blink interval, the other for checking button status
     try
     {
@@ -340,7 +310,6 @@ private async void InitializeSystem()
         ledTimer.Interval = TimeSpan.FromMilliseconds(TIMER_INTERVAL);
         ledTimer.Tick += LedTimer_Tick;
         ledTimer.Start();
-
         buttonStatusCheckTimer = new DispatcherTimer();
         buttonStatusCheckTimer.Interval = TimeSpan.FromMilliseconds(BUTTON_STATUS_CHECK_TIMER_INTERVAL);
         buttonStatusCheckTimer.Tick += ButtonStatusCheckTimer_Tick;
@@ -356,7 +325,7 @@ private async void InitializeSystem()
 
 The method `FlipLED()`
 
-`FlipLED()` is called by the ledTimer whenever the LED timer has reached the end of its interval length. Initially, this is 500 milliseconds but can be changed by a user via the slider displayed on a monitor connected to the Upboard.
+`FlipLED()` is called by the ledTimer whenever the LED timer has reached the end of its interval length. Initially, this is 500 milliseconds but can be changed by a user via the slider displayed on a monitor connected to the UP Board.
 
  This method determines if the LED is currently on or off.
 
@@ -401,7 +370,6 @@ private void CheckButtonStatus()
 {
     byte[] readBuffer = new byte[1];
     i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_GPIO_REGISTER_ADDRESS }, readBuffer);
-
     // a button press results in a logic low for the GPIO pin
     if ((byte)(readBuffer[0] & PUSHBUTTON_GPIO_PIN) == 0x00  )
     {
@@ -416,15 +384,15 @@ private void CheckButtonStatus()
 }
 ```
 
-### Build, Deploy and Run the App
+## Step 9: Deploy and Run the App
 
-Let's build, deploy and run the app on our Upboard.
+Let's build, deploy and run the app on our UP Board.
 
 * If not already open, open in Visual Studio the app you created with the code above.
 
-After several moments, you will see the screen attached to the Upboard change to show a circle, some text, and a slider. The LED on the breadboard will begin to turn on and off.
+After several moments, you will see the screen attached to the UP Board change to show a circle, some text, and a slider. The LED on the breadboard will begin to turn on and off.
 
-Congratulations! You've successfully connected an I2C port expander to your Upboard.
+Congratulations! You've successfully connected an I2C port expander to your device.
 
 ### The complete MainPage.xaml.cs code
 
@@ -446,9 +414,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
-
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace I2cPortExpanderLedSample
 {
     /// <summary>
@@ -457,47 +423,37 @@ namespace I2cPortExpanderLedSample
     public sealed partial class MainPage : Page
     {
         // use these constants for controlling how the I2C bus is setup
-        private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to Upboard
+        private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to UP Board
         private const byte PORT_EXPANDER_I2C_ADDRESS = 0x20; // 7-bit I2C address of the port expander
         private const byte PORT_EXPANDER_IODIR_REGISTER_ADDRESS = 0x00; // IODIR register controls the direction of the GPIO on the port expander
         private const byte PORT_EXPANDER_GPIO_REGISTER_ADDRESS = 0x09; // GPIO register is used to read the pins input
         private const byte PORT_EXPANDER_OLAT_REGISTER_ADDRESS = 0x0A; // Output Latch register is used to set the pins output high/low
         private const double TIMER_INTERVAL = 500; // value is milliseconds and denotes the timer interval
         private const double BUTTON_STATUS_CHECK_TIMER_INTERVAL = 50;
-
         private byte LED_GPIO_PIN = 0x01; // using GPIO pin 0 on the port expander for the LED
         private byte PUSHBUTTON_GPIO_PIN = 0x02; // using GPIO pin 1 on the port expander for reading the toggle button status
-
         private byte iodirRegister; // local copy of I2C Port Expander IODIR register
         private byte gpioRegister; // local copy of I2C Port Expander GPIO register
         private byte olatRegister; // local copy of I2C Port Expander OLAT register
-
         private I2cDevice i2cPortExpander;
         private DispatcherTimer ledTimer;
         private DispatcherTimer buttonStatusCheckTimer;
-
         private bool isLedOn = false;
         private bool isButtonPressed = false;
-
         private SolidColorBrush redBrush = new SolidColorBrush(Windows.UI.Colors.Red);
         private SolidColorBrush grayBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
-
         public MainPage()
         {
             this.InitializeComponent();
-
             // Register for the unloaded event so we can clean up upon exit
             Unloaded += MainPage_Unloaded;
-
             InitializeSystem();
         }
-
         private async void InitializeSystem()
         {
             byte[] i2CWriteBuffer;
             byte[] i2CReadBuffer;
             byte bitMask;
-
             // initialize I2C communications
             try
             {
@@ -512,43 +468,35 @@ namespace I2cPortExpanderLedSample
                 System.Diagnostics.Debug.WriteLine("Exception: {0}", e.Message);
                 return;
             }
-
             // initialize I2C Port Expander registers
             try
             {
                 // initialize local copies of the IODIR, GPIO, and OLAT registers
                 i2CReadBuffer = new byte[1];
-
                 // read in each register value on register at a time (could do this all at once but
                 // for example clarity purposes we do it this way)
                 i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_IODIR_REGISTER_ADDRESS }, i2CReadBuffer);
                 iodirRegister = i2CReadBuffer[0];
-
                 i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_GPIO_REGISTER_ADDRESS }, i2CReadBuffer);
                 gpioRegister = i2CReadBuffer[0];
-
                 i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_OLAT_REGISTER_ADDRESS }, i2CReadBuffer);
                 olatRegister = i2CReadBuffer[0];
-
                 // configure the LED pin output to be logic high, leave the other pins as they are.
                 olatRegister |= LED_GPIO_PIN;
                 i2CWriteBuffer = new byte[] { PORT_EXPANDER_OLAT_REGISTER_ADDRESS, olatRegister };
                 i2cPortExpander.Write(i2CWriteBuffer);
-
                 // configure only the LED pin to be an output and leave the other pins as they are.
                 // input is logic low, output is logic high
                 bitMask = (byte)(0xFF ^ LED_GPIO_PIN); // set the LED GPIO pin mask bit to '0', all other bits to '1'
                 iodirRegister &= bitMask;
                 i2CWriteBuffer = new byte[] { PORT_EXPANDER_IODIR_REGISTER_ADDRESS, iodirRegister };
                 i2cPortExpander.Write(i2CWriteBuffer);
-
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Exception: {0}", e.Message);
                 return;
             }
-
             // setup our timers, one for the LED blink interval, the other for checking button status
             try
             {
@@ -556,7 +504,6 @@ namespace I2cPortExpanderLedSample
                 ledTimer.Interval = TimeSpan.FromMilliseconds(TIMER_INTERVAL);
                 ledTimer.Tick += LedTimer_Tick;
                 ledTimer.Start();
-
                 buttonStatusCheckTimer = new DispatcherTimer();
                 buttonStatusCheckTimer.Interval = TimeSpan.FromMilliseconds(BUTTON_STATUS_CHECK_TIMER_INTERVAL);
                 buttonStatusCheckTimer.Tick += ButtonStatusCheckTimer_Tick;
@@ -568,13 +515,11 @@ namespace I2cPortExpanderLedSample
                 return;
             }
         }
-
         private void MainPage_Unloaded(object sender, object args)
         {
             /* Cleanup */
             i2cPortExpander.Dispose();
         }
-
         private void FlipLED()
         {
             byte bitMask;
@@ -596,7 +541,6 @@ namespace I2cPortExpanderLedSample
                 Led.Fill = redBrush;
             }
         }
-
         private void TurnOffLED()
         {
             isLedOn = false;
@@ -604,12 +548,10 @@ namespace I2cPortExpanderLedSample
             i2cPortExpander.Write(new byte[] { PORT_EXPANDER_OLAT_REGISTER_ADDRESS, olatRegister });
             Led.Fill = grayBrush;
         }
-
         private void CheckButtonStatus()
         {
             byte[] readBuffer = new byte[1];
             i2cPortExpander.WriteRead(new byte[] { PORT_EXPANDER_GPIO_REGISTER_ADDRESS }, readBuffer);
-
             // a button press results in a logic low for the GPIO pin
             if ((byte)(readBuffer[0] & PUSHBUTTON_GPIO_PIN) == 0x00  )
             {
@@ -622,7 +564,6 @@ namespace I2cPortExpanderLedSample
                 isButtonPressed = false;
             }
         }
-
         private void LedTimer_Tick(object sender, object e)
         {
             if (isButtonPressed == false)
@@ -630,12 +571,10 @@ namespace I2cPortExpanderLedSample
                 FlipLED();
             }
         }
-
         private void ButtonStatusCheckTimer_Tick(object sender, object e)
         {
             CheckButtonStatus();
         }
-
         private void Delay_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (ledTimer == null)
