@@ -4,9 +4,9 @@ urlFragment: gpio-onewire
 languages:
   - cpp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
 description: "This sample shows how to read from the DHT11 from a Universal Windows Application for Windows 10 IoT Enterprise."
 ---
 
