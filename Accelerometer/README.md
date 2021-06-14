@@ -27,7 +27,7 @@ You'll need a few components:
 
 * a breadboard and a couple of male-to-female connector wires
 
-![Electrical Components](../Resources/components.png)
+![Electrical Components](../Resources/components1.png)
 
 #### UP Board
 If you have UP Board, we need to hook up power, ground, and the SPI lines to the accelerometer.
