@@ -52,7 +52,7 @@ Below are the pinouts of the MCP3002 and MCP3208 analog-to-digital converters (A
 
 * UP Board
 
- ![UP Board Pinout](../../Resources/UP Board_Pinout.png)
+ ![UP Board Pinout](../../Resources/Upboard_Pinout.png)
 
 ## Parts Connection
 
