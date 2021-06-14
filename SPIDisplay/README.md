@@ -31,7 +31,7 @@ First, we need to wire up the display to your device. You'll need a few componen
 
 * <a name="SPI_Display"></a>If you are using a DragonBoard 410c, you'll also need a [8-channel Bi-directional Logic Level Converter](http://www.adafruit.com/products/395) from Adafruit with pin headers soldered on
 
-![Electrical Components](../Resources/components.png)
+![Electrical Components](../Resources/components2.png)
 
 #### UP Board
 For the UP Board, we need to hook up power, ground, SPI, and a few GPIO pins to the OLED display.
