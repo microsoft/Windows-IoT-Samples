@@ -4,19 +4,19 @@ urlFragment: external-process-launcher
 languages:
   - csharp
 products:
-  - windows 10
-  - windows-iot
-  - windows-10-iot-Enterprise
-Description: We'll learn how to launch an external process (exe) from a Universal Windows Platform (UWP) app using the Windows.System.ProcessLauncher API with Windows 10 IoT Enterprise.
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: We'll learn how to launch an external process (exe) from a Universal Windows Platform (UWP) app using the Windows.System.ProcessLauncher API with Windows 10 IoT Enterprise.
 ---
 
 # External process launcher
   
 We'll learn how to launch an external process (exe) from a Universal Windows Platform (UWP) app using `Windows.System.ProcessLauncher` API.  
 
-### Load the project in Visual Studio  
+## Step 1: Load the project in Visual Studio  
   
-You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from Visual Studio 2019.  
+You can find the source code for this sample by downloading a zip of all of our samples. Make a copy of the folder on your disk and open the project from [Visual Studio 2019](https://www.visualstudio.com/downloads/).  
   
 This is a Universal Windows application. 
 
@@ -24,55 +24,27 @@ Make a copy of the folder on your disk and open the project from Visual Studio 2
 
 The code for the ProcessLauncher sample can be found under: <samples root folder>\ProcessLauncher\CS  
  
-### Deploy your app  
+## Step 2: Deploy your app  
  
-For building on UP-Board, select `x64` as the architecture.
+1. For building on UP Board, select `x64` as the architecture.
 
-Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
+1. Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 
-### Generate an app package
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
+1. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
- * In Solution Explorer, open the solution for your application project.
-
- * Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
-
- * Select Sideloading in the first page of the wizard and then click Next.
-
- * On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. 
-
- * For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
-
- * Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package).  
-  
-### Install your app package using an install script
-
-Steps to follow :
-
- * Open the *_Test folder.
-
- * Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
-
- * When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script).  
-  
- Click the Start button to search for the app by name, and then launch it.
-
-### Test your app   
+## Step 3: Test your app   
   
 The sample app when deployed displays a screen similar to this one: 
 
-![App Started](../Resources/images/ProcessLauncherSample/ProcessLauncher0.png)
+![App Started](../../Resources/images/ProcessLauncherSample/ProcessLauncher0.png)
 
 Go ahead, click the **Run Command** button to launch the application specified in the **Command** edit box, SampleConsoleApplication.exe, which is an executable Win32 application built and deployed from the sample app as well.
 
 When run, the SampleConsoleApplication exe, will send output to both the Standard Output and Standard Error boxes. The return error code of the process, 100, should also be shown.
 
-![SampleConsoleApplication Output](../Resources/images/ProcessLauncherSample/ProcessLauncher1.png)
+![SampleConsoleApplication Output](../../Resources/images/ProcessLauncherSample/ProcessLauncher1.png)
 
 ## Let's take a look at the code  
  
@@ -86,7 +58,7 @@ Since the IoT extension SDK is not added to projects by default, we'll need to a
 
 To do so, right-click on the References entry under the project, select "Add Reference" then navigate the resulting dialog to `Universal Windows->Extensions->Windows IoT Extensions for the UWP` making sure the right version, 10.0.10586.0 or higher, is selected, then check the box, and click OK.
 
-![Add Extension SDK](../Resources/images/ProcessLauncherSample/AddIoTExtensionReference.png)
+![Add Extension SDK](../../Resources/images/ProcessLauncherSample/AddIoTExtensionReference.png)
 
 
 ### Add systemManagement capabiity
@@ -200,14 +172,17 @@ The application has been added to the solution as a *console application*.
 To be able to find and invoke the SampleConsoleApplication exe at runtime, we need to package the output exe with the AppX. We've already added it to the sample application. However, to do the same in your own application, you can follow these steps:
 
 1. Put the output exe in the same folder as the C# sample. Right click on the C++ console app project, select *Properties*, then open the *General* tab
-1. Change the output directory to the be the same as the C# sample (or a subfolder) and click OK ![Console Application Properties](../Resources/images/ProcessLauncherSample/ConsoleApplicationProperties.png)
+1. Change the output directory to the be the same as the C# sample (or a subfolder) and click OK ![Console Application Properties](../../Resources/images/ProcessLauncherSample/ConsoleApplicationProperties.png)
 1. Build the console application to create and put the exe in its new location
 1. Add the exe to the UWP projct: Right click on the Project, select *Add -> Existing Item*
 1. Browse to and select the exe just built
 1. After the exe is added to the UWP project, we need to make sure it's added to the AppX package layout, Right click on the exe, select *Properties*
 1. Change *Build Action* to *Content*
-1. Change *Copy to Output Directory* to *Always* ![Exe File Properties](../Resources/images/ProcessLauncherSample/ExeProperties.png)
-1. Finaly, to ensure the exe is built every time the main app is deployed, we need to change the project dependency, Right click the solution, select *Project Dependencies* and make the UWP project have a dependency on the console app ![Build Dependencies](../Resources/images/ProcessLauncherSample/BuildDependencies.png)
+1. Change *Copy to Output Directory* to *Always* 
+												       
+![Exe File Properties](../../Resources/images/ProcessLauncherSample/ExeProperties.png)
+												       
+1. Finaly, to ensure the exe is built every time the main app is deployed, we need to change the project dependency, Right click the solution, select *Project Dependencies* and make the UWP project have a dependency on the console app ![Build Dependencies](../../Resources/images/ProcessLauncherSample/BuildDependencies.png)
 
 Now, everytime the solution is built or deployed, it'll ensure the console application exe is up-to-date and deployed with the rest of the AppX. 
   
@@ -227,5 +202,5 @@ To add an exe to the **allow list**, add to or replace the reg value in the reg 
 
 Go ahead, run the command above on your device, using SSH or PowerShell. Then, in the sample app (no need to restart) type the command `c:\windows\system32\ipconfig.exe`. You should get an output similar to the one below:
 
-![App Started](../Resources/images/ProcessLauncherSample/ProcessLauncher2.png)
+![App Started](../../Resources/images/ProcessLauncherSample/ProcessLauncher2.png)
 
