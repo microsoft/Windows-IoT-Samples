@@ -146,7 +146,7 @@ UpBoard, we take the first 3 available pins. There is also logic to skip
 pins connected to onboard functions on known hardware platforms.
 
 ```csharp
-var deviceModel = GetDeviceModel();
+//var deviceModel = GetDeviceModel();
 
     // take the first 3 available GPIO pins
     var pins = new List<GpioPin>(3);
