@@ -4,13 +4,11 @@ urlFragment: video-capture
 languages:	
   - csharp	
 products:	
-  - windows
-  - windows-iot	
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
 description: Initialize a video capture device, record video to a file, preview video feed, and playback recorded video with Windows 10 IoT Enterprise.
 ---
-
-# Video Capture Sample
 
 Initialize a video capture device, record video to a file, preview video feed, and playback recorded video.
 
@@ -24,37 +22,17 @@ Connect the web cam to one of USB ports on the IoT Device
 
 ### Deploy your app  
   
-If you're building for UPBoard, select `x64` as the architecture.   
+If you're building for UP Board, select `x64` as the architecture.   
   
 Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 
-### Generate an app package
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
-Steps to follow :
-
-* In Solution Explorer, open the solution for your application project.
-* Right-click the project and choose Publish->Create App Packages (before Visual Studio 2019 version 16.3, the Publish menu is named Store).
-* Select Sideloading in the first page of the wizard and then click Next.
-* On the Select signing method page, select whether to skip packaging signing or select a certificate for signing. You can select a certificate from your local certificate store, select a certificate file, or create a new certificate. For an MSIX package to be installed on an end user's machine, it must be signed with a cert that is trusted on the machine.
-* Complete the Select and configure packages page as described in the Create your app package upload file using Visual Studio section.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#generate-an-app-package)  
-  
-### Install your app package using an install script
-
-Steps to follow :
-* Open the *_Test folder.
-* Right-click on the Add-AppDevPackage.ps1 file. Choose Run with PowerShell and follow the prompts.
-* When the app package has been installed, the PowerShell window displays this message: Your app was successfully installed.
-
- If you need guidance click Link: [here](https://docs.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)  
-  
- Click the Start button to search for the app by name, and then launch it.
- 
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
 ### Test your app
 
-The sample app when deployed displays 3 buttons `Start Capturing`, `End Capturing`and `Play Captured Video`. Below is a description of the actions available when the buttons are clicked.
+The sample app when deployed displays 3 buttons `Start Capturing`, `End Capturing` and `Play Captured Video`. Below is a description of the actions available when the buttons are clicked.
 
 ### Start Capturing:
 
@@ -70,7 +48,7 @@ The sample app when deployed displays 3 buttons `Start Capturing`, `End Capturin
 * Reads recorded video data from cameraCapture.wmv file.
 * View stream will appear under Video Review Window section of the canvas.
 
-**NOTE:** On UPBoard , audio output is available via HDMI.
+**NOTE:** On UP Board , audio output is available via HDMI.
 
 Congratulations! You created your first video recording app.
 
