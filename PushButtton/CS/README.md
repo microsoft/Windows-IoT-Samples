@@ -38,7 +38,7 @@ Let's start by wiring up the components on a breadboard. Visit the corresponding
 
 | Breadboard Diagram                                                                        | Schematic                                                                          |
 | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| ![Breadboard connections](../../Resources/UP Board_PushButton_bb.png)      | ![Circuit Schematic](../../Resources/UP Board_PushButton_schem.png) |
+| ![Breadboard connections](../../Resources/Upboard_PushButton_bb.png)      | ![Circuit Schematic](../../Resources/Upboard_PushButton_schem.png) |
 
 
 ##### Connecting the LED
