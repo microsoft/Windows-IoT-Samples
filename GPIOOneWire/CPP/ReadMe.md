@@ -25,8 +25,8 @@ As a workaround, two pins are used to interface with the DHT22.
 One pin is configured as an output and is used to assert the data line LOW to request a sample. 
 The other pin is configured as input and is used to capture changes on the data line.
 
-Your breadboard should be wired as follows. You can use either a MOSFET or BJT transistor. 
-If you use a BJT, be sure to put a resistor in series with the base of the transistor.
+Your breadboard should be wired as follows. You can use either a MOSFET(2N700) or BJT transistor(2N3904). 
+If you use a BJT(2N3904), be sure to put a resistor in series with the base of the transistor.
 
 ![Schematic](../Resources/schematic.png)
 
