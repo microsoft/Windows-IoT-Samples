@@ -1,207 +1,186 @@
 ---
 page_type: sample
-urlFragment: gpio-onewire
-languages:
+urlFragment: hello-blinky
+languages: 
+  - csharp
   - cpp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: "This sample shows how to read from the DHT11 from a Universal Windows Application for Windows 10 IoT Enterprise."
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: A sample that shows how to make an LED attached to a GPIO pin blink on and off for Windows 10 IoT Enterprise.
 ---
 
-# GPIO OneWire DHT11/22 reader
+# “Hello, blinky!”
 
-| Minimum SDK Version | 19041 |
-|---------------------|-------|
-| Minimum OS Version  | 19041 |
+We will create a simple LED blinking app and connect a LED to your Windows 10 IoT Enterprise device.
 
-This sample has been updated to use the `GpioChangeReader` API which is new as of build 19041. You must install SDK version 19041 or later to build this sample.
+> [!NOTE]
+>
+> GPIO APIs are not available on Desktop - this sample will be based on the UP Board. 
 
-The sample has been temporarily modified to use two pins instead of one to drive the DHT22. `GpioChangeReader` requires interrupts to be enabled. 
-`GpioPin.SetDriveMode()` currently takes much longer when interrupts are enabled than when they are disabled. 
-If you try to change a pin from output to input when interrupts are enabled, you will miss the response from the DHT22.
-As a workaround, two pins are used to interface with the DHT22.
-One pin is configured as an output and is used to assert the data line LOW to request a sample. 
-The other pin is configured as input and is used to capture changes on the data line.
+## Step 1: Load the project in Visual Studio 2019
 
-Your breadboard should be wired as follows. You can use either a MOSFET or BJT transistor. 
-If you use a BJT, be sure to put a resistor in series with the base of the transistor.
+* * *
 
-![Schematic](../Resources/schematic.png)
+1. Open the application in Visual Studio 2019
+2. Set the architecture in the toolbar dropdown. If you’re building for the UP Board, select `x64`.
 
-## GPIO OneWire DHT11 reader
+## Step 2: Connect the LED to your Windows IoT device
 
-Note what follows below is a bit out of date-  the latest version on GitHub is a 2 wire operation requiring pin 4 as input and pin 5 as output.
+* * *
 
-This sample shows how to read from the [DHT11](https://www.adafruit.com/product/386) from a Universal Windows Application. 
-The DHT11 is a low cost temperature and humidity sensor that uses a single wire to interface to the host controller.
-This wire is used by the host to request a sample from the DHT11 and by the DHT11 to transmit data back to the host.
+You’ll need a few components:
 
-The DHT11 is right on the edge performance-wise of what the GPIO APIs can handle. 
-If there is background activity such as network, USB, filesystem, or graphics activity, it can prevent the sample from successfully sampling from the DHT11.
+*   a LED (any color you like)
 
-For a description of the protocol used by the DHT11, see [this article](http://embedded-lab.com/blog/?p=4333). 
+*   a 220 Ω resistor for the UP Board
 
-The datasheet is [here](http://akizukidenshi.com/download/ds/aosong/DHT11.pdf).
+*   a breadboard and a couple of connector wires
 
-![Screenshot](../Resources/GpioOneWireScreen1.png)
+![Electrical Components](../../Resources/components.png)
 
-### Requirements
+### For UP Board
 
-{:.table.table-bordered}
-| Minimum supported build | 10.0.10556                      |
-|-------------------------|---------------------------------|
-| Supported Hardware      | UP Board |
+1.  Connect the shorter leg of the LED to GPIO 5 (pin 15 on the expansion header) on the UP Board.
+2.  Connect the longer leg of the LED to the resistor.
+3.  Connect the other end of the resistor to one of the 3.3V pins on the UP Board.
+4.  Note that the polarity of the LED is important. (This configuration is commonly known as Active Low)
 
-### Hardware Setup
+And here is the pinout of the UP Board:
 
-You will need the following hardware to run this demo:
+![](../../Resources/UpBoard_Pinout.png)
 
- * A [DHT11](https://www.adafruit.com/product/386) or [DHT22](http://www.adafruit.com/products/385) sensor
- * A couple of female-to-female connector wires
+Here is an example of what your breadboard might look like with the circuit assembled:
 
-Connect the components as shown in the following diagram:
+![](../../Resources/breadboard_assembled_UpBoard_kit.png)
 
-![Schematic](../Resources/GpioOneWireSchematic.png)
-![Wiring Diagram](../Resources/GpioOneWireFritz.png)
+## Step 3: Deploy your app
 
-### Running the Solution
+* * *
 
- 1. Clone the Microsoft IoT Enterprise Repository and open GpioOneWire/GpioOneWire.vcxproj in Visual Studio 2019.
- 2. Build the solution in Release x64 mode.
+1. [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
+2. [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
+3. If you are using an UP Board, you have to setup the BIOS GPIO configuration.
+	1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
+  	1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
-### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
+  	1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
 
-### BIOS Settings for UP Board
-If you are using UP Board, you have to setup the BIOS GPIO configuration.
-1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
-1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
-1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
-1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
-1. Select **Pin 4** as **INPUT** and **Pin 5** as **OUTPUT**
-1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
-1. Click the Start button to search for the app by name, and then launch it.
+  	1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
 
-### How it works
+  	1. For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
+  
+4. Click the Start button to search for the app by name, and then launch it.
 
-The logic that interacts with the DHT11 is contained in the Dht11::Sample() method. 
-Since the 1s and 0s that the DHT11 sends back are encoded as pulse widths, we need a way to precisely measure the time difference between falling edges. 
-We use [QueryPerformanceCounter()](https://msdn.microsoft.com/en-us/library/windows/desktop/ms644904(v=vs.85).aspx) for this purpose. 
-The units of QueryPerformanceCounter are platform-dependent, so we must call [QueryPerformanceFrequency()](https://msdn.microsoft.com/en-us/library/windows/desktop/ms644905(v=vs.85).aspx) to determine the resolution of the counter.
+5. The Blinky app will deploy and start on the Windows IoT device, and you should see the LED blink in sync with the simulation on the screen.
 
-A difference of 76 microseconds between falling edges denotes a '0', while a difference of 120 microseconds between falling edges denotes a '1'.
-We choose 110 microseconds as a reasonable threshold above which we will consider bits to be 1s, while we will consider pulses shorter than this threshold to be 0s. We convert 110 microseconds to QueryPerformanceCounter (QPC) units to be used later.
+![](../../Resources/blinky-screenshot.png)
 
-```cpp
-	HRESULT GpioOneWire::Dht11::Sample (GpioOneWire::Dht11Reading& Reading)
+Congratulations! You controlled one of the GPIO pins on your Windows IoT device.
+
+## Let’s look at the code
+
+* * *
+
+The code for this sample is pretty simple. We use a timer, and each time the ‘Tick’ event is called, we flip the state of the LED.
+
+### Timer code
+
+Here is how you set up the timer in C#:
+
+
+	public MainPage()
 	{
-		Reading = Dht11Reading();
+		// ...
 
-		LARGE_INTEGER qpf;
-		QueryPerformanceFrequency(&qpf);
+		timer = new DispatcherTimer();
+		timer.Interval = TimeSpan.FromMilliseconds(500);
+		timer.Tick += Timer_Tick;
+		InitGPIO();
+		if (pin != null)
+		{
+			timer.Start();
+		}
 
-		// This is the threshold used to determine whether a bit is a '0' or a '1'.
-		// A '0' has a pulse time of 76 microseconds, while a '1' has a
-		// pulse time of 120 microseconds. 110 is chosen as a reasonable threshold.
-		// We convert the value to QPF units for later use.
-		const unsigned int oneThreshold = static_cast<unsigned int>(
-			110LL * qpf.QuadPart / 1000000LL);
-``` 
+		// ...
+	}
 
-Next, we send the sequence required to activate the sensor. 
-The GPIO signal is normally pulled high while the device is idle, and we must pull it low for 18 milliseconds to request a sample. We latch a low value to the pin and set it as an output, driving the GPIO pin low.
+	private void Timer_Tick(object sender, object e)
+	{
+		if (pinValue == GpioPinValue.High)
+		{
+			pinValue = GpioPinValue.Low;
+			pin.Write(pinValue);
+			LED.Fill = redBrush;
+		}
+		else
+		{
+			pinValue = GpioPinValue.High;
+			pin.Write(pinValue);
+			LED.Fill = grayBrush;
+		}
+	}
 
-```cpp
-    // Latch low value onto pin
-    this->pin->Write(GpioPinValue::Low);
+### Initialize the GPIO pin
 
-    // Set pin as output
-    this->pin->SetDriveMode(GpioPinDriveMode::Output);
+To drive the GPIO pin, first we need to initialize it. Here is the C# code (notice how we leverage the new WinRT classes in the Windows.Devices.Gpio namespace):
 
-    // Wait for at least 18 ms
-    Sleep(SAMPLE_HOLD_LOW_MILLIS);
-```
 
-We then revert the pin to an input which causes it to go high, and wait for the DHT11 to pull the pin low, then high again.
+	using Windows.Devices.Gpio;
 
-```cpp
-    // Set pin back to input
-    this->pin->SetDriveMode(this->inputDriveMode);
+	private void InitGPIO()
+	{
+		var gpio = GpioController.GetDefault();
 
-    GpioPinValue previousValue = this->pin->Read();
+		// Show an error if there is no GPIO controller
+		if (gpio == null)
+		{
+			pin = null;
+			GpioStatus.Text = "There is no GPIO controller on this device.";
+			return;
+		}
 
-    // catch the first rising edge
-    const ULONG initialRisingEdgeTimeoutMillis = 1;
-    ULONGLONG endTickCount = GetTickCount64() + initialRisingEdgeTimeoutMillis;
-    for (;;) {
-        if (GetTickCount64() > endTickCount) {
-            return HRESULT_FROM_WIN32(ERROR_TIMEOUT);
-        }
+		pin = gpio.OpenPin(LED_PIN);
+		pinValue = GpioPinValue.High;
+		pin.Write(pinValue);
+		pin.SetDriveMode(GpioPinDriveMode.Output);
 
-        GpioPinValue value = this->pin->Read();
-        if (value != previousValue) {
-            // rising edgue?
-            if (value == GpioPinValue::High) {
-                break;
-            }
-            previousValue = value;
-        }
-    }
-```
+		GpioStatus.Text = "GPIO pin initialized correctly.";
 
-After receiving the first rising edge, we catch all of the falling edges and measure the time difference between them to determine whether the bit is a 0 or 1.
+	}
 
-```cpp
-    LARGE_INTEGER prevTime = { 0 };
+Let’s break this down a little:
 
-    const ULONG sampleTimeoutMillis = 10;
-    endTickCount = GetTickCount64() + sampleTimeoutMillis;
+*   First, we use `GpioController.GetDefault()` to get the GPIO controller.
 
-    // capture every falling edge until all bits are received or
-    // timeout occurs
-    for (unsigned int i = 0; i < (Reading.bits.size() + 1);) {
-        if (GetTickCount64() > endTickCount) {
-            return HRESULT_FROM_WIN32(ERROR_TIMEOUT);
-        }
+*   If the device does not have a GPIO controller, this function will return `null`.
 
-        GpioPinValue value = this->pin->Read();
-        if ((previousValue == GpioPinValue::High) && (value == GpioPinValue::Low)) {
-            // A falling edge was detected
-            LARGE_INTEGER now;
-            QueryPerformanceCounter(&now);
+*   Then we attempt to open the pin by calling `GpioController.OpenPin()` with the `LED_PIN` value.
 
-            if (i != 0) {
-                unsigned int difference = static_cast<unsigned int>(
-                    now.QuadPart - prevTime.QuadPart);
-                Reading.bits[Reading.bits.size() - i] =
-                    difference > oneThreshold;
-            }
+*   Once we have the `pin`, we set it to be off (High) by default using the `GpioPin.Write()` function.
 
-            prevTime = now;
-            ++i;
-        }
+*   We also set the `pin` to run in output mode using the `GpioPin.SetDriveMode()` function.
 
-        previousValue = value;
-    }
-```
+### Modify the state of the GPIO pin
 
-After all bits have been received, we validate the checksum to make sure the received data is valid. The data is returned through the `Reading` reference parameter.
+Once we have access to the `GpioOutputPin` instance, it’s trivial to change the state of the pin to turn the LED on or off.
 
-```cpp
-    if (!Reading.IsValid()) {
-        // checksum mismatch
-        return HRESULT_FROM_WIN32(ERROR_INVALID_DATA);
-    }
+To turn the LED on, simply write the value `GpioPinValue.Low` to the pin:
 
-    return S_OK;
-```
+	pin.Write(GpioPinValue.Low);
 
-## Additional Notes
+and of course, write `GpioPinValue.High` to turn the LED off:
 
-Make sure that LowLevel Capabilities in set in PackageAppManifest.
-* To do that go to Package.appxmanifesto and view the code
-* Under Capabilities if you can find "DeviceCapability Name="lowLevel"/" then your lowLevel Capabilities is enabled.
-* If this line "DeviceCapability Name="lowLevel"/" is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
+	pin.Write(GpioPinValue.High);
+
+
+Remember that we connected the other end of the LED to the 3.3 Volts power supply, so we need to drive the pin to low to have current flow into the LED.
+
+## Additional resources
+
+* [Windows 10 IoT Enterprise Documentation](https://docs.microsoft.com/windows/iot/iot-enterprise/getting_started)
+* [Documentation for all samples](https://developer.microsoft.com/windows/iot/samples)
+
+This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact <opencode@microsoft.com> with any additional questions or comments.
