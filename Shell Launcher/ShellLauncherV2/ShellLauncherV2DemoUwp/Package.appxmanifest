@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="ShellLauncherV2DemoUwp" Publisher="CN=ShellLauncherV2Demo" Version="1.0.13.0" />
+  <Identity Name="ShellLauncherV2DemoUwp" Publisher="CN=MSFT" Version="1.0.13.0" />
   <mp:PhoneIdentity PhoneProductId="9eacb8af-b458-4097-a626-1c7fed3162ef" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ShellLauncherV2DemoUwp</DisplayName>
-    <PublisherDisplayName>chandde</PublisherDisplayName>
+    <PublisherDisplayName>MSFT</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
