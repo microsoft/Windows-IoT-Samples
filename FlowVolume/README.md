@@ -12,7 +12,7 @@ description: This sample demonstrates how to use a relatively inexpensive device
 
 # Flow Volume
 
-In this sample, we will demonstrate how to use a relatively inexpensive device and a UP Board to measure the volume of liquid flowing through a hose.
+In this sample, we will demonstrate how to use a relatively inexpensive device and an UP Board to measure the volume of liquid flowing through a hose.
 
 Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise, so this sample cannot run on your desktop.
 
@@ -26,7 +26,7 @@ You’ll need a few components:
 
 ![Flow Sensor](../Resources/FlowSensor.jpg)
 
-*   a microcontroller board running Windows IoT Enterprise (we used a UP Board) with a free GPIO pin
+*   a microcontroller board running Windows IoT Enterprise (we used an UP Board) with a free GPIO pin
 
 ![Assembled Components](../Resources/Assembled.jpg)
 
