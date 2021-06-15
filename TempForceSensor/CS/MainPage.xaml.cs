@@ -184,7 +184,7 @@ namespace TempSensor
 
         /*UP Board  Parameters*/
         private const string SPI_CONTROLLER_NAME = "SPI2";  /* For UP Board, use SPI2 and For Raspberry Pi use SPI0      */
-        private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Upboard     */
+        private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the UP Board     */
 
 
         byte[] readBuffer = null;                           /* this is defined to hold the output data*/
