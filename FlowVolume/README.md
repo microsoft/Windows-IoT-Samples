@@ -7,7 +7,7 @@ products:
   - Windows 10
   - Windows IoT 
   - Windows 10 IoT Enterprise
-description: This sample demonstrates how to use a relatively inexpensive device and a UP Board to measure the volume of liquid flowing through a hose.
+description: This sample demonstrates how to use a relatively inexpensive device and an UP Board to measure the volume of liquid flowing through a hose.
 ---
 
 # Flow Volume
