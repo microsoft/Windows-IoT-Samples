@@ -4,7 +4,7 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
+  IgnorableNamespaces="DeviceIOControlUWP">
 
   <Identity
     Name="16684029-29b1-4d3c-a32e-1da372cc3136"
