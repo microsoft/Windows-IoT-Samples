@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="d6bbe866-57dc-4016-ba7a-cdbdaed04cd6"
-    Publisher="CN=RFIDForIoT"
+    Name="RFIDForIoT"
+    Publisher="CN=MSFT"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="d6bbe866-57dc-4016-ba7a-cdbdaed04cd6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>RFIDForIoT</DisplayName>
-    <PublisherDisplayName>rushiral</PublisherDisplayName>
+    <PublisherDisplayName>MSFT</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
