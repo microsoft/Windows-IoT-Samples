@@ -124,7 +124,7 @@ namespace TempSensor
             try
             {
                 var settings = new SpiConnectionSettings(SPI_CHIP_SELECT_LINE);
-                settings.ClockFrequency = 1000000;// For Upboard use 1MHzs and For Rpi use 500KHzs
+                settings.ClockFrequency = 1000000;"// For UP Board use 1MHz and For Rpi use 500KHz"
                 settings.Mode = SpiMode.Mode0; //Mode3;
                 var controller = await SpiController.GetDefaultAsync();
                 SpiDisplay = controller.GetDevice(settings);
@@ -182,8 +182,8 @@ namespace TempSensor
             return result;
         }
 
-        /*RaspBerry Pi2  Parameters*/
-        private const string SPI_CONTROLLER_NAME = "SPI2";  /* For Upboard, use SPI2 and For Raspberry Pi use SPI0      */
+        /*UP Board  Parameters*/
+        private const string SPI_CONTROLLER_NAME = "SPI2";  /* For UP Board, use SPI2 and For Raspberry Pi use SPI0      */
         private const Int32 SPI_CHIP_SELECT_LINE = 0;       /* Line 0 maps to physical pin number 24 on the Upboard     */
 
 
