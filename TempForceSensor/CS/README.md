@@ -1,15 +1,3 @@
----
-page_type: sample
-urlFragment: temp-force-sensor
-languages:
-  - csharp
-products:
-  - Windows 10
-  - Windows IoT 
-  - Windows 10 IoT Enterprise
-description: Control a basic temperature and force sensor for Windows 10 IoT Enterprise.
----
-
 # Temperature and force sensor
 This sample uses SPI communication. 
 
