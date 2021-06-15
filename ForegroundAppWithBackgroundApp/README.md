@@ -47,7 +47,7 @@ If you want to create a solution that builds the foreground application and the 
 
 7.	In Solution Explorer right-click on the background application Package.appxmanifest and choose View Code
 
-![step 7](../Resources/images/ForegroundApp/step7.png)
+![step 7](../Resources/step7.png)
 
 8.	In Solution Explorer right-click on the foreground application Package.appxmanifest and choose View Code
 
