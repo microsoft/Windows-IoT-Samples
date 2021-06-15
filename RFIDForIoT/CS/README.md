@@ -12,7 +12,7 @@ description: Sample to show how to read the RFID Tag from MFRC522 Scanner and be
 
 # RFID scanner with Windows 10 IoT Enterprise
 
-In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans.
+In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and beep the buzzer when the card scans.
 Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise boards, so this sample cannot run on your desktop.
 
 ## Step 1: Load the project in Visual Studio
