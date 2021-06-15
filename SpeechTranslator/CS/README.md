@@ -1,3 +1,15 @@
+---
+page_type: sample
+urlFragment: speech-translator
+languages:
+  - csharp
+products:
+  - Windows
+  - Windows 10 
+  - Windows 10 IoT Enterprise
+description: Translate your speech to different languages.
+---
+
 # Build the Speech Translator Project
 
 ## Component Lists
