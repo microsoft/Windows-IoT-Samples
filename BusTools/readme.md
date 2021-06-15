@@ -52,6 +52,8 @@ Valid values of Configuration are: Release, Debug
 
 1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
 
-1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **LPSS PWM #1/#2 Support --> ACPI**.
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
 
 For more information, please review the [UP Board Firmware Settings.](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf)
