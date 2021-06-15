@@ -29,7 +29,6 @@ This sample only has C# version.
 This sample assumes that UP Board has already been set up as below:
 
 - UP Board has been connected to HDMI monitor
-- A SD image card has been plugged to UP Board
 - An Ethernet cable has been plugged to UP Board
 - UP Board has been powered on
 
@@ -125,7 +124,7 @@ private async void InitSPI()
     try
     {
         var settings = new SpiConnectionSettings(SPI_CHIP_SELECT_LINE);
-        settings.ClockFrequency = 1000000;// For UP Board use 1MHzs and For Rpi use 500KHzs
+        settings.ClockFrequency = 1000000;// For UP Board use 1MHz and For Rpi use 500KHz
         settings.Mode = SpiMode.Mode0; //Mode3;
 
         string spiAqs = SpiDevice.GetDeviceSelector(SPI_CONTROLLER_NAME);
