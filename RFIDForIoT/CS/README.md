@@ -1,15 +1,3 @@
----
-page_type: sample
-urlFragment: RFIDForIoT
-languages:
-  - csharp
-products:
-  - Windows 10
-  - Windows IoT 
-  - Windows 10 IoT Enterprise 
-description: Sample to show how to read the RFID Tag from MFRC522 Scanner and beep the buzzer when the card scans
----
-
 # RFID scanner with Windows 10 IoT Enterprise
 
 In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and beep the buzzer when the card scans.
