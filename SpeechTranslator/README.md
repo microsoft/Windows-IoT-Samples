@@ -14,12 +14,11 @@ description: Translate your speech to different languages.
 
 ## Component Lists
 - A Windows 10 IoT Enterprise Device (e.g. UP Board)
-- A headset [e.g. the Microsoft LifeChat-3000 Headset](http://www.microsoft.com/hardware/en-us/p/lifechat-lx-3000/JUG-00013) 
+- A headset [e.g. EPOS/Sennheiser SC 75 USB Headset](https://www.microsoft.com/en-us/d/epos-sennheiser-sc-75-usb-headset-for-ms-teams/8xqc82x6r516?activetab=pivot%3aoverviewtab) 
 - A mouse
 - A router connected to the Internet 
-- An ethernet cable
+- An Ethernet cable or WiFi Adapter
 - An HDMI monitor and cables 
-- A micro-SD card and reader
 
 ## Step 1: Setup your Development PC (Required for Windows IoT Builds 15063 or greater.)
 1. Install the Windows ADK for Windows 10, version from [here](https://developer.microsoft.com/en-us/windows/hardware/windows-assessment-deployment-kit)
@@ -54,8 +53,6 @@ description: Translate your speech to different languages.
     4. Unmap your local drive (e.g. net use /delete t:).
     
 9. Apply the Speech Language Package to your device.  **(Required for Windows 10 IoT Builds 15063 or greater)**
-    
-    *Note: Your device should reboot after committing each update and a "spinning gears" screen will appear until the update completes.*
     
     - **applyupdate -stage c:\Microsoft-Windows-OneCore-Microsoft-SpeechData-es-MX-Package.cab**
     - **applyupdate -commit**
