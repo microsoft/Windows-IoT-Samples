@@ -1,18 +1,6 @@
----
-page_type: sample
-urlFragment: RFIDForIoT
-languages:
-  - csharp
-products:
-  - Windows 10
-  - Windows IoT 
-  - Windows 10 IoT Enterprise 
-description: Sample to show how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans
----
-
 # RFID scanner with Windows 10 IoT Enterprise
 
-In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and Beep the Buzzer when the card Scans.
+In this sample, we will demonstrate how to read the RFID Tag from MFRC522 Scanner and beep the buzzer when the card scans.
 Keep in mind that the GPIO APIs are only available on Windows 10 IoT Enterprise boards, so this sample cannot run on your desktop.
 
 ## Step 1: Load the project in Visual Studio
@@ -23,7 +11,7 @@ You'll need a few components:
 
 * MFRC522 scanner
 * a Piezo Buzzer (If you want a beep when a card scans)
-* a breadboard and a couple of connetor wires
+* a breadboard and a couple of connector wires
 
 ### For UP Board
 
@@ -34,7 +22,7 @@ You'll need a few components:
 5. Connect RFID GND to Pin 6
 6. Connect RFID RST to Pin 38
 7. Connect RFID 3.3V to Pin 1 (For some higher frequency cards this might need 5V)
-8. Connect Piezo Buzzer '+' to Pin 32
+8. Connect Piezzo Buzzer '+' to Pin 32
 9. Connect Piezzo Buzzer '-' to Pin 6
 
 For reference, here is the pinout of the UP Board:
