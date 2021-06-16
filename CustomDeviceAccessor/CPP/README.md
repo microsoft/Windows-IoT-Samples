@@ -28,7 +28,7 @@ The high level steps involved are:
  3. Use CreateFile/ReadFile/WriteFile/DeviceIoControl in your code
  4. Make the device accessible to appcontainer processes
 
-This walkthrough uses the COM port on UP Board as the example device. UP Board has 2 COM ports - one high-speed UARTs on the 26-pin header, and a conventional COM port controlled by serial.sys on a separate header. The oone high speed UARTs are already exposed to UWP applications, but the COM port is not. This walkthrough shows you how to access the COM port from UWP applications.
+This walkthrough uses the COM port on UP Board as the example device. UP Board has 2 COM ports - one high-speed UARTs on the 40-pin header, and a conventional COM port controlled by serial.sys on a separate header. The oone high speed UARTs are already exposed to UWP applications, but the COM port is not. This walkthrough shows you how to access the COM port from UWP applications.
 
 ## Exposing the COM port to usermode
 
