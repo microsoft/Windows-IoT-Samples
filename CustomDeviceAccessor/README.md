@@ -37,7 +37,7 @@ Before we can access the COM port, we need to add the `PortName` registry value 
     Reg add "HKLM\SYSTEM\ControlSet001\Enum\ACPI\PNP0501\1\Device Parameters" /v PortName /t REG_SZ /d COM1
     Devcon restart acpi\pnp0501
 
-If you now run `mincomm -list`, you should see ACPI\PNP0501\1 in the list of COM ports. Mincomm is available at ms-iot samples.
+If you now run `mincomm -list`, you should see ACPI\PNP0501\1 in the list of COM ports. Mincomm is available at [here](https://github.com/ms-iot/samples/tree/develop/MinComm).
 
 ## Enabling access to desktop APIs in a C++/CX UWP Application
 
