@@ -28,7 +28,7 @@ The high level steps involved are:
  3. Use CreateFile/ReadFile/WriteFile/DeviceIoControl in your code
  4. Make the device accessible to appcontainer processes
 
-This walkthrough uses the COM port on MinnowBoardMax as the example device. MinnowBoardMax has 3 COM ports - two high-speed UARTs on the 26-pin header, and a conventional COM port controlled by serial.sys on a separate 6-pin header. The two high speed UARTs are already exposed to UWP applications, but the COM port is not. This walkthrough shows you how to access the COM port from UWP applications.
+This walkthrough uses the COM port on UP Board as the example device. UP Board has 2 COM ports - one high-speed UARTs on the 40-pin header, and a conventional COM port controlled by serial.sys on a separate header. The one high speed UARTs are already exposed to UWP applications, but the COM port is not. This walkthrough shows you how to access the COM port from UWP applications.
 
 ## Exposing the COM port to usermode
 
@@ -37,7 +37,7 @@ Before we can access the COM port, we need to add the `PortName` registry value 
     Reg add "HKLM\SYSTEM\ControlSet001\Enum\ACPI\PNP0501\1\Device Parameters" /v PortName /t REG_SZ /d COM1
     Devcon restart acpi\pnp0501
 
-If you now run `mincomm -list`, you should see ACPI\PNP0501\1 in the list of COM ports. Mincomm is available at [here](https://github.com/ms-iot/samples/tree/develop/MinComm).
+If you now run `mincomm -list`, you should see ACPI\PNP0501\1 in the list of COM ports. Mincomm is available at ms-iot samples.
 
 ## Enabling access to desktop APIs in a C++/CX UWP Application
 
@@ -185,7 +185,7 @@ Add a call to `AccessComPort()` in the MainPage constructor:
 
 * Set a breakpoint on the `throw` statement after the file handle validity check, as indicated in the source code above.
 
-* Debug the application on MinnowBoardMax. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set     a proper security descriptor on the device object so it can be accessed by UWP applications.
+* Debug the application on UP Board. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set     a proper security descriptor on the device object so it can be accessed by UWP applications.
 
 ### Generate an app package
 
@@ -263,14 +263,6 @@ The output will be a long string of comma-separated numbers that we will paste i
 
     [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\ACPI\PNP0501\1]
     "Security"=hex:1,0,4,90,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,2,0,60,0,4,0,0,0,0,0,14,0,0,0,0,10,1,1,0,0,0,0,0,5,12,0,0,0,0,0,18,0,0,0,0,10,1,2,0,0,0,0,0,5,20,0,0,0,20,2,0,0,0,0,14,0,0,0,0,10,1,1,0,0,0,0,0,5,B,0,0,0,0,0,18,0,0,0,0,10,1,2,0,0,0,0,0,F,2,0,0,0,1,0,0,0
-
-Copy this file to c:\data on your MBM and run:
-
-    schtasks /create /RU SYSTEM /SC ONCE /TN DeviceAC /TR "reg import c:\data\deviceac.reg" /ST 00:00
-    schtasks /run /tn DeviceAC
-    schtasks /delete /tn DeviceAC /f
-
-We use schtasks to run the reg import operation as SYSTEM, because only the SYSTEM account has permission to change registry keys under the enum key.
 
 Verify that the Security registry value was created by running:
 
