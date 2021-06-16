@@ -1,109 +1,74 @@
-# "Hello, blinky!" background service
+<!--
+   samplefwlink:  https://aka.ms/WinIoTSamples
+--->
 
-We'll create a simple Blinky app and connect a LED to your Windows IoT Core device (Raspberry Pi 2 or 3, Up Squared or DragonBoard).  Be aware that the GPIO APIs are
-only available on Windows IoT Core, so this sample cannot run on your desktop.
+    ██╗       ██╗ ██╗ ███╗  ██╗ ██████╗   █████╗  ██╗       ██╗  ██████╗      ██╗        ████████╗
+    ██║  ██╗  ██║ ██║ ████╗ ██║ ██╔══██╗ ██╔══██╗ ██║  ██╗  ██║ ██╔════╝      ██║        ╚══██╔══╝
+    ╚██╗████╗██╔╝ ██║ ██╔██╗██║ ██║  ██║ ██║  ██║ ╚██╗████╗██╔╝ ╚█████╗       ██║  █████╗   ██║
+     ████╔═████║  ██║ ██║╚████║ ██║  ██║ ██║  ██║  ████╔═████║   ╚═══██╗      ██║ ██╔══██║  ██║
+     ╚██╔╝ ╚██╔╝  ██║ ██║ ╚███║ ██████╔╝ ╚█████╔╝  ╚██╔╝ ╚██╔╝  ██████╔╝      ██║ ╚█████╔╝  ██║  
+      ╚═╝   ╚═╝   ╚═╝ ╚═╝  ╚══╝ ╚═════╝   ╚════╝    ╚═╝   ╚═╝   ╚═════╝       ╚═╝  ╚════╝   ╚═╝
 
-## Headless mode
-___
+# Windows 10 Internet of Things (IoT) Samples
 
-This application is designed for a headless device.  To better understand what Headless mode is and how to configure your device to be headless, follow the instructions [here](https://docs.microsoft.com/en-us/windows/iot-core/learn-about-hardware/headlessmode).
+This repo contains samples that demonstrate usage patterns for Microsoft's Windows 10 IoT.  These code samples were created with templates available in Visual Studio and are designed, but not limited to, run on devices using Windows IoT Enterprise.
 
-## Load the project in Visual Studio
-___
+> **Note:** If you are unfamiliar with Git and GitHub, you can download the entire collection as a
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq).
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center.
 
-You can find the source code for this sample by downloading a zip of all of our samples [here](https://github.com/Microsoft/Windows-iotcore-samples/archive/master.zip) and navigating to the `samples\HelloBlinkyBackground`.  The sample code is available in either C++ or C#, however the documentation here only details the C# variant. Make a copy of the folder on your disk and open the project from Visual Studio.
+## Windows 10 IoT development
+These samples require Visual Studio and the Windows Software Development Kit (SDK) for Windows 10.
 
-Make sure you connect the LED to your board. Go back to the basic 'Blinky' [sample](https://github.com/Microsoft/Windows-iotcore-samples/tree/master/Samples/HelloBlinky) if you need guidance.
+   [Get a free copy of Visual Studio Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
 
-Note that the app will not run successfully if it cannot find any available GPIO ports.
+Additionally, to stay on top of the latest updates to Windows and the development tools, become a Windows Insider by joining the Windows Insider Program.
 
-Once the project is open and builds, the next step is to [deploy](https://github.com/MicrosoftDocs/windows-iotcore-docs/blob/master/windows-iotcore/develop-your-app/AppDeployment.md) the application to your device.
+   [Become a Windows Insider](https://insider.windows.com/)
 
-When everything is set up, you should be able to press F5 from Visual Studio.  The Blinky app will deploy and start on the Windows IoT device, and you should see the attached LED blink.
+   ## Using the samples
 
-## Let's look at the code
-___
-The code for this sample is pretty simple. We use a timer, and each time the 'Tick' event is called, we flip the state of the LED.
+The easiest way to use these samples without using Git is to download the zip file containing the current version (using the following link or by clicking the "Download ZIP" button on the repo page). You can then unzip the entire archive and use the samples in Visual Studio.
 
+   [Download the samples ZIP](../../archive/master.zip)
 
-## Timer code
-___
-Here is how you set up the timer in C#:
-```csharp
-using Windows.System.Threading;
+   **Notes:**
+   * Before you unzip the archive, right-click it, select **Properties**, and then select **Unblock**.
+   * Be sure to unzip the entire archive, and not just individual samples. The samples all depend on the SharedContent folder in the archive.   
+   * In Visual Studio, the platform target defaults to ARM, so be sure to change that to x64 or x86 if you want to test on a non-ARM device.
 
-BackgroundTaskDeferral _deferral;
-public void Run(IBackgroundTaskInstance taskInstance)
-{
-    _deferral = taskInstance.GetDeferral();
+The samples use Linked files in Visual Studio to reduce duplication of common files, including sample template files and image assets. These common files are stored in the SharedContent folder at the root of the repository and are referred to in the project files using links.
 
-    this.timer = ThreadPoolTimer.CreatePeriodicTimer(Timer_Tick, TimeSpan.FromMilliseconds(500));
-    . . .
-}
+**Reminder:** If you unzip individual samples, they will not build due to references to other portions of the ZIP file that were not unzipped. You must unzip the entire archive if you intend to build the samples.
 
-private void Timer_Tick(ThreadPoolTimer timer)
-{
-    . . .
-}
-```
+For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, please refer to the guidance, tutorials, and reference topics provided in the Windows 10 documentation available in the [Windows Developer Center](http://go.microsoft.com/fwlink/p/?LinkID=532421). These samples are provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows.
 
+## Contributing
+These samples are direct from the feature teams and we welcome your input on issues and suggestions for new samples. If you would like to see new coverage or have feedback, please consider contributing. You can edit the existing content, add new content, or simply create new issues. We’ll take a look at your suggestions and will work together to incorporate them into the docs.
 
-## Initialize the GPIO pin
-___
-To drive the GPIO pin, first we need to initialize it. Here is the C# code (notice how we leverage the new WinRT classes in the Windows.Devices.Gpio namespace):
+This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
-```csharp
-using Windows.Devices.Gpio;
+**Note**:
+* When contributing, make sure you are contributing from the **develop** branch and not the master branch. Your contribution will not be accepted if your PR is coming from the master branch.
 
-private void InitGPIO()
-{
-    var gpio = GpioController.GetDefault();
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
-    if (gpio == null)
-    {
-        pin = null;
-        return;
-    }
-
-    pin = gpio.OpenPin(LED_PIN);
-
-    if (pin == null)
-    {
-        return;
-    }
-
-    pin.Write(GpioPinValue.High);
-    pin.SetDriveMode(GpioPinDriveMode.Output);
-}
-```
-
-Let's break this down a little:
-
-* First, we use `GpioController.GetDefault()` to get the GPIO controller.
-
-* If the device does not have a GPIO controller, this function will return `null`.
-
-* Then we attempt to open the pin by calling `GpioController.OpenPin()` with the `LED_PIN` value.
-
-* Once we have the `pin`, we set it to be off (High) by default using the `GpioPin.Write()` function.
-
-* We also set the `pin` to run in output mode using the `GpioPin.SetDriveMode()` function.
+This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
 
 
-## Modify the state of the GPIO pin
-___
-Once we have access to the `GpioOutputPin` instance, it's trivial to change the state of the pin to turn the LED on or off.  You can modify 'Timer_Tick' to do this.
+## See also
 
-To turn the LED on, simply write the value `GpioPinValue.Low` to the pin:
+For additional Windows samples, see:
+* [Windows on GitHub](http://microsoft.github.io/windows/)
+* [Windows IoT Core](https://github.com/microsoft/Windows-iotcore-samples/tree/develop/Samples)
 
-```csharp
-this.pin.Write(GpioPinValue.Low);
-```
+## Samples by category
 
-and of course, write `GpioPinValue.High` to turn the LED off:
+### Azure IoT Edge
 
-```csharp
-this.pin.Write(GpioPinValue.High);
-```
-
-Remember that we connected the other end of the LED to the 3.3 Volts power supply, so we need to drive the pin to low to have current flow into the LED.
+| Name           | Description      |  
+|----------------|------------------|  
+| [interop-textmsg-consoleapp](https://aka.ms/WinIoTSamples-interop-textmsg-consoleapp) | Basic interop sample demonstrating text messaging between a Windows console app and an Edge module. |
+| [interop-customvision-textmsg-uwpapp](https://aka.ms/WinIoTSamples-interop-customvision-textmsg-uwpapp) | <p>Two more advanced interop samples which demonstrate bidirectional communication between a Windows application and an Edge module. </p><ul><li>Text messaging between a UWP application and an Edge module. </li><li>A 'Custom vision' machine learning interop sample with a fruit classifier which uses a Windows UWP app to send camera frames to an Edge module for identification.</li></ul>|  
