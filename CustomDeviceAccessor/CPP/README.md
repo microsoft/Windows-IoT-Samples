@@ -28,7 +28,7 @@ The high level steps involved are:
  3. Use CreateFile/ReadFile/WriteFile/DeviceIoControl in your code
  4. Make the device accessible to appcontainer processes
 
-This walkthrough uses the COM port on MinnowBoardMax as the example device. MinnowBoardMax has 3 COM ports - two high-speed UARTs on the 26-pin header, and a conventional COM port controlled by serial.sys on a separate 6-pin header. The two high speed UARTs are already exposed to UWP applications, but the COM port is not. This walkthrough shows you how to access the COM port from UWP applications.
+This walkthrough uses the COM port on UP Board as the example device. UP Board has 2 COM ports - one high-speed UARTs on the 26-pin header, and a conventional COM port controlled by serial.sys on a separate header. The oone high speed UARTs are already exposed to UWP applications, but the COM port is not. This walkthrough shows you how to access the COM port from UWP applications.
 
 ## Exposing the COM port to usermode
 
@@ -240,14 +240,6 @@ The output will be a long string of comma-separated numbers that we will paste i
 
     [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\ACPI\PNP0501\1]
     "Security"=hex:1,0,4,90,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,2,0,60,0,4,0,0,0,0,0,14,0,0,0,0,10,1,1,0,0,0,0,0,5,12,0,0,0,0,0,18,0,0,0,0,10,1,2,0,0,0,0,0,5,20,0,0,0,20,2,0,0,0,0,14,0,0,0,0,10,1,1,0,0,0,0,0,5,B,0,0,0,0,0,18,0,0,0,0,10,1,2,0,0,0,0,0,F,2,0,0,0,1,0,0,0
-
-Copy this file to c:\data on your MBM and run:
-
-    schtasks /create /RU SYSTEM /SC ONCE /TN DeviceAC /TR "reg import c:\data\deviceac.reg" /ST 00:00
-    schtasks /run /tn DeviceAC
-    schtasks /delete /tn DeviceAC /f
-
-We use schtasks to run the reg import operation as SYSTEM, because only the SYSTEM account has permission to change registry keys under the enum key.
 
 Verify that the Security registry value was created by running:
 
