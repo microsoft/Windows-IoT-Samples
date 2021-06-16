@@ -5,55 +5,54 @@ languages:
   - csharp
   - cpp
 products:
-  - windows
-  - windows-iot
-description: An example of building a foreground app and background app within the same APPX file for Windows 10 IoT Core.
+  - Windows
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: An example of building a foreground app and background app within the same APPX file for Windows 10 IoT Enterprise.
 ---
 
 # Foreground App with Background App
 
-These are the available versions of this Windows 10 IoT Core sample.  
-
-In both versions, the Background App currently toggles a GPIO pin.  If you are using a Dragonboard, 
-you'll need to change LED_PIN in StartupTask.cpp (for C++) or StartupTask.cs (for C#) to a pin that 
-exists on the Dragonboard (for example, the User LED 1: pin 21).  You can find a list of available
-pins for the Dragonboard [here](https://docs.microsoft.com/en-us/windows/iot-core/learn-about-hardware/pinmappings/pinmappingsdb).
+In both versions of this sample (C++ or C#), the Background App can toggle a GPIO pin. 
 
 ## About this sample
 If you want to create a solution that builds the foreground application and the background application into the same .APPX file it will require manual steps to combine the two projects.
 
-### Steps
+## Step 1: Create a New project
+1. Download [Visual Studio 2019](https://www.visualstudio.com/downloads/)
+1. Navigate to **File** > **New** > Projec
 
-1. File>New>Project…
-2. Create a new Blank App
+## Step 2: Create a new Blank App
 
-![step 2](../Resources/step2a.png)
+![step 2](../Resources/step2.png)
 
-3. Select desired target version and click OK when prompted for target version
+## Step 3: Select desired target version and click OK when prompted for target version
 
-![step 3](../Resources/step3a.png)
+![step 3](../Resources/step3.PNG)
 
-4.	In Solution Explorer right-click on the solution and choose Add>New Project …
+## Step 4: In Solution Explorer right-click on the solution and choose Add>New Project …
 
 ![step 4](../Resources/step4.png)
 
-5.	Create a new Background Application
+## Step 5: Create a new Background Application
 
-![step 5](../Resources/step5a.png)
+![step 5](../Resources/step5.png)
 
-6.	Select desired target version and click OK when prompted for target version
+## Step 6: Select desired target version and click OK when prompted for target version
 
-![step 6](../Resources/step6a.png)
+![step 6](../Resources/step6.PNG)
 
-7.	In Solution Explorer right-click on the background application Package.appxmanifest and choose View Code
+## Step 7: In Solution Explorer right-click on the background application Package.appxmanifest and choose View Code
 
 ![step 7](../Resources/step7.png)
 
-8.	In Solution Explorer right-click on the foreground application Package.appxmanifest and choose View Code
+## Step 8: In Solution Explorer right-click on the foreground application Package.appxmanifest and choose View Code
 
 ![step 8](../Resources/step8.png)
 
-9.	At the top of the foreground Package.appxmanifest add xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" and modify IgnorableNamespaces to include iot.
+## Step 9: Update App Manifest 
+
+At the top of the foreground Package.appxmanifest add xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" and modify IgnorableNamespaces to include IoT.
 
         <Package
         xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -62,7 +61,9 @@ If you want to create a solution that builds the foreground application and the 
         xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
         IgnorableNamespaces="uap mp iot">
 
-10.	Copy the <Extensions> from the Background Application project Package.appxmanifest  to the Foreground Application Package.appxmanifest.  It should look like this:
+## Step 10:	Copy the Extensions from Background to Foreground Application Package.appxmanifest
+
+It should look like this:
 
         <Applications>
         <Application Id="App"
@@ -87,29 +88,37 @@ If you want to create a solution that builds the foreground application and the 
         </Application>
         </Applications>
 
-11.	In Solution Explorer right-click on the Foreground Application References node and choose Add Reference…
+## Step 11: Add References to Foreground Application 
+
+In Solution Explorer right-click on the Foreground Application References node and choose Add Reference
 
 ![step 11](../Resources/step11.png)
 
-12.	Add a project reference to the Background Application
+## Step 12: Add References to Background Application 
+
+Add a project reference to the Background Application
  
 ![step 12](../Resources/step12.png)
 
-13.	In Solution Explorer right-click the foreground application project and choose Unload Project, then right-click the background application project and choose Unload Project.
+## Step 13: Unload Project
+
+In Solution Explorer right-click the foreground application project and choose Unload Project, then right-click the background application project and choose Unload Project.
 
 ![step 13](../Resources/step13.png)
 
-14.	In Solution Explorer right-click on the foreground application project and choose Edit MyForegroundApp.csproj and then right-click on the background application project and choose Edit MyBackgroundApp.csproj.
+## Step 14: Edit Foreground and Background App
+
+1. In Solution Explorer right-click on the foreground application project and choose Edit MyForegroundApp.csproj and then right-click on the background application project and choose Edit MyBackgroundApp.csproj.
  
 ![step 14](../Resources/step14.png)
 
-15.	In the background project file comment the following lines:
+1. In the background project file comment the following lines:
 
         <!--<PackageCertificateKeyFile>MyBackgroundApplication_TemporaryKey.pfx</PackageCertificateKeyFile>-->
         <!--<AppxPackage>true</AppxPackage>-->
         <!--<ContainsStartupTask>true</ContainsStartupTask>-->
 
-16.	In the foreground project file add <ContainsStartupTask>true</ ContainsStartupTask> to the first PropertyGroup
+1. In the foreground project file add <ContainsStartupTask>true</ ContainsStartupTask> to the first PropertyGroup
 
         <PropertyGroup>
             <!-- snip -->
@@ -117,13 +126,44 @@ If you want to create a solution that builds the foreground application and the 
             <ContainsStartupTask>true</ContainsStartupTask>
         </PropertyGroup>
 
-17.	In Solution Explorer right-click on each project and choose Reload Project
+## Step 15: Reload Project
 
-![step 17](../Resources/step17.png)
+1. In Solution Explorer right-click on each project and choose Reload Project
 
-18.	In Solution Explorer delete Package.appxmanifest from the background application
+![step 15](../Resources/step17.png)
 
-![step 18](../Resources/step18.png)
+1. In Solution Explorer delete Package.appxmanifest from the background application
 
-19.	At this point the project should build (and run the implementation you have added to the foreground and background applications).
+![step 15-a](../Resources/step18.png)
 
+1. At this point the project should build (and run the implementation you have added to the foreground and background applications).
+
+## Step 16: [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
+
+## Step 17: [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
+
+## Step 18: BIOS GPIO Configuration
+
+>[!NOTE]
+>
+> If you are using the [UP Board](https://up-board.org/up/specifications/), you will have to set up the BIOS GPIO configuration.
+
+1. Configure the BIOS GPIO on the UP Board:
+
+1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
+
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+
+1. Navigate to the **Advance** tab and select the **Hat Configuration** and select **GPIO Configuration in Pin Order**.
+
+1. Configure the Pins you are using in the sample as **INPUT** or **OUTPUT**.
+
+For more information, please review the [UP Board Firmware Settings.](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf)
+
+
+## Additional Notes
+
+Make sure that LowLevel Capabilities in set in PackageAppManifest.
+* To do that go to Package.appxmanifesto and view the code
+* Under Capabilities if you can find "DeviceCapability Name="lowLevel"/" then your lowLevel Capabilities is enabled.
+* If this line "DeviceCapability Name="lowLevel"/" is not present then add it to enable the LowLevel mode and save the PackageAppManifest.
