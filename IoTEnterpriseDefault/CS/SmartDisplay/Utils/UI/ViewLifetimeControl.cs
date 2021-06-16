@@ -40,7 +40,7 @@ namespace SmartDisplay.Utils.UI
         public CoreDispatcher Dispatcher { get; private set; }
 
         // Each view has a unique Id, found using the ApplicationView.Id property or
-        // ApplicationView.GetApplicationViewIdForEnterpriseWindow method. This id is used in all of the ApplicationViewSwitcher
+        // ApplicationView.GetApplicationViewIdForCoreeWindow method. This id is used in all of the ApplicationViewSwitcher
         // and ProjectionManager APIs. 
         public int Id { get; private set; }
 
