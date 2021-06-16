@@ -312,7 +312,7 @@ namespace SmartDisplay.Identity
         private async Task<WebTokenRequestResult> RequestTokenWithTimeout(WebTokenRequest request)
         {
             // The WebTokenRequest will time out if the user does not complete in time.
-            // This is because there is currently no 'close' button on IoT Enterprise, so it
+            // This is because there is currently no 'close' button on IoT Core, so it
             // will prevent users from getting stuck on the sign-in page forever.
             var requestOperation = WebAuthenticationCoreManager.RequestTokenAsync(request);
             var delay = Task.Delay(TimeSpan.FromSeconds(DialogTimeoutSeconds));
