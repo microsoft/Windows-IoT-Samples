@@ -181,7 +181,7 @@ Add a call to `AccessComPort()` in the MainPage constructor:
 * Select **Local Machine** to point to IoT device and hit F5 to deploy to your device. 
 * Build the project, which should succeed because we made desktop APIs visible at compile time.
 * Set a breakpoint on the `throw` statement after the file handle validity check, as indicated in the source code above.
-* Debug the application on MinnowBoardMax. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
+* Debug the application on UP Board. The breakpoint should get hit. Inspect the `lastError` variable in the debugger, which should equal 5 (Access Denied). We need to set a proper security descriptor on the device object so it can be accessed by UWP applications.
 
 ### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
 
