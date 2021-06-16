@@ -204,7 +204,7 @@ Variables and Constants
 
 ```csharp
 // use these constants for controlling how the I2C bus is setup
-private const string I2C_CONTROLLER_NAME = "I2C0"; //specific to UP Board
+
 private const byte PORT_EXPANDER_I2C_ADDRESS = 0x20; // 7-bit I2C address of the port expander
 private const byte PORT_EXPANDER_IODIR_REGISTER_ADDRESS = 0x00; // IODIR register controls the direction of the GPIO on the port expander
 private const byte PORT_EXPANDER_GPIO_REGISTER_ADDRESS = 0x09; // GPIO register is used to read the pins input
