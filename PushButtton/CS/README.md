@@ -28,11 +28,11 @@ You will need the following components:
 
 * [330 &#x2126; resistor](http://www.digikey.com/product-detail/en/CFR-25JB-52-330R/330QBK-ND/1636)
 
-* Breadboard and several male-to-male for the UP Board.
+* Breadboard and several male-to-male wires for the UP Board.
 
 ### Connect the circuit to your device
 
-Let's start by wiring up the components on a breadboard. Visit the corresponding **UP Board** sections below depending on your device.
+Let's start by wiring up the components on a breadboard.
 
 #### UP Board
 
