@@ -4,27 +4,55 @@ urlFragment: appservice-sharednotepad
 languages:
   - csharp
 products:
-  - windows
-  - windows-iot
-description: Create a simple notepad app service as well as two simple app service clients for Windows 10 IoT Core.
+  - Windows 10
+  - Windows IoT 
+  - Windows 10 IoT Enterprise
+description: Create a simple notepad app service as well as two simple app service clients for Windows 10 IoT Enterprise.
 ---
 
 # Using an app service with multiple clients
+
 We’ll create a simple notepad [app service](https://docs.microsoft.com/en-us/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service).  We'll also create two simple app service clients. One that writes to the notepad service and one that reads from the notepad service.
 
-## Load the projects in Visual Studio
+## Step 1: Load the projects in Visual Studio
 ___
 
-You can find the source code for this sample by downloading a zip of all of our samples [here](https://github.com/Microsoft/Windows-iotcore-samples/archive/master.zip) and navigating to the `samples-develop\AppServiceSharedNotepad`.  Make a copy of the folder on your disk and open the projects from Visual Studio.  NotepadService.sln implements the app service and must be started first.  NotepadClientBackgroundApplication.sln implements a client that writes messages to the app service.  NotepadServiceClientApp.sln implements a windows that retrieves messages from the client and displays them.
+* You can find the source code for this sample by downloading a zip of all of our samples in Windows 10 IoT Enterprise folder and navigating to the `samples-develop\AppServiceBlinky`. 
+* Make a copy of the folder on your disk and open the projects from Visual Studio. 
+* NotepadService.sln implements the app service and must be started first.
+* NotepadClientBackgroundApplication.sln implements a client that writes messages to the app service.
+* NotepadServiceClientApp.sln implements a window that retrieves messages from the client and displays them.
+* Make a copy of the folder on your disk and open the projects from Visual Studio. 
+* NotepadService.sln implements the app service and must be started first. 
+* NotepadClientBackgroundApplication.sln implements the app service client.
 
-Once the project is open and builds, the next step is to [deploy](https://github.com/MicrosoftDocs/windows-iotcore-docs/blob/master/windows-iotcore/develop-your-app/AppDeployment.md) the application to your device.
+## Step 2: Deploy your app
 
-When everything is set up, you should be able to press F5 from each instance of Visual Studio.  The NotepadService app will deploy and start on the Windows IoT device, and you should see the package family name printed the debug output window on Visual Studio.  Before pressing F5 for NotepadClientBackgroundApplication and NotepadServiceClientApp projects verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by BlinkyService.  Next start NotepadServiceClientApp and then NotepadServiceClientApp.
+* * *
+
+With the application open in Visual Studio 2019, set the architecture in the toolbar dropdown. If you’re building for UP Board, select `x64`.
+
+When everything is set up, you should be able to press F5 from each instance of Visual Studio. 
+
+The NotepadService app will deploy and start on the Windows IoT device, and you should see the package family name printed the debug output window on Visual Studio.  
+
+Before pressing F5 for NotepadClientBackgroundApplication and NotepadServiceClientApp projects verify that the value of connection.PackageFamilyName in StartupTask.cs and MainPage.xaml.cs matches the value output in the output window by NotepadService.
+
+If it does not have any value output, you will get the value by marking the breakpoint in debug mode for 
+StartupTask.cs at System.Diagnostics.Debug.WriteLine("Service closed. Status=" + args.Status.ToString()).
+
+Next start NotepadServiceClientApp and then NotepadServiceClientApp.
+
+### [Generate an app package](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#generate-an-app-package)
+
+### [Install your app package using an install script](https://docs.microsoft.com/windows/msix/package/packaging-uwp-apps#install-your-app-package-using-an-install-script)
 
 When you run the client app you should see
+
 ![No messages yet](../Resources/AppServiceSharedNotepad-NoMessages.jpg)
 
 After a 30 seconds or so the text in the button should change to black from gray.  Clicking the button will show the messages from the clipboard service.
+
 ![Message from clipboard service](../Resources/AppServiceSharedNotepad-Messages.jpg)
 
 ## Let's look at the code
