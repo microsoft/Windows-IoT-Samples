@@ -48,11 +48,11 @@ If you are using the [Up Board](https://up-board.org/up/specifications/), you wi
 
 Steps to follow:
  
-(1)	After power on the Upboard, Press Del or F7 to enter the BIOS setting.
+(1)	After power on the Upboard, Press **Del** or **F7** to enter the BIOS setting.
  
-(2)	Under the "Boot -> OS Image ID" Tab:
-    Select "Windows 10 IoT Core".
+(2)	Under the **Boot -> OS Image ID** Tab:
+    Select **Windows 10 IoT Core**.
  
-(3) Under the "Advance" Tab: Select "Hat Configuration" and make "I2C0/GPIO SELECTION" as "I2C0".
+(3) Under the **Advance** Tab: Select **Hat Configuration** and make **I2C0/GPIO SELECTION** as **I2C0**.
 
 For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
