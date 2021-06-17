@@ -2,17 +2,18 @@
 page_type: sample
 urlFragment: DMMockPortal
 languages:
-  - cs
+  - csharp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
-description: "This sample tool allows the user to update devices individually or in bulk in Azure ADM service."
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
+description: This sample tool allows the user to update devices individually or in bulk in Azure ADM service.
 ---
 
 # DM Mock Portal
 
 This tool allows the user to update devices individually or in bulk. It utilizes [Azure's ADM](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-auto-device-config) service.
+
 While you may find this tool useful, it was primary developed as a sample to show how an operator's flow might look like - specifically when it comes to bulk updates.
 
 ## Individual Update
@@ -20,13 +21,13 @@ While you may find this tool useful, it was primary developed as a sample to sho
 - After inserting the iothubowner connection string, click `Refresh`.
 - Select the `All` deployment.
 - In the `Deployment Details` pane, click the `Target Devices` button.
-- Select the device of your choice, and paste the json you want applied.
+- Select the device of your choice, and paste the JSON you want applied.
 
 ## Bulk Update
 
 Bulk update is possible using this tool by specifying three different pieces:
 
-1. The configuration to deploy (a json blob).
+1. The configuration to deploy (a JSON blob).
 2. What criteria a device should satisfy to be a target of that configuration.
 3. What criteria a device should satisfy to be considered successful in applying the configuration.
 
@@ -113,7 +114,3 @@ For example, we have [adm.windows_telemetry_x64_v1.json](adm.windows_telemetry_x
 **Note 2**: By default, we have device info and device schemas reported on start-up. This allows deployments to use their reported properties for targeting.
 
 <img src="dm-mock-portal.png"/>
-
------
-
-[Home](../../README.md)
