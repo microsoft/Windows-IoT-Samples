@@ -4,9 +4,9 @@ urlFragment: gpio-kmdf-demo
 languages:
   - cpp
 products:
-  - windows
-  - windows-iot
-  - windows-10-iot-Enterprise
+  - Windows 10
+  - Windows IoT
+  - Windows 10 IoT Enterprise
 description: Create a simple GPIO demo.
 ---
 
@@ -17,7 +17,7 @@ Windows 10 IoT Enterprise GPIO KMDF Demo sample will allow you to deploy a GPIO 
 # Prerequisites 
 In order to build this driver you will need the following:
 
-  * [Latest Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).
+  * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/).
   * [Windows 10 Driver Development Kit](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
   * [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/).
 
@@ -29,11 +29,11 @@ In order to build this driver you will need the following:
   5. You can now build the solution.
 
 ### Copying the GPIOKMDF folder to your device
-  1. Under the release folder you will find the inf and sys file. 
+  1. Under the release folder you will find the .inf and .sys files. 
   2. Copy that folder and send it to IoT Enterprise device
 
 ### Installing the GPIO KMDF Drivers
-   1. Install the inf file in the Windows IoT Enterprise device.
+   1. Install the .inf file in the Windows IoT Enterprise device.
    2. You will see the dialogue box of "The operation completed successful".
    3. The GPIO KMDF device drivers installed in IoT device
 
