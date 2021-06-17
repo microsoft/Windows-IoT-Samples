@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="cce26b09-3a50-4d4c-b617-c8789fb5352a"
+    Name="NotepadServiceClientApp"
     Publisher="CN=Microsoft"
     Version="1.0.0.0" />
 
