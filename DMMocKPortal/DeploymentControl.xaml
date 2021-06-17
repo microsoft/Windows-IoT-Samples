@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="DMMockPortal.DeploymentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DMMockPortal"
+             xmlns:localControls="clr-namespace:DMMockPortal.PropertyControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="900">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="3,3,3,15" FontSize="20" Text="Deployment Details"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button Margin="3" Width="15" Height="20" Content="?" Click="OnHelp"/>
+                    <Button Margin="3" Width="15" Height="20" Content="X" Click="OnCollapse"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Margin="3" Width="60" Content="Import" Click="OnImportDeployment"/>
+                    <Button Margin="3" Width="60" Content="Delete" Click="OnDeleteDeployment"/>
+                    <Button Margin="3" Width="60" Content="Save" Click="OnSaveDeployment"/>
+                    <Button Margin="3" Width="60" Content="Export" Click="OnExportDeployment"/>
+                </StackPanel>
+                <Button Margin="3" Width="120" Content="Target Devices &gt;&gt;" Click="OnShowDeviceListPanel" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Deployment Name"/>
+                <TextBox Grid.Row="1" Grid.Column="0" Margin="3" x:Name="DeploymentNameValueBox"/>
+                <Border Grid.Row="2" Grid.Column="0" Height="20"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Priority"/>
+                <TextBox Grid.Row="4" Grid.Column="0" Margin="3" x:Name="PriorityValueBox" />
+                <Border Grid.Row="5" Grid.Column="0" Height="20"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="3" Text="Desired State"/>
+                <Grid Grid.Row="7" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- TabControl -->
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- TabPagePane -->
+                        <Border Grid.Row="0" Grid.Column="1" BorderThickness="0,1,1,1" Height="200" SnapsToDevicePixels="True" BorderBrush="#444444" Background="#222222">
+                            <Grid x:Name="TabContentGrid">
+                                <TextBox
+                                    Margin="3"
+                                    HorizontalAlignment="Stretch"
+                                    TextWrapping="Wrap"
+                                    AcceptsReturn="True"
+                                    FontFamily="Consolas"
+                                    VerticalScrollBarVisibility="Auto"
+                                    x:Name="DesiredPropertiesValueBox"
+                                    Visibility="Visible"/>
+                                <localControls:ApplicationListControl Margin="3"/>
+                                <localControls:AzureStorageControl Margin="3"/>
+                                <localControls:RebootInfoControl Margin="3"/>
+                                <localControls:WindowsUpdateControl Margin="3"/>
+                            </Grid>
+                        </Border>
+                        <!-- TabPageTitlePane -->
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0" Grid.Column="0" GroupName="DeploymentTabGroup" Style="{StaticResource TabHeader}" IsChecked="True" Checked="OnTabClicked">
+                                <TextBlock Margin="3" Text="Raw Json" HorizontalAlignment="Stretch"/>
+                            </RadioButton>
+                            <RadioButton Grid.Row="1" Grid.Column="0" GroupName="DeploymentTabGroup" Style="{StaticResource TabHeader}" IsChecked="False" Checked="OnTabClicked">
+                                <TextBlock Margin="3" Text="Applications" HorizontalAlignment="Stretch"/>
+                            </RadioButton>
+                            <RadioButton Grid.Row="2" Grid.Column="0" GroupName="DeploymentTabGroup" Style="{StaticResource TabHeader}" IsChecked="False" Checked="OnTabClicked">
+                                <TextBlock Margin="3" Text="Azure Storage" HorizontalAlignment="Stretch"/>
+                            </RadioButton>
+                            <RadioButton Grid.Row="3" Grid.Column="0" GroupName="DeploymentTabGroup" Style="{StaticResource TabHeader}" IsChecked="False" Checked="OnTabClicked">
+                                <TextBlock Margin="3" Text="Reboot Info" HorizontalAlignment="Stretch"/>
+                            </RadioButton>
+                            <RadioButton Grid.Row="4" Grid.Column="0" GroupName="DeploymentTabGroup" Style="{StaticResource TabHeader}" IsChecked="False" Checked="OnTabClicked">
+                                <TextBlock Margin="3" Text="Windows Update" HorizontalAlignment="Stretch"/>
+                            </RadioButton>
+                            <Border Grid.Row="5" Grid.Column="0" BorderThickness="0,1,1,0" BorderBrush="#444444" Background="Transparent"/>
+                        </Grid>
+                    </Grid>
+                    <Button Grid.Row="1" Grid.Column="0" Margin="3" Width="70" Content="Import" Click="OnPropertiesBrowse" HorizontalAlignment="Right"/>
+                </Grid>
+                <Border Grid.Row="8" Grid.Column="0" Height="20"/>
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="3" Text="Target Condition"/>
+                <Grid Grid.Row="10" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Margin="3" x:Name="TargetConditionValueBox" />
+                    <Button Grid.Column="1" Margin="3" Width="70" Content="Devices" Click="OnTargetRun"/>
+                </Grid>
+                <Border Grid.Row="11" Grid.Column="0" Height="20"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Margin="3" Text="Metrics"/>
+                <StackPanel Grid.Row="13" Grid.Column="0" Orientation="Vertical">
+                    <ListView Margin="3" Height="100" x:Name="MetricsList" SelectionChanged="OnMetricChanged">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}" >
+                                <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Query" Width="400" DisplayMemberBinding="{Binding Query}" />
+                                <GridViewColumn Header="Device Count" Width="100" DisplayMemberBinding="{Binding Count}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="0" Margin="3,3,0,3" x:Name="MetricConditionNameBox"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,3,3" x:Name="MetricConditionValueBox"/>
+                        <Button Grid.Row="0" Grid.Column="2" Margin="3" Width="70" Content="Devices" Click="OnMetricRunEditAsync"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="3" Width="20" Content="+" Click="OnAddMetricCondition"/>
+                        <Button Margin="3" Width="20" Content="-" Click="OnRemoveMetricCondition"/>
+                    </StackPanel>
+                </StackPanel>
+                <Border Grid.Row="15" Grid.Column="0" Height="20"/>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Margin="3" Text="System Criteria"/>
+                <StackPanel Grid.Row="17" Grid.Column="0" Orientation="Vertical">
+                    <ListView Margin="3" Height="100" x:Name="SystemMetricsList">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}" >
+                                <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Query" Width="400" DisplayMemberBinding="{Binding Query}" />
+                                <GridViewColumn Header="Device Count" Width="100" DisplayMemberBinding="{Binding Count}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Border Grid.Row="0" Grid.Column="1" Width="2" BorderThickness="1,0,0,0" BorderBrush="#3F3F46"/>
+        <local:DeviceListControl Grid.Column="2" x:Name="DeviceListPanel" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>
