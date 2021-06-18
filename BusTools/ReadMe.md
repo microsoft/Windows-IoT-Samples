@@ -67,6 +67,7 @@ Steps to follow:
 **For PWMTestTool**
 
 * Navigate to the **Advance** Tab: Select the **Hat Configuration** and under **LPSS PWM #1Support** Select **ACPI.**
+* Configure the Pins you are using in the sample as **INPUT** or **OUTPUT.**
 
 **For SPITestTool**
 
