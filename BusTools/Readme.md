@@ -44,37 +44,13 @@ Valid values of Configuration are: `Release, Debug`
 
 [!NOTE]
 
-If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS I2C configuration.
 
+If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS I2C configuration.
 Steps to follow:
  
 (1)	After power on the Upboard, Press **Del** or **F7** to enter the BIOS setting.
  
 (2)	Under the **Boot -> OS Image ID** Tab:
     Select **Windows 10 IoT Core**.
-
-**For GPIOTestTool**
- 
-* Navigate to the **Advance** Tab: Select the **Hat Configuration** and select **GPIO Configuration in Pin Order.**
-
-* Configure the Pins you are using in the sample as **INPUT** or **OUTPUT.**
-
-**For I2CTestTool**
- 
-* Navigate to the **Advance** Tab: Select the **Hat Configuration** and under **LPSS I2C #1Support** Select **ACPI.**
-* Configure **I2C0/GPIO SELECTION** as **I2C0.**
-
-**For PWMTestTool**
-
-* Navigate to the **Advance** Tab: Select the **Hat Configuration** and under **LPSS PWM #1Support** Select **ACPI.**
-* Configure the Pins you are using in the sample as **INPUT** or **OUTPUT.**
-
-**For SPITestTool**
-
-* Navigate to the **Advance** Tab: Select the **Hat Configuration** and under **LPSS SPISupport** Select **ACPI.**
-
-**For MinComm(UART)**
-
-* Navigate to the **Advance** Tab: Select the **Hat Configuration** and under **LPSS HSUARTSupport** Select **ACPI.**
-
+    
 For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).

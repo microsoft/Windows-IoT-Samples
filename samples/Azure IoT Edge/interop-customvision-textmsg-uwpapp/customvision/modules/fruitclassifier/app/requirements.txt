@@ -1,4 +1,4 @@
-tensorflow==2.4.0
-pillow==8.1.1
+tensorflow==2.5.0
+pillow==8.2.0
 numpy==1.16.4
 flask==1.0
