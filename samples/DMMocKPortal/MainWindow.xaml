@@ -1,0 +1,41 @@
+﻿<Window x:Class="DMMockPortal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DMMockPortal"
+        mc:Ignorable="d"
+        Title="DM Mock Portal" Height="1000" Width="1000">
+    <Grid Background="#2D2D30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="3" FontSize="20" Text="DM Mock Portal"/>
+        <Grid Grid.Row="3" Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" FontSize="16" Text="Connection String"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="&lt;connection string&gt;" x:Name="IoTHubConnectionStringBox" TextChanged="OnConnectionStringChanged"/>
+        </Grid>
+        <ScrollViewer Grid.Row="5" Grid.Column="1" Visibility="Visible" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <local:DeploymentListControl x:Name="DeploymentListPanel"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

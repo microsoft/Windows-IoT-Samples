@@ -44,15 +44,13 @@ Valid values of Configuration are: `Release, Debug`
 
 [!NOTE]
 
-If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS SPI configuration.
 
+If you are using the [Up Board](https://up-board.org/up/specifications/), you will have to set up the BIOS I2C configuration.
 Steps to follow:
  
 (1)	After power on the Upboard, Press **Del** or **F7** to enter the BIOS setting.
  
 (2)	Under the **Boot -> OS Image ID** Tab:
     Select **Windows 10 IoT Core**.
- 
-(3) Navigate to the **Advance** tab and select the **Hat Configuration** and select **LPSS SPISupport** as **Enabled**.
-
+    
 For more information, please review the [UP Board Firmware Settings](https://www.annabooks.com/Articles/Articles_IoT10/Windows-10-IoT-UP-Board-BIOS-RHPROXY-Rev1.3.pdf).
