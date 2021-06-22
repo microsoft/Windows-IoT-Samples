@@ -1,0 +1,17 @@
+{
+  "name": "windows_telemetry_arm_v1",
+  "priority": 20,
+  "desiredState": {
+    "windowsTelemetry": {
+      "__meta": {
+        "deploymentId": "windows_telemetry_arm_v1",
+        "serviceInterfaceVersion": "1.0.0"
+      },
+      "level": "basic"
+    }
+  },
+  "targetCondition": "properties.reported.deviceInfo.processorArchitecture='5'",
+  "successCondition": "properties.reported.windowsTelemetry.__meta.deploymentStatus='succeeded' and properties.reported.deviceInfo.processorArchitecture='5'",
+  "failureCondition": "properties.reported.windowsTelemetry.__meta.deploymentStatus='failed' and properties.reported.deviceInfo.processorArchitecture='5'",
+  "pendingCondition": "properties.reported.windowsTelemetry.__meta.deploymentStatus='pending' and properties.reported.deviceInfo.processorArchitecture='5'"
+}

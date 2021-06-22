@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="DMMockPortal.DeploymentListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DMMockPortal"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="3,3,3,15" FontSize="20" Text="Deployments"/>
+            <Button Grid.Row="1" Margin="3" Width="60" HorizontalAlignment="Left" Content="Refresh" Click="OnRefreshDeploymentList"/>
+            <Button Grid.Row="1" Margin="3" Width="15" HorizontalAlignment="Right" Content="+" Click="OnAddDeployment"/>
+            <Grid Grid.Row="2" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0" Margin="3" VerticalAlignment="Bottom" Checked="OnFilterHasErrors" Unchecked="OnFilterHasErrors" x:Name="FilterHasErrorsCheckBox">
+                    <TextBlock Text="Has Errors"/>
+                </CheckBox>
+                <CheckBox Grid.Column="1" Margin="3" VerticalAlignment="Bottom" Checked="OnFilterHasPending" Unchecked="OnFilterHasPending" x:Name="FilterHasPendingCheckBox">
+                    <TextBlock Text="Has Pending"/>
+                </CheckBox>
+            </Grid>
+            <ListView Grid.Row="3" Margin="3" x:Name="DeploymentsList" SelectionChanged="OnSelectedDeploymentChanged">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}" >
+                        <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Targeted" Width="65" DisplayMemberBinding="{Binding TargetedCount}" />
+                        <GridViewColumn Header="Applied" Width="65" DisplayMemberBinding="{Binding AppliedCount}" />
+                        <GridViewColumn Header="Pending" Width="65" DisplayMemberBinding="{Binding PendingCount}" />
+                        <GridViewColumn Header="Success" Width="65" DisplayMemberBinding="{Binding SuccessCount}" />
+                        <GridViewColumn Header="Has Errors" Width="65" DisplayMemberBinding="{Binding FailedCount}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Border Grid.Row="0" Grid.Column="1" Width="2" BorderThickness="1,0,0,0" BorderBrush="#3F3F46"/>
+        <local:DeploymentControl Grid.Row="0" Grid.Column="2" x:Name="DeploymentPanel" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

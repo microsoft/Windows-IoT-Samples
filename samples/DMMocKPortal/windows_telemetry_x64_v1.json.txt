@@ -1,0 +1,7 @@
+      "windowsTelemetry": {
+        "__meta": {
+          "deploymentId": "windows_telemetry_x64_v1",
+          "serviceInterfaceVersion": "1.0.0"
+        },
+        "level": "security"
+      }
