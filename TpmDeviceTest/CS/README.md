@@ -23,6 +23,6 @@ await deviceClient.SendEventAsync(message);
 
 At this point, you have a connected _deviceClient_ object that you can use to send and receive messages. You can view the full working sample [here](https://github.com/ms-iot/samples/tree/develop/Azure/TpmDeviceTest).
 
-To learn more about building secure apps for Windows IoT Core, you can view the blog post [here](https://blogs.windows.com/buildingapps/2016/07/20/building-secure-apps-for-windows-iot-core/#oqFLXiWIL1iCF8j9.97).
+To learn more about building secure apps for Windows IoT Enterprise, you can view the blog post.
 
 
