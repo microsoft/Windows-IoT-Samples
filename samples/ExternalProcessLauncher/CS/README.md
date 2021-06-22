@@ -38,13 +38,13 @@ The code for the ProcessLauncher sample can be found under: <samples root folder
   
 The sample app when deployed displays a screen similar to this one: 
 
-![App Started](../../Resources/images/ProcessLauncherSample/ProcessLauncher0.png)
+![App Started](../../../Resources/images/ProcessLauncherSample/ProcessLauncher0.png)
 
 Go ahead, click the **Run Command** button to launch the application specified in the **Command** edit box, SampleConsoleApplication.exe, which is an executable Win32 application built and deployed from the sample app as well.
 
 When run, the SampleConsoleApplication exe, will send output to both the Standard Output and Standard Error boxes. The return error code of the process, 100, should also be shown.
 
-![SampleConsoleApplication Output](../../Resources/images/ProcessLauncherSample/ProcessLauncher1.png)
+![SampleConsoleApplication Output](../../../Resources/images/ProcessLauncherSample/ProcessLauncher1.png)
 
 ## Let's take a look at the code  
  
@@ -58,7 +58,7 @@ Since the IoT extension SDK is not added to projects by default, we'll need to a
 
 To do so, right-click on the References entry under the project, select "Add Reference" then navigate the resulting dialog to `Universal Windows->Extensions->Windows IoT Extensions for the UWP` making sure the right version, 10.0.10586.0 or higher, is selected, then check the box, and click OK.
 
-![Add Extension SDK](../../Resources/images/ProcessLauncherSample/AddIoTExtensionReference.png)
+![Add Extension SDK](../../../Resources/images/ProcessLauncherSample/AddIoTExtensionReference.png)
 
 
 ### Add systemManagement capabiity
@@ -180,7 +180,7 @@ To be able to find and invoke the SampleConsoleApplication exe at runtime, we ne
 1. Change *Build Action* to *Content*
 1. Change *Copy to Output Directory* to *Always* 
 												       
-![Exe File Properties](../../Resources/images/ProcessLauncherSample/ExeProperties.png)
+![Exe File Properties](../../../Resources/images/ProcessLauncherSample/ExeProperties.png)
 												       
 1. Finaly, to ensure the exe is built every time the main app is deployed, we need to change the project dependency, Right click the solution, select *Project Dependencies* and make the UWP project have a dependency on the console app ![Build Dependencies](../../Resources/images/ProcessLauncherSample/BuildDependencies.png)
 
@@ -202,5 +202,5 @@ To add an exe to the **allow list**, add to or replace the reg value in the reg 
 
 Go ahead, run the command above on your device, using SSH or PowerShell. Then, in the sample app (no need to restart) type the command `c:\windows\system32\ipconfig.exe`. You should get an output similar to the one below:
 
-![App Started](../../Resources/images/ProcessLauncherSample/ProcessLauncher2.png)
+![App Started](../../../Resources/images/ProcessLauncherSample/ProcessLauncher2.png)
 
