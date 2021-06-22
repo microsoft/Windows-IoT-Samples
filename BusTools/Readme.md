@@ -54,14 +54,6 @@ Steps to follow:
     Select **Windows 10 IoT Core**.
 
 **For GPIOTestTool**
-<<<<<<< Updated upstream
- 
-* Navigate to the **Advance** Tab: Select the **Hat Configuration** and select **GPIO Configuration in Pin Order.**
-* Configure the Pins you are using in the sample as **INPUT** or **OUTPUT.**
-
-**For I2CTestTool**
- 
-=======
  
 * Navigate to the **Advance** Tab: Select the **Hat Configuration** and select **GPIO Configuration in Pin Order.**
 
@@ -69,7 +61,6 @@ Steps to follow:
 
 **For I2CTestTool**
  
->>>>>>> Stashed changes
 * Navigate to the **Advance** Tab: Select the **Hat Configuration** and under **LPSS I2C #1Support** Select **ACPI.**
 * Configure **I2C0/GPIO SELECTION** as **I2C0.**
 
