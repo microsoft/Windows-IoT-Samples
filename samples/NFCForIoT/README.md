@@ -6,12 +6,13 @@ languages:
 products:
   - windows
   - windows-iot
-description: Learn how use NFC on Windows 10 IoT Core.
+  - windows-10-iot-Enterprise
+description: Learn how use NFC on Windows 10 IoT Enterprise.
 ---
 
 # Near Field Communication
 Near Field Communication allows a device to send small pieces of data when in close proxmimity to other NFC devices. NFC hardware is required for this communication. 
-On Windows 10 IoT Core, you can communicate with the hardware manually by using the GPIO, I2C or SPI APIs, or you can use the SmartCard APIs if a driver is associated with the hardware.
+On Windows 10 IoT Enterprise, you can communicate with the hardware manually by using the GPIO, I2C or SPI APIs, or you can use the SmartCard APIs if a driver is associated with the hardware.
 
 In this sample, we will demonstrate how to set up the NXP NFC SBC Kit and how to communicate with an NXP NTAG21x.
 
