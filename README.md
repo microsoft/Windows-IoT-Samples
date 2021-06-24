@@ -72,3 +72,14 @@ For additional Windows samples, see:
 |----------------|------------------|  
 | [interop-textmsg-consoleapp](https://aka.ms/WinIoTSamples-interop-textmsg-consoleapp) | Basic interop sample demonstrating text messaging between a Windows console app and an Edge module. |
 | [interop-customvision-textmsg-uwpapp](https://aka.ms/WinIoTSamples-interop-customvision-textmsg-uwpapp) | <p>Two more advanced interop samples which demonstrate bidirectional communication between a Windows application and an Edge module. </p><ul><li>Text messaging between a UWP application and an Edge module. </li><li>A 'Custom vision' machine learning interop sample with a fruit classifier which uses a Windows UWP app to send camera frames to an Edge module for identification.</li></ul>|  
+
+### Windows 10 IoT Enterprise
+
+#### Bus Tools
+| Name           | Description      |  
+|----------------|------------------|
+| [GPIOTestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to manipulate GPIO pins from the command line. Demonstrates how to use the GPIO WinRT APIs from standard C++ with WRL. |
+| [I2CTestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to read and write I2C devices from the command line. Shows how to use C++/CX in console applications. |
+| [PWMTestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to read and write PWM devices from the command line. Shows how to use C++/CX in console applications. |
+| [SPITestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to read and write SPI devices from the command line. |
+| [MinComm (UART)](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Demonstrates how to use UART. |
