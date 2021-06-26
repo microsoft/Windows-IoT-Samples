@@ -50,7 +50,7 @@ Valid values of Configuration are: Release, Debug
 
 1. Once you power on the UP board, select the **Del** or **F7** key on your keyboard to enter the BIOS setting.
 
-1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT Core**.
+1. Navigate to **Boot** > **OS Image ID** tab, and select **Windows 10 IoT**.
 
 **For GPIOTestTool**
 * Navigate to the **Advance** Tab: Select the **Hat Configuration** and select **GPIO Configuration in Pin Order.**
