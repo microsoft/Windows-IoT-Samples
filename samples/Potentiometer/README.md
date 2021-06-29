@@ -12,8 +12,7 @@ description: Connect a rotary potentiometer and LED to your Windows 10 IoT Enter
 
 # Potentiometer sensor
 
-This sample shows how to connect a rotary potentiometer and LED to a UP Board. We use a SPI-based ADC (Analog to Digital Converter) to read values from the potentiometer 
-and control an LED based on the knob position.
+This sample shows how to connect a rotary potentiometer and LED to a Windows 10 IoT Enterprise compatible device (this sample uses an UP Board). We use a SPI-based ADC (Analog to Digital Converter) to read values from the potentiometer and control an LED based on the knob position.
 
 ## Parts needed
 - [1 LED](http://www.digikey.com/product-detail/en/C5SMF-RJS-CT0W0BB1/C5SMF-RJS-CT0W0BB1-ND/2341832)
