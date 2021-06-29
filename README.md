@@ -75,11 +75,49 @@ For additional Windows samples, see:
 
 ### Windows 10 IoT Enterprise
 
+| Name           | Description      |  
+|----------------|------------------|
+| [Accelerometer](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/Accelerometer) | Sample app that reads data over either I2C or SPI from an attached ADXL345 accelerometer |
+| [AppServiceBlinky](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/AppServiceBlinky) | Two part sample. 1. Create a simple Blinky app service and connect a LED to your Windows IoT Enterprise device (Up-Board). 2. Create a simple app service client that blinks the LED |
+| [AppServiceSharedNotepad](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/AppServiceSharedNotepad) | This app creates a simple notepad app service, and two simple app service clients. One app will write to the notepad service and the other one reads from the notepad service. |
+| [CustomDeviceAccessor](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/CustomDeviceAccessor) | This sample shows how to access devices from UWP applications using familiar win32 APIs like CreateFile(), ReadFile(), WriteFile(), and DeviceIOControl(). |
+| [DMMocKPortal](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/DMMocKPortal) | This sample shows what an operator's flow might look like when it comes to updating devices in bulk or individually. |
+| [DeviceIOContoller](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/DeviceIOContoller) | This sample shows how to access devices from UWP applications using familiar win32 APIs like CreateFile(), ReadFile(), WriteFile(), and DeviceIoControl(). |
+| [ExternalProcessLauncher](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/ExternalProcessLauncher) | We'll learn how to launch an external process (exe) from a Universal Windows Platform (UWP) app using Windows.System.ProcessLauncher API. |
+| [FlowVolume](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/FlowVolume) | This sample show how to launch an external process (exe) from a Universal Windows Platform (UWP) app using Windows.System.ProcessLauncher API. |
+| [ForegroundAppWithBackgroundApp](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/ForegroundAppWithBackgroundApp) | This sample will showcase how to create a foreground application with a background application. |
+| [GPIOKmdfDemo](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/GPIOKmdfDemo) | This sample will demonstrate how to deploy a GPIO Kernel driver to a Windows 10 IoT Device. |
+| [GPIOOneWire](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/GPIOOneWire) | This sample shows how to read a temperature and humidity sensor from a Universal Windows Application. |
+| [HIDInjector](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/HIDInjector) | This sample will allow you to deploy a driver to perform low level injection of touch, keyboard and mouse events. |
+| [Hello Blinky](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/Hello%20Blinky) | This sample is a simple blinking LED app. |
+| [HelloBlinkyBackground](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/HelloBlinkyBackground) | This sample showcases how to set up and use a background service. |
+| [I2CCompass](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/I2CCompass) | This sample uses I2C on Windows IoT Enterprise to communicate with an magnetometer device.|
+| [I2CPortExpander](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/I2CPortExpander) | This sample app uses the port expander to read the status of a tactile switch and control an LED. |
+| [IoTEnterpriseDefault](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/IoTEnterpriseDefault) | This sample app provides an overview of the various features that can be enabled in Windows 10 IoT Enterprise. |
+| [IoTHubClients](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/IoTHubClients) | This sample demonstrates how to connect to IoT Hub, send telemetry, and monitor and respond to device twin state changes. |
+| [MemoryStatus](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/MemoryStatus) | This sample is intended to show how to create a console application that can be used to query the memory usage on your Windows 10 IoT Enterprise device. |
+| [NTServiceRpc](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/NTServiceRpc) | This sample demonstrates the use of a NT service with an UWP app. |
+| [Potentiometer](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/Potentiometer) | This sample shows how to connect a rotary potentiometer and LED to a Windows IoT Enterprise compatible board. |
+| [PushButtton](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/PushButtton) | This sample shows how to use a push button to control an LED. |
+| [RFIDForIoT](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/RFIDForIoT) | This sample demonstrates how to read an RFID tag and beep the buzzer when the card scans. |
+| [RGBLED](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/RGBLED) | This sample demonstrates how a tri-color LED will blink and cycle through red, blue and green. |
+| [SPIDisplay](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/SPIDisplay) | This sample interfaces a SPI based OLED display to a Windows 10 IoT Enterprise device. |
+| [SerialNumber](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/SerialNumber) | This sample demonstrates how to get the device serial number. |
+| [SerialUART](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/SerialUART) | This sample creates an app that allows communication between a PC and an IoT device over a serial interface. |
+| [ShellLauncher](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/ShellLauncher) | This is a UWP app sample for Shell Launcher V2, see how to configure UWP app for Shell Launcher V2 in the samples. |
+| [SpeechTranslator](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/SpeechTranslator) | This sample will translate speech to different languages. |
+| [TempForceSensor](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/TempForceSensor) | This sample showcases how to use a temperature and force sensor. |
+| [VideoCaptureSample](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/VideoCaptureSample) | This sample initializes a video capture device, record video to a file, preview video feed, and playback the recorded video. |
+| [VirtualMicrophoneArrayDriver](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/VirtualMicrophoneArrayDriver) | This sample illustrates how to construct a virtual microphone array at runtime using monoaural audio devices present on the system. |
+| [WebcamApp](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/WebcamApp) | This sample will initialize a webcam, take pictures, and record video and audio. |
+| [WifiConnector](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/WifiConnector) | This sample will find and connect to WiFi networks using a Universal Windows Platform (UWP) app that makes use of the Windows.Devices.WiFi.WiFiAdapter API. |
+
+
 #### Bus Tools
 | Name           | Description      |  
 |----------------|------------------|
 | [GPIOTestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to manipulate GPIO pins from the command line. Demonstrates how to use the GPIO WinRT APIs from standard C++ with WRL. |
 | [I2CTestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to read and write I2C devices from the command line. Shows how to use C++/CX in console applications. |
+| [MinComm (UART)](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Demonstrates how to use UART. |
 | [PWMTestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to read and write PWM devices from the command line. Shows how to use C++/CX in console applications. |
 | [SPITestTool](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Utility to read and write SPI devices from the command line. |
-| [MinComm (UART)](https://github.com/microsoft/Windows-IoT-Samples/tree/master/BusTools) | Demonstrates how to use UART. |
