@@ -96,13 +96,6 @@ $unitsList = @(
   Description = "Calc.exe, Character Map."
 },
 [PSCustomObject]@{
-  Name = "SnippingTool"
-  Packages = @(
-  "Microsoft-Windows-SnippingTool"
-  )
-  Description = "Snipping Tool."
-},
-[PSCustomObject]@{
   Name = "AppManagement_UEV"
   Packages = @(
   "Microsoft-Windows-AppManagement-UEV"
@@ -139,7 +132,7 @@ $unitsList = @(
   "Microsoft-Windows-RecoveryDrive",
   "Microsoft-Windows-ScreenSavers-3D",
   "Microsoft-Windows-ShellOptions",
-  "Microsoft-Windows-SnippingTool"
+  "Microsoft-OneCore-Fonts-DesktopFonts-NonLeanSupplement"
   )
   Description = "Desktop Shared Features"
 },
@@ -151,6 +144,7 @@ $unitsList = @(
   "Microsoft-Windows-Media-Streaming",
   "Microsoft-Windows-MediaPlayback-OC",
   "Microsoft-Windows-Portable-Devices",
+  "Microsoft-Windows-WebcamExperience",
   "Microsoft-Windows-WinSATMediaFiles"
   )
   Description = 
