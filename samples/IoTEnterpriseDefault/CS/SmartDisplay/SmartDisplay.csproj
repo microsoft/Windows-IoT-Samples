@@ -623,7 +623,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
       <Version>1.23.0</Version>
