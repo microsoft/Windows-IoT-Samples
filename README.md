@@ -63,6 +63,7 @@ This project has adopted the Microsoft Open Source Code of Conduct. For more inf
 For additional Windows samples, see:
 * [Windows on GitHub](http://microsoft.github.io/windows/)
 * [Windows IoT Core](https://github.com/microsoft/Windows-iotcore-samples/tree/develop/Samples)
+* [Azure IoT Edge for Linux on Windows (EFLOW)](https://github.com/Azure/iotedge-eflow)
 
 ## Samples by category
 
