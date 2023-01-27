@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "P28bwBNx6aF0tTxvDFUn3j0bYGtsQhQ9D4ImEeAplqz/TPMkC3Nev6D0yHatAllqg7Nt2EXXz5F/0ToWy4wkrA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\twarwick\\OneDrive - Microsoft\\My Files\\Documents\\GitHub\\Windows-IoT-Samples\\samples\\DualOperator\\DualOperator\\DualOperator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\twarwick\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
+    "C:\\Users\\twarwick\\.nuget\\packages\\system.management\\6.0.0\\system.management.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
