@@ -1,0 +1,10 @@
+[
+  {
+    "ApplicationTitle": "Document1 - Word",
+    "Keyboard": "\\\\?\\HID#VID_046D&PID_C541&MI_01&Col01#b&865bce8&0&0000#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}"
+  },
+  {
+    "ApplicationTitle": "Untitled - Notepad",
+    "Keyboard": "\\\\?\\HID#{00001812-0000-1000-8000-00805f9b34fb}_Dev_VID&02045e_PID&0832_REV&0138_eb5864041ec3&Col01#9&19514786&0&0000#{884b96c3-56ef-11d1-bc8c-00a0c91405dd}"
+  }
+]
