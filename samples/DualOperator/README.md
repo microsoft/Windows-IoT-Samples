@@ -1,11 +1,15 @@
 # Dual Operator
 
-Dual Operator is an application which will register 2 physical keyboards with the Windows operating system.  On registration, Dual Operator will receive any keystrokes from the registered keyboards and can pass those keystrokes to specific applications.
+Dual Operator is a conceptual sample application which demonstrates how input from 2 physical keyboards can be routed to specific applications docked full screen to separate display. Dual Operator receives keystrokes from both physical keyboards and routes them to the application to which the keyboard is associated.   
 
 Teaser Trailer: http://aka.ms/dualoperatordemo
 MS Build 2022: https://aka.ms/MSBuild2022-DualOperator
 
 ## Requirements
+
+- 2 physical keyboards
+- 2 monitors
+
 Dual Operator requires the full device ID as used by Windows for each keyboard registered.  It also requires a unique portion of the title bar text to be paired with the keyboard output.
 
 Applications targeted by Dual Operator must have a visible window on any available monitor.  This means that Windows services or any application that runs as a background task is not a target candidate because this type of application does not present a handle to the operating system.  This handle is a necessity for receiving keystrokes whether they come from the OS or from Dual Operator.
@@ -14,13 +18,7 @@ In addition to having a visible window, each application targeted should also be
 
 ## Devices
 
-Currently Dual Operator is written to handle 2 physical keyboards.
-
-The development team is currently experimenting with mouse support.  Redirecting a mouse on Windows presents some unique challenges.  While Windows supports the use of multiple pointing devices, the operating system exposes a single visible cursor that collects input from all attached pointing devices.  Because of this, it would be extremely difficult to support one mouse per application in the same way that keyboards can be handled.  The team is engaged in experiments to see if the mouse can be contained to a single monitor, thus giving mouse support to one of the targeted applications without allowing the mouse to affect the other application.
-
-Touch is not supported by Dual Operator, but not due to any technical issue.  Simply put, touch is bound by the device coordinates (e.g., 0,0 through 1920,1080 for a 1080p touch-enabled monitor) and the operating model for Dual Operator is a single application full screen per monitor.  The remainder of this information on touch assumes that the application intended to be a target is itself touch aware, that the application is running in full screen mode, and the monitor the application is running on has touch capability that is not derived from Windows touch-mouse promotion.
-
-Assuming all external requirements are met, our example has application 1 is running on one 1080p touch-enabled monitor and application 2 is running on a second 1080p monitor with or without touch capabilities, any touch events generated on monitor 1 would be sent to application 1 automatically by Windows without the need for intervention via code.  The same is true of monitor 2 if it is touch-enabled - any touch events on that monitor would automatically be directed to application 2 by Windows.  Each touch-enabled device is bound by distinct and separate coordinates, so events from a device will only register on applications running on that device.
+Dual Operator demonstrates input isolation using 2 physical keyboards. Dual Operator does not provide input isolation for mouse or touch imput.
 
 ## How it works
 In normal operation, on startup Dual Operator will read from a file named OPERATORS.JSON located in the same folder as the executable file for the system.  The contents of the file look like this:
