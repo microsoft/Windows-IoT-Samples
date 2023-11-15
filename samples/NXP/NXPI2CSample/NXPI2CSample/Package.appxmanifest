@@ -15,7 +15,7 @@
   <mp:PhoneIdentity PhoneProductId="db7c3fa7-703a-4c86-94f4-cdc63336a952" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>TestRemoteDebug</DisplayName>
+    <DisplayName>NXPI2CSample</DisplayName>
     <PublisherDisplayName>jayuppaluri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
