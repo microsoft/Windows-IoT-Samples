@@ -11,7 +11,7 @@ namespace NXPGPIOSample
 {
     public sealed partial class MainPage : Page
     {
-        private int[] LED_PINS = new int[] { 155, 154, 147, 146, 141, 140, 139, 138, 137, 136, 88, 87, 86, 85, 84, 83 };
+        private int[] LED_PINS = new int[] {147, 146, 141, 140, 139, 138, 137, 136, 87, 86, 85, 84, 83 };
         private GpioPin[] pins;
         private GpioPinValue[] pinValues;
         private DispatcherTimer timer;

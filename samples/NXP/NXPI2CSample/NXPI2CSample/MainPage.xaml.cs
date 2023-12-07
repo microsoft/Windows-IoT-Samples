@@ -10,7 +10,7 @@ namespace NXPI2CSample
 {
     public sealed partial class MainPage : Page
     {
-        private const string I2C_CONTROLLER_NAME = "I2C3"; 
+        private const string I2C_CONTROLLER_NAME = "I2C3";
         private const int TCS34725_ADDRESS = 0x29;
 
         private I2cDevice tcs34725;
@@ -107,10 +107,10 @@ namespace NXPI2CSample
             write8(TCS34725_ENABLE, TCS34725_ENABLE_PON | TCS34725_ENABLE_AEN);
 
             // Integration Time
-           // write8(TCS34725_ATIME, TCS34725_INTEGRATIONTIME_700MS);
+            // write8(TCS34725_ATIME, TCS34725_INTEGRATIONTIME_700MS);
 
             // Gain
-           // write8(TCS34725_CONTROL, TCS34725_GAIN_60X);
+            // write8(TCS34725_CONTROL, TCS34725_GAIN_60X);
 
             write8(0x80, 0x03);
         }
