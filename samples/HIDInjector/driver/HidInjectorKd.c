@@ -44,7 +44,7 @@ HID_REPORT_DESCRIPTOR       G_DefaultReportDescriptor[] =
     0x75,   0x08,       //  report size 8
     0x95,   0x04,       //  report count 4
     0x81,   0x00,       //  Input(Data, Array),
-    0x95,   0x05,       //  REPORT_COUNT (2)
+    0x95,   0x02,       //  REPORT_COUNT (2)
     0x75,   0x08,       //  REPORT_SIZE (8)
     0x81,   0x03,       //  INPUT (Cnst,Var,Abs)
     0xC0,				// End Collection,
@@ -78,7 +78,7 @@ HID_REPORT_DESCRIPTOR       G_DefaultReportDescriptor[] =
     0x75, 0x10,                    //     Report Size(16)
     0x95, 0x02,                    //     Report Count(2)
     0x81, 0x62,                    //     Input(Data, Variable, Absolute, No Preferred, Null State)
-    0x95, 0x05,                    //     REPORT_COUNT (2)
+    0x95, 0x02,                    //     REPORT_COUNT (2)
     0x75, 0x08,                    //     REPORT_SIZE (8)
     0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
     0xc0,                          //   END_COLLECTION
