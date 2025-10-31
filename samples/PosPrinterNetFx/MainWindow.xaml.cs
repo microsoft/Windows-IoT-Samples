@@ -68,7 +68,10 @@ namespace PosPrinterNetFx
                     _printer.Close();
                 }
             }
-            catch { /* ignore cleanup errors */ }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Cleanup error in PrinterComboBox_SelectionChanged: {ex}");
+            }
 
             CreatePrinterInstance(_printerDevices[PrinterComboBox.SelectedIndex]);
         }
