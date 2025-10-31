@@ -124,7 +124,10 @@ namespace PosPrinterNetFx
                     }
                     _printer.Close();
                 }
-                catch { /* ignore close errors */ }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Cleanup error: {ex}");
+                }
             }
         }
     }
