@@ -11,6 +11,8 @@ It is intended as a starting point for integrating OPOS / POS for .NET receipt p
 
 It has been tested with the Epson TM-T88V and XPrinter XP-80 POS printers. 
 
+POS for .NET only supports .NET Framework at this time. It does not support .NET Core/.NET. 
+
 Note: To use POS for .NET on an Arm64 platform, you must use emulation (i.e. Build the application targeting x64 or x86 and run the application as is).
 
 ## Pre-requisite software
