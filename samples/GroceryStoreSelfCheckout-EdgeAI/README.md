@@ -6,8 +6,8 @@ Edge AI Kiosk is a WinUI 3 proof-of-concept for self-checkout basket verificatio
 
 The goal is to show why edge AI is useful in a kiosk: low-latency verification, no cloud round trip for camera frames, and local inference that can use an NPU, GPU, or CPU.
 
-<img width="1561" height="681" alt="SwimlaneDiagramJPG" src="https://github.com/user-attachments/assets/22538f0b-293d-4d6e-aa11-cbcddbc40a37" />
-<img width="1588" height="819" alt="EdgeAIXMLUMLFinal" src="https://github.com/user-attachments/assets/109af0b3-b660-4b8d-841f-2e158e927f3b" />
+<img width="1561" height="681" alt="SwimlaneDiagramJPG" src="https://github.com/user-attachments/assets/5bd480c8-b9e4-4845-a925-d8d0d43aeb21" />
+<img width="1588" height="819" alt="EdgeAIXMLUMLFinal" src="https://github.com/user-attachments/assets/cae2a209-12de-4621-9f1d-82d293db944b" />
 
 
 
@@ -21,9 +21,8 @@ The current demo flow is:
 4. Scan items on the shopping screen. For this POC, scanner input is treated as both the barcode and item name, so use labels such as `apple`, `banana`, `orange`, `bottle`, or `cup`.
 5. Select **Pay Now**.
 6. The app captures camera frames, runs object detection, and opens the alert screen with either a successful checkout or a mismatch list.
+<img width="761" height="486" alt="alertwindow" src="https://github.com/user-attachments/assets/ef9e39b7-8b9a-4cfb-ba4c-d7dbb8ee1f19" />
 
-No screenshot or GIF is checked into the repository yet. The sequence diagram below documents the Shopping -> Alert flow; if you capture a live demo, add it under `docs\media\shopping-alert-demo.gif` and link it from this section.
-I will add a full demo set
 
 
 ## Prerequisites
