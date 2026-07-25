@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="EdgeAIKiosk1.Views.LiveInferenceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="{StaticResource KioskBlackBrush}">
+        <MediaPlayerElement
+            x:Name="CameraPreview"
+            AreTransportControlsEnabled="False"
+            AutoPlay="True"
+            Stretch="UniformToFill" />
+        <Canvas
+            x:Name="BoundingBoxCanvas"
+            IsHitTestVisible="False"
+            SizeChanged="OnBoundingBoxCanvasSizeChanged" />
+        <StackPanel
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="{StaticResource KioskInferencePanelMargin}"
+            Spacing="{StaticResource KioskSpacingSmall}">
+            <Grid Style="{StaticResource KioskInferenceOverlayStyle}">
+                <TextBlock
+                    x:Name="DetectedCountTextBlock"
+                    Text="Detected: starting camera"
+                    Style="{StaticResource KioskInferenceTextStyle}" />
+            </Grid>
+            <Grid Style="{StaticResource KioskInferenceOverlayStyle}">
+                <TextBlock
+                    x:Name="PoweredByModelTextBlock"
+                    Style="{StaticResource KioskInferenceTextStyle}" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

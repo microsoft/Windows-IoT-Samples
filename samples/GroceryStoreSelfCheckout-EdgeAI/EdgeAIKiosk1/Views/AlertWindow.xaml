@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="EdgeAIKiosk1.Views.AlertWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Windows Mart — Verification">
+
+    <Grid Loaded="OnAlertWindowLoaded">
+    <Grid x:Name="SuccessPanel" Background="{StaticResource KioskSuccessBrush}" Visibility="Collapsed">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="{StaticResource KioskSpacingHero}">
+            <TextBlock
+                Text="Thank you for shopping with us!"
+                FontSize="{StaticResource KioskFontSizeSuccess}"
+                Style="{StaticResource KioskWhiteBoldTextStyle}"
+                HorizontalAlignment="Center" />
+            <Button
+                Content="Start Again"
+                FontSize="{StaticResource KioskFontSizeBodyLarge}"
+                Background="{StaticResource KioskPrimaryBrush}"
+                Padding="{StaticResource KioskHeroButtonPadding}"
+                HorizontalAlignment="Center"
+                CornerRadius="{StaticResource KioskPanelCornerRadius}"
+                Style="{StaticResource KioskWhiteButtonStyle}"
+                Click="OnStartAgainClick" />
+        </StackPanel>
+    </Grid>
+
+    <Grid
+        x:Name="FailurePanel"
+        Background="{StaticResource KioskFailureBrush}"
+        Padding="{StaticResource KioskPagePadding}"
+        Visibility="Collapsed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="32" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+            Text="Alert: Basket Mismatch Detected"
+            FontSize="{StaticResource KioskFontSizeTitle}"
+            Margin="{StaticResource KioskHeaderMargin}"
+            Style="{StaticResource KioskWhiteBoldTextStyle}" />
+        <Button
+            Grid.Row="0" Grid.Column="2"
+            Content="Back to Home"
+            FontSize="{StaticResource KioskFontSizeSmall}"
+            Background="{StaticResource KioskBlackBrush}"
+            Padding="{StaticResource KioskBackButtonPadding}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Style="{StaticResource KioskControlButtonStyle}"
+            Click="OnStartAgainClick" />
+
+        <ContentControl
+            x:Name="LiveInferenceHost"
+            Grid.Row="1"
+            Grid.Column="0" />
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Text="Mismatched items"
+                FontSize="{StaticResource KioskFontSizeSubtitle}"
+                Style="{StaticResource KioskWhiteBoldTextStyle}" />
+            <ListView
+                Grid.Row="1"
+                x:Name="MismatchedItemsListView"
+                Style="{StaticResource KioskMismatchListStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Text="{Binding}"
+                            Foreground="{StaticResource KioskErrorBrush}"
+                            FontSize="{StaticResource KioskFontSizeBodyLarge}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+    </Grid>
+</Window>
