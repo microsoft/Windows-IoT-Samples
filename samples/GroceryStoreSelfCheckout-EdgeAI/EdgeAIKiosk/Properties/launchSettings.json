@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EdgeAIKiosk (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "EdgeAIKiosk (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
