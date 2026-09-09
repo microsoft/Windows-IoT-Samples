@@ -155,7 +155,7 @@ public sealed partial class HomeWindow : Window
     /// </summary>
     private StackPanel BuildLabelRow(IEnumerable<string> labels)
     {
-            var row = new StackPanel();
+        var row = new StackPanel();
         row.Orientation = Orientation.Horizontal;
         row.Spacing = 8;
         foreach (var label in labels) row.Children.Add(BuildLabelCheckBox(label));
