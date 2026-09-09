@@ -204,4 +204,4 @@ The tests cover core verification logic, bounding box math, majority-frame track
 
 ## Contributing and License
 
-This repository does not currently include a license file. Do not redistribute the project or model artifacts until a license is added.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
