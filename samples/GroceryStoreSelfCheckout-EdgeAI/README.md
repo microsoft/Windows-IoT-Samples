@@ -35,7 +35,7 @@ The current demo flow is:
 | IDE | Visual Studio 2022 17.8 or newer with .NET desktop development, Windows App SDK, and WinUI tooling. |
 | Camera | Built-in camera or USB UVC-compatible webcam. |
 | Scanner | Barcode scanner that behaves like a keyboard, or a keyboard for manual demo input. |
-| Model | A compatible YOLO26 ONNX model copied into `EdgeAIKiosk1\Models\`. |
+| Model | A compatible YOLO26 ONNX model copied into `EdgeAIKiosk\Models\`. |
 
 ## Quick Start
 
@@ -43,28 +43,28 @@ The current demo flow is:
 git clone https://github.com/t-shrpathak_microsoft/EdgeAIKioskProject.git
 cd EdgeAIKioskProject
 
-New-Item -ItemType Directory -Force EdgeAIKiosk1\Models
+New-Item -ItemType Directory -Force EdgeAIKiosk\Models
 
 # Use an ONNX model from Microsoft Foundry, Hugging Face, your own training,
 # or another model zoo, converted to the contract in Model Setup.
-Copy-Item <path-to-model>\yolo26x.onnx EdgeAIKiosk1\Models\yolo26x.onnx
+Copy-Item <path-to-model>\yolo26x.onnx EdgeAIKiosk\Models\yolo26x.onnx
 
-dotnet restore EdgeAIKiosk1\EdgeAIKiosk1.csproj
-dotnet build EdgeAIKiosk1\EdgeAIKiosk1.csproj -c Debug -r win-arm64
-dotnet run --project EdgeAIKiosk1\EdgeAIKiosk1.csproj -c Debug -r win-arm64
+dotnet restore EdgeAIKiosk\EdgeAIKiosk.csproj
+dotnet build EdgeAIKiosk\EdgeAIKiosk.csproj -c Debug -r win-arm64
+dotnet run --project EdgeAIKiosk\EdgeAIKiosk.csproj -c Debug -r win-arm64
 ```
 
 Visual Studio is the recommended launch path for day-to-day WinUI debugging:
 
-1. Open `EdgeAIKiosk1.slnx`.
+1. Open `EdgeAIKiosk.slnx`.
 2. Select the `ARM64` platform for Snapdragon X hardware.
-3. Confirm `EdgeAIKiosk1\Models\yolo26x.onnx` exists before launching.
+3. Confirm `EdgeAIKiosk\Models\yolo26x.onnx` exists before launching.
 4. Press F5.
 
 ## Project Structure
 
 ```text
-EdgeAIKiosk1\
+EdgeAIKiosk\
   App.xaml                         App startup and shared resources
   Configuration\KioskSettings.cs  Runtime model, hardware, camera, and label selections
   Styles\KioskStyles.xaml          Shared brushes, spacing, typography, and control styles
@@ -81,7 +81,7 @@ EdgeAIKiosk1\
   DataModels\                      Cart, detection, model input/output, and result types
   Models\                          Local ONNX model files; not committed to Git
 
-EdgeAIKiosk1.Tests\
+EdgeAIKiosk.Tests\
   xUnit tests for bounding boxes, tracking, scanned items, letterbox math, hardware options, and verification
 ```
 
@@ -90,7 +90,7 @@ EdgeAIKiosk1.Tests\
 ONNX model files are intentionally ignored by Git because model artifacts can be large or restricted. The app expects model files under:
 
 ```text
-EdgeAIKiosk1\Models\
+EdgeAIKiosk\Models\
 ```
 
 ONNX is an open machine-learning model standard. That is why this sample uses it: Windows ML and ONNX Runtime can run models from many training ecosystems once they are exported or converted to ONNX.
@@ -100,7 +100,7 @@ Acquisition path:
 1. Find a compatible object-detection model from Microsoft Foundry, Hugging Face, a custom training run, or another model zoo.
 2. If the model is not already ONNX, convert it with the model's recommended open-source exporter or the Windows ML CLI.
 3. Export or rename the final file to `yolo26x.onnx`.
-4. Copy it to `EdgeAIKiosk1\Models\yolo26x.onnx`.
+4. Copy it to `EdgeAIKiosk\Models\yolo26x.onnx`.
 5. Rebuild the app so MSBuild copies the model into the output `Models` folder.
 
 This repository does not include an ONNX model because model licenses and sizes vary. The fastest path is to use a model that is already available as ONNX; conversion is for cases where the source model is in another format.
@@ -111,7 +111,7 @@ The default model path is configured in `KioskSettings.cs`:
 public static string ModelFileName { get; set; } = "Models\\yolo26x.onnx";
 ```
 
-At build time, any `EdgeAIKiosk1\Models\*.onnx` file is copied to the output directory. At runtime, the home screen lists those copied `.onnx` files in the model picker.
+At build time, any `EdgeAIKiosk\Models\*.onnx` file is copied to the output directory. At runtime, the home screen lists those copied `.onnx` files in the model picker.
 
 The current loader expects:
 
@@ -161,20 +161,20 @@ Checkout verification is intentionally split into small pipeline stages:
 For a loose-file deployment to a kiosk device:
 
 ```powershell
-dotnet publish EdgeAIKiosk1\EdgeAIKiosk1.csproj -c Release -r win-arm64 --self-contained true -o .\publish\win-arm64
-Copy-Item EdgeAIKiosk1\Models\yolo26x.onnx .\publish\win-arm64\Models\yolo26x.onnx
+dotnet publish EdgeAIKiosk\EdgeAIKiosk.csproj -c Release -r win-arm64 --self-contained true -o .\publish\win-arm64
+Copy-Item EdgeAIKiosk\Models\yolo26x.onnx .\publish\win-arm64\Models\yolo26x.onnx
 ```
 
-Copy the published folder to the target Snapdragon X device and run `EdgeAIKiosk1.exe`.
+Copy the published folder to the target Snapdragon X device and run `EdgeAIKiosk.exe`.
 
-For MSIX packaging, use Visual Studio **Package and Publish** on the `EdgeAIKiosk1` project. Sign the package with a trusted certificate before installing on a kiosk device.
+For MSIX packaging, use Visual Studio **Package and Publish** on the `EdgeAIKiosk` project. Sign the package with a trusted certificate before installing on a kiosk device.
 
 ## Testing
 
 Run the xUnit test project from the repository root:
 
 ```powershell
-dotnet test EdgeAIKiosk1.Tests\EdgeAIKiosk1.Tests.csproj
+dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj
 ```
 
 The tests cover core verification logic, bounding box math, majority-frame tracking, scanned item behavior, letterbox coordinate conversion, and hardware-picker filtering and ordering.
@@ -191,12 +191,12 @@ The tests cover core verification logic, bounding box math, majority-frame track
 
 | Symptom | Fix |
 | --- | --- |
-| Model picker is empty or startup cannot find `Models` | Create `EdgeAIKiosk1\Models\` and copy a compatible `.onnx` model into it before building or running. |
+| Model picker is empty or startup cannot find `Models` | Create `EdgeAIKiosk\Models\` and copy a compatible `.onnx` model into it before building or running. |
 | NPU or GPU does not appear in the hardware picker | The picker only shows hardware types reported by Windows ML. Update Windows and hardware drivers, and allow network access for initial certified-provider registration. |
 | An explicit hardware choice fails during startup | Select Auto to allow fallback, or select another detected type. Explicit CPU, GPU, or NPU choices intentionally do not fall back. |
 | Camera list is empty | Connect a UVC-compatible webcam or enable the built-in camera in Windows Settings. |
 | Camera access is denied | Enable camera permissions for desktop apps in Windows Settings > Privacy & security > Camera. |
-| `APPX1101` or architecture errors when building | Build with an explicit runtime, for example `dotnet build EdgeAIKiosk1\EdgeAIKiosk1.csproj -r win-arm64`. WinUI packaged apps should not rely on Any CPU for this target. |
+| `APPX1101` or architecture errors when building | Build with an explicit runtime, for example `dotnet build EdgeAIKiosk\EdgeAIKiosk.csproj -r win-arm64`. WinUI packaged apps should not rely on Any CPU for this target. |
 | `byte[].AsBuffer()` is not found while editing preprocessing code | Ensure `System.Runtime.InteropServices.WindowsRuntime` is referenced where WinRT buffer conversion is used. |
 | XAML compiler exits with a generic error | Check that each `Window` has a single root child element. Multiple direct root grids can cause markup compilation failures. |
 | `onnxruntime.dll` is missing at runtime | Restore and rebuild for an explicit runtime such as `win-arm64` or `win-x64`; Windows ML supplies the matching native runtime. |
@@ -204,4 +204,4 @@ The tests cover core verification logic, bounding box math, majority-frame track
 
 ## Contributing and License
 
-This repository does not currently include a license file. Do not redistribute the project or model artifacts until a license is added.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
