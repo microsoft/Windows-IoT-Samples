@@ -49,7 +49,7 @@ You’ll need a few components:
 
 And here is the pinout of the UP Board:
 
-![](../../../Resources/UpBoard_Pinout.png)
+![](../../../Resources/Upboard_Pinout.png)
 
 Here is an example of what your breadboard might look like with the circuit assembled:
 
