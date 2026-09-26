@@ -60,14 +60,6 @@
             Style="{StaticResource KioskControlButtonStyle}"
             Click="OnPayNowClick" />
 
-        <TextBox
-            x:Name="BarcodeInputBox"
-            IsTabStop="True"
-            Opacity="0"
-            Width="20"
-            Height="10"
-            KeyDown="OnBarcodeKeyDown" />
-
         <Grid
             x:Name="LoadingOverlay"
             Grid.ColumnSpan="3"
