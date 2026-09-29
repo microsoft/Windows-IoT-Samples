@@ -29,9 +29,15 @@ dotnet build EdgeAIKiosk\EdgeAIKiosk.csproj -r win-arm64
 
 ## Test
 
+From the sample directory:
+
 ```powershell
-dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj
+dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj -r win-x64 -p:Platform=x64
 ```
+
+For ARM64, use `-r win-arm64 -p:Platform=ARM64` on a Windows ARM64 device.
+
+Memory stress tests are skipped by default. Set `RUN_MEMORY_STABILITY_TESTS=1` in the test process environment to enable them. See [Opt-in memory stress tests](README.md#opt-in-memory-stress-tests) for Visual Studio/command-line instructions and model/runtime requirements.
 
 ## Pull Requests
 

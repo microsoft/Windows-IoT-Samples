@@ -17,8 +17,6 @@ public sealed class MajorityFrames : IObjectTrackingStrategy
     public float MinConfidence { get; set; } = 0.5f;
     public int TotalObservations { get; private set; }
 
-    #region Main entrypoint
-
     /// <summary>Accumulates detections across frames and returns labels that passed the confidence/count gate.</summary>
     /// <param name="detections">The model detections from the current frame or an empty list when only reading current results.</param>
     /// <param name="reset">Clears prior frame history before processing the supplied detections.</param>
@@ -28,10 +26,6 @@ public sealed class MajorityFrames : IObjectTrackingStrategy
         this.AccumulateCounts(detections);
         return this.BuildValidatedItems().ToList();
     }
-
-    #endregion
-
-    #region Steps
 
     private void ResetIfRequested(bool reset)
     {
@@ -64,10 +58,6 @@ public sealed class MajorityFrames : IObjectTrackingStrategy
         }
     }
 
-    #endregion
-
-    #region Helpers
-
     /// <summary>Copies the latest detection for a label and attaches its accumulated observation count.</summary>
     private DetectedItem BuildValidatedItem(string label, int count)
     {
@@ -79,6 +69,4 @@ public sealed class MajorityFrames : IObjectTrackingStrategy
         validatedItem.ObservationCount = count;
         return validatedItem;
     }
-
-    #endregion
 }

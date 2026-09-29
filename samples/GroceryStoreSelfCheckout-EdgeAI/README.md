@@ -82,7 +82,7 @@ EdgeAIKiosk\
   Models\                          Local ONNX model files; not committed to Git
 
 EdgeAIKiosk.Tests\
-  xUnit tests for bounding boxes, tracking, scanned items, letterbox math, hardware options, and verification
+  xUnit tests for tracking, letterbox math, hardware options/errors, startup handling, and verification
 ```
 
 ## Model Setup
@@ -171,13 +171,36 @@ For MSIX packaging, use Visual Studio **Package and Publish** on the `EdgeAIKios
 
 ## Testing
 
-Run the xUnit test project from the repository root:
+Run the xUnit test project from the `samples\GroceryStoreSelfCheckout-EdgeAI` directory:
 
 ```powershell
-dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj
+dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj -r win-x64 -p:Platform=x64
 ```
 
-The tests cover core verification logic, bounding box math, majority-frame tracking, scanned item behavior, letterbox coordinate conversion, and hardware-picker filtering and ordering.
+The tests cover core verification logic, majority-frame tracking, letterbox coordinate conversion, hardware-picker filtering and ordering, camera/model error handling, and startup error reporting.
+
+For ARM64, use `-r win-arm64 -p:Platform=ARM64` on a Windows ARM64 device.
+
+### Opt-in memory stress tests
+
+The two memory stability tests report **Skipped** during ordinary runs, including Visual Studio Test Explorer, unless `RUN_MEMORY_STABILITY_TESTS=1` is present in the test process environment. They are labeled `Category=MemoryStability`.
+
+To enable them in Visual Studio Test Explorer, set the environment variable before launching Visual Studio, then rediscover the tests. Run the memory tests individually. Alternatively, enable them for a terminal session:
+
+```powershell
+$env:RUN_MEMORY_STABILITY_TESTS = "1"
+dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj -r win-x64 -p:Platform=x64 --filter "FullyQualifiedName~PreprocessorMemoryStabilityTests"
+dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj -r win-x64 -p:Platform=x64 --filter "FullyQualifiedName~YoloInferenceMemoryStabilityTests"
+Remove-Item Env:\RUN_MEMORY_STABILITY_TESTS
+```
+
+For ARM64, use `-r win-arm64 -p:Platform=ARM64` on a Windows ARM64 device. Requirements:
+
+- The same .NET SDK/runtime and Windows App SDK/WinUI build tooling as the regular tests.
+- For inference, a compatible model at `EdgeAIKiosk\Models\yolo26x.onnx` with the input/output contract described in Model Setup, and a working Windows ML execution provider for the selected architecture.
+- No camera is needed: preprocessing uses a synthetic bitmap, and inference uses a zero-filled tensor. These tests measure memory growth, not detection accuracy.
+
+After warm-up, each test runs 1,000 operations. The allowed process-private memory growth after garbage collection is 32 MiB for preprocessing and 64 MiB for inference. Runtime/provider caching can affect these measurements. The tests disable parallel execution to avoid overlapping measurements. The separate `dotnet test` commands above additionally give each test a fresh process.
 
 ## Known Limitations and Non-Goals
 

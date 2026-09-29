@@ -23,8 +23,6 @@ public sealed class ShoppingVerifier(
     // A short burst balances checkout latency with enough observations to smooth camera noise.
     private const int FrameCount = 5;
 
-    #region Main entrypoint
-
     /// <summary>Captures several frames, compares detected items against scanned items, and returns checkout status.</summary>
     /// <param name="scannedItems">The cart items collected from barcode scans before checkout.</param>
     public async Task<VerificationResult> Verify(List<ScannedItem> scannedItems)
@@ -33,10 +31,6 @@ public sealed class ShoppingVerifier(
         await this.RunInferenceFrames();
         return BuildVerificationResult(scannedItems, this._tracker.Track([]));
     }
-
-    #endregion
-
-    #region Steps
 
     private void ResetTracker() =>
         this._tracker.Track([], reset: true);
@@ -74,8 +68,6 @@ public sealed class ShoppingVerifier(
         var mismatches = scannedOnly.Concat(detectedOnly).Distinct().ToList();
         return new VerificationResult(mismatches.Count == 0, scanned, detected, mismatches);
     }
-
-    #endregion
 
     public void Dispose() => this._modelLoader.Dispose();
 }

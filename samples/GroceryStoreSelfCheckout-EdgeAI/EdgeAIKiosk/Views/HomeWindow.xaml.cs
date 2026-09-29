@@ -27,8 +27,6 @@ public sealed partial class HomeWindow : Window
     private async void OnHomeWindowLoaded(object sender, RoutedEventArgs e) =>
         await StartupTask.Run(LoadPickerOptions, "Startup setup failed", ShowStartupError);
 
-    #region Picker setup
-
     private async Task LoadPickerOptions()
     {
         LoadModelOptions();
@@ -82,10 +80,6 @@ public sealed partial class HomeWindow : Window
         StartupErrorTextBlock.Visibility = Visibility.Visible;
     }
 
-    #endregion
-
-    #region Navigation
-
     /// <summary>
     /// Saves the selected model and camera, opens the shopping flow, and closes this window.
     /// </summary>
@@ -97,10 +91,6 @@ public sealed partial class HomeWindow : Window
         new ShoppingView().Activate();
         Close();
     }
-
-    #endregion
-
-    #region Settings
 
     private void OnSettingsClick(object sender, RoutedEventArgs e)
     {
@@ -122,10 +112,6 @@ public sealed partial class HomeWindow : Window
         SettingsPanel.Visibility = Visibility.Collapsed;
         SettingsDismissLayer.Visibility = Visibility.Collapsed;
     }
-
-    #endregion
-
-    #region Label dialog
 
     private void OnEditLabelsClick(object sender, RoutedEventArgs e)
     {
@@ -195,8 +181,6 @@ public sealed partial class HomeWindow : Window
 
     private static string LabelFromCheckBox(CheckBox checkBox) =>
         (string)checkBox.Tag;
-
-    #endregion
 
     private sealed record PickerOption(string Name, string Value);
     internal sealed record HardwarePickerOption(string Name, OrtHardwareDeviceType? Value);

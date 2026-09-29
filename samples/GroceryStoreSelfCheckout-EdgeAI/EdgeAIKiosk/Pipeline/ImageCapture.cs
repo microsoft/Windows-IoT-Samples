@@ -22,8 +22,6 @@ public sealed class ImageCapture
     // Public status lets callers stop live loops when capture is no longer active.
     public bool IsInitialized { get; private set; }
 
-    #region Startup
-
     /// <summary>Starts the camera preview and frame reader, then returns the preview media source.</summary>
     public async Task<MediaSource> StartPreview()
     {
@@ -97,10 +95,6 @@ public sealed class ImageCapture
         await this._cameraFrameReader.StartAsync();
     }
 
-    #endregion
-
-    #region Capture
-
     /// <summary>Captures the latest camera frame as a CPU bitmap when the reader has one ready.</summary>
     public async Task<SoftwareBitmap?> CaptureFrame()
     {
@@ -123,10 +117,6 @@ public sealed class ImageCapture
         return null;
     }
 
-    #endregion
-
-    #region Shutdown
-
     /// <summary>Disposes the active camera objects and marks capture as stopped.</summary>
     public void Stop()
     {
@@ -135,6 +125,4 @@ public sealed class ImageCapture
         this._mediaCapture?.Dispose();
         this.IsInitialized = false;
     }
-
-    #endregion
 }

@@ -4,15 +4,13 @@ using Windows.Graphics.Imaging;
 
 namespace EdgeAIKiosk.Tests;
 
+[Collection(MemoryStabilityCollection.Name)]
+[Trait("Category", "MemoryStability")]
 public class PreprocessorMemoryStabilityTests
 {
-    private const string EnableVariable = "RUN_MEMORY_STABILITY_TESTS";
-
-    [Fact]
+    [MemoryStabilityFact]
     public void Preprocessor_DoesNotGrowMemoryOverRepeatedFrames()
     {
-        if (Environment.GetEnvironmentVariable(EnableVariable) != "1") return;
-
         var preprocessor = new Yolo26Preprocessor();
         using var frame = new SoftwareBitmap(BitmapPixelFormat.Bgra8, 640, 480, BitmapAlphaMode.Ignore);
 
