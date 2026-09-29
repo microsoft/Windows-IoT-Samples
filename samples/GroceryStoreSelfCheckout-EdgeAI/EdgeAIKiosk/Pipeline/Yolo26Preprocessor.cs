@@ -17,8 +17,6 @@ public sealed class Yolo26Preprocessor : IModelPreprocessor
     public int TargetHeight { get; } = 640;
     public int Channels { get; } = 3;
 
-    #region Main entrypoint
-
     /// <summary>Converts a camera bitmap into the tensor and letterbox metadata expected by YOLO26.</summary>
     /// <param name="frame">The SoftwareBitmap captured from the WinRT camera pipeline.</param>
     public ModelInput Preprocess(SoftwareBitmap frame)
@@ -30,10 +28,6 @@ public sealed class Yolo26Preprocessor : IModelPreprocessor
             return this.BuildTensor(letterboxed, padLeft, padTop, scale);
         }
     }
-
-    #endregion
-
-    #region Steps
 
     /// <summary>Converts the WinRT bitmap into an ImageSharp RGB image.</summary>
     /// <param name="frame">The camera frame to copy out of WinRT bitmap memory.</param>
@@ -103,10 +97,6 @@ public sealed class Yolo26Preprocessor : IModelPreprocessor
         return input;
     }
 
-    #endregion
-
-    #region Helpers
-
     /// <summary>Writes RGB pixels into the supplied NCHW tensor buffer.</summary>
     /// <param name="letterboxedImage">The image whose pixels should be normalized into tensor data.</param>
     /// <param name="tensor">The preallocated tensor buffer ordered as all R, then all G, then all B values.</param>
@@ -129,6 +119,4 @@ public sealed class Yolo26Preprocessor : IModelPreprocessor
             }
         });
     }
-
-    #endregion
 }

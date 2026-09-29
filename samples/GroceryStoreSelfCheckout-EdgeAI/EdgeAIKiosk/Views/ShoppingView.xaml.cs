@@ -19,8 +19,6 @@ public sealed partial class ShoppingView : Window
 
     private readonly LiveInferenceView _liveInference = new();
 
-    #region Startup
-
     public ShoppingView()
     {
         InitializeComponent();
@@ -60,10 +58,6 @@ public sealed partial class ShoppingView : Window
         ShowLoadingError(message);
     }
 
-    #endregion
-
-    #region Barcode scanning
-
     /// <summary>
     /// Accepts a unique barcode on Enter, syncs the cart with live inference, and resets scanner focus.
     /// </summary>
@@ -84,10 +78,6 @@ public sealed partial class ShoppingView : Window
         FocusBarcodeInput();
     }
 
-    #endregion
-
-    #region Cart actions
-
     private void OnVoidItemClick(object sender, RoutedEventArgs e)
     {
         if (ScannedItemsListBox.SelectedItem is ScannedItem item)
@@ -95,10 +85,6 @@ public sealed partial class ShoppingView : Window
         _liveInference.SetScannedItems(ScannedItems);
         FocusBarcodeInput();
     }
-
-    #endregion
-
-    #region Checkout
 
     /// <summary>
     /// Pauses live inference, verifies the scanned cart against a captured frame, and opens the result window.
@@ -130,10 +116,6 @@ public sealed partial class ShoppingView : Window
         }
     }
 
-    #endregion
-
-    #region Loading overlay
-
     private void ShowLoadingOverlay(string message)
     {
         LoadingProgressRing.Visibility = Visibility.Visible;
@@ -147,6 +129,4 @@ public sealed partial class ShoppingView : Window
         LoadingTextBlock.Text = message;
         LoadingOverlay.Visibility = Visibility.Visible;
     }
-
-    #endregion
 }

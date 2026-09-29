@@ -27,8 +27,6 @@ public sealed class Yolo26SnapdragonXLoader : IModelLoader
         (_inferenceSession, ExecutionProvider, HardwareDevice) = this.BuildSession(modelPath, preferredHardware);
     }
 
-    #region Model startup
-
     /// <summary>Creates the ONNX Runtime session and configures provider-specific options.</summary>
     private (InferenceSession Session, string Provider, string Hardware) BuildSession(
         string modelPath,
@@ -80,10 +78,6 @@ public sealed class Yolo26SnapdragonXLoader : IModelLoader
     private static bool IsProviderFailure(Exception exception) =>
         exception is OnnxRuntimeException or DllNotFoundException or EntryPointNotFoundException or BadImageFormatException;
 
-    #endregion
-
-    #region Main entrypoint
-
     /// <summary>Runs YOLO inference and converts raw model output into detected items.</summary>
     /// <param name="input">The preprocessed tensor plus letterbox metadata from <see cref="Yolo26Preprocessor"/>.</param>
     public async Task<ModelOutput> RunInference(ModelInput input)
@@ -92,10 +86,6 @@ public sealed class Yolo26SnapdragonXLoader : IModelLoader
         using var inferenceOutputs = await this.RunSession(input);
         return this.ParseTimedOutputs(inferenceOutputs, input, inferenceStartTime);
     }
-
-    #endregion
-
-    #region Steps
 
     /// <summary>Executes the loaded ONNX session on the supplied model input.</summary>
     /// <param name="input">The model tensor, width, height, channel count, and letterbox values for one camera frame.</param>
@@ -127,10 +117,6 @@ public sealed class Yolo26SnapdragonXLoader : IModelLoader
         // Return detections with measured inference time.
         return new(detections, (DateTime.UtcNow - inferenceStartTime).TotalMilliseconds);
     }
-
-    #endregion
-
-    #region Helpers
 
     /// <summary>Converts YOLO26 fixed-slot tensor rows into detected items.</summary>
     /// <param name="tensor">The raw YOLO output tensor with boxes, confidence, and class ids.</param>
@@ -185,8 +171,6 @@ public sealed class Yolo26SnapdragonXLoader : IModelLoader
     }
 
     private static float Unscale(float coord, float pad, float scale) => (coord - pad) / scale;
-
-    #endregion
 
     public void Dispose() => _inferenceSession.Dispose();
 }

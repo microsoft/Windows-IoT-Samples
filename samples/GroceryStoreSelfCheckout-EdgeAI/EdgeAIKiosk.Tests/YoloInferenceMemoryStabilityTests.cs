@@ -4,18 +4,16 @@ using EdgeAIKiosk.Pipeline;
 
 namespace EdgeAIKiosk.Tests;
 
+[Collection(MemoryStabilityCollection.Name)]
+[Trait("Category", "MemoryStability")]
 public class YoloInferenceMemoryStabilityTests
 {
-    private const string EnableVariable = "RUN_MEMORY_STABILITY_TESTS";
-
-    [Fact]
+    [MemoryStabilityFact]
     public async Task YoloInference_DoesNotGrowMemoryOverRepeatedRuns()
     {
-        if (Environment.GetEnvironmentVariable(EnableVariable) != "1") return;
-
         var modelPath = Path.Combine(RepoRoot(), "EdgeAIKiosk", "Models", "yolo26x.onnx");
         var input = new ModelInput(new float[3 * 640 * 640], 640, 640, 3) { Scale = 1f };
-        var loader = new Yolo26SnapdragonXLoader(modelPath);
+        using var loader = new Yolo26SnapdragonXLoader(modelPath);
 
         for (var i = 0; i < 10; i++) await loader.RunInference(input);
         var baseline = PrivateBytes();

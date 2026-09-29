@@ -9,34 +9,17 @@ public class MajorityFramesTests
         new() { Label = label, Confidence = confidence };
 
     [Fact]
-    public void Validate_ReturnsEmpty_WhenRequiredCountNotMet()
+    public void Track_AcceptsItemOnlyAtThreshold_AndPreservesLatestDetection()
     {
         var mf = new MajorityFrames { RequiredCount = 3 };
-        mf.Track(new[] { Item("apple") });
-        var result = mf.Track(new[] { Item("apple") });
-        Assert.Empty(result);
-    }
+        Assert.Empty(mf.Track(new[] { Item("apple") }));
+        Assert.Empty(mf.Track(new[] { Item("apple") }));
 
-    [Fact]
-    public void Validate_ReturnsItem_WhenRequiredCountMet()
-    {
-        var mf = new MajorityFrames { RequiredCount = 2 };
-        mf.Track(new[] { Item("banana") });
-        var result = mf.Track(new[] { Item("banana") });
-        Assert.Single(result);
-        Assert.Equal("banana", result[0].Label);
-    }
-
-    [Fact]
-    public void Validate_PreservesBoundingBox_WhenRequiredCountMet()
-    {
-        var mf = new MajorityFrames { RequiredCount = 1 };
-        var result = mf.Track(new[] { new DetectedItem { Label = "apple", Confidence = 0.9f, Box = new(1, 2, 3, 4) } });
-
-        Assert.Equal(1, result[0].Box.X);
-        Assert.Equal(2, result[0].Box.Y);
-        Assert.Equal(3, result[0].Box.Width);
-        Assert.Equal(4, result[0].Box.Height);
+        var latest = new DetectedItem { Label = "apple", Confidence = 0.8f, Box = new(1, 2, 3, 4) };
+        var item = Assert.Single(mf.Track(new[] { latest }));
+        Assert.Equal(latest.Label, item.Label);
+        Assert.Equal(latest.Confidence, item.Confidence);
+        Assert.Equal(latest.Box, item.Box);
     }
 
     [Fact]
@@ -50,10 +33,13 @@ public class MajorityFramesTests
     [Fact]
     public void Reset_ClearsAccumulatedState()
     {
-        var mf = new MajorityFrames { RequiredCount = 1 };
+        var mf = new MajorityFrames { RequiredCount = 2 };
         mf.Track(new[] { Item("apple") });
-        var result = mf.Track(Array.Empty<DetectedItem>(), reset: true);
-        Assert.Empty(result);
-        Assert.Equal(0, mf.TotalObservations);
+        Assert.Single(mf.Track(new[] { Item("apple") }));
+
+        Assert.Empty(mf.Track(Array.Empty<DetectedItem>(), reset: true));
+        Assert.Empty(mf.Track(new[] { Item("apple") }));
+        var item = Assert.Single(mf.Track(new[] { Item("apple") }));
+        Assert.Equal("apple", item.Label);
     }
 }
