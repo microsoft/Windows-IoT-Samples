@@ -29,10 +29,22 @@ public sealed partial class HomeWindow : Window
 
     private async Task LoadPickerOptions()
     {
+        LoadScannerOptions();
         LoadModelOptions();
         await LoadHardwareOptions();
         await LoadCameraOptions();
         StartNowButton.IsEnabled = true;
+    }
+
+    private void LoadScannerOptions()
+    {
+        var options = new List<ScannerPickerOption>
+        {
+            new("HID Barcode Scanner", ScannerMode.HidScanner),
+            new("Keyboard Mode", ScannerMode.Keyboard)
+        };
+        ScannerPickerComboBox.ItemsSource = options;
+        ScannerPickerComboBox.SelectedItem = options.FirstOrDefault(o => o.Value == KioskSettings.ScannerMode) ?? options[0];
     }
 
     private void LoadModelOptions()
@@ -85,6 +97,7 @@ public sealed partial class HomeWindow : Window
     /// </summary>
     private void OnStartNowClick(object sender, RoutedEventArgs e)
     {
+        KioskSettings.ScannerMode = ((ScannerPickerOption)ScannerPickerComboBox.SelectedItem).Value;
         KioskSettings.ModelFileName = ((PickerOption)ModelPickerComboBox.SelectedItem).Value;
         KioskSettings.PreferredHardware = ((HardwarePickerOption)HardwarePickerComboBox.SelectedItem).Value;
         KioskSettings.CameraDeviceId = ((PickerOption?)CameraPickerComboBox.SelectedItem)?.Value;
@@ -184,4 +197,5 @@ public sealed partial class HomeWindow : Window
 
     private sealed record PickerOption(string Name, string Value);
     internal sealed record HardwarePickerOption(string Name, OrtHardwareDeviceType? Value);
+    private sealed record ScannerPickerOption(string Name, ScannerMode Value);
 }
