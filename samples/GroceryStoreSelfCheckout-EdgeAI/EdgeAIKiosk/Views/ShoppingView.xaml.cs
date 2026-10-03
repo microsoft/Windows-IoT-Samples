@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using EdgeAIKiosk;
 using EdgeAIKiosk.Models;
 using EdgeAIKiosk.Services;
+using EdgeAIKiosk.Interfaces;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Input;
-using Windows.System;
 
 namespace EdgeAIKiosk.Views;
 
@@ -16,27 +15,29 @@ public sealed partial class ShoppingView : Window
 {
     // Cart state is displayed in the scanned-items list.
     public ObservableCollection<ScannedItem> ScannedItems { get; } = new();
+    public Visibility BarcodeInputVisibility =>
+        KioskSettings.ScannerMode == ScannerMode.Keyboard ? Visibility.Visible : Visibility.Collapsed;
 
     private readonly LiveInferenceView _liveInference = new();
+    private IBarcodeScanner? _scanner;
 
     public ShoppingView()
     {
         InitializeComponent();
         WindowLayout.Maximize(this);
-        Activated += OnWindowActivated;
+        this.Closed += OnWindowClosed;
     }
 
-    private void OnWindowActivated(object sender, WindowActivatedEventArgs e) =>
-        FocusBarcodeInput();
+    private void OnWindowClosed(object sender, WindowEventArgs args)
+    {
+        _scanner?.Dispose();
+        _scanner = null;
+    }
 
     private async void OnShoppingViewLoaded(object sender, RoutedEventArgs e)
     {
-        FocusBarcodeInput();
         await StartupTask.Run(StartShopping, "Hardware connection error", ShowStartupError);
     }
-
-    private void FocusBarcodeInput() =>
-        DispatcherQueue.TryEnqueue(() => BarcodeInputBox.Focus(FocusState.Programmatic));
 
     /// <summary>
     /// Connects the cart and preview controls, starts inference, and removes the startup overlay.
@@ -45,6 +46,11 @@ public sealed partial class ShoppingView : Window
     {
         ScannedItemsListBox.ItemsSource = ScannedItems;
         LiveInferenceHost.Content = _liveInference;
+        _scanner = KioskSettings.ScannerMode == ScannerMode.HidScanner
+            ? new HidBarcodeScanner()
+            : new KeyboardBarcodeScanner(BarcodeInputBox!);
+        _scanner.BarcodeScanned += OnBarcodeScanned;
+        await _scanner.StartAsync();
         await _liveInference.StartAsync();
         HideLoadingOverlay();
     }
@@ -54,28 +60,23 @@ public sealed partial class ShoppingView : Window
 
     private void ShowStartupError(string message)
     {
+        _scanner?.Dispose();
         _ = _liveInference.StopAsync();
         ShowLoadingError(message);
     }
 
     /// <summary>
-    /// Accepts a unique barcode on Enter, syncs the cart with live inference, and resets scanner focus.
+    /// Receives a barcode from any scanner type, adds unique items to the cart, and syncs with live inference.
     /// </summary>
-    private void OnBarcodeKeyDown(object sender, KeyRoutedEventArgs e)
+    private void OnBarcodeScanned(string barcode)
     {
-        if (e.Key != VirtualKey.Enter) return;
-
-        // Read and validate the scanner input.
-        var barcode = BarcodeInputBox.Text.Trim();
-        bool hasBarcode = !string.IsNullOrEmpty(barcode);
-        bool alreadyScanned = ScannedItems.Any(item => item.Barcode == barcode);
-
-        // Add new scans, then reset focus for the next scan.
-        if (hasBarcode && !alreadyScanned)
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            if (!PayNowButton.IsEnabled) return;
+            if (ScannedItems.Any(item => item.Barcode == barcode)) return;
             ScannedItems.Add(new ScannedItem(barcode, barcode, 1));
-        _liveInference.SetScannedItems(ScannedItems);
-        BarcodeInputBox.Text = string.Empty;
-        FocusBarcodeInput();
+            _liveInference.SetScannedItems(ScannedItems);
+        });
     }
 
     private void OnVoidItemClick(object sender, RoutedEventArgs e)
@@ -83,7 +84,6 @@ public sealed partial class ShoppingView : Window
         if (ScannedItemsListBox.SelectedItem is ScannedItem item)
             ScannedItems.Remove(item);
         _liveInference.SetScannedItems(ScannedItems);
-        FocusBarcodeInput();
     }
 
     /// <summary>

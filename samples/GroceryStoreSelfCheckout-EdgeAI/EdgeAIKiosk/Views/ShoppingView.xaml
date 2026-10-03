@@ -46,7 +46,17 @@
             Grid.Row="0"
             Grid.Column="2"
             x:Name="ScannedItemsListBox"
-            Style="{StaticResource KioskScannedItemsListStyle}" />
+            Style="{StaticResource KioskScannedItemsListStyle}"
+            Margin="0,50,0,0" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="2"
+            x:Name="BarcodeInputBox"
+            PlaceholderText="Type item name and press Enter..."
+            VerticalAlignment="Top"
+            FontSize="18"
+            Margin="0,4,0,0"
+            Visibility="{x:Bind BarcodeInputVisibility}" />
         <Button
             Grid.Row="1"
             Grid.Column="2"
@@ -59,14 +69,6 @@
             HorizontalAlignment="Stretch"
             Style="{StaticResource KioskControlButtonStyle}"
             Click="OnPayNowClick" />
-
-        <TextBox
-            x:Name="BarcodeInputBox"
-            IsTabStop="True"
-            Opacity="0"
-            Width="20"
-            Height="10"
-            KeyDown="OnBarcodeKeyDown" />
 
         <Grid
             x:Name="LoadingOverlay"

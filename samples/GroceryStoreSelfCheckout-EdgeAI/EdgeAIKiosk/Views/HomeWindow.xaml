@@ -55,6 +55,16 @@
                     <StackPanel Width="420" Spacing="{StaticResource KioskSpacingLarge}">
                         <StackPanel Spacing="{StaticResource KioskSpacingSmall}">
                             <TextBlock
+                                Text="Scanner"
+                                FontSize="{StaticResource KioskFontSizeLabel}"
+                                Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />
+                            <ComboBox
+                                x:Name="ScannerPickerComboBox"
+                                DisplayMemberPath="Name"
+                                HorizontalAlignment="Stretch" />
+                        </StackPanel>
+                        <StackPanel Spacing="{StaticResource KioskSpacingSmall}">
+                            <TextBlock
                                 Text="Model"
                                 FontSize="{StaticResource KioskFontSizeLabel}"
                                 Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />

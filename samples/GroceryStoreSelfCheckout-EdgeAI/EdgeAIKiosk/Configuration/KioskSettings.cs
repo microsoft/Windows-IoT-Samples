@@ -4,6 +4,8 @@ using Microsoft.ML.OnnxRuntime;
 
 namespace EdgeAIKiosk;
 
+public enum ScannerMode { HidScanner, Keyboard }
+
 public static class KioskSettings
 {
     public static string ModelFileName { get; set; } = "Models\\yolo26x.onnx";
@@ -11,6 +13,7 @@ public static class KioskSettings
     // Null keeps automatic NPU, GPU, then CPU selection.
     public static OrtHardwareDeviceType? PreferredHardware { get; set; }
     public static string LabelTypeName { get; set; } = "CocoLabels";
+    public static ScannerMode ScannerMode { get; set; } = ScannerMode.HidScanner;
     public static HashSet<string> AcceptedLabels { get; set; } = new(StringComparer.OrdinalIgnoreCase)
     {
         "apple",

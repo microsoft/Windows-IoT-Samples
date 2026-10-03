@@ -50,5 +50,6 @@
     <rescap:Capability Name="runFullTrust" />
     <systemai:Capability Name="systemAIModels"/>
     <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="pointOfService" />
   </Capabilities>
 </Package>
