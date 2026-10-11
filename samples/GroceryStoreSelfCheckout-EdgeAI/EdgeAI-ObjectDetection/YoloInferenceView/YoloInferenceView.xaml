@@ -15,7 +15,7 @@
             </Canvas>
             <Canvas x:Name="Overlay" IsHitTestVisible="False" />
         </Grid>
-        <StackPanel Grid.Row="1" Spacing="4">
+        <StackPanel Grid.Row="1" Margin="5">
             <TextBlock x:Name="StatusText" Text="Not running." TextWrapping="Wrap" />
             <TextBlock x:Name="TimingText" />
             <TextBlock x:Name="EndToEndTimingText" />

@@ -16,12 +16,21 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border
+        <TextBlock
             Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Text="Windows Mart - Scan items"
+            FontSize="{StaticResource KioskFontSizeTitle}"
+            Margin="{StaticResource KioskHeaderMargin}"
+            Style="{StaticResource KioskWhiteBoldTextStyle}" />
+
+        <Border
+            Grid.Row="1"
             Grid.Column="0"
             Background="{StaticResource KioskBlackBrush}"
             CornerRadius="{StaticResource KioskPanelCornerRadius}">
@@ -36,12 +45,12 @@
                 <TextBlock x:Name="DetectedCountTextBlock"
                            Grid.Row="1"
                            Text="Detected: waiting for inference"
-                           Margin="12"
+                           Margin="4"
                            Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />
             </Grid>
         </Border>
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             x:Name="VoidItemButton"
             Content="Void Item"
@@ -53,14 +62,19 @@
             Style="{StaticResource KioskControlButtonStyle}"
             Click="OnVoidItemClick" />
 
-        <ListBox
-            Grid.Row="0"
+        <Border
+            Grid.Row="1"
             Grid.Column="2"
-            x:Name="ScannedItemsListBox"
-            Style="{StaticResource KioskScannedItemsListStyle}"
-            Margin="0,50,0,0" />
+            Background="{StaticResource KioskBlackBrush}"
+            CornerRadius="{StaticResource KioskPanelCornerRadius}">
+            <ListBox
+                x:Name="ScannedItemsListBox"
+                Style="{StaticResource KioskScannedItemsListStyle}"
+                Margin="0,50,0,0" />
+        </Border>
+        
         <TextBox
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="2"
             x:Name="BarcodeInputBox"
             PlaceholderText="Type item name and press Enter..."
@@ -69,7 +83,7 @@
             Margin="0,4,0,0"
             Visibility="{x:Bind BarcodeInputVisibility}" />
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="2"
             x:Name="PayNowButton"
             IsEnabled="False"
@@ -84,6 +98,7 @@
 
         <Grid
             x:Name="LoadingOverlay"
+            Grid.Row="1"
             Grid.ColumnSpan="3"
             Background="{StaticResource KioskLoadingOverlayBrush}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="{StaticResource KioskSpacingLarge}">
