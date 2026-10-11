@@ -23,7 +23,7 @@ public class ShoppingVerifierTests
         string[] scannedLabels, string[] detectedLabels, string[] expectedMismatches)
     {
         List<ScannedItem> scanned = scannedLabels.Select(label => new ScannedItem(label, label, 1)).ToList();
-        List<Detection> detected = detectedLabels.Select(label => new Detection(0, label, 0.9f, default)).ToList();
+        List<PreviewDetection> detected = detectedLabels.Select(label => new PreviewDetection(0, label, 0.9f, default)).ToList();
 
         VerificationResult result = ShoppingVerifier.Verify(scanned, detected, new HashSet<string> { "apple", "banana" });
 
@@ -70,7 +70,7 @@ public class ShoppingVerifierTests
     [Fact]
     public void Verify_LaterStreamUpdatesDoNotChangeCheckoutResult()
     {
-        List<Detection> detected = new() { new(0, "apple", 0.9f, default) };
+        List<PreviewDetection> detected = new() { new(0, "apple", 0.9f, default) };
         VerificationResult result = ShoppingVerifier.Verify([new("apple", "apple", 1)],
             detected, new HashSet<string> { "apple", "banana" });
 

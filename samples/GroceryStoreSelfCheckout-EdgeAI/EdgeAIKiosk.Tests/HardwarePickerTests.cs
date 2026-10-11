@@ -8,7 +8,7 @@ public class HardwarePickerTests
     [Fact]
     public void BuildHardwareOptions_ShowsAutoThenDetectedHardwareInDisplayOrder()
     {
-        var options = HomeWindow.BuildHardwareOptions(
+        List<HomePage.HardwarePickerOption> options = HomePage.BuildHardwareOptions(
             [OrtHardwareDeviceType.NPU, OrtHardwareDeviceType.CPU]);
 
         Assert.Collection(

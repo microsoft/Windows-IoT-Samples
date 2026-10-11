@@ -10,17 +10,21 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace EdgeAIKiosk.Views;
 
-public sealed partial class ShoppingView : Window
+internal sealed record ShoppingNavigationArgs(KioskSettings Settings, KioskInferenceOptions Options);
+
+public sealed partial class ShoppingPage : Page
 {
     public ObservableCollection<ScannedItem> ScannedItems { get; } = new();
     public Visibility BarcodeInputVisibility =>
         _settings.ScannerMode == ScannerMode.Keyboard ? Visibility.Visible : Visibility.Collapsed;
 
-    private readonly KioskSettings _settings;
-    private readonly KioskInferenceOptions _options;
+    private KioskSettings _settings = new();
+    private KioskInferenceOptions? _options;
     private readonly YoloInferenceView _inferenceView = new()
     {
         PreviewStretch = Stretch.UniformToFill,
@@ -30,26 +34,19 @@ public sealed partial class ShoppingView : Window
         ShowEndToEndInferenceTime = false
     };
     private IBarcodeScanner? _scanner;
-    private IReadOnlyList<Detection>? _latestDetections;
+    private IReadOnlyList<PreviewDetection>? _latestDetections;
     private bool _cartEnabled;
-    private bool _started;
-    private bool _closed;
-    private bool _transferred;
 
-    internal ShoppingView(KioskSettings settings, KioskInferenceOptions options)
+    public ShoppingPage()
     {
-        _settings = settings;
-        _options = options;
         InitializeComponent();
-        WindowLayout.Maximize(this);
-        Closed += OnWindowClosed;
-        _inferenceView.Faulted += OnInferenceFaulted;
-        _inferenceView.DetectionsUpdated += OnDetectionsUpdated;
+        ScannedItemsListBox.ItemsSource = ScannedItems;
+        LiveInferenceHost.Content = _inferenceView;
     }
 
-    private void OnWindowClosed(object sender, WindowEventArgs args)
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
     {
-        _closed = true;
+        base.OnNavigatedFrom(e);
         _inferenceView.Faulted -= OnInferenceFaulted;
         _inferenceView.DetectionsUpdated -= OnDetectionsUpdated;
         DisposeScanner();
@@ -57,98 +54,63 @@ public sealed partial class ShoppingView : Window
 
     private void DisposeScanner()
     {
-        if (_scanner is null) return;
-        _scanner.BarcodeScanned -= OnBarcodeScanned;
-        _scanner.Dispose();
+        if (_scanner is not null)
+        {
+            _scanner.BarcodeScanned -= OnBarcodeScanned;
+        }
+        _scanner?.Dispose();
         _scanner = null;
     }
 
-    private async void OnShoppingViewLoaded(object sender, RoutedEventArgs e)
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
-        if (_started || _closed) return;
-        _started = true;
+        base.OnNavigatedTo(e);
+        SetCartEnabled(false);
         try
         {
-            ScannedItemsListBox.ItemsSource = ScannedItems;
-            LiveInferenceHost.Content = _inferenceView;
-            SetCartEnabled(false);
+            if (e.Parameter is not ShoppingNavigationArgs navigation)
+            {
+                throw new ArgumentException("Shopping requires settings and inference options.", nameof(e));
+            }
+            _settings = navigation.Settings;
+            _options = navigation.Options;
+            Bindings.Update();
+            _inferenceView.Faulted += OnInferenceFaulted;
+            _inferenceView.DetectionsUpdated += OnDetectionsUpdated;
             _scanner = _settings.ScannerMode == ScannerMode.HidScanner
                 ? new HidBarcodeScanner()
                 : new KeyboardBarcodeScanner(BarcodeInputBox);
             _scanner.BarcodeScanned += OnBarcodeScanned;
             await _scanner.StartAsync();
-            if (_closed) return;
             await KioskInference.StartAsync(_inferenceView, _options, CancellationToken.None);
-            if (_closed) return;
-            SetCartEnabled(true);
             LoadingOverlay.Visibility = Visibility.Collapsed;
+            SetCartEnabled(true);
+            if (_settings.ScannerMode == ScannerMode.Keyboard)
+            {
+                BarcodeInputBox.Focus(FocusState.Programmatic);
+            }
         }
         catch (Exception error)
         {
             Trace.TraceError(error.ToString());
             DisposeScanner();
-            if (!_closed) ShowLoadingError($"Hardware connection error: {error.Message}");
+            await StartupTask.Run(async () => await _inferenceView.DisposeAsync(),
+                "Cleanup failed", ShowLoadingError);
+            ShowLoadingError($"Hardware connection error: {error.Message}");
         }
     }
 
     private void OnInferenceFaulted(object? sender, InferenceFaultedEventArgs args)
     {
-        if (_closed || _transferred) return;
         SetCartEnabled(false);
         ShowLoadingError($"Inference failed: {args.Exception.Message}");
     }
 
     private void OnDetectionsUpdated(object? sender, DetectionsUpdatedEventArgs args)
     {
-        if (_closed || _transferred) return;
         _latestDetections = args.Detections;
         DetectedCountTextBlock.Text = $"Detected: {args.Detections.Count} items";
         PayNowButton.IsEnabled = _cartEnabled;
-    }
-
-    private void OnBarcodeScanned(string barcode)
-    {
-        DispatcherQueue.TryEnqueue(() =>
-        {
-            if (_closed || _transferred || !_cartEnabled) return;
-            if (ScannedItems.Any(item => item.Barcode == barcode)) return;
-            ScannedItems.Add(new ScannedItem(barcode, barcode, 1));
-        });
-    }
-
-    private void OnVoidItemClick(object sender, RoutedEventArgs e)
-    {
-        if (ScannedItemsListBox.SelectedItem is ScannedItem item)
-            ScannedItems.Remove(item);
-    }
-
-    private void OnPayNowClick(object sender, RoutedEventArgs e)
-    {
-        SetCartEnabled(false);
-        try
-        {
-            if (_latestDetections is null)
-            {
-                throw new InvalidOperationException("Wait for the first inference result before checking out.");
-            }
-
-            Detection[] detections = _latestDetections.ToArray();
-            VerificationResult result = ShoppingVerifier.Verify(ScannedItems.ToArray(), detections, _options.SelectedClasses);
-            AlertWindow alert = new(result, _inferenceView, _settings);
-            _inferenceView.Faulted -= OnInferenceFaulted;
-            _inferenceView.DetectionsUpdated -= OnDetectionsUpdated;
-            LiveInferenceHost.Content = null;
-            _transferred = true;
-            alert.Activate();
-            Close();
-        }
-        catch (Exception error)
-        {
-            Trace.TraceError(error.ToString());
-            if (_closed) return;
-            SetCartEnabled(true);
-            if (!_closed) ShowLoadingError($"Verification failed: {error.Message}");
-        }
     }
 
     private void SetCartEnabled(bool enabled)
@@ -157,6 +119,58 @@ public sealed partial class ShoppingView : Window
         PayNowButton.IsEnabled = enabled && _latestDetections is not null;
         VoidItemButton.IsEnabled = enabled;
         BarcodeInputBox.IsEnabled = enabled;
+    }
+
+    private void OnBarcodeScanned(string barcode)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            if (!_cartEnabled || ScannedItems.Any(item => item.Barcode == barcode))
+            {
+                return;
+            }
+            ScannedItems.Add(new ScannedItem(barcode, barcode, 1));
+        });
+    }
+
+    private void OnVoidItemClick(object sender, RoutedEventArgs e)
+    {
+        if (ScannedItemsListBox.SelectedItem is ScannedItem item)
+        {
+            ScannedItems.Remove(item);
+        }
+    }
+
+    /// <summary>
+    /// Compares the cart with the latest completed streaming result and opens the result page.
+    /// </summary>
+    private void OnPayNowClick(object sender, RoutedEventArgs e)
+    {
+        SetCartEnabled(false);
+        LoadingProgressRing.Visibility = Visibility.Visible;
+        LoadingTextBlock.Text = "Verifying basket...";
+        LoadingOverlay.Visibility = Visibility.Visible;
+        try
+        {
+            if (_latestDetections is null || _options is null)
+            {
+                throw new InvalidOperationException("Wait for the first inference result before checking out.");
+            }
+            PreviewDetection[] detections = _latestDetections.ToArray();
+            VerificationResult result = ShoppingVerifier.Verify(ScannedItems.ToArray(), detections, _options.SelectedClasses);
+            LiveInferenceHost.Content = null;
+            if (!Frame.Navigate(typeof(AlertPage), new CheckoutNavigationArgs(result, _inferenceView, _settings)))
+            {
+                throw new InvalidOperationException("Could not navigate to the checkout result.");
+            }
+        }
+        catch (Exception error)
+        {
+            Trace.TraceError(error.ToString());
+            LiveInferenceHost.Content = _inferenceView;
+            SetCartEnabled(true);
+            ShowLoadingError($"Verification failed: {error.Message}");
+        }
     }
 
     private void ShowLoadingError(string message)

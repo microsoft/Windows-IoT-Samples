@@ -8,10 +8,20 @@ public static class StartupTask
 {
     public static async Task Run(Func<Task> task, string failureMessage, Action<string> showError, Action<Exception>? log = null)
     {
-        try { await task(); }
+        try
+        {
+            await task();
+        }
         catch (Exception exception)
         {
-            (log ?? (error => Trace.TraceError(error.ToString())))(exception);
+            if (log is null)
+            {
+                Trace.TraceError(exception.ToString());
+            }
+            else
+            {
+                log(exception);
+            }
             showError($"{failureMessage}: {exception.Message}");
         }
     }

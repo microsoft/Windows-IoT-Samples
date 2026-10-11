@@ -29,9 +29,11 @@ public sealed class PreprocessorTests
         Assert.NotNull(pixels);
         var detection = YoloInferenceEngine.DecodeDetection(0, 0, 640, 640, .9f, 0, layout);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(left / 640f, top / 640f, resizedWidth / 640f, resizedHeight / 640f),
+        Assert.Equal(new DetectionBox(left, top, resizedWidth, resizedHeight),
             detection.BoundingBox);
-        Assert.Equal(new DetectionBox(0, 0, 1, 1), layout.ToCropBox(detection.BoundingBox));
+        var geometry = PreviewGeometry.Create(width, height, width, height, 1);
+        Assert.Equal(new PreviewDetectionBox(0, 0, width, height),
+            Assert.Single(geometry.MapDetections([detection], layout)).BoundingBox);
         for (int y = 0; y < 640; y++)
         {
             for (int x = 0; x < 640; x++)

@@ -6,5 +6,5 @@ namespace EdgeAIKiosk.Models;
 public record VerificationResult(
     bool IsMatch,
     IReadOnlyList<ScannedItem> ScannedItems,
-    IReadOnlyList<Detection> DetectedItems,
+    IReadOnlyList<PreviewDetection> DetectedItems,
     IReadOnlyList<string> Mismatches);

@@ -70,7 +70,9 @@ public sealed class InferenceSnapshotTests
                 frame, new PreviewGeometry(80, 0, 640, 640, 1, 0, 0), true).ImagePixels!;
         }
 
-        var detection = new Detection(0, "person", .8f, new DetectionBox(.25f, .125f, .5f, .5f));
+        var detection = YoloInferenceEngine.DecodeDetection(160, 80, 480, 400, .8f, 0,
+            LetterboxGeometry.Create(640, 640));
+        Assert.NotNull(detection);
         IReadOnlyList<Detection> detections = Array.AsReadOnly(new[] { detection });
         using var snapshot = new InferenceSnapshot(detections, pixels);
         Array.Clear(pixels);
@@ -78,7 +80,7 @@ public sealed class InferenceSnapshotTests
         Assert.Equal((byte)80, pixels[2]);
         Assert.Equal((byte)255, pixels[3]);
         Assert.Same(detections, snapshot.Detections);
-        Assert.Equal(new DetectionBox(.25f, .125f, .5f, .5f), snapshot.Detections[0].BoundingBox);
+        Assert.Equal(new DetectionBox(160, 80, 320, 320), snapshot.Detections[0].BoundingBox);
 
         snapshot.Dispose();
         snapshot.Dispose();

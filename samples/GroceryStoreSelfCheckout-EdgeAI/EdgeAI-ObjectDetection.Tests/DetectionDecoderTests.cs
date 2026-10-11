@@ -8,13 +8,13 @@ public sealed class DetectionDecoderTests
     private static readonly LetterboxGeometry SquareInput = LetterboxGeometry.Create(640, 640);
 
     [Fact]
-    public void BoxesAreNormalizedWithinInferenceCrop()
+    public void BoxesUseSnapshotImagePixels()
     {
         var detection = YoloInferenceEngine.DecodeDetection(160, 80, 480, 400, .8f, 1, SquareInput);
         Assert.NotNull(detection);
         Assert.Equal(1, detection.ClassId);
         Assert.Equal("bicycle", detection.Label);
-        Assert.Equal(new DetectionBox(.25f, .125f, .5f, .5f), detection.BoundingBox);
+        Assert.Equal(new DetectionBox(160, 80, 320, 320), detection.BoundingBox);
     }
 
     [Fact]
@@ -22,7 +22,15 @@ public sealed class DetectionDecoderTests
     {
         var detection = YoloInferenceEngine.DecodeDetection(-10, -20, 650, 700, .8f, 0, SquareInput);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(0, 0, 1, 1), detection.BoundingBox);
+        Assert.Equal(new DetectionBox(0, 0, 640, 640), detection.BoundingBox);
+    }
+
+    [Fact]
+    public void FractionalPixelCoordinatesArePreserved()
+    {
+        var detection = YoloInferenceEngine.DecodeDetection(160.25f, 80.5f, 480.75f, 400.125f, .8f, 1, SquareInput);
+        Assert.NotNull(detection);
+        Assert.Equal(new DetectionBox(160.25f, 80.5f, 320.5f, 319.625f), detection.BoundingBox);
     }
 
     [Theory]

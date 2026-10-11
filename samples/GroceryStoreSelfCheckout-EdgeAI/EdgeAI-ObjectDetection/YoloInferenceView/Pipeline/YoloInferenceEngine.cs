@@ -201,8 +201,7 @@ internal sealed class YoloInferenceEngine : IDisposable
         {
             return null;
         }
-        DetectionBox box = new(x1 / InputSize, y1 / InputSize,
-            (x2 - x1) / InputSize, (y2 - y1) / InputSize);
+        DetectionBox box = new(x1, y1, x2 - x1, y2 - y1);
         return new Detection((int)classId, SupportedClasses[(int)classId], confidence, box);
     }
 

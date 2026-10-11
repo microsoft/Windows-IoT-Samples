@@ -8,6 +8,4 @@ public interface IBarcodeScanner : IDisposable
     event Action<string> BarcodeScanned;
 
     Task StartAsync();
-
-    Task StopAsync();
 }

@@ -101,6 +101,7 @@ internal sealed class YoloPipeline : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
+        List<Exception> errors = new();
         try
         {
             if (_readerStarted)
@@ -108,32 +109,43 @@ internal sealed class YoloPipeline : IAsyncDisposable
                 await _reader!.StopAsync();
             }
         }
-        finally
+        catch (Exception error)
         {
-            _readerStarted = false;
+            errors.Add(error);
+        }
+        _readerStarted = false;
+
+        try
+        {
+            if (_capture is not null)
+            {
+                _capture.Failed -= Capture_Failed;
+            }
+        }
+        catch (Exception error)
+        {
+            errors.Add(error);
+        }
+
+        foreach (IDisposable? resource in new IDisposable?[] { _reader, _capture, _engine })
+        {
             try
             {
-                _reader?.Dispose();
+                resource?.Dispose();
             }
-            finally
+            catch (Exception error)
             {
-                _reader = null;
-                FrameSource = null;
-                try
-                {
-                    if (_capture is not null)
-                    {
-                        _capture.Failed -= Capture_Failed;
-                        _capture.Dispose();
-                    }
-                }
-                finally
-                {
-                    _capture = null;
-                    _engine?.Dispose();
-                    _engine = null;
-                }
+                errors.Add(error);
             }
+        }
+        _reader = null;
+        FrameSource = null;
+        _capture = null;
+        _engine = null;
+
+        if (errors.Count > 0)
+        {
+            throw new AggregateException("Could not completely clean up the inference pipeline.", errors);
         }
     }
 }

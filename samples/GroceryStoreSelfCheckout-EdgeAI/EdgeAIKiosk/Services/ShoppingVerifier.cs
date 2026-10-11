@@ -9,12 +9,12 @@ namespace EdgeAIKiosk.Services;
 public static class ShoppingVerifier
 {
     public static VerificationResult Verify(IReadOnlyList<ScannedItem> scanned,
-        IReadOnlyList<Detection> detected, IReadOnlySet<string> includedLabels)
+        IReadOnlyList<PreviewDetection> detected, IReadOnlySet<string> includedLabels)
     {
         HashSet<string> labels = new(includedLabels, StringComparer.OrdinalIgnoreCase);
         HashSet<string> scannedLabels = new(
             scanned.Select(item => item.Name).Where(labels.Contains), StringComparer.OrdinalIgnoreCase);
-        Detection[] relevantDetections = detected.Where(item => labels.Contains(item.Label)).ToArray();
+        PreviewDetection[] relevantDetections = detected.Where(item => labels.Contains(item.Label)).ToArray();
         HashSet<string> detectedLabels = new(
             relevantDetections.Select(item => item.Label), StringComparer.OrdinalIgnoreCase);
         string[] mismatches = scannedLabels.Except(detectedLabels, StringComparer.OrdinalIgnoreCase)

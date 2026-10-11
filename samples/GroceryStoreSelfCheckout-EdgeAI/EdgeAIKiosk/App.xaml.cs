@@ -7,11 +7,14 @@ namespace EdgeAIKiosk
     {
         private Window? _window;
 
-        public App() => InitializeComponent();
+        public App()
+        {
+            InitializeComponent();
+        }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            _window = new HomeWindow();
+            _window = new MainWindow();
             _window.Activate();
         }
     }

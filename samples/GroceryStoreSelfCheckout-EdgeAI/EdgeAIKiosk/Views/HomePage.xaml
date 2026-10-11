@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
-    x:Class="EdgeAIKiosk.Views.HomeWindow"
+<Page
+    x:Class="EdgeAIKiosk.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Title="Windows Mart">
+    mc:Ignorable="d">
 
-    <Grid Background="{StaticResource KioskPrimaryBrush}" Loaded="OnHomeWindowLoaded">
+    <Grid Background="{StaticResource KioskPrimaryBrush}">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="{StaticResource KioskSpacingHero}">
             <TextBlock
                 Text="Welcome To Windows Mart"
@@ -39,13 +38,11 @@
             x:Name="SettingsDismissLayer"
             Background="Transparent"
             Visibility="Collapsed"
-            Canvas.ZIndex="1"
             Tapped="OnSettingsDismissLayerTapped" />
         <Grid
             Margin="{StaticResource KioskPagePadding}"
             HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Canvas.ZIndex="2">
+            VerticalAlignment="Bottom">
             <StackPanel Spacing="{StaticResource KioskSpacingMedium}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Border
                     x:Name="SettingsPanel"
@@ -60,8 +57,10 @@
                                 Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />
                             <ComboBox
                                 x:Name="ScannerPickerComboBox"
-                                DisplayMemberPath="Name"
-                                HorizontalAlignment="Stretch" />
+                                HorizontalAlignment="Stretch">
+                                <ComboBoxItem x:Name="HidScannerItem" Content="HID Barcode Scanner" />
+                                <ComboBoxItem x:Name="KeyboardScannerItem" Content="Keyboard Mode" />
+                            </ComboBox>
                         </StackPanel>
                         <StackPanel Spacing="{StaticResource KioskSpacingSmall}">
                             <TextBlock
@@ -70,7 +69,6 @@
                                 Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />
                             <ComboBox
                                 x:Name="ModelPickerComboBox"
-                                DisplayMemberPath="Name"
                                 HorizontalAlignment="Stretch" />
                         </StackPanel>
                         <StackPanel Spacing="{StaticResource KioskSpacingSmall}">
@@ -92,7 +90,7 @@
                                 Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />
                             <ComboBox
                                 x:Name="CameraPickerComboBox"
-                                DisplayMemberPath="Name"
+                                DisplayMemberPath="DisplayName"
                                 HorizontalAlignment="Stretch" />
                         </StackPanel>
                         <Button
@@ -121,7 +119,6 @@
         <Grid
             x:Name="LabelDialogOverlay"
             Background="{StaticResource KioskOverlayBrush}"
-            Canvas.ZIndex="3"
             Visibility="Collapsed">
             <Border
                 Width="620"
@@ -142,11 +139,31 @@
                         FontSize="{StaticResource KioskFontSizeDialogTitle}"
                         Margin="{StaticResource KioskDialogSectionMargin}"
                         Style="{StaticResource KioskWhiteBoldTextStyle}" />
-                    <ScrollViewer Grid.Row="1" MaxHeight="400">
-                        <StackPanel
-                            x:Name="LabelsStackPanel"
-                            Spacing="{StaticResource KioskSpacingSmall}" />
-                    </ScrollViewer>
+                    <ItemsView
+                        x:Name="LabelsItemsView"
+                        Grid.Row="1"
+                        MaxHeight="400"
+                        SelectionMode="Multiple"
+                        RequestedTheme="Dark"
+                        AutomationProperties.Name="Accepted labels">
+                        <ItemsView.Layout>
+                            <UniformGridLayout
+                                MinItemWidth="170"
+                                MinRowSpacing="{StaticResource KioskSpacingSmall}"
+                                MinColumnSpacing="{StaticResource KioskSpacingSmall}"
+                                MaximumRowsOrColumns="3"
+                                ItemsStretch="Fill" />
+                        </ItemsView.Layout>
+                        <ItemsView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <ItemContainer AutomationProperties.Name="{x:Bind}">
+                                    <TextBlock Text="{x:Bind}" Margin="8"
+                                               TextWrapping="Wrap"
+                                               Foreground="{StaticResource KioskWhiteBrush}" />
+                                </ItemContainer>
+                            </DataTemplate>
+                        </ItemsView.ItemTemplate>
+                    </ItemsView>
                     <StackPanel
                         Grid.Row="2"
                         Orientation="Horizontal"
@@ -170,4 +187,4 @@
             </Border>
         </Grid>
     </Grid>
-</Window>
+</Page>

@@ -68,14 +68,15 @@ EdgeAIKiosk\
   App.xaml                         App startup and shared resources
   Configuration\KioskSettings.cs  App-owned model, hardware, camera, and label selections
   Styles\KioskStyles.xaml          Shared brushes, spacing, typography, and control styles
-  Views\HomeWindow.xaml            Model, hardware, camera, and label selection
-  Views\ShoppingView.xaml          Barcode input, cart UI, camera preview, checkout
-  Views\AlertWindow.xaml           Verification result UI
-  YoloInferenceView\              Exact local copy of the ObjectDetection control, pipeline, and types
-  Services\KioskInference.cs       Converts session options into explicit control settings
+  Views\MainWindow.xaml            Persistent window and navigation frame
+  Views\HomePage.xaml              Model, hardware, camera, and label selection
+  Views\ShoppingPage.xaml          Barcode input, cart UI, camera preview, checkout
+  Views\AlertPage.xaml             Verification result UI
+  YoloInferenceView\               Copy of the reusable control, including Pipeline and Types
+  Services\KioskInference.cs       Starts the control with the selected camera, model, and classes
   Services\ExecutionProviderPolicy.cs
-                                   App-owned Auto/provider fallback
-  Services\ShoppingVerifier.cs     Compares cart labels with a single inference result
+                                   Automatic provider fallback or explicit hardware selection
+  Services\ShoppingVerifier.cs     Compares scanned cart labels with detected labels
   DataModels\                      Cart and verification result types
   Models\                          Local ONNX model files; not committed to Git
 
@@ -143,18 +144,21 @@ Configuration is currently in code and through the home-screen settings UI:
 
 ## Architecture
 
-Each app compiles its own identical copy of `YoloInferenceView`; the kiosk no longer has a separate app-specific camera pipeline or bounding-box renderer. Update the reusable component in `EdgeAI-ObjectDetection` first, then copy the entire `YoloInferenceView` folder unchanged into `EdgeAIKiosk`. Keep kiosk integration outside that folder. Kiosk settings are passed between windows as an app-owned instance, not read globally by the inference control.
+Each app compiles its own identical copy of `YoloInferenceView`; the kiosk no longer has a separate app-specific camera pipeline or bounding-box renderer. Update the reusable component in `EdgeAI-ObjectDetection` first, then copy the entire `YoloInferenceView` folder unchanged into `EdgeAIKiosk`. Keep kiosk integration outside that folder. Kiosk settings are passed between pages as an app-owned instance, not read globally by the inference control.
 
-1. `HomeWindow` discovers models, camera groups, and hardware, and snapshots the selected labels into session options.
-2. `ShoppingView` collects scanned items and hosts `YoloInferenceView` in streaming mode, capped at 30 inference cycles per second. Actual throughput depends on the model and hardware.
-3. `KioskInference` supplies explicit `InferenceSettings`. `ExecutionProviderPolicy` implements Auto (NPU, GPU, CPU) and narrow provider-failure fallback in the app; explicit hardware selection does not fall back.
-4. The shared control captures the visible rectangular crop, letterboxes it to 640x640, runs inference, and displays only selected labels using the same green boxes as ObjectDetection.
-5. **Pay Now** is disabled until the first streaming result arrives (an empty result is valid). Checkout disables cart edits and copies the cart and latest completed detections, without waiting for a new frame, switching modes, or allocating an image snapshot. The detections may predate the click.
-6. `ShoppingVerifier` compares the copied detected label set against scanned labels using the explicit selected-label set. It does not aggregate frames or verify quantities.
-7. `AlertWindow` shows the fixed checkout result, keeps the transferred stream running on mismatch, or awaits inference disposal on success. Returning home awaits disposal; closing the app does not wait for inference shutdown.
+1. `HomePage` selects settings and passes a camera group and inference options to `ShoppingPage` through the navigation frame.
+2. `ShoppingPage` starts `YoloInferenceView` through `KioskInference`. Auto tries NPU, GPU, then CPU; an explicit choice uses only that hardware type.
+3. The control captures frames, letterboxes the visible crop, runs the model, and publishes class-filtered detections with preview-local boxes.
+4. Pay Now is enabled after the first completed result, including a valid empty result. It copies the latest streaming detections; it does not capture a new frame or perform multi-frame voting.
+5. `ShoppingVerifier` compares selected label sets, not quantities. Later frames do not change the checkout decision.
+6. `ShoppingPage` transfers the same control to `AlertPage`. A mismatch keeps streaming without a restart; a successful checkout disposes the control. Returning home awaits disposal and preserves the selected settings.
 
 ### Design Notes
 
+- One `MainWindow` hosts a `Frame` for the home, shopping, and result pages. Navigation replaces page content without closing/recreating the native window or animating through a blank background. Navigation history is disabled so completed checkout sessions cannot be revisited.
+- Pages initialize screen/session state in `OnNavigatedTo`. Reattaching a page's visual tree does not recreate its scanner or restart model loading. Navigation does not await async initialization, so checkout remains disabled until startup finishes and the first inference result arrives. Keyboard input is focused after startup enables it.
+- The label dialog uses WinUI `ItemsView` with multiple selection and a uniform grid. Save reads selected data items; Cancel discards edits when the dialog is reopened. XAML child order defines overlay stacking without explicit Z-index values.
+- Shopping transfers the running control to the result page without pausing inference. Success and returning home await inference cleanup; application exit is not deferred for cleanup.
 - Camera capture uses WinRT `MediaCapture` and `MediaFrameReader` because OpenCvSharp does not provide a reliable `win-arm64` native path for this target.
 - Both apps use the shared managed preprocessor, preserving crop/letterbox geometry through decoding and presentation. Neither app depends on ImageSharp.
 - Label selection applies consistently to overlays, detection events, and snapshots. The kiosk always supplies its selection; selecting no labels ignores all detections and cart labels. ObjectDetection defaults to all labels.
@@ -222,7 +226,7 @@ InferenceSettings settings = new()
 Yolo.DetectionsUpdated += (_, args) =>
 {
     // Empty means inference completed with no detections.
-    foreach (Detection detection in args.Detections)
+    foreach (PreviewDetection detection in args.Detections)
         Debug.WriteLine($"{detection.Label}: {detection.Confidence:P0}");
 };
 Yolo.Faulted += (_, args) => Debug.WriteLine(args.Exception);
@@ -250,7 +254,9 @@ await Yolo.StartAsync(settings with { ClassMask = classMask });
 
 The control must be stopped before starting; calling `StartAsync` while running throws `InvalidOperationException`, even with equivalent settings. Await `StopAsync` before starting again. Startup cancellation unwinds acquired resources. `StopAsync` cancels startup/inference, detaches preview consumers, waits for outstanding model execution, and releases the pipeline; it is safe to repeat. `DisposeAsync` also permanently retires the instance.
 
-For one-shot operation, start with `InferenceType.OneShot`, then call `await Yolo.InferOnceAsync(cancellationToken)`. The control displays the analyzed still image and its boxes together, and returns an `InferenceSnapshot` containing `Detections` (the same read-only list delivered by `DetectionsUpdated`) and `Image` (a caller-owned `SoftwareBitmap`). The image is the exact 640 x 640 letterboxed RGB image used to build the model tensor, including gray padding, stored as opaque BGRA8 with premultiplied alpha for XAML display. Detection boxes are normalized to this image. It contains the visible camera crop, not necessarily the full camera frame, and has no drawn overlays. Dispose the snapshot after copying, displaying, or saving its image; its detections remain usable after disposal. The control retains its own uploaded image, so the sample host can dispose the returned snapshot immediately without affecting the display.
+Pipeline cleanup attempts to release the reader, camera capture, and model even if an earlier cleanup step fails, then reports any failures together in an `AggregateException`.
+
+For one-shot operation, start with `InferenceType.OneShot`, then call `await Yolo.InferOnceAsync(cancellationToken)`. The control displays the analyzed still image and its boxes together, and returns an `InferenceSnapshot` containing image-relative `Detections` and `Image` (a caller-owned `SoftwareBitmap`). Unlike the event's `PreviewDetection` list, snapshot detections use image pixels, independent of view layout. The image is the exact 640 x 640 letterboxed RGB image used to build the model tensor, including gray padding, stored as opaque BGRA8 with premultiplied alpha for XAML display. It contains the visible camera crop, not necessarily the full camera frame, and has no drawn overlays. Dispose the snapshot after copying, displaying, or saving its image; its detections remain usable after disposal. The control retains its own uploaded image, so the sample host can dispose the returned snapshot immediately without affecting the display.
 
 ```csharp
 // Yolo has already been started in OneShot mode.
@@ -273,7 +279,9 @@ Normal XAML `Width`, `Height`, and layout constraints size the whole control, in
 
 Inference consumes the entire visible rectangular camera region **as laid out by `PreviewStretch`**, rounded inward to source-pixel boundaries, excluding empty preview space and camera pixels cropped away by that layout. This rectangle is proportionally resized and letterboxed to 640 x 640 with gray padding. `Uniform` includes the full camera frame; `UniformToFill` and `None` can crop it to the viewport. Objects are no longer truncated at an artificial square boundary, but can still be truncated at the actual viewport edge. This input-crop policy is the same in streaming and one-shot modes, even though one-shot mode does not show the live camera. Resize/DPI changes update the next input crop without restarting the model or camera and discard in-flight results with obsolete capture geometry. Streaming clears old boxes and removes model padding when mapping new boxes onto the visible camera rectangle. One-shot mode instead retains the last result and uniformly fits its entire square model-input image (including padding) and matching boxes to the viewport, independent of `PreviewStretch`; resizing does not crop or invalidate the displayed still. A zero-sized viewport pauses inference, not capture. Hiding the camera image does not change the input crop.
 
-Each immutable `Detection` contains `ClassId`, `Label`, `Confidence`, and a `BoundingBox` with normalized `X`, `Y`, `Width`, and `Height` within the 640 x 640 letterboxed model-input image. The origin is the model image's top-left, including padding. Boxes are clipped to the camera-content rectangle within that image; padding-only detections are discarded. Coordinates are not relative to the unpadded crop, full camera image, or XAML control. Hosts interested only in classes/counts can ignore the boxes. The static `YoloInferenceView.GetSupportedClasses()` method returns the complete read-only COCO class list, indexed by class ID, without constructing or starting a view. `ClassMask` never narrows this discovery list.
+`DetectionsUpdated` delivers a read-only list of immutable `PreviewDetection` records containing `ClassId`, `Label`, `Confidence`, and a `PreviewDetectionBox`. Its `X`, `Y`, `Width`, and `Height` are in XAML logical units (DIPs), relative to the preview area's top-left, excluding the status lines. Letterbox removal, preview scaling, and offsets are already applied. In one-shot mode the coordinates instead follow the fitted still image, including its padding. The event and built-in overlays share the same mapping; results are available even when built-in boxes and labels are hidden. A host can position rectangles directly on an overlay aligned with the preview area, without multiplying coordinates by its size. These are not native-window or screen coordinates. They describe the layout when the event fires; resizing redraws built-in overlays but does not emit another inference event. Custom overlays should clear stale results on resize and await the next result.
+
+Snapshot `Detection` records use a distinct `DetectionBox` type: `X`, `Y`, `Width`, and `Height` in pixels relative to the top-left of `InferenceSnapshot.Image`, the 640 x 640 letterboxed model-input image. Values are floats, preserving fractional pixels; they are not normalized or rounded to integer pixel indices. For example, `(160, 200, 320, 240)` starts 160 pixels from the left and 200 pixels from the top, and is 320 pixels wide by 240 pixels high. Their coordinates remain stable after resizing the view and are suitable for drawing over a saved snapshot. Boxes are clipped to the camera-content rectangle within that image; padding-only detections are discarded. Callers migrating from normalized boxes must stop multiplying by the image dimensions. Drawing a snapshot at a different size still requires scaling to that display, or using the control's `PreviewDetection` event for its own preview. Hosts interested only in classes/counts can ignore either box type. `GetSupportedClasses()` returns the read-only COCO label list, indexed by class ID.
 
 These dependency properties can change while running: `ShowCameraPreview`, `ShowBoundingBoxes`, `ShowLabels`, `ShowConfidence`, `ShowInferenceStatus`, `ShowInferenceTime`, and `ShowEndToEndInferenceTime`. They default to true. `ShowCameraPreview` controls live-image visibility in streaming and still-image visibility in one-shot mode; it never enables a live preview in one-shot mode. Both timing displays update for each accepted result in streaming and one-shot modes. E2E inference time runs from acquiring the available camera frame through preprocessing, inference, postprocessing, dispatch back to the UI, and bounding-box/label element updates, including the image upload in one-shot mode. It excludes waiting for a new frame, stream throttling, event-handler work, and deferred XAML layout/rendering or screen presentation. It measures the work of updating the presentation, not camera preview FPS or camera-to-display latency. The separate inference time covers the engine call (including its output decoding) without preprocessing or presentation updates.
 

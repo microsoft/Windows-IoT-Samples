@@ -14,6 +14,7 @@ public sealed class InferenceSnapshot : IDisposable
 {
     private SoftwareBitmap? _image;
 
+    /// <summary>Detections with bounding boxes in pixels of <see cref="Image"/>, independent of preview layout.</summary>
     public IReadOnlyList<Detection> Detections { get; }
 
     /// <summary>The 640x640 model-input image, in BGRA8 premultiplied format for XAML display.</summary>

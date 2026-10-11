@@ -135,11 +135,6 @@ publish/
 # TODO: Comment the next line if you want to checkin your web deploy settings 
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
-# Shared, credential-free publish profiles for the Edge AI sample
-!/samples/GroceryStoreSelfCheckout-EdgeAI/EdgeAI-ObjectDetection/Properties/PublishProfiles/win-x64.pubxml
-!/samples/GroceryStoreSelfCheckout-EdgeAI/EdgeAI-ObjectDetection/Properties/PublishProfiles/win-arm64.pubxml
-!/samples/GroceryStoreSelfCheckout-EdgeAI/EdgeAIKiosk/Properties/PublishProfiles/win-x64.pubxml
-!/samples/GroceryStoreSelfCheckout-EdgeAI/EdgeAIKiosk/Properties/PublishProfiles/win-arm64.pubxml
 *.publishproj
 
 # NuGet Packages

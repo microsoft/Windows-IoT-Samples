@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
-    x:Class="EdgeAIKiosk.Views.ShoppingView"
+<Page
+    x:Class="EdgeAIKiosk.Views.ShoppingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Title="Windows Mart — Shopping">
+    mc:Ignorable="d">
 
     <Grid
         Background="{StaticResource KioskPrimaryBrush}"
-        Padding="{StaticResource KioskPagePadding}"
-        Loaded="OnShoppingViewLoaded">
+        Padding="{StaticResource KioskPagePadding}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="32" />
@@ -28,17 +26,18 @@
             Background="{StaticResource KioskBlackBrush}"
             CornerRadius="{StaticResource KioskPanelCornerRadius}">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <ContentControl x:Name="LiveInferenceHost"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch" />
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Top"
-                      Margin="{StaticResource KioskInferencePanelMargin}"
-                      Style="{StaticResource KioskInferenceOverlayStyle}"
-                      IsHitTestVisible="False">
-                    <TextBlock x:Name="DetectedCountTextBlock"
-                               Text="Detected: starting inference"
-                               Style="{StaticResource KioskInferenceTextStyle}" />
-                </Grid>
+                <TextBlock x:Name="DetectedCountTextBlock"
+                           Grid.Row="1"
+                           Text="Detected: waiting for inference"
+                           Margin="12"
+                           Style="{StaticResource KioskWhiteSemiBoldTextStyle}" />
             </Grid>
         </Border>
         <Button
@@ -86,7 +85,6 @@
         <Grid
             x:Name="LoadingOverlay"
             Grid.ColumnSpan="3"
-            Canvas.ZIndex="10"
             Background="{StaticResource KioskLoadingOverlayBrush}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="{StaticResource KioskSpacingLarge}">
                 <ProgressRing
@@ -104,4 +102,4 @@
             </StackPanel>
         </Grid>
     </Grid>
-</Window>
+</Page>

@@ -50,7 +50,7 @@ public class DetectionFilterTests
         Assert.Equal(new[] { "apple", "banana" }, result.Select(detection => detection.Label));
         Assert.Equal(new[] { 47, 46 }, result.Select(detection => detection.ClassId));
         Assert.All(result, detection =>
-            Assert.Equal(new DetectionBox(.1f, .2f, .3f, .4f), detection.BoundingBox));
+            Assert.Equal(new DetectionBox(64, 128, 192, 256), detection.BoundingBox));
         Assert.Throws<NotSupportedException>(() => ((IList<Detection>)result).Clear());
     }
 

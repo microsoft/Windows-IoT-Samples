@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 
 namespace EdgeAI_ObjectDetection.Controls;
 
@@ -20,6 +21,24 @@ internal readonly record struct PreviewGeometry(
     public double OverlayY => ImageY + CropY * Scale;
     public double OverlayWidth => CropWidth * Scale;
     public double OverlayHeight => CropHeight * Scale;
+
+    internal IReadOnlyList<PreviewDetection> MapDetections(
+        IReadOnlyList<Detection> detections, LetterboxGeometry? letterbox)
+    {
+        var mapped = new List<PreviewDetection>(detections.Count);
+        double scaleX = OverlayWidth / (letterbox?.Width ?? CropWidth);
+        double scaleY = OverlayHeight / (letterbox?.Height ?? CropHeight);
+        int left = letterbox?.Left ?? 0;
+        int top = letterbox?.Top ?? 0;
+        foreach (Detection detection in detections)
+        {
+            DetectionBox box = detection.BoundingBox;
+            mapped.Add(new PreviewDetection(detection.ClassId, detection.Label, detection.Confidence,
+                new PreviewDetectionBox(OverlayX + (box.X - left) * scaleX, OverlayY + (box.Y - top) * scaleY,
+                    box.Width * scaleX, box.Height * scaleY)));
+        }
+        return mapped.AsReadOnly();
+    }
 
     public static PreviewGeometry FitSquare(int imageSize, double viewportWidth, double viewportHeight)
     {

@@ -33,9 +33,10 @@ public sealed class LetterboxGeometryTests
         var layout = LetterboxGeometry.Create(width, height);
         var detection = YoloInferenceEngine.DecodeDetection(0, 0, 640, 640, .9f, 0, layout);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(layout.Left / 640f, layout.Top / 640f,
-            layout.Width / 640f, layout.Height / 640f), detection.BoundingBox);
-        Assert.Equal(new DetectionBox(0, 0, 1, 1), layout.ToCropBox(detection.BoundingBox));
+        Assert.Equal(new DetectionBox(layout.Left, layout.Top, layout.Width, layout.Height), detection.BoundingBox);
+        var geometry = PreviewGeometry.Create(width, height, width, height, 1);
+        Assert.Equal(new PreviewDetectionBox(0, 0, width, height),
+            Assert.Single(geometry.MapDetections([detection], layout)).BoundingBox);
     }
 
     [Theory]
@@ -56,13 +57,12 @@ public sealed class LetterboxGeometryTests
         var detection = YoloInferenceEngine.DecodeDetection(160, 240, 480, 400, .9f, 0, layout);
         Assert.NotNull(detection);
         // Snapshot coordinates retain the padding; streaming coordinates remove it.
-        Assert.Equal(new DetectionBox(.25f, .375f, .5f, .25f), detection.BoundingBox);
-        var box = layout.ToCropBox(detection.BoundingBox);
-        Assert.Equal(new DetectionBox(.25f, .25f, .5f, .5f), box);
-        Assert.Equal(200, geometry.OverlayX + box.X * geometry.OverlayWidth, 6);
-        Assert.Equal(100, geometry.OverlayY + box.Y * geometry.OverlayHeight, 6);
-        Assert.Equal(400, box.Width * geometry.OverlayWidth, 6);
-        Assert.Equal(200, box.Height * geometry.OverlayHeight, 6);
+        Assert.Equal(new DetectionBox(160, 240, 320, 160), detection.BoundingBox);
+        var box = Assert.Single(geometry.MapDetections([detection], layout)).BoundingBox;
+        Assert.Equal(200, box.X, 6);
+        Assert.Equal(100, box.Y, 6);
+        Assert.Equal(400, box.Width, 6);
+        Assert.Equal(200, box.Height, 6);
     }
 
     [Fact]
@@ -73,6 +73,7 @@ public sealed class LetterboxGeometryTests
         Assert.Equal(new LetterboxGeometry(320, 640, 160, 0), layout);
         var detection = YoloInferenceEngine.DecodeDetection(240, 160, 400, 480, .9f, 0, layout);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(.25f, .25f, .5f, .5f), layout.ToCropBox(detection.BoundingBox));
+        Assert.Equal(new PreviewDetectionBox(100, 200, 200, 400),
+            Assert.Single(geometry.MapDetections([detection], layout)).BoundingBox);
     }
 }

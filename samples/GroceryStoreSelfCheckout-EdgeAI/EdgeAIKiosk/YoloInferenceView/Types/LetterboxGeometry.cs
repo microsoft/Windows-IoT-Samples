@@ -22,11 +22,4 @@ internal readonly record struct LetterboxGeometry(int Width, int Height, int Lef
         int height = Math.Clamp((int)Math.Round(cropHeight * scale), 1, InputSize);
         return new(width, height, (InputSize - width) / 2, (InputSize - height) / 2);
     }
-
-    // Input is normalized to the padded model image; output is normalized to the visible camera crop.
-    public DetectionBox ToCropBox(DetectionBox box) => new(
-        (box.X * InputSize - Left) / Width,
-        (box.Y * InputSize - Top) / Height,
-        box.Width * InputSize / Width,
-        box.Height * InputSize / Height);
 }

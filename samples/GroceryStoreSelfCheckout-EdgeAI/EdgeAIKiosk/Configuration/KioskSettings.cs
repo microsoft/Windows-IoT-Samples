@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 namespace EdgeAIKiosk;
 
-public enum ScannerMode { HidScanner, Keyboard }
+public enum ScannerMode
+{
+    HidScanner,
+    Keyboard
+}
 
 public sealed class KioskSettings
 {
