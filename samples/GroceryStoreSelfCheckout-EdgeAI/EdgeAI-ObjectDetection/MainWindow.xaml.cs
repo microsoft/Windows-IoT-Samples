@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using EdgeAI_ObjectDetection.Controls;
-using EdgeAI_ObjectDetection.Pipeline;
+using EdgeAI.ObjectDetection.Yolo;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -77,7 +76,7 @@ public sealed partial class MainWindow : Window
             ExecutionProviderComboBox.SelectedIndex = ExecutionProviderComboBox.Items.Count > 0 ? 0 : -1;
 
             var cameras = await MediaFrameSourceGroup.FindAllAsync();
-            foreach (var camera in cameras.Where(group => group.SourceInfos.Any(YoloPipeline.IsColorVideoSource)))
+            foreach (var camera in cameras.Where(YoloInferenceView.IsSupportedCamera))
             {
                 Cameras.Add(camera);
             }

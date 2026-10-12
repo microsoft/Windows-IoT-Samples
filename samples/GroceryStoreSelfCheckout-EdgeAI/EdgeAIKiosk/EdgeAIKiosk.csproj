@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
+    <ProjectReference Include="..\EdgeAI.ObjectDetection.Yolo\EdgeAI.ObjectDetection.Yolo.csproj" />
   </ItemGroup>
 
   <!--

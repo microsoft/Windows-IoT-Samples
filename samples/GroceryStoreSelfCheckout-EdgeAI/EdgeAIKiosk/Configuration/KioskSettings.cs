@@ -1,4 +1,4 @@
-using EdgeAI_ObjectDetection.Controls;
+using EdgeAI.ObjectDetection.Yolo;
 using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;

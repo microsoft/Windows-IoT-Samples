@@ -1,4 +1,4 @@
-using EdgeAI_ObjectDetection.Controls;
+using EdgeAI.ObjectDetection.Yolo;
 
 namespace EdgeAIKiosk.Tests;
 

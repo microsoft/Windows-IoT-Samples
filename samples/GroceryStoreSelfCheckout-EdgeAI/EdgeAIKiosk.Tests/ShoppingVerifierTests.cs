@@ -1,4 +1,4 @@
-using EdgeAI_ObjectDetection.Controls;
+using EdgeAI.ObjectDetection.Yolo;
 using EdgeAIKiosk.Models;
 using EdgeAIKiosk.Services;
 

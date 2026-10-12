@@ -72,7 +72,6 @@ EdgeAIKiosk\
   Views\HomePage.xaml              Model, hardware, camera, and label selection
   Views\ShoppingPage.xaml          Barcode input, cart UI, camera preview, checkout
   Views\AlertPage.xaml             Verification result UI
-  YoloInferenceView\               Copy of the reusable control, including Pipeline and Types
   Services\KioskInference.cs       Starts the control with the selected camera, model, and classes
   Services\ExecutionProviderPolicy.cs
                                    Automatic provider fallback or explicit hardware selection
@@ -85,10 +84,14 @@ EdgeAIKiosk.Tests\
 
 EdgeAI-ObjectDetection\
   MainWindow.xaml                 Model-folder, provider, camera, and inference-mode selection
-  YoloInferenceView\              Reusable control source, including Pipeline and Types
 
-EdgeAI-ObjectDetection.Tests\
-  xUnit tests for preview geometry, model contracts, detection decoding, label filtering, and snapshots
+EdgeAI.ObjectDetection.Yolo\
+  YoloInferenceView.xaml           Shared WinUI UserControl referenced by both apps
+  Pipeline\                       Internal camera capture, preprocessing, and ONNX inference
+  Types\                          Public inference API and internal geometry types
+
+EdgeAI.ObjectDetection.Yolo.Tests\
+  xUnit tests for geometry, model contracts, decoding, filtering, snapshots, and memory stability
 ```
 
 ## Model Setup
@@ -144,9 +147,9 @@ Configuration is currently in code and through the home-screen settings UI:
 
 ## Architecture
 
-Each app compiles its own identical copy of `YoloInferenceView`; the kiosk no longer has a separate app-specific camera pipeline or bounding-box renderer. Update the reusable component in `EdgeAI-ObjectDetection` first, then copy the entire `YoloInferenceView` folder unchanged into `EdgeAIKiosk`. Keep kiosk integration outside that folder. Kiosk settings are passed between pages as an app-owned instance, not read globally by the inference control.
+Both apps reference the `EdgeAI.ObjectDetection.Yolo` WinUI class library. It owns the single implementation of `YoloInferenceView`, the camera pipeline, and the bounding-box renderer; neither app compiles a private copy. Keep kiosk integration and execution-provider selection policy in the host apps. Kiosk settings are passed between pages as an app-owned instance, not read globally by the inference control.
 
-1. `HomePage` selects settings and passes a camera group and inference options to `ShoppingPage` through the navigation frame.
+1. Both apps discover camera groups and filter them using `YoloInferenceView.IsSupportedCamera`. The kiosk's `HomePage` selects settings and passes a camera group and inference options to `ShoppingPage` through the navigation frame.
 2. `ShoppingPage` starts `YoloInferenceView` through `KioskInference`. Auto tries NPU, GPU, then CPU; an explicit choice uses only that hardware type.
 3. The control captures frames, letterboxes the visible crop, runs the model, and publishes class-filtered detections with preview-local boxes.
 4. Pay Now is enabled after the first completed result, including a valid empty result. It copies the latest streaming detections; it does not capture a new frame or perform multi-frame voting.
@@ -196,16 +199,18 @@ Provide any certificate password through your local signing setup or CI secret h
 
 ## Reusable ObjectDetection view
 
-`EdgeAI-ObjectDetection` hosts `YoloInferenceView\YoloInferenceView.xaml`. The component's implementation lives in the `YoloInferenceView` folder, with `Pipeline` and `Types` subfolders. The window only discovers models, execution providers, and camera groups; the control owns its camera reader, preview player, inference pipeline, and overlays. Changing any selection performs a coordinated stop/start. Select **One shot** and press **Run one inference** to display an analyzed still image with its detections, without a live preview; streaming is the default.
+`EdgeAI-ObjectDetection` and `EdgeAIKiosk` host `YoloInferenceView` from the `EdgeAI.ObjectDetection.Yolo` class library. The library contains its XAML and code-behind, with `Pipeline` and `Types` subfolders. The ObjectDetection window only discovers models, execution providers, and camera groups; the control owns its camera reader, preview player, inference pipeline, and overlays. Changing any selection performs a coordinated stop/start. Select **One shot** and press **Run one inference** to display an analyzed still image with its detections, without a live preview; streaming is the default.
 
 The view reuses clip geometries, a shared detection brush, and overlay rectangles/labels. Overlay elements are allocated as the detection count grows (up to the model's 300 detections), hidden when unused, retained across stops, and released on disposal. Preview layout properties are updated only when their calculated bounds change; camera resolution, stretch mode, and DPI remain part of the geometry calculation. The inference engine caches managed tensor/input wrappers around the reusable input buffer; inference outputs and published detection results are still separately owned per inference.
 
-The control is currently source-level reusable, not a separate NuGet package. `EdgeAIKiosk\YoloInferenceView` is an exact copy of `EdgeAI-ObjectDetection\YoloInferenceView`, including XAML, code-behind, pipeline/engine, preprocessing, and types. Namespaces are preserved to keep the copies identical. EdgeAIKiosk compiles its local files normally; it has no source links or project reference to ObjectDetection. To use it in another WinUI 3 app, copy the entire `YoloInferenceView` folder and use the same Windows ML and Windows App SDK dependencies as ObjectDetection. The host must have camera access and the appropriate package capabilities (`webcam`, `runFullTrust`, and `systemAIModels` as in the sample manifest). The host discovers/registers execution providers before supplying a selected `OrtEpDevice`.
+The control is distributed as a WinUI class library, not a NuGet package. To use it in another WinUI 3 app, add a `ProjectReference` to `EdgeAI.ObjectDetection.Yolo\EdgeAI.ObjectDetection.Yolo.csproj` and use the `EdgeAI.ObjectDetection.Yolo` namespace. The normal WinUI build includes the library assembly and compiled XAML resources in each app; do not copy the control's source files or manually load its XAML. Keep Windows ML and Windows App SDK dependency versions aligned with the library, and build for the host architecture (`x64` or `ARM64`).
+
+The public API consists of `YoloInferenceView`, settings/state enums, detection types, snapshots, and event arguments. The pipeline and geometry implementation remain internal; `InternalsVisibleTo` grants access only to `EdgeAI.ObjectDetection.Yolo.Tests`. Hosts use `GetSupportedClasses()` and `IsSupportedCamera()` rather than referencing the internal pipeline. The host still owns camera access, package capabilities (`webcam`, `runFullTrust`, and `systemAIModels` as in the sample manifest), execution-provider discovery/registration, and application deployment. Each process creates its own inference session. This is a WinUI-specific library, not a WPF control.
 
 The shared, independently implemented managed preprocessor proportionally resizes the visible rectangular crop to fit 640x640, then centers it on RGB (114,114,114) padding. It uses separable Catmull-Rom bicubic filtering, widened support for downsampling, and normalized crop-edge weights. Resized dimensions are rounded to whole pixels (at least one pixel per axis); an odd padding remainder goes on the right or bottom. Preprocessing returns the tensor, actual letterbox geometry, and optional snapshot pixels together. That geometry travels with the result through decoding and display, rather than being reconstructed from the current viewport. It clamps and rounds channels to bytes before RGB tensor normalization; one-shot snapshots use those same bytes. A per-pipeline workspace caches horizontal and vertical weights and reuses source, scratch, and tensor arrays. OneShot lazily allocates its pixel buffer once and reuses it on subsequent captures. These internal buffers are borrowed until the next preprocessing call: inference consumes the tensor synchronously, and `InferenceSnapshot` copies the pixels into its own bitmap before another call can overwrite them. Earlier snapshots and the uploaded frozen image remain independent. BGRA8 frames with ignored alpha avoid format conversion.
 
 ```xml
-<!-- Add xmlns:ai="using:EdgeAI_ObjectDetection.Controls" to the containing view. -->
+<!-- Add xmlns:ai="using:EdgeAI.ObjectDetection.Yolo" to the containing view. -->
 <ai:YoloInferenceView x:Name="Yolo"
                       Width="800" Height="600"
                       PreviewStretch="UniformToFill"
@@ -293,16 +298,16 @@ Both YOLO26 NMS-free one-to-one exports and exports with embedded NMS can satisf
 
 Camera capture uses the selected `MediaFrameSourceGroup` in `SharedReadOnly` mode, prefers a color preview stream and otherwise uses a color recording stream. It accepts the current camera format; it does not request 1080p or another resolution.
 
-### ObjectDetection checks
+### Shared component checks
 
-The crop, model-shape, normalized-detection, and snapshot tests reference the application directly. They require Windows, the same WinUI build tools as the application, and the Windows App SDK runtime matching the app's SDK version and test-process architecture, but do not need a camera or model. The test project explicitly enables Windows App SDK bootstrapping, following Microsoft's [non-WinUI testing guidance](https://learn.microsoft.com/windows/apps/develop/testing/#testing-non-winui-functionality). The app disables Deployment Manager auto-initialization because it does not use Main/Singleton features; this also allows its assembly to load in an unpackaged test host. The project reference uses the normal app build without test-specific packaging overrides.
+The crop, model-shape, pixel-coordinate detection, and snapshot tests reference the class library directly, not either application. They require Windows, the same WinUI build tools as the applications, and the Windows App SDK runtime matching the library's SDK version and test-process architecture, but do not need a camera or model. The test project explicitly enables Windows App SDK bootstrapping, following Microsoft's [non-WinUI testing guidance](https://learn.microsoft.com/windows/apps/develop/testing/#testing-non-winui-functionality). No application packaging overrides are needed for these library tests. Opt-in memory stress tests also live here; the inference stress test additionally requires a compatible model.
 
-In Visual Studio, build the solution with the platform matching your machine (`x64` or `ARM64`), then run `EdgeAI-ObjectDetection.Tests` in Test Explorer. From a Visual Studio Developer PowerShell, build and run them:
+In Visual Studio, build the solution with the platform matching your machine (`x64` or `ARM64`), then run `EdgeAI.ObjectDetection.Yolo.Tests` in Test Explorer. From a Visual Studio Developer PowerShell, build and run them:
 
 ```powershell
-msbuild EdgeAI-ObjectDetection.Tests\EdgeAI-ObjectDetection.Tests.csproj /t:Restore /p:Configuration=Debug /p:Platform=x64 /p:RuntimeIdentifier=win-x64
-msbuild EdgeAI-ObjectDetection.Tests\EdgeAI-ObjectDetection.Tests.csproj /t:Build /p:Configuration=Debug /p:Platform=x64 /p:RuntimeIdentifier=win-x64
-dotnet test EdgeAI-ObjectDetection.Tests\EdgeAI-ObjectDetection.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64
+msbuild EdgeAI.ObjectDetection.Yolo.Tests\EdgeAI.ObjectDetection.Yolo.Tests.csproj /t:Restore /p:Configuration=Debug /p:Platform=x64 /p:RuntimeIdentifier=win-x64
+msbuild EdgeAI.ObjectDetection.Yolo.Tests\EdgeAI.ObjectDetection.Yolo.Tests.csproj /t:Build /p:Configuration=Debug /p:Platform=x64 /p:RuntimeIdentifier=win-x64
+dotnet test EdgeAI.ObjectDetection.Yolo.Tests\EdgeAI.ObjectDetection.Yolo.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64
 ```
 
 For ARM64, use `Platform=ARM64` and `RuntimeIdentifier=win-arm64` for both build commands, and `-r win-arm64 -p:Platform=ARM64` for the test command on a Windows ARM64 device.
@@ -318,7 +323,7 @@ msbuild EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj /restore /t:Build /p:Configur
 dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64
 ```
 
-The kiosk tests cover single-result label-set verification, explicit selection semantics, Auto/provider fallback, hardware-picker filtering and ordering, and startup error reporting. Reusable geometry, model validation, decoder, preprocessing, snapshot, and label-filter coverage lives in `EdgeAI-ObjectDetection.Tests`. After updating the control in ObjectDetection, copy the entire component unchanged to EdgeAIKiosk and run both test projects.
+The kiosk tests cover single-result label-set verification, explicit selection semantics, Auto/provider fallback, hardware-picker filtering and ordering, and startup error reporting. They still reference `EdgeAIKiosk`, with MSIX packaging disabled for the test dependency, because they exercise application-owned code. Reusable geometry, model validation, decoder, preprocessing, snapshot, label-filter, and memory-stability coverage lives in `EdgeAI.ObjectDetection.Yolo.Tests`. Update the library once, then build both apps and run both test projects.
 
 For ARM64, use `-r win-arm64 -p:Platform=ARM64` on a Windows ARM64 device.
 
@@ -330,8 +335,8 @@ To enable them in Visual Studio Test Explorer, set the environment variable befo
 
 ```powershell
 $env:RUN_MEMORY_STABILITY_TESTS = "1"
-dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64 --filter "FullyQualifiedName~PreprocessorMemoryStabilityTests"
-dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64 --filter "FullyQualifiedName~YoloInferenceMemoryStabilityTests"
+dotnet test EdgeAI.ObjectDetection.Yolo.Tests\EdgeAI.ObjectDetection.Yolo.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64 --filter "FullyQualifiedName~PreprocessorMemoryStabilityTests"
+dotnet test EdgeAI.ObjectDetection.Yolo.Tests\EdgeAI.ObjectDetection.Yolo.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64 --filter "FullyQualifiedName~YoloInferenceMemoryStabilityTests"
 Remove-Item Env:\RUN_MEMORY_STABILITY_TESTS
 ```
 

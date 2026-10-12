@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using EdgeAI_ObjectDetection.Controls;
+using EdgeAI.ObjectDetection.Yolo;
 using EdgeAIKiosk.Models;
 using EdgeAIKiosk.Services;
 using Microsoft.UI.Xaml;

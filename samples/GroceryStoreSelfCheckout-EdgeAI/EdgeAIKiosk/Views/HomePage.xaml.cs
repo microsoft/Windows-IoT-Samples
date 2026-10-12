@@ -1,5 +1,4 @@
-using EdgeAI_ObjectDetection.Controls;
-using EdgeAI_ObjectDetection.Pipeline;
+using EdgeAI.ObjectDetection.Yolo;
 using EdgeAIKiosk.Services;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.UI.Xaml;
@@ -100,7 +99,7 @@ public sealed partial class HomePage : Page
     {
         IReadOnlyList<MediaFrameSourceGroup> groups = await MediaFrameSourceGroup.FindAllAsync();
         List<MediaFrameSourceGroup> cameras = groups
-            .Where(group => group.SourceInfos.Any(YoloPipeline.IsColorVideoSource)).ToList();
+            .Where(YoloInferenceView.IsSupportedCamera).ToList();
         CameraPickerComboBox.ItemsSource = cameras;
         CameraPickerComboBox.SelectedItem = cameras.FirstOrDefault(group => group.Id == _settings.CameraGroupId)
             ?? cameras.FirstOrDefault();

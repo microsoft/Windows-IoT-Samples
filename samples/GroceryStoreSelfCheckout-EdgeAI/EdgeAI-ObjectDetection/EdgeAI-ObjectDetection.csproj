@@ -11,7 +11,6 @@
     <UseWinUI>true</UseWinUI>
     <WinUISDKReferences>false</WinUISDKReferences>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <!-- No Main/Singleton features; avoid requiring package identity when loaded by a test host. -->
     <WindowsAppSdkDeploymentManagerInitialize>false</WindowsAppSdkDeploymentManagerInitialize>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -28,7 +27,7 @@
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
-    <InternalsVisibleTo Include="EdgeAI-ObjectDetection.Tests" />
+    <ProjectReference Include="..\EdgeAI.ObjectDetection.Yolo\EdgeAI.ObjectDetection.Yolo.csproj" />
   </ItemGroup>
 
   <!--
