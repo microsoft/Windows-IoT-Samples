@@ -84,10 +84,24 @@ public class DetectionFilterTests
     [InlineData("not a supported class")]
     [InlineData("")]
     [InlineData(null)]
-    public void UnsupportedClass_FailsInitialization(string className)
+    public void UnsupportedClass_ReturnsNoDetections(string className)
     {
-        ArgumentException error = Assert.Throws<ArgumentException>(() => YoloInferenceEngine.ResolveClassMask(new[] { className }));
-        Assert.Equal("classMask", error.ParamName);
+        FrozenSet<int>? mask = YoloInferenceEngine.ResolveClassMask(new[] { className });
+        Assert.NotNull(mask);
+        Assert.Empty(mask);
+        Assert.Empty(Decode(mask));
+    }
+
+    [Theory]
+    [InlineData("not a supported class")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void UnsupportedClass_DoesNotAffectSupportedSelections(string className)
+    {
+        FrozenSet<int>? mask = YoloInferenceEngine.ResolveClassMask(new[] { className, "APPLE", "apple" });
+        Assert.NotNull(mask);
+        Assert.Equal(47, Assert.Single(mask));
+        Assert.Equal("apple", Assert.Single(Decode(mask)).Label);
     }
 
     [Theory]

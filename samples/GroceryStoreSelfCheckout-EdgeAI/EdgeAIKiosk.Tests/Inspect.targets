@@ -1,8 +1,0 @@
-<Project>
-  <Target Name="InspectItems" BeforeTargets="Build">
-    <Message Text="=== COMPILE ITEMS ===" Importance="high" />
-    <Message Text="Compile: %(Compile.Identity)" Importance="high" />
-    <Message Text="=== PAGE ITEMS ===" Importance="high" />
-    <Message Text="Page: %(Page.Identity)" Importance="high" />
-  </Target>
-</Project>

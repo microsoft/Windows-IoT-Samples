@@ -1,3 +1,4 @@
+using EdgeAI_ObjectDetection.Controls;
 using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,11 @@ public enum ScannerMode
 
 public sealed class KioskSettings
 {
-    public string ModelFileName { get; set; } = "Models\\yolo26x.onnx";
+    public string? ModelFileName { get; set; }
     public string? CameraGroupId { get; set; }
     // Null keeps automatic NPU, GPU, then CPU selection.
     public OrtHardwareDeviceType? PreferredHardware { get; set; }
     public ScannerMode ScannerMode { get; set; } = ScannerMode.HidScanner;
-    public HashSet<string> AcceptedLabels { get; set; } = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "apple",
-        "banana",
-        "orange",
-        "bottle",
-        "cup"
-    };
+    public HashSet<string> AcceptedLabels { get; set; } =
+        new(YoloInferenceView.GetSupportedClasses(), StringComparer.OrdinalIgnoreCase);
 }

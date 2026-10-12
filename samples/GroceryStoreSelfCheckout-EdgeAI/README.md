@@ -47,7 +47,7 @@ New-Item -ItemType Directory -Force EdgeAIKiosk\Models
 
 # Use an ONNX model from Microsoft Foundry, Hugging Face, your own training,
 # or another model zoo, converted to the contract in Model Setup.
-Copy-Item <path-to-model>\yolo26x.onnx EdgeAIKiosk\Models\yolo26x.onnx
+Copy-Item <path-to-model>\model.onnx EdgeAIKiosk\Models\
 
 msbuild EdgeAIKiosk\EdgeAIKiosk.csproj /restore /t:Build /p:Configuration=Debug /p:Platform=ARM64 /p:RuntimeIdentifier=win-arm64
 ```
@@ -56,7 +56,7 @@ Visual Studio is the recommended launch path for day-to-day WinUI debugging:
 
 1. Open `EdgeAIKiosk.slnx`.
 2. Set `EdgeAIKiosk` as the startup project and select the `ARM64` platform for Snapdragon X hardware, or `x64` for an x64 device.
-3. Confirm `EdgeAIKiosk\Models\yolo26x.onnx` exists before launching.
+3. Copy a compatible `.onnx` model into `EdgeAIKiosk\Models\` before launching.
 4. Press F5.
 
 To run the standalone detection demo instead, set `EdgeAI-ObjectDetection` as the startup project and press F5. Choose a folder containing compatible `.onnx` models, then select a model, execution provider, and camera. It does not require copying models into the kiosk's `Models` folder.
@@ -105,19 +105,19 @@ Acquisition path:
 
 1. Find a compatible object-detection model from Microsoft Foundry, Hugging Face, a custom training run, or another model zoo.
 2. If the model is not already ONNX, convert it with the model's recommended open-source exporter or the Windows ML CLI.
-3. Export or rename the final file to `yolo26x.onnx`.
-4. Copy it to `EdgeAIKiosk\Models\yolo26x.onnx`.
+3. Export the final file with an `.onnx` extension; no particular filename is required.
+4. Copy it to `EdgeAIKiosk\Models\`.
 5. Rebuild the app so MSBuild copies the model into the output `Models` folder.
 
 This repository does not include an ONNX model because model licenses and sizes vary. The fastest path is to use a model that is already available as ONNX; conversion is for cases where the source model is in another format.
 
-The default model path is configured in `KioskSettings.cs`:
+`KioskSettings.cs` has no hardcoded model preference:
 
 ```csharp
-public string ModelFileName { get; set; } = "Models\\yolo26x.onnx";
+public string? ModelFileName { get; set; }
 ```
 
-At build time, any `EdgeAIKiosk\Models\*.onnx` file is copied to the output directory. At runtime, the home screen lists those copied `.onnx` files in the model picker.
+At build time, any `EdgeAIKiosk\Models\*.onnx` file is copied to the output directory. At runtime, the home screen lists those copied `.onnx` files in the model picker. It selects the first available model on a fresh launch and restores the chosen model when returning home within the same session.
 
 Both applications use the same control and model contract:
 
@@ -137,10 +137,10 @@ Configuration is currently in code and through the home-screen settings UI:
 
 | Setting | Location | Notes |
 | --- | --- | --- |
-| Model file | `KioskSettings.ModelFileName` and the model picker | Defaults to `Models\yolo26x.onnx`. |
+| Model file | `KioskSettings.ModelFileName` and the model picker | Selects the first available model; preserves the selection when returning home. |
 | Inference hardware | `KioskSettings.PreferredHardware` and the hardware picker | Defaults to Auto, which tries NPU, GPU, then CPU. The picker lists only detected types; an explicit choice uses only that hardware type. |
 | Camera | `KioskSettings.CameraGroupId` and the camera picker | Defaults to the first available group with a color preview or recording stream. |
-| Labels to verify | `KioskSettings.AcceptedLabels` and the label dialog | Defaults to `apple`, `banana`, `orange`, `bottle`, and `cup`. |
+| Labels to verify | `KioskSettings.AcceptedLabels` and the label dialog | Defaults to all supported COCO labels; use the dialog to restrict the selection. |
 
 ## Architecture
 
@@ -173,7 +173,7 @@ For a loose-file deployment to a kiosk device:
 
 ```powershell
 dotnet publish EdgeAIKiosk\EdgeAIKiosk.csproj -c Release -r win-arm64 --self-contained true -o .\publish\win-arm64
-Copy-Item EdgeAIKiosk\Models\yolo26x.onnx .\publish\win-arm64\Models\yolo26x.onnx
+Copy-Item EdgeAIKiosk\Models\*.onnx .\publish\win-arm64\Models\
 ```
 
 Copy the published folder to the target Snapdragon X device and run `EdgeAIKiosk.exe`.
@@ -242,7 +242,7 @@ await Yolo.DisposeAsync();
 
 ### Lifecycle and settings
 
-Call lifecycle methods on the UI thread. `StartAsync` retains the supplied init-only settings and returns when the pipeline and preview are started, without waiting for a detection. Optional `ClassMask` accepts an `IReadOnlyCollection<string>` of included class names, not an array of Boolean flags or class IDs. Null includes all classes; an empty collection includes none. Names are case-insensitive, duplicates are accepted, and unsupported names cause an `ArgumentException` during initialization. The engine resolves the names once into its own immutable class-ID filter and excludes masked classes before constructing detections, so overlays, events, and snapshots stay consistent. The supported-class list and class IDs are never renumbered. Do not modify the input collection while `StartAsync` is in progress; subsequent caller edits do not change the active filter. Apply a new mask by stopping and starting again.
+Call lifecycle methods on the UI thread. `StartAsync` retains the supplied init-only settings and returns when the pipeline and preview are started, without waiting for a detection. Optional `ClassMask` accepts an `IReadOnlyCollection<string>` of included class names, not an array of Boolean flags or class IDs. Null includes all classes; an empty collection includes none. Names are case-insensitive, duplicates are accepted, and unsupported names are ignored. A mask containing only unsupported names includes no classes; it does not enable all classes. The engine resolves the names once into its own immutable class-ID filter and excludes masked classes before constructing detections, so overlays, events, and snapshots stay consistent. The supported-class list and class IDs are never renumbered. Do not modify the input collection while `StartAsync` is in progress; subsequent caller edits do not change the active filter. Apply a new mask by stopping and starting again.
 
 `GetSupportedClasses()` always returns the view's complete supported class list, regardless of any mask or current detections. The caller can use this list to populate an editable class-selection UI, then pass the selected names as `ClassMask`. The kiosk's selection dialog follows this pattern.
 

@@ -116,15 +116,10 @@ internal sealed class YoloInferenceEngine : IDisposable
         List<int> enabledClassIds = new();
         for (int classId = 0; classId < SupportedClasses.Count; classId++)
         {
-            if (selectedClasses.Remove(SupportedClasses[classId]))
+            if (selectedClasses.Contains(SupportedClasses[classId]))
             {
                 enabledClassIds.Add(classId);
             }
-        }
-        if (selectedClasses.Count != 0)
-        {
-            throw new ArgumentException("ClassMask contains unsupported classes. Use names from GetSupportedClasses().",
-                nameof(classMask));
         }
         return enabledClassIds.ToFrozenSet();
     }

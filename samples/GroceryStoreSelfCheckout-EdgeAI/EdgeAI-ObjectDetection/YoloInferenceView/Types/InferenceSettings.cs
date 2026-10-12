@@ -53,6 +53,7 @@ public sealed record InferenceSettings
     /// <summary>
     /// Included class names, matched case-insensitively against GetSupportedClasses().
     /// Null includes all classes; an empty collection includes none.
+    /// Unsupported names are ignored; a mask with no supported names includes none.
     /// Do not modify the collection during StartAsync; subsequent edits do not affect the active run.
     /// </summary>
     public IReadOnlyCollection<string>? ClassMask { get; init; }
