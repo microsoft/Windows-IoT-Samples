@@ -34,21 +34,27 @@
                 Style="{StaticResource KioskWhiteButtonStyle}"
                 Click="OnStartNowClick" />
         </StackPanel>
-        <Border
-            x:Name="SettingsDismissLayer"
-            Background="Transparent"
-            Visibility="Collapsed"
-            Tapped="OnSettingsDismissLayerTapped" />
-        <Grid
+        <Button
+            x:Name="SettingsButton"
+            Width="52"
+            Height="52"
             Margin="{StaticResource KioskPagePadding}"
             HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-            <StackPanel Spacing="{StaticResource KioskSpacingMedium}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Border
-                    x:Name="SettingsPanel"
-                    Padding="{StaticResource KioskPanelPadding}"
-                    Style="{StaticResource KioskPanelBorderStyle}"
-                    Visibility="Collapsed">
+            VerticalAlignment="Bottom"
+            Background="{StaticResource KioskNeutralBrush}"
+            CornerRadius="{StaticResource KioskRoundCornerRadius}"
+            AutomationProperties.Name="Settings"
+            Style="{StaticResource KioskWhiteForegroundButtonStyle}">
+            <Button.Flyout>
+                <Flyout x:Name="SettingsFlyout" Placement="TopEdgeAlignedRight">
+                    <Flyout.FlyoutPresenterStyle>
+                        <Style TargetType="FlyoutPresenter">
+                            <Setter Property="Background" Value="{StaticResource KioskPanelBrush}" />
+                            <Setter Property="Padding" Value="{StaticResource KioskPanelPadding}" />
+                            <Setter Property="CornerRadius" Value="{StaticResource KioskPanelCornerRadius}" />
+                            <Setter Property="MaxWidth" Value="500" />
+                        </Style>
+                    </Flyout.FlyoutPresenterStyle>
                     <StackPanel Width="420" Spacing="{StaticResource KioskSpacingLarge}">
                         <StackPanel Spacing="{StaticResource KioskSpacingSmall}">
                             <TextBlock
@@ -102,20 +108,10 @@
                             Style="{StaticResource KioskControlButtonStyle}"
                             Click="OnEditLabelsClick" />
                     </StackPanel>
-                </Border>
-                <Button
-                    x:Name="SettingsButton"
-                    Width="52"
-                    Height="52"
-                    HorizontalAlignment="Right"
-                    Background="{StaticResource KioskNeutralBrush}"
-                    CornerRadius="{StaticResource KioskRoundCornerRadius}"
-                    Style="{StaticResource KioskWhiteForegroundButtonStyle}"
-                    Click="OnSettingsClick">
-                    <FontIcon Glyph="&#xE713;" FontSize="{StaticResource KioskFontSizeSubtitle}" />
-                </Button>
-            </StackPanel>
-        </Grid>
+                </Flyout>
+            </Button.Flyout>
+            <FontIcon Glyph="&#xE713;" FontSize="{StaticResource KioskFontSizeSubtitle}" />
+        </Button>
         <Grid
             x:Name="LabelDialogOverlay"
             Background="{StaticResource KioskOverlayBrush}"

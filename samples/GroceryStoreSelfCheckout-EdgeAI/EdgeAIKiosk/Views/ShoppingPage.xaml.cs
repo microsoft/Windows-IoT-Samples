@@ -36,6 +36,7 @@ public sealed partial class ShoppingPage : Page
     private IBarcodeScanner? _scanner;
     private IReadOnlyList<PreviewDetection>? _latestDetections;
     private bool _cartEnabled;
+    private bool _returningHome;
 
     public ShoppingPage()
     {
@@ -94,16 +95,14 @@ public sealed partial class ShoppingPage : Page
         {
             Trace.TraceError(error.ToString());
             DisposeScanner();
-            await StartupTask.Run(async () => await _inferenceView.DisposeAsync(),
-                "Cleanup failed", ShowLoadingError);
-            ShowLoadingError($"Hardware connection error: {error.Message}");
+            await _inferenceView.DisposeAsync();
+            ShowError($"Hardware connection error: {error.Message}");
         }
     }
 
     private void OnInferenceFaulted(object? sender, InferenceFaultedEventArgs args)
     {
-        SetCartEnabled(false);
-        ShowLoadingError($"Inference failed: {args.Exception.Message}");
+        ShowError($"Inference failed: {args.Exception.Message}");
     }
 
     private void OnDetectionsUpdated(object? sender, DetectionsUpdatedEventArgs args)
@@ -168,15 +167,41 @@ public sealed partial class ShoppingPage : Page
         {
             Trace.TraceError(error.ToString());
             LiveInferenceHost.Content = _inferenceView;
-            SetCartEnabled(true);
-            ShowLoadingError($"Verification failed: {error.Message}");
+            ShowError($"Verification failed: {error.Message}");
         }
     }
 
-    private void ShowLoadingError(string message)
+    private void ShowError(string message)
     {
-        LoadingProgressRing.Visibility = Visibility.Collapsed;
-        LoadingTextBlock.Text = message;
-        LoadingOverlay.Visibility = Visibility.Visible;
+        SetCartEnabled(false);
+        LoadingOverlay.Visibility = Visibility.Collapsed;
+        ErrorView.Show(message);
+    }
+
+    private async void OnBackToHomeRequested(object sender, RoutedEventArgs e)
+    {
+        if (_returningHome)
+        {
+            return;
+        }
+        _returningHome = true;
+        ErrorView.IsEnabled = false;
+        DisposeScanner();
+        await _inferenceView.DisposeAsync();
+        try
+        {
+            LiveInferenceHost.Content = null;
+            if (!Frame.Navigate(typeof(HomePage), _settings))
+            {
+                throw new InvalidOperationException("Could not navigate home.");
+            }
+        }
+        catch (Exception error)
+        {
+            Trace.TraceError(error.ToString());
+            _returningHome = false;
+            ErrorView.IsEnabled = true;
+            ShowError($"Could not return home: {error.Message}");
+        }
     }
 }

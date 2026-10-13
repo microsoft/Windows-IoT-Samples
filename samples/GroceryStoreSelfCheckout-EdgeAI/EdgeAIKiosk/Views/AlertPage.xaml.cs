@@ -1,8 +1,8 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using EdgeAI.ObjectDetection.Yolo;
 using EdgeAIKiosk.Models;
-using EdgeAIKiosk.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
@@ -14,7 +14,7 @@ internal sealed record CheckoutNavigationArgs(VerificationResult Result, YoloInf
 public sealed partial class AlertPage : Page
 {
     private CheckoutNavigationArgs? _checkout;
-    private Task _startupTask = Task.CompletedTask;
+    private Task _cleanupTask = Task.CompletedTask;
     private bool _returningHome;
 
     public AlertPage()
@@ -22,10 +22,10 @@ public sealed partial class AlertPage : Page
         InitializeComponent();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        _startupTask = StartupTask.Run(async () =>
+        try
         {
             if (e.Parameter is not CheckoutNavigationArgs checkout)
             {
@@ -38,15 +38,23 @@ public sealed partial class AlertPage : Page
             FailurePanel.Visibility = checkout.Result.IsMatch ? Visibility.Collapsed : Visibility.Visible;
             MismatchedItemsListView.ItemsSource = checkout.Result.Mismatches;
 
-            if (checkout.Result.IsMatch)
-            {
-                await checkout.Inference.DisposeAsync();
-            }
-            else
+            if (!checkout.Result.IsMatch)
             {
                 LiveInferenceHost.Content = checkout.Inference;
             }
-        }, "Verification preview failed", ShowError);
+        }
+        catch (Exception error)
+        {
+            Trace.TraceError(error.ToString());
+            ShowError($"Verification preview failed: {error.Message}");
+            return;
+        }
+
+        if (_checkout.Result.IsMatch)
+        {
+            _cleanupTask = _checkout.Inference.DisposeAsync().AsTask();
+            await _cleanupTask;
+        }
     }
 
     protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -64,36 +72,40 @@ public sealed partial class AlertPage : Page
     private void ShowError(string message)
     {
         SuccessPanel.Visibility = Visibility.Collapsed;
-        FailurePanel.Visibility = Visibility.Visible;
-        MismatchedItemsListView.ItemsSource = new[] { message };
+        FailurePanel.Visibility = Visibility.Collapsed;
+        ErrorView.Show(message);
     }
 
     /// <summary>
     /// Stops the shared inference session before returning home.
     /// </summary>
-    private async void OnStartAgainClick(object sender, RoutedEventArgs e)
+    private async void OnBackToHomeRequested(object sender, RoutedEventArgs e)
     {
         if (_returningHome)
         {
             return;
         }
         _returningHome = true;
-        await StartupTask.Run(async () =>
+        ErrorView.IsEnabled = false;
+        await _cleanupTask;
+        if (_checkout is not null)
         {
-            await _startupTask;
-            if (_checkout is not null)
-            {
-                await _checkout.Inference.DisposeAsync();
-            }
+            await _checkout.Inference.DisposeAsync();
+        }
+        try
+        {
             LiveInferenceHost.Content = null;
             if (!Frame.Navigate(typeof(HomePage), _checkout?.Settings))
             {
                 throw new InvalidOperationException("Could not navigate home.");
             }
-        }, "Could not stop inference or return home", message =>
+        }
+        catch (Exception error)
         {
+            Trace.TraceError(error.ToString());
             _returningHome = false;
-            ShowError(message);
-        });
+            ErrorView.IsEnabled = true;
+            ShowError($"Could not return home: {error.Message}");
+        }
     }
 }

@@ -80,7 +80,7 @@ EdgeAIKiosk\
   Models\                          Local ONNX model files; not committed to Git
 
 EdgeAIKiosk.Tests\
-  xUnit tests for provider fallback, hardware options, startup handling, and single-result verification
+  xUnit tests for provider fallback, hardware options, settings, and single-result verification
 
 EdgeAI-ObjectDetection\
   MainWindow.xaml                 Model-folder, provider, camera, and inference-mode selection
@@ -161,7 +161,10 @@ Both apps reference the `EdgeAI.ObjectDetection.Yolo` WinUI class library. It ow
 - One `MainWindow` hosts a `Frame` for the home, shopping, and result pages. Navigation replaces page content without closing/recreating the native window or animating through a blank background. Navigation history is disabled so completed checkout sessions cannot be revisited.
 - Pages initialize screen/session state in `OnNavigatedTo`. Reattaching a page's visual tree does not recreate its scanner or restart model loading. Navigation does not await async initialization, so checkout remains disabled until startup finishes and the first inference result arrives. Keyboard input is focused after startup enables it.
 - The label dialog uses WinUI `ItemsView` with multiple selection and a uniform grid. Save reads selected data items; Cancel discards edits when the dialog is reopened. XAML child order defines overlay stacking without explicit Z-index values.
+- Settings use a native `Flyout` attached to the gear button. Standard dismissal is preserved: when a ComboBox dropdown is open, the first outside click closes the dropdown and the next closes settings. Edit Labels closes the flyout before opening the label dialog.
 - Shopping transfers the running control to the result page without pausing inference. Success and returning home await inference cleanup; application exit is not deferred for cleanup.
+- Page setup errors are logged and displayed explicitly. Failures from cleanup awaited by the kiosk page handlers are not caught; they terminate the app rather than attempting recovery.
+- ShoppingPage and AlertPage share an `ErrorOverlay` UserControl for technical failures, separate from loading progress and basket-mismatch results. It displays the error and requests Back to Home; each page owns cleanup and navigation. Returning home from ShoppingPage disposes the scanner and awaits inference cleanup, discards the current cart, and preserves settings. The overlay is hidden during normal loading and verification.
 - Camera capture uses WinRT `MediaCapture` and `MediaFrameReader` because OpenCvSharp does not provide a reliable `win-arm64` native path for this target.
 - Both apps use the shared managed preprocessor, preserving crop/letterbox geometry through decoding and presentation. Neither app depends on ImageSharp.
 - Label selection applies consistently to overlays, detection events, and snapshots. The kiosk always supplies its selection; selecting no labels ignores all detections and cart labels. ObjectDetection defaults to all labels.
@@ -323,7 +326,7 @@ msbuild EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj /restore /t:Build /p:Configur
 dotnet test EdgeAIKiosk.Tests\EdgeAIKiosk.Tests.csproj --no-build --no-restore -c Debug -r win-x64 -p:Platform=x64
 ```
 
-The kiosk tests cover single-result label-set verification, explicit selection semantics, Auto/provider fallback, hardware-picker filtering and ordering, and startup error reporting. They still reference `EdgeAIKiosk`, with MSIX packaging disabled for the test dependency, because they exercise application-owned code. Reusable geometry, model validation, decoder, preprocessing, snapshot, label-filter, and memory-stability coverage lives in `EdgeAI.ObjectDetection.Yolo.Tests`. Update the library once, then build both apps and run both test projects.
+The kiosk tests cover single-result label-set verification, explicit selection semantics, Auto/provider fallback, hardware-picker filtering and ordering, and settings defaults and isolation. They still reference `EdgeAIKiosk`, with MSIX packaging disabled for the test dependency, because they exercise application-owned code. Reusable geometry, model validation, decoder, preprocessing, snapshot, label-filter, and memory-stability coverage lives in `EdgeAI.ObjectDetection.Yolo.Tests`. Update the library once, then build both apps and run both test projects.
 
 For ARM64, use `-r win-arm64 -p:Platform=ARM64` on a Windows ARM64 device.
 

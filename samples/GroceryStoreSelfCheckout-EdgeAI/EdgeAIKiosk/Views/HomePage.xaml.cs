@@ -3,7 +3,6 @@ using EdgeAIKiosk.Services;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.AI.MachineLearning;
 using System;
@@ -31,7 +30,7 @@ public sealed partial class HomePage : Page
     {
         base.OnNavigatedTo(e);
         _settings = e.Parameter as KioskSettings ?? new KioskSettings();
-        await StartupTask.Run(async () =>
+        try
         {
             if (_settings.ScannerMode == ScannerMode.Keyboard)
             {
@@ -49,12 +48,14 @@ public sealed partial class HomePage : Page
                 throw new InvalidOperationException("Select a compatible model and color camera before starting.");
             }
             StartNowButton.IsEnabled = true;
-        }, "Startup setup failed", message =>
+        }
+        catch (Exception error)
         {
+            Trace.TraceError(error.ToString());
             StartNowButton.IsEnabled = false;
-            StartupErrorTextBlock.Text = message;
+            StartupErrorTextBlock.Text = $"Startup setup failed: {error.Message}";
             StartupErrorTextBlock.Visibility = Visibility.Visible;
-        });
+        }
     }
 
     private void LoadModelOptions()
@@ -127,32 +128,9 @@ public sealed partial class HomePage : Page
         Frame.Navigate(typeof(ShoppingPage), new ShoppingNavigationArgs(_settings, options));
     }
 
-    private void OnSettingsClick(object sender, RoutedEventArgs e)
-    {
-        if (SettingsPanel.Visibility == Visibility.Visible)
-        {
-            HideSettings();
-        }
-        else
-        {
-            SettingsPanel.Visibility = Visibility.Visible;
-            SettingsDismissLayer.Visibility = Visibility.Visible;
-        }
-    }
-
-    private void OnSettingsDismissLayerTapped(object sender, TappedRoutedEventArgs e)
-    {
-        HideSettings();
-    }
-
-    private void HideSettings()
-    {
-        SettingsPanel.Visibility = Visibility.Collapsed;
-        SettingsDismissLayer.Visibility = Visibility.Collapsed;
-    }
-
     private void OnEditLabelsClick(object sender, RoutedEventArgs e)
     {
+        SettingsFlyout.Hide();
         IReadOnlyList<string> labels = YoloInferenceView.GetSupportedClasses();
         LabelsItemsView.ItemsSource = labels;
         LabelsItemsView.DeselectAll();
