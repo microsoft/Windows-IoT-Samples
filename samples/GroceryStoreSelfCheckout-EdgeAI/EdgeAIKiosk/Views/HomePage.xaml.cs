@@ -1,24 +1,26 @@
+using EdgeAI.ObjectDetection.Yolo;
 using EdgeAIKiosk.Services;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.AI.MachineLearning;
 using System;
 using System.Collections.Generic;
+using System.Collections.Frozen;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
-using Windows.Media.Devices;
+using Windows.Media.Capture.Frames;
 
 namespace EdgeAIKiosk.Views;
 
 public sealed partial class HomePage : Page
 {
+    private KioskSettings _settings = new();
+
     public HomePage()
     {
         InitializeComponent();
@@ -27,9 +29,10 @@ public sealed partial class HomePage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        await StartupTask.Run(async () =>
+        _settings = e.Parameter as KioskSettings ?? new KioskSettings();
+        try
         {
-            if (KioskSettings.ScannerMode == ScannerMode.Keyboard)
+            if (_settings.ScannerMode == ScannerMode.Keyboard)
             {
                 ScannerPickerComboBox.SelectedItem = KeyboardScannerItem;
             }
@@ -40,13 +43,19 @@ public sealed partial class HomePage : Page
             LoadModelOptions();
             await LoadHardwareOptions();
             await LoadCameraOptions();
+            if (ModelPickerComboBox.SelectedItem is null || CameraPickerComboBox.SelectedItem is null)
+            {
+                throw new InvalidOperationException("Select a compatible model and color camera before starting.");
+            }
             StartNowButton.IsEnabled = true;
-        }, "Startup setup failed", message =>
+        }
+        catch (Exception error)
         {
+            Trace.TraceError(error.ToString());
             StartNowButton.IsEnabled = false;
-            StartupErrorTextBlock.Text = message;
+            StartupErrorTextBlock.Text = $"Startup setup failed: {error.Message}";
             StartupErrorTextBlock.Visibility = Visibility.Visible;
-        });
+        }
     }
 
     private void LoadModelOptions()
@@ -57,7 +66,7 @@ public sealed partial class HomePage : Page
             .ToList();
         ModelPickerComboBox.ItemsSource = modelNames;
         ModelPickerComboBox.SelectedItem = modelNames
-            .FirstOrDefault(name => name == Path.GetFileName(KioskSettings.ModelFileName))
+            .FirstOrDefault(name => name == Path.GetFileName(_settings.ModelFileName))
             ?? modelNames.FirstOrDefault();
     }
 
@@ -75,7 +84,7 @@ public sealed partial class HomePage : Page
         List<HardwarePickerOption> options = BuildHardwareOptions(
             OrtEnv.Instance().GetEpDevices().Select(device => device.HardwareDevice.Type));
         HardwarePickerComboBox.ItemsSource = options;
-        HardwarePickerComboBox.SelectedItem = options.FirstOrDefault(option => option.Value == KioskSettings.PreferredHardware) ?? options[0];
+        HardwarePickerComboBox.SelectedItem = options.FirstOrDefault(option => option.Value == _settings.PreferredHardware) ?? options[0];
     }
 
     internal static List<HardwarePickerOption> BuildHardwareOptions(IEnumerable<OrtHardwareDeviceType> availableHardware)
@@ -89,10 +98,12 @@ public sealed partial class HomePage : Page
 
     private async Task LoadCameraOptions()
     {
-        DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(MediaDevice.GetVideoCaptureSelector());
-        CameraPickerComboBox.ItemsSource = devices;
-        CameraPickerComboBox.SelectedItem = devices.FirstOrDefault(device => device.Id == KioskSettings.CameraDeviceId)
-            ?? devices.FirstOrDefault();
+        IReadOnlyList<MediaFrameSourceGroup> groups = await MediaFrameSourceGroup.FindAllAsync();
+        List<MediaFrameSourceGroup> cameras = groups
+            .Where(YoloInferenceView.IsSupportedCamera).ToList();
+        CameraPickerComboBox.ItemsSource = cameras;
+        CameraPickerComboBox.SelectedItem = cameras.FirstOrDefault(group => group.Id == _settings.CameraGroupId)
+            ?? cameras.FirstOrDefault();
     }
 
     /// <summary>
@@ -102,49 +113,30 @@ public sealed partial class HomePage : Page
     {
         if (ScannerPickerComboBox.SelectedItem is ComboBoxItem scanner && scanner == KeyboardScannerItem)
         {
-            KioskSettings.ScannerMode = ScannerMode.Keyboard;
+            _settings.ScannerMode = ScannerMode.Keyboard;
         }
         else
         {
-            KioskSettings.ScannerMode = ScannerMode.HidScanner;
+            _settings.ScannerMode = ScannerMode.HidScanner;
         }
-        KioskSettings.ModelFileName = Path.Combine("Models", (string)ModelPickerComboBox.SelectedItem);
-        KioskSettings.PreferredHardware = ((HardwarePickerOption)HardwarePickerComboBox.SelectedItem).Value;
-        KioskSettings.CameraDeviceId = ((DeviceInformation?)CameraPickerComboBox.SelectedItem)?.Id;
-        Frame.Navigate(typeof(ShoppingPage));
-    }
-
-    private void OnSettingsClick(object sender, RoutedEventArgs e)
-    {
-        if (SettingsPanel.Visibility == Visibility.Visible)
-        {
-            HideSettings();
-        }
-        else
-        {
-            SettingsPanel.Visibility = Visibility.Visible;
-            SettingsDismissLayer.Visibility = Visibility.Visible;
-        }
-    }
-
-    private void OnSettingsDismissLayerTapped(object sender, TappedRoutedEventArgs e)
-    {
-        HideSettings();
-    }
-
-    private void HideSettings()
-    {
-        SettingsPanel.Visibility = Visibility.Collapsed;
-        SettingsDismissLayer.Visibility = Visibility.Collapsed;
+        _settings.ModelFileName = Path.Combine("Models", (string)ModelPickerComboBox.SelectedItem);
+        _settings.PreferredHardware = ((HardwarePickerOption)HardwarePickerComboBox.SelectedItem).Value;
+        MediaFrameSourceGroup camera = (MediaFrameSourceGroup)CameraPickerComboBox.SelectedItem;
+        _settings.CameraGroupId = camera.Id;
+        KioskInferenceOptions options = new(Path.Combine(AppContext.BaseDirectory, _settings.ModelFileName),
+            camera, _settings.PreferredHardware, _settings.AcceptedLabels.ToFrozenSet(StringComparer.OrdinalIgnoreCase));
+        Frame.Navigate(typeof(ShoppingPage), new ShoppingNavigationArgs(_settings, options));
     }
 
     private void OnEditLabelsClick(object sender, RoutedEventArgs e)
     {
-        LabelsItemsView.ItemsSource = CocoLabels.Labels;
+        SettingsFlyout.Hide();
+        IReadOnlyList<string> labels = YoloInferenceView.GetSupportedClasses();
+        LabelsItemsView.ItemsSource = labels;
         LabelsItemsView.DeselectAll();
-        for (int index = 0; index < CocoLabels.Labels.Length; index++)
+        for (int index = 0; index < labels.Count; index++)
         {
-            if (KioskSettings.AcceptedLabels.Contains(CocoLabels.Labels[index]))
+            if (_settings.AcceptedLabels.Contains(labels[index]))
             {
                 LabelsItemsView.Select(index);
             }
@@ -162,7 +154,7 @@ public sealed partial class HomePage : Page
     /// </summary>
     private void OnSaveLabelsClick(object sender, RoutedEventArgs e)
     {
-        KioskSettings.AcceptedLabels = new HashSet<string>(
+        _settings.AcceptedLabels = new HashSet<string>(
             LabelsItemsView.SelectedItems.Cast<string>(), StringComparer.OrdinalIgnoreCase);
         LabelDialogOverlay.Visibility = Visibility.Collapsed;
     }

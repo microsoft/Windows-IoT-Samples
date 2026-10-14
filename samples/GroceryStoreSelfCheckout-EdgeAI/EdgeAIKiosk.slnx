@@ -16,7 +16,13 @@
     <Platform Solution="*|ARM64" Project="ARM64" />
     <Platform Solution="*|x64" Project="x64" />
   </Project>
-  <Project Path="EdgeAI-ObjectDetection.Tests/EdgeAI-ObjectDetection.Tests.csproj">
+  <Project Path="EdgeAI.ObjectDetection.Yolo/EdgeAI.ObjectDetection.Yolo.csproj">
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Platform Solution="*|ARM" Project="x64" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="EdgeAI.ObjectDetection.Yolo.Tests/EdgeAI.ObjectDetection.Yolo.Tests.csproj">
     <Platform Solution="*|Any CPU" Project="x64" />
     <Platform Solution="*|ARM" Project="x64" />
     <Platform Solution="*|ARM64" Project="ARM64" />

@@ -1,3 +1,4 @@
+using EdgeAI.ObjectDetection.Yolo;
 using System.Collections.Generic;
 
 namespace EdgeAIKiosk.Models;
@@ -5,5 +6,5 @@ namespace EdgeAIKiosk.Models;
 public record VerificationResult(
     bool IsMatch,
     IReadOnlyList<ScannedItem> ScannedItems,
-    IReadOnlyList<DetectedItem> DetectedItems,
+    IReadOnlyList<PreviewDetection> DetectedItems,
     IReadOnlyList<string> Mismatches);

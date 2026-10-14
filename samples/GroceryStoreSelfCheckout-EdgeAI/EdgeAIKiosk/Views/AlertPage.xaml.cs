@@ -1,17 +1,21 @@
 using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using EdgeAI.ObjectDetection.Yolo;
 using EdgeAIKiosk.Models;
-using EdgeAIKiosk.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace EdgeAIKiosk.Views;
 
-internal sealed record CheckoutNavigationArgs(VerificationResult Result, LiveInferenceView Inference);
+internal sealed record CheckoutNavigationArgs(VerificationResult Result, YoloInferenceView Inference, KioskSettings Settings);
 
 public sealed partial class AlertPage : Page
 {
     private CheckoutNavigationArgs? _checkout;
+    private Task _cleanupTask = Task.CompletedTask;
+    private bool _returningHome;
 
     public AlertPage()
     {
@@ -21,7 +25,7 @@ public sealed partial class AlertPage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        await StartupTask.Run(async () =>
+        try
         {
             if (e.Parameter is not CheckoutNavigationArgs checkout)
             {
@@ -29,45 +33,79 @@ public sealed partial class AlertPage : Page
             }
 
             _checkout = checkout;
-            checkout.Inference.SetScannedItems(checkout.Result.ScannedItems);
+            checkout.Inference.Faulted += OnInferenceFaulted;
             SuccessPanel.Visibility = checkout.Result.IsMatch ? Visibility.Visible : Visibility.Collapsed;
             FailurePanel.Visibility = checkout.Result.IsMatch ? Visibility.Collapsed : Visibility.Visible;
             MismatchedItemsListView.ItemsSource = checkout.Result.Mismatches;
 
-            if (checkout.Result.IsMatch)
-            {
-                await checkout.Inference.StopAsync();
-            }
-            else
+            if (!checkout.Result.IsMatch)
             {
                 LiveInferenceHost.Content = checkout.Inference;
             }
-        }, "Verification preview failed", message =>
+        }
+        catch (Exception error)
         {
-            SuccessPanel.Visibility = Visibility.Collapsed;
-            FailurePanel.Visibility = Visibility.Visible;
-            MismatchedItemsListView.ItemsSource = new[] { message };
-        });
+            Trace.TraceError(error.ToString());
+            ShowError($"Verification preview failed: {error.Message}");
+            return;
+        }
+
+        if (_checkout.Result.IsMatch)
+        {
+            _cleanupTask = _checkout.Inference.DisposeAsync().AsTask();
+            await _cleanupTask;
+        }
     }
 
-    private void OnAlertPageLoaded(object sender, RoutedEventArgs e)
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
     {
-        if (LiveInferenceHost.Content is LiveInferenceView inference)
+        base.OnNavigatedFrom(e);
+        if (_checkout is not null)
         {
-            inference.Resume();
+            _checkout.Inference.Faulted -= OnInferenceFaulted;
         }
+    }
+
+    private void OnInferenceFaulted(object? sender, InferenceFaultedEventArgs args) =>
+        ShowError($"Inference failed: {args.Exception.Message}");
+
+    private void ShowError(string message)
+    {
+        SuccessPanel.Visibility = Visibility.Collapsed;
+        FailurePanel.Visibility = Visibility.Collapsed;
+        ErrorView.Show(message);
     }
 
     /// <summary>
     /// Stops the shared inference session before returning home.
     /// </summary>
-    private async void OnStartAgainClick(object sender, RoutedEventArgs e)
+    private async void OnBackToHomeRequested(object sender, RoutedEventArgs e)
     {
+        if (_returningHome)
+        {
+            return;
+        }
+        _returningHome = true;
+        ErrorView.IsEnabled = false;
+        await _cleanupTask;
         if (_checkout is not null)
         {
-            await _checkout.Inference.StopAsync();
+            await _checkout.Inference.DisposeAsync();
         }
-        LiveInferenceHost.Content = null;
-        Frame.Navigate(typeof(HomePage));
+        try
+        {
+            LiveInferenceHost.Content = null;
+            if (!Frame.Navigate(typeof(HomePage), _checkout?.Settings))
+            {
+                throw new InvalidOperationException("Could not navigate home.");
+            }
+        }
+        catch (Exception error)
+        {
+            Trace.TraceError(error.ToString());
+            _returningHome = false;
+            ErrorView.IsEnabled = true;
+            ShowError($"Could not return home: {error.Message}");
+        }
     }
 }

@@ -16,6 +16,7 @@
          WindowsAppRuntime framework package installed on the machine (e.g. the Dragonwing). -->
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
+    <WindowsAppSdkDeploymentManagerInitialize>false</WindowsAppSdkDeploymentManagerInitialize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +34,7 @@
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
+    <ProjectReference Include="..\EdgeAI.ObjectDetection.Yolo\EdgeAI.ObjectDetection.Yolo.csproj" />
   </ItemGroup>
 
   <!--
@@ -44,11 +46,10 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.1839" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.0.1" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2705" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
     <!-- Windows ML supplies CPU/DirectML and dynamically registers compatible NPU/GPU providers. -->
-    <PackageReference Include="Microsoft.Windows.AI.MachineLearning" Version="2.0.300" />
+    <PackageReference Include="Microsoft.Windows.AI.MachineLearning" Version="2.1.74" />
   </ItemGroup>
 
   <!--
