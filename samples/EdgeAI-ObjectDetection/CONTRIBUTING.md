@@ -1,42 +1,17 @@
 # Contributing
 
-Thank you for your interest in contributing to the Edge AI object detection samples.
+This project welcomes contributions and suggestions. Most contributions require you to
+agree to a Contributor License Agreement (CLA) declaring that you have the right to,
+and actually do, grant us the rights to use your contribution. For details, visit
+https://cla.microsoft.com.
 
-## Prerequisites
+When you submit a pull request, a CLA-bot will automatically determine whether you need
+to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the
+instructions provided by the bot. You will only need to do this once across all repositories using our CLA.
 
-- Windows 11 recommended
-- .NET 8 SDK for the app target framework
-- A .NET SDK or Visual Studio version that supports `.slnx` files, or use the project-file build fallback below
-- Visual Studio 2022 with WinUI and .NET desktop workloads
-- Windows App SDK tooling
-- Qualcomm Snapdragon X Windows device for the intended `win-arm64` QNN path
-- A compatible YOLO26 ONNX model copied to `EdgeAI-SelfCheckoutKiosk\Models\`
-
-## Build
-
-From `samples\EdgeAI-ObjectDetection` in a Visual Studio Developer PowerShell:
-
-```powershell
-msbuild EdgeAI-ObjectDetection.slnx /restore /p:Configuration=Debug /p:Platform=ARM64
-```
-
-If your SDK does not support `.slnx`, build the project file directly:
-
-```powershell
-msbuild EdgeAI-SelfCheckoutKiosk\EdgeAI-SelfCheckoutKiosk.csproj /restore /p:Configuration=Debug /p:Platform=ARM64
-```
-
-## Test
-
-After building, run both test assemblies from the sample directory:
-
-```powershell
-dotnet vstest EdgeAI-SelfCheckoutKiosk.Tests\bin\ARM64\Debug\net8.0-windows10.0.19041.0\EdgeAI-SelfCheckoutKiosk.Tests.dll EdgeAI.ObjectDetection.Yolo.Tests\bin\ARM64\Debug\net8.0-windows10.0.19041.0\EdgeAI.ObjectDetection.Yolo.Tests.dll
-```
-
-On an x64 device, use `/p:Platform=x64` when building and replace `ARM64` with `x64` in the test paths.
-
-Memory stress tests are skipped by default. Set `$env:RUN_MEMORY_STABILITY_TESTS = "1"` before running tests to enable them. The inference stress test requires a compatible model named `yolo26x.onnx` in `EdgeAI-SelfCheckoutKiosk\Models` and uses the CPU execution provider.
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Pull Requests
 
