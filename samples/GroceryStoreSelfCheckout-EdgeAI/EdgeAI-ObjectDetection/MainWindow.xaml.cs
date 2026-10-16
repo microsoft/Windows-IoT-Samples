@@ -187,6 +187,7 @@ public sealed partial class MainWindow : Window
         try
         {
             using var snapshot = await InferenceView.InferOnceAsync();
+            HostStatusTextBlock.Text = $"{snapshot.Detections.Count} detections";
         }
         catch (Exception error)
         {

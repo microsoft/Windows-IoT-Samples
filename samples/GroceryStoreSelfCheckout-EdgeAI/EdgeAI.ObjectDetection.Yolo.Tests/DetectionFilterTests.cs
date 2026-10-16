@@ -6,7 +6,7 @@ namespace EdgeAI.ObjectDetection.Yolo.Tests;
 
 public class DetectionFilterTests
 {
-    private static IReadOnlyList<Detection> Decode(IReadOnlySet<int>? enabledClassIds)
+    private static IReadOnlyList<ImageDetection> Decode(IReadOnlySet<int>? enabledClassIds)
     {
         DenseTensor<float> output = new(new[] { 1, 300, 6 });
         int[] classIds = [47, 0, 46];
@@ -45,12 +45,12 @@ public class DetectionFilterTests
         FrozenSet<int>? mask = YoloInferenceEngine.ResolveClassMask(classes);
         classes.Clear();
         classes.Add("person");
-        IReadOnlyList<Detection> result = Decode(mask);
+        IReadOnlyList<ImageDetection> result = Decode(mask);
         Assert.Equal(new[] { "apple", "banana" }, result.Select(detection => detection.Label));
         Assert.Equal(new[] { 47, 46 }, result.Select(detection => detection.ClassId));
         Assert.All(result, detection =>
-            Assert.Equal(new DetectionBox(64, 128, 192, 256), detection.BoundingBox));
-        Assert.Throws<NotSupportedException>(() => ((IList<Detection>)result).Clear());
+            Assert.Equal(new ImageDetectionBox(64, 128, 192, 256), detection.BoundingBox));
+        Assert.Throws<NotSupportedException>(() => ((IList<ImageDetection>)result).Clear());
     }
 
     [Fact]

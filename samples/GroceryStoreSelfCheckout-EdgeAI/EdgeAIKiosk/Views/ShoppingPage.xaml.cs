@@ -155,8 +155,7 @@ public sealed partial class ShoppingPage : Page
             {
                 throw new InvalidOperationException("Wait for the first inference result before checking out.");
             }
-            PreviewDetection[] detections = _latestDetections.ToArray();
-            VerificationResult result = ShoppingVerifier.Verify(ScannedItems.ToArray(), detections, _options.SelectedClasses);
+            VerificationResult result = ShoppingVerifier.Verify(ScannedItems, _latestDetections, _options.SelectedClasses);
             LiveInferenceHost.Content = null;
             if (!Frame.Navigate(typeof(AlertPage), new CheckoutNavigationArgs(result, _inferenceView, _settings)))
             {

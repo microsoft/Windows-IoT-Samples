@@ -15,12 +15,12 @@ public sealed class InferenceSnapshot : IDisposable
     private SoftwareBitmap? _image;
 
     /// <summary>Detections with bounding boxes in pixels of <see cref="Image"/>, independent of preview layout.</summary>
-    public IReadOnlyList<Detection> Detections { get; }
+    public IReadOnlyList<ImageDetection> Detections { get; }
 
     /// <summary>The 640x640 model-input image, in BGRA8 premultiplied format for XAML display.</summary>
     public SoftwareBitmap Image => _image ?? throw new ObjectDisposedException(nameof(InferenceSnapshot));
 
-    internal InferenceSnapshot(IReadOnlyList<Detection> detections, byte[] imagePixels)
+    internal InferenceSnapshot(IReadOnlyList<ImageDetection> detections, byte[] imagePixels)
     {
         Detections = detections;
         _image = SoftwareBitmap.CreateCopyFromBuffer(imagePixels.AsBuffer(),

@@ -28,7 +28,7 @@ public sealed class PreprocessorTests
         Assert.NotNull(pixels);
         var detection = YoloInferenceEngine.DecodeDetection(0, 0, 640, 640, .9f, 0, layout);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(left, top, resizedWidth, resizedHeight),
+        Assert.Equal(new ImageDetectionBox(left, top, resizedWidth, resizedHeight),
             detection.BoundingBox);
         var geometry = PreviewGeometry.Create(width, height, width, height, 1);
         Assert.Equal(new PreviewDetectionBox(0, 0, width, height),
@@ -196,7 +196,7 @@ public sealed class PreprocessorTests
             frame, new PreviewGeometry(80, 40, 640, 640, 1, 0, 0), true);
         Assert.NotNull(firstPixels);
         var saved = firstPixels.ToArray();
-        using var snapshot = new InferenceSnapshot(Array.Empty<Detection>(), firstPixels);
+        using var snapshot = new InferenceSnapshot(Array.Empty<ImageDetection>(), firstPixels);
         var snapshotPixels = new byte[saved.Length];
         foreach (var crop in new[]
         {

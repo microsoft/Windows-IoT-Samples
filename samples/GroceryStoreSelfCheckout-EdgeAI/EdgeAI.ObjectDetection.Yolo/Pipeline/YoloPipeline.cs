@@ -92,7 +92,7 @@ internal sealed class YoloPipeline : IAsyncDisposable
         PreprocessedFrame input = _preprocessor.Preprocess(bitmap, geometry, captureImage);
         token.ThrowIfCancellationRequested();
         long inferenceStarted = Stopwatch.GetTimestamp();
-        IReadOnlyList<Detection> detections = _engine!.Run(input);
+        IReadOnlyList<ImageDetection> detections = _engine!.Run(input);
         TimeSpan inferenceTime = Stopwatch.GetElapsedTime(inferenceStarted);
         token.ThrowIfCancellationRequested();
         return new(detections, inferenceTime, startedAt, input.Letterbox, input.ImagePixels);
@@ -150,5 +150,5 @@ internal sealed class YoloPipeline : IAsyncDisposable
 }
 
 internal sealed record PipelineResult(
-    IReadOnlyList<Detection> Detections, TimeSpan InferenceTime, long StartedAt,
+    IReadOnlyList<ImageDetection> Detections, TimeSpan InferenceTime, long StartedAt,
     LetterboxGeometry Letterbox, byte[]? ImagePixels);

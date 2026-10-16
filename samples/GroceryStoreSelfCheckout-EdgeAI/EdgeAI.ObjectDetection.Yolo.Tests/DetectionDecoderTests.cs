@@ -13,7 +13,7 @@ public sealed class DetectionDecoderTests
         Assert.NotNull(detection);
         Assert.Equal(1, detection.ClassId);
         Assert.Equal("bicycle", detection.Label);
-        Assert.Equal(new DetectionBox(160, 80, 320, 320), detection.BoundingBox);
+        Assert.Equal(new ImageDetectionBox(160, 80, 320, 320), detection.BoundingBox);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public sealed class DetectionDecoderTests
     {
         var detection = YoloInferenceEngine.DecodeDetection(-10, -20, 650, 700, .8f, 0, SquareInput);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(0, 0, 640, 640), detection.BoundingBox);
+        Assert.Equal(new ImageDetectionBox(0, 0, 640, 640), detection.BoundingBox);
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public sealed class DetectionDecoderTests
     {
         var detection = YoloInferenceEngine.DecodeDetection(160.25f, 80.5f, 480.75f, 400.125f, .8f, 1, SquareInput);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(160.25f, 80.5f, 320.5f, 319.625f), detection.BoundingBox);
+        Assert.Equal(new ImageDetectionBox(160.25f, 80.5f, 320.5f, 319.625f), detection.BoundingBox);
     }
 
     [Theory]

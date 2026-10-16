@@ -23,16 +23,16 @@ internal readonly record struct PreviewGeometry(
     public double OverlayHeight => CropHeight * Scale;
 
     internal IReadOnlyList<PreviewDetection> MapDetections(
-        IReadOnlyList<Detection> detections, LetterboxGeometry? letterbox)
+        IReadOnlyList<ImageDetection> detections, LetterboxGeometry? letterbox)
     {
         var mapped = new List<PreviewDetection>(detections.Count);
         double scaleX = OverlayWidth / (letterbox?.Width ?? CropWidth);
         double scaleY = OverlayHeight / (letterbox?.Height ?? CropHeight);
         int left = letterbox?.Left ?? 0;
         int top = letterbox?.Top ?? 0;
-        foreach (Detection detection in detections)
+        foreach (ImageDetection detection in detections)
         {
-            DetectionBox box = detection.BoundingBox;
+            ImageDetectionBox box = detection.BoundingBox;
             mapped.Add(new PreviewDetection(detection.ClassId, detection.Label, detection.Confidence,
                 new PreviewDetectionBox(OverlayX + (box.X - left) * scaleX, OverlayY + (box.Y - top) * scaleY,
                     box.Width * scaleX, box.Height * scaleY)));

@@ -50,6 +50,7 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
         private set;
     } = YoloInferenceState.Stopped;
     public event EventHandler? StateChanged;
+    /// <summary>Raised for completed Stream results. OneShot results are returned by InferOnceAsync.</summary>
     public event EventHandler<DetectionsUpdatedEventArgs>? DetectionsUpdated;
     public event EventHandler<InferenceFaultedEventArgs>? Faulted;
     /// <summary>Returns all supported class names in class-ID order, independent of any inference mask.</summary>
@@ -385,7 +386,7 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
         }
     }
 
-    /// <summary>Displays and returns detections and their model-input image. The caller must dispose the snapshot.</summary>
+    /// <summary>Displays and returns detections and their model-input image without raising DetectionsUpdated. The caller must dispose the snapshot.</summary>
     public async Task<InferenceSnapshot> InferOnceAsync(CancellationToken cancellationToken = default)
     {
         CheckThread();
@@ -453,7 +454,12 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
             {
                 token.ThrowIfCancellationRequested();
                 long cycleStarted = Stopwatch.GetTimestamp();
-                await ProcessFrameAsync(token);
+                PipelineResult? result = await ProcessFrameAsync(token);
+                if (result is not null)
+                {
+                    PresentResult(result);
+                    DetectionsUpdated?.Invoke(this, new DetectionsUpdatedEventArgs(_previewDetections));
+                }
                 double remaining = 1000 / _settings!.MaxEndToEndFps - Stopwatch.GetElapsedTime(cycleStarted).TotalMilliseconds;
                 await Task.Delay(TimeSpan.FromMilliseconds(Math.Max(1, remaining)), token);
             }
@@ -486,10 +492,6 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
             return null;
         }
 
-        if (!captureImage)
-        {
-            PresentResult(result);
-        }
         return result;
     }
 
@@ -500,7 +502,6 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
         TimeSpan endToEndTime = Stopwatch.GetElapsedTime(result.StartedAt);
         TimingText.Text = $"Inference: {result.InferenceTime.TotalMilliseconds:F0} ms";
         EndToEndTimingText.Text = $"E2E inference: {endToEndTime.TotalMilliseconds:F0} ms";
-        DetectionsUpdated?.Invoke(this, new DetectionsUpdatedEventArgs(_previewDetections));
     }
 
     private void Player_MediaFailed(MediaPlayer sender, MediaPlayerFailedEventArgs args)
@@ -529,7 +530,7 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
             await _lifecycle.WaitAsync();
             try
             {
-                if (failedPipeline is null || !ReferenceEquals(_pipeline, failedPipeline))
+                if (!ReferenceEquals(_pipeline, failedPipeline))
                 {
                     return;
                 }
