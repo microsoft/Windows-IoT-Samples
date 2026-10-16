@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EdgeAI-SelfCheckoutKiosk (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "EdgeAI-SelfCheckoutKiosk (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
