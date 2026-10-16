@@ -11,7 +11,7 @@
 
 # Windows Internet of Things (IoT) Samples
 
-This repo contains samples that demonstrate usage patterns for Microsoft's Windows 10 IoT.  These code samples were created with templates available in Visual Studio and are designed, but not limited to, run on devices using Windows IoT Enterprise.
+This repo contains samples that demonstrate usage patterns for Microsoft's Windows IoT.  These code samples were created with templates available in Visual Studio and are designed, but not limited to, run on devices using Windows IoT Enterprise.
 
 > **Note:** If you are unfamiliar with Git and GitHub, you can download the entire collection as a
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be
@@ -19,8 +19,8 @@ This repo contains samples that demonstrate usage patterns for Microsoft's Windo
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq).
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center.
 
-## Windows 10 IoT development
-These samples require Visual Studio and the Windows Software Development Kit (SDK) for Windows 10.
+## Windows IoT development
+These samples require Visual Studio and the Windows Software Development Kit (SDK) for Windows.
 
    [Get a free copy of Visual Studio Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
 
@@ -43,7 +43,7 @@ The samples use Linked files in Visual Studio to reduce duplication of common fi
 
 **Reminder:** If you unzip individual samples, they will not build due to references to other portions of the ZIP file that were not unzipped. You must unzip the entire archive if you intend to build the samples.
 
-For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, please refer to the guidance, tutorials, and reference topics provided in the Windows 10 documentation available in the [Windows Developer Center](http://go.microsoft.com/fwlink/p/?LinkID=532421). These samples are provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows.
+For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, please refer to the guidance, tutorials, and reference topics provided in the Windows documentation available in the [Windows Developer Center](http://go.microsoft.com/fwlink/p/?LinkID=532421). These samples are provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows.
 
 ## Contributing
 These samples are direct from the feature teams and we welcome your input on issues and suggestions for new samples. If you would like to see new coverage or have feedback, please consider contributing. You can edit the existing content, add new content, or simply create new issues. We’ll take a look at your suggestions and will work together to incorporate them into the docs.
@@ -75,7 +75,7 @@ For additional Windows samples, see:
 | [interop-textmsg-consoleapp](https://aka.ms/WinIoTSamples-interop-textmsg-consoleapp) | Basic interop sample demonstrating text messaging between a Windows console app and an Edge module. |
 | [interop-customvision-textmsg-uwpapp](https://aka.ms/WinIoTSamples-interop-customvision-textmsg-uwpapp) | <p>Two more advanced interop samples which demonstrate bidirectional communication between a Windows application and an Edge module. </p><ul><li>Text messaging between a UWP application and an Edge module. </li><li>A 'Custom vision' machine learning interop sample with a fruit classifier which uses a Windows UWP app to send camera frames to an Edge module for identification.</li></ul>|  
 
-### Windows 10 IoT Enterprise
+### Windows IoT Enterprise
 
 | Name           | Description      |  
 |----------------|------------------|
@@ -86,6 +86,7 @@ For additional Windows samples, see:
 | [DMMockPortal](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/DMMocKPortal) | This sample shows what an operator's flow might look like when it comes to updating devices in bulk or individually. |
 | [DeviceIOContoller](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/DeviceIOContoller) | This sample shows how to access devices from UWP applications using familiar win32 APIs like CreateFile(), ReadFile(), WriteFile(), and DeviceIoControl(). |
 | [DualOperator](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/DualOperator) | This sample demonstrates Dual Operator demonstrates routing input from 2 physical keyboards to specific applications. |
+| [EdgeAI-ObjectDetection](samples/EdgeAI-ObjectDetection) | This sample demonstrates local object detection using Windows ML and YOLO models, with a reusable WinUI control, a model-testing app, and a self-checkout kiosk demo. |
 | [ExternalProcessLauncher](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/ExternalProcessLauncher) | We'll learn how to launch an external process (exe) from a Universal Windows Platform (UWP) app using Windows.System.ProcessLauncher API. |
 | [FlowVolume](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/FlowVolume) | This sample show how to launch an external process (exe) from a Universal Windows Platform (UWP) app using Windows.System.ProcessLauncher API. |
 | [ForegroundAppWithBackgroundApp](https://github.com/microsoft/Windows-IoT-Samples/tree/master/samples/ForegroundAppWithBackgroundApp) | This sample will showcase how to create a foreground application with a background application. |
