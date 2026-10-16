@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="EdgeAI.SelfCheckoutKiosk.Views.ErrorOverlay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    RequestedTheme="Dark">
+    <Grid Background="{StaticResource KioskLoadingOverlayBrush}">
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Stretch">
+            <StackPanel
+                MaxWidth="640"
+                Margin="{StaticResource KioskPagePadding}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="{StaticResource KioskSpacingLarge}">
+                <TextBlock
+                    Text="Something went wrong"
+                    FontSize="{StaticResource KioskFontSizeTitle}"
+                    Style="{StaticResource KioskWhiteBoldTextStyle}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    x:Name="ErrorMessageTextBlock"
+                    FontSize="{StaticResource KioskFontSizeSubtitle}"
+                    Style="{StaticResource KioskWhiteSemiBoldTextStyle}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <Button
+                    x:Name="BackToHomeButton"
+                    Content="Back to Home"
+                    FontSize="{StaticResource KioskFontSizeBodyLarge}"
+                    Background="{StaticResource KioskPrimaryBrush}"
+                    Padding="{StaticResource KioskHeroButtonPadding}"
+                    Margin="{StaticResource KioskBottomActionMargin}"
+                    HorizontalAlignment="Center"
+                    CornerRadius="{StaticResource KioskPanelCornerRadius}"
+                    Style="{StaticResource KioskWhiteButtonStyle}"
+                    Click="OnBackToHomeClick" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
