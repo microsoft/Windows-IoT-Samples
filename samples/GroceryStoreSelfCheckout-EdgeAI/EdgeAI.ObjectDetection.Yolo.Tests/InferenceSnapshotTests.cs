@@ -18,7 +18,7 @@ public sealed class InferenceSnapshotTests
         var (input, _, pixels) = new YoloPreprocessor().Preprocess(frame, geometry, true);
         Assert.NotNull(pixels);
 
-        using var snapshot = new InferenceSnapshot(Array.Empty<Detection>(), pixels);
+        using var snapshot = new InferenceSnapshot(Array.Empty<ImageDetection>(), pixels);
         Assert.Equal(640, snapshot.Image.PixelWidth);
         Assert.Equal(640, snapshot.Image.PixelHeight);
         Assert.Equal(BitmapPixelFormat.Bgra8, snapshot.Image.BitmapPixelFormat);
@@ -72,14 +72,14 @@ public sealed class InferenceSnapshotTests
         var detection = YoloInferenceEngine.DecodeDetection(160, 80, 480, 400, .8f, 0,
             LetterboxGeometry.Create(640, 640));
         Assert.NotNull(detection);
-        IReadOnlyList<Detection> detections = Array.AsReadOnly(new[] { detection });
+        IReadOnlyList<ImageDetection> detections = Array.AsReadOnly(new[] { detection });
         using var snapshot = new InferenceSnapshot(detections, pixels);
         Array.Clear(pixels);
         snapshot.Image.CopyToBuffer(pixels.AsBuffer());
         Assert.Equal((byte)80, pixels[2]);
         Assert.Equal((byte)255, pixels[3]);
         Assert.Same(detections, snapshot.Detections);
-        Assert.Equal(new DetectionBox(160, 80, 320, 320), snapshot.Detections[0].BoundingBox);
+        Assert.Equal(new ImageDetectionBox(160, 80, 320, 320), snapshot.Detections[0].BoundingBox);
 
         snapshot.Dispose();
         snapshot.Dispose();

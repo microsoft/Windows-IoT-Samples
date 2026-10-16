@@ -5,8 +5,8 @@ namespace EdgeAI.ObjectDetection.Yolo.Tests;
 
 public sealed class PreviewDetectionTests
 {
-    private static readonly Detection ImageDetection =
-        new(0, "person", .9f, new DetectionBox(160, 200, 320, 240));
+    private static readonly ImageDetection ImageDetection =
+        new(0, "person", .9f, new ImageDetectionBox(160, 200, 320, 240));
 
     [Fact]
     public void LivePreviewRemovesModelPadding()
@@ -33,7 +33,7 @@ public sealed class PreviewDetectionTests
     public void CroppedPreviewMapsToVisibleRegion()
     {
         var geometry = PreviewGeometry.Create(1920, 1080, 400, 800, 800.0 / 1080);
-        Detection detection = new(1, "bicycle", .8f, new DetectionBox(240, 160, 160, 320));
+        ImageDetection detection = new(1, "bicycle", .8f, new ImageDetectionBox(240, 160, 160, 320));
         var padding = LetterboxGeometry.Create(geometry.CropWidth, geometry.CropHeight);
         var box = Assert.Single(geometry.MapDetections([detection], padding)).BoundingBox;
 
@@ -50,13 +50,13 @@ public sealed class PreviewDetectionTests
         var detection = Assert.Single(geometry.MapDetections([ImageDetection], null));
 
         Assert.Equal(new PreviewDetectionBox(250, 187.5, 300, 225), detection.BoundingBox);
-        Assert.Equal(new DetectionBox(160, 200, 320, 240), ImageDetection.BoundingBox);
+        Assert.Equal(new ImageDetectionBox(160, 200, 320, 240), ImageDetection.BoundingBox);
     }
 
     [Fact]
     public void FractionalImagePixelsMapToDipsWithoutRounding()
     {
-        Detection detection = new(0, "person", .9f, new DetectionBox(160.25f, 200.5f, 320.5f, 239.25f));
+        ImageDetection detection = new(0, "person", .9f, new ImageDetectionBox(160.25f, 200.5f, 320.5f, 239.25f));
         var live = PreviewGeometry.Create(640, 480, 320, 240, .5);
         var still = PreviewGeometry.FitSquare(640, 320, 240);
 

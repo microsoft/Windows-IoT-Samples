@@ -133,7 +133,7 @@ internal sealed class YoloInferenceEngine : IDisposable
         }
     }
 
-    public IReadOnlyList<Detection> Run(PreprocessedFrame input)
+    public IReadOnlyList<ImageDetection> Run(PreprocessedFrame input)
     {
         if (!ReferenceEquals(_inputBuffer, input.Tensor))
         {
@@ -147,7 +147,7 @@ internal sealed class YoloInferenceEngine : IDisposable
         return ParseDetections(output.AsTensor<float>(), input.Letterbox, _enabledClassIds);
     }
 
-    internal static IReadOnlyList<Detection> ParseDetections(Tensor<float> output, LetterboxGeometry letterbox,
+    internal static IReadOnlyList<ImageDetection> ParseDetections(Tensor<float> output, LetterboxGeometry letterbox,
         IReadOnlySet<int>? enabledClassIds = null)
     {
         if (output.Rank != 3 || output.Dimensions[0] != 1 ||
@@ -157,10 +157,10 @@ internal sealed class YoloInferenceEngine : IDisposable
                 "Expected processed YOLO output [1,300,6] (x1, y1, x2, y2, confidence, COCO class id).");
         }
 
-        List<Detection> detections = new();
+        List<ImageDetection> detections = new();
         for (int index = 0; index < output.Dimensions[1]; index++)
         {
-            Detection? detection = DecodeDetection(
+            ImageDetection? detection = DecodeDetection(
                 output[0, index, 0], output[0, index, 1], output[0, index, 2], output[0, index, 3],
                 output[0, index, 4], output[0, index, 5], letterbox, enabledClassIds);
             if (detection is not null)
@@ -172,7 +172,7 @@ internal sealed class YoloInferenceEngine : IDisposable
         return detections.AsReadOnly();
     }
 
-    internal static Detection? DecodeDetection(float x1, float y1, float x2, float y2,
+    internal static ImageDetection? DecodeDetection(float x1, float y1, float x2, float y2,
         float confidence, float classId, LetterboxGeometry letterbox, IReadOnlySet<int>? enabledClassIds = null)
     {
         if (!float.IsFinite(confidence) || confidence < 0.5f || confidence > 1 ||
@@ -195,8 +195,8 @@ internal sealed class YoloInferenceEngine : IDisposable
         {
             return null;
         }
-        DetectionBox box = new(x1, y1, x2 - x1, y2 - y1);
-        return new Detection((int)classId, SupportedClasses[(int)classId], confidence, box);
+        ImageDetectionBox box = new(x1, y1, x2 - x1, y2 - y1);
+        return new ImageDetection((int)classId, SupportedClasses[(int)classId], confidence, box);
     }
 
     public void Dispose() => _session.Dispose();

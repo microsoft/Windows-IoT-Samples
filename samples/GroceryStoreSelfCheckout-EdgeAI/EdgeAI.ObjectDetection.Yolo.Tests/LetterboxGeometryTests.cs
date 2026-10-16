@@ -32,7 +32,7 @@ public sealed class LetterboxGeometryTests
         var layout = LetterboxGeometry.Create(width, height);
         var detection = YoloInferenceEngine.DecodeDetection(0, 0, 640, 640, .9f, 0, layout);
         Assert.NotNull(detection);
-        Assert.Equal(new DetectionBox(layout.Left, layout.Top, layout.Width, layout.Height), detection.BoundingBox);
+        Assert.Equal(new ImageDetectionBox(layout.Left, layout.Top, layout.Width, layout.Height), detection.BoundingBox);
         var geometry = PreviewGeometry.Create(width, height, width, height, 1);
         Assert.Equal(new PreviewDetectionBox(0, 0, width, height),
             Assert.Single(geometry.MapDetections([detection], layout)).BoundingBox);
@@ -56,7 +56,7 @@ public sealed class LetterboxGeometryTests
         var detection = YoloInferenceEngine.DecodeDetection(160, 240, 480, 400, .9f, 0, layout);
         Assert.NotNull(detection);
         // Snapshot coordinates retain the padding; streaming coordinates remove it.
-        Assert.Equal(new DetectionBox(160, 240, 320, 160), detection.BoundingBox);
+        Assert.Equal(new ImageDetectionBox(160, 240, 320, 160), detection.BoundingBox);
         var box = Assert.Single(geometry.MapDetections([detection], layout)).BoundingBox;
         Assert.Equal(200, box.X, 6);
         Assert.Equal(100, box.Y, 6);
