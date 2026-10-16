@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EdgeAI-ObjectDetection (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "EdgeAI-ObjectDetection (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
