@@ -530,7 +530,7 @@ public sealed partial class YoloInferenceView : UserControl, IAsyncDisposable
             await _lifecycle.WaitAsync();
             try
             {
-                if (failedPipeline is null || !ReferenceEquals(_pipeline, failedPipeline))
+                if (!ReferenceEquals(_pipeline, failedPipeline))
                 {
                     return;
                 }
