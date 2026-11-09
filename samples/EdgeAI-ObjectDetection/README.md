@@ -10,7 +10,7 @@ Use the sample as a starting point for integrating local vision into your own ap
 
 ## Explore the solution
 1. [EdgeAI.ObjectDetection.Yolo](#edgeaiobjectdetectionyolo): A reusable WinUI control for camera capture, YOLO inference, and detection visualization, with results available to your application.
-2. [EdgeAI-ObjectDetection](#edgeai-objectdetection): an app for trying models.
+2. [EdgeAI-ObjectDetection](#edgeai-objectdetection): An application for trying compatible models, cameras, and execution providers with continuous or single-frame inference.
 3. [EdgeAI-SelfCheckoutKiosk](#edgeai-selfcheckoutkiosk): A self-checkout demo that connects local object detection to cart verification and mismatch handling.
 
 ## EdgeAI.ObjectDetection.Yolo
