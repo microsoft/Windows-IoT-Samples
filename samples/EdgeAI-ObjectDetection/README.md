@@ -1,11 +1,17 @@
-# Edge AI - Object Detection
+# Edge AI on Windows IoT: object detection and self-checkout
 
-This sample performs object detection locally on a Windows IoT device using Windows ML and YOLO models. It identifies objects and their locations without sending camera frames to the cloud.
+Adding AI to a device takes more than running a model. Your application needs to capture input, run inference on the available hardware, and use the results in its workflow. This sample demonstrates that integration on Windows IoT through a reusable object-detection component and two applications, including a self-checkout demo.
 
-The sample is split into three projects:
-1. [EdgeAI.ObjectDetection.Yolo](#edgeaiobjectdetectionyolo): a reusable WinUI control.
-2. [EdgeAI-ObjectDetection](#edgeai-objectdetection): an app for trying models.
-3. [EdgeAI-SelfCheckoutKiosk](#edgeai-selfcheckoutkiosk): a self-checkout demo that compares detected objects with a scanned cart.
+The solution shows how to use the same application code across devices powered by Qualcomm, AMD, and Intel processors. Windows ML runs compatible YOLO models through ONNX Runtime execution providers, allowing the application to use available CPUs, GPUs, and NPUs without separate vendor-specific inference implementations. Hardware acceleration depends on the target device, drivers, execution provider, and model compatibility. The projects support x64 and Arm64 builds.
+
+A reusable WinUI control handles camera capture, model inference, and detection results. The object-detection application lets you explore compatible models, cameras, and execution providers. The self-checkout application takes the integration further: it uses detections to compare visible object labels with items entered in a cart and flags mismatches. Camera frames remain on the device throughout inference.
+
+Use the sample as a starting point for integrating local vision into your own application. The checkout scenario illustrates how application logic can act on model output; it is not a complete retail checkout system. It compares object-label presence, rather than verifying quantities or looking up products in a catalog.
+
+## Explore the solution
+1. [EdgeAI.ObjectDetection.Yolo](#edgeaiobjectdetectionyolo): A reusable WinUI control for camera capture, YOLO inference, and detection visualization, with results available to your application.
+2. [EdgeAI-ObjectDetection](#edgeai-objectdetection): An application for trying compatible models, cameras, and execution providers with continuous or single-frame inference.
+3. [EdgeAI-SelfCheckoutKiosk](#edgeai-selfcheckoutkiosk): A self-checkout demo that connects local object detection to cart verification and mismatch handling.
 
 ## EdgeAI.ObjectDetection.Yolo
 
