@@ -1,4 +1,4 @@
-# Edge AI on Windows IoT: object detection and self-checkout
+# Edge AI on Windows IoT: object detection and a self-checkout kiosk
 
 Adding AI to a device takes more than running a model. Your application needs to capture input, run inference on the available hardware, and use the results in its workflow. This sample demonstrates that integration on Windows IoT through a reusable object-detection component and two applications, including a self-checkout demo.
 
