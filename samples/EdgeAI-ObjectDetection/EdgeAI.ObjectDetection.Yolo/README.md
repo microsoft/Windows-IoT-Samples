@@ -200,10 +200,10 @@ These positional record properties have `get` and `init` accessors.
 ### ImageDetectionBox
 
 ```csharp
-public readonly record struct ImageDetectionBox(float X, float Y, float Width, float Height)
+public readonly record struct ImageDetectionBox(double X, double Y, double Width, double Height)
 ```
 
-The positional constructor initializes four `float` properties with `get` and `init` accessors. `X` and `Y` are the upper-left corner; `Width` and `Height` are dimensions. Units are pixels relative to the 640x640 snapshot image's top-left, including letterbox padding. Fractional pixels are preserved.
+The positional constructor initializes four `double` properties with `get` and `init` accessors, matching the numeric type used by WinUI layout APIs and `PreviewDetectionBox`. `X` and `Y` are the upper-left corner; `Width` and `Height` are dimensions. Units are pixels relative to the 640x640 snapshot image's top-left, including letterbox padding. Fractional pixels are preserved. Model tensors and confidence scores remain `float`; decoded box coordinates are widened to `double`.
 
 Default initialization produces zero-valued coordinates and dimensions.
 

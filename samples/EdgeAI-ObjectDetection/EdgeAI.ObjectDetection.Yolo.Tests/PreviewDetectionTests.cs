@@ -56,13 +56,17 @@ public sealed class PreviewDetectionTests
     [Fact]
     public void FractionalImagePixelsMapToDipsWithoutRounding()
     {
-        ImageDetection detection = new(0, "person", .9f, new ImageDetectionBox(160.25f, 200.5f, 320.5f, 239.25f));
+        const double fraction = 1.0 / (1 << 20);
+        ImageDetection detection = new(0, "person", .9f,
+            new ImageDetectionBox(160.25 + fraction, 200.5 + fraction, 320.5 + fraction, 239.25 + fraction));
         var live = PreviewGeometry.Create(640, 480, 320, 240, .5);
         var still = PreviewGeometry.FitSquare(640, 320, 240);
 
-        Assert.Equal(new PreviewDetectionBox(80.125, 60.25, 160.25, 119.625),
+        Assert.Equal(new PreviewDetectionBox(80.125 + fraction / 2, 60.25 + fraction / 2,
+                160.25 + fraction / 2, 119.625 + fraction / 2),
             Assert.Single(live.MapDetections([detection], LetterboxGeometry.Create(640, 480))).BoundingBox);
-        Assert.Equal(new PreviewDetectionBox(100.09375, 75.1875, 120.1875, 89.71875),
+        Assert.Equal(new PreviewDetectionBox(100.09375 + fraction * .375, 75.1875 + fraction * .375,
+                120.1875 + fraction * .375, 89.71875 + fraction * .375),
             Assert.Single(still.MapDetections([detection], null)).BoundingBox);
     }
 
