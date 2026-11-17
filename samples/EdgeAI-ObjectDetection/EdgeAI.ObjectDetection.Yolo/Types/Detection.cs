@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace EdgeAI.ObjectDetection.Yolo;
 
 /// <summary>Coordinates in pixels relative to the 640x640 snapshot image's top-left, including letterbox padding. Fractional pixels are preserved.</summary>
-public readonly record struct ImageDetectionBox(float X, float Y, float Width, float Height);
+public readonly record struct ImageDetectionBox(double X, double Y, double Width, double Height);
 
 public sealed record ImageDetection(int ClassId, string Label, float Confidence, ImageDetectionBox BoundingBox);
 
